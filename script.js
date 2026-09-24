@@ -383,7 +383,7 @@
   const SECTORS = [
     { key:"all",                         label:"Total",                       short:"Total",        mobile:["Total"], letter:"C", line:"#00BB85" },
     { key:"Local Government",            label:"Local Government",            short:"Local Gov",    mobile:["Local","Government"], letter:"G", line:"#FF9500" },
-    { key:"Government-Owned Company",    label:"Government-Owned Company",    short:"Gov. Company", mobile:["Government","Owned Company"], letter:"T", line:"#009BBF" },
+    { key:"Government-Owned Company",    label:"Government-Owned Company",    short:"Gov. Company", mobile:["Government-Owned","Company"], letter:"T", line:"#009BBF" },
     { key:"Central Government",          label:"Central Government",          short:"Central Gov",  mobile:["Central","Government"], letter:"M", line:"#F62E36" },
   ];
 
@@ -535,16 +535,16 @@
     var metroStats = function (items) {
       return '<div class="about-metro-stats">'+items.map(function (s) { return metroStat(s[0], s[1]); }).join('')+'</div>';
     };
-    var overviewMedia = function (statsItems) {
+    var overviewMedia = function (mapTitle) {
       return '<div class="about-overview-media">' +
-        metroStats(statsItems) +
+        '<h3 class="about-subhead">'+mapTitle+'</h3>' +
         '<div class="about-overview-gallery">' +
           '<figure class="about-overview-map">' +
-            '<img src="images/about-metro-map.png" alt="The planned Tel Aviv Metro network"/>' +
+            '<img src="images/about-metro-map.png?v=4" alt="The planned Tel Aviv Metro network"/>' +
           '</figure>' +
           '<div class="about-overview-stations">' +
             '<img src="images/about-station-interior.png?v=3" alt="Planned metro station interior"/>' +
-            '<img src="images/about-station-aerial.png?v=3" alt="Planned metro station aerial view"/>' +
+            '<img class="about-station-aerial" src="images/about-station-aerial.png?v=4" alt="Planned metro station aerial view"/>' +
           '</div>' +
         '</div>' +
       '</div>';
@@ -560,7 +560,7 @@
     var aboutStops = [
       { id: 'about-overview', letter: 'M', num: '02', short: 'Overview', line: '#F62E36' },
       { id: 'about-delegation', letter: 'T', num: '03', short: 'Delegation', line: '#009BBF' },
-      { id: 'about-interests', letter: 'C', num: '04', short: 'Interest', line: '#00BB85' }
+      { id: 'about-interests', letter: 'C', num: '04', short: 'Program Objectives', line: '#00BB85' }
     ];
     var aboutStopsHtml = aboutStops.map(function (s) {
       return '<button type="button" data-about-section="'+s.id+'" class="sector-btn" style="--station:'+s.line+'">' +
@@ -573,6 +573,14 @@
         '<div class="about-overview-lead">' +
           '<p class="about-lede">Israel’s Cross-Sector Partnership for Advancing the Tel Aviv Metro</p>' +
           '<p class="about-date">Tokyo, Japan | December 14–21, 2026</p>' +
+          metroStats([
+            ['3', 'Metro lines · M1 / M2 / M3'],
+            ['150', 'Km of planned routes'],
+            ['109', 'Planned stations'],
+            ['24', 'Municipalities'],
+            ['7', 'Transport hubs'],
+            ['4', 'Depot complexes']
+          ]) +
         '</div>' +
         '<div class="about-overview-copy">' +
           para('The Tel Aviv metropolitan area, Israel’s financial heartland and leading innovation hub, is preparing for transformation through its first metro system: a US$50 billion project comprising three lines, 150 km of underground railway and 109 stations.') +
@@ -582,20 +590,21 @@
           para('Practical insights, stronger professional relationships and a shared set of questions to inform planning, delivery and future operation in Israel. The exchange is intended to open an ongoing conversation between Israeli and Japanese professionals.') +
         '</div>' +
       '</div>' +
-      overviewMedia([
-        ['3', 'Metro lines · M1 / M2 / M3'],
-        ['150', 'Km of planned routes'],
-        ['109', 'Planned stations'],
-        ['24', 'Municipalities'],
-        ['7', 'Transport hubs'],
-        ['4', 'Depot complexes']
-      ]);
+      overviewMedia('The planned Metro network');
 
     var overviewSectionJa =
       '<div class="about-overview-layout">' +
         '<div class="about-overview-lead">' +
           '<p class="about-lede">テルアビブ・メトロ推進に向けたイスラエルの分野横断型連携プラットフォーム</p>' +
           '<p class="about-date">東京｜2026年12月14日〜21日</p>' +
+          metroStats([
+            ['3', 'メトロ路線 · M1 / M2 / M3'],
+            ['150', '計画延長（km）'],
+            ['109', '計画駅'],
+            ['24', '自治体'],
+            ['7', '交通ハブ'],
+            ['4', '車両基地']
+          ]) +
         '</div>' +
         '<div class="about-overview-copy">' +
           para('イスラエルの経済・金融の中心地であり、主要なイノベーション拠点でもあるテルアビブ都市圏では、初のメトロ整備による大きな変革が進められています。本事業は、3路線、地下路線総延長150km、109駅からなる総事業費500億米ドル規模のプロジェクトです。') +
@@ -605,14 +614,7 @@
           para('実践的な知見、より強固な専門的関係、そしてイスラエルにおける計画・整備・将来の運営に活かすための共通の問いです。本交流は、イスラエルと日本の専門家による継続的な対話のきっかけとなることを目指しています。') +
         '</div>' +
       '</div>' +
-      overviewMedia([
-        ['3', 'メトロ路線 · M1 / M2 / M3'],
-        ['150', '計画延長（km）'],
-        ['109', '計画駅'],
-        ['24', '自治体'],
-        ['7', '交通ハブ'],
-        ['4', '車両基地']
-      ]);
+      overviewMedia('計画メトロネットワーク');
 
     var delegationSectionEn =
       '<div class="about-delegation-layout">' +
@@ -684,14 +686,12 @@
         '</section>' +
         '<section class="about-section" id="about-interests">' +
           '<h2 class="all-participants-title about-section-title">Areas of Professional Interest</h2>' +
-          '<div class="about-interests-row">' +
-            '<div class="about-panel">' +
-              buildAboutSectionFlipHtml('about-objectives-flip', interestsSectionEn, interestsSectionJa) +
-            '</div>' +
-            '<section class="about-group-image">' +
-              '<img src="images/group-photo.jpg?v=1" alt="FORUMETRO delegation group photo"/>' +
-            '</section>' +
+          '<div class="about-panel">' +
+            buildAboutSectionFlipHtml('about-objectives-flip', interestsSectionEn, interestsSectionJa) +
           '</div>' +
+          '<section class="about-group-image">' +
+            '<img src="images/group-photo.jpg?v=2" alt="FORUMETRO delegation group photo"/>' +
+          '</section>' +
           '<section class="about-cta">' +
             '<button id="cta-participants" class="home-cta">Meet the Participants</button>' +
           '</section>' +
