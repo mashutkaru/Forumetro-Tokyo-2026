@@ -1,0 +1,340 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#214f63" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="Forumetro Tokyo 2026" />
+  <title>FORUMETRO TOKYO 2026 Program</title>
+  <meta
+    name="description"
+    content="[PLACEHOLDER] Program guide details will be added here."
+  />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="FORUMETRO TOKYO 2026 Program" />
+  <meta
+    property="og:description"
+    content="[PLACEHOLDER] Program guide details will be added here."
+  />
+  <meta
+    property="og:image:alt"
+    content="FORUMETRO TOKYO 2026 — משלחת פורום מטרו"
+  />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="FORUMETRO TOKYO 2026 Program" />
+  <meta
+    name="twitter:description"
+    content="[PLACEHOLDER] Program guide details will be added here."
+  />
+  <link rel="stylesheet" href="./styles.css?v=89" />
+</head>
+<body>
+  <script>
+    (function () {
+      try {
+        var params = new URLSearchParams(window.location.search);
+        var embedded = params.get('embed') === '1' || window.self !== window.top;
+        if (embedded) document.documentElement.classList.add('is-embedded');
+        if (params.get('mobile') === '1') document.documentElement.classList.add('is-mobile-embed');
+        var page = params.get('page') || 'day';
+        document.documentElement.classList.add('embed-page-' + page);
+        if (params.get('branch') === 'useful') document.documentElement.classList.add('embed-branch-useful');
+      } catch (e) {
+        document.documentElement.classList.add('is-embedded');
+      }
+    })();
+  </script>
+  <div class="app">
+    <header class="desktop-only">
+      <div class="topbar">
+        <button type="button" class="brand brand-home" aria-label="Back to About">
+          <span class="brand-logo logo-placeholder">Forumetro</span>
+        </button>
+
+        <div class="participants-header-copy program-page-title">
+          <h1 id="embedPageTitle">Program</h1>
+        </div>
+
+        <nav class="nav nav-program" aria-label="Day sections">
+          <button class="active" type="button" data-section="overview"><span class="nav-mark" aria-hidden="true"><span class="nav-mark-line">T</span><span class="nav-mark-id">04</span></span>Day Program</button>
+          <button type="button" data-section="schedule"><span class="nav-mark" aria-hidden="true"><span class="nav-mark-line">C</span><span class="nav-mark-id">05</span></span>Schedule</button>
+          <button type="button" data-section="location"><span class="nav-mark" aria-hidden="true"><span class="nav-mark-line">M</span><span class="nav-mark-id">06</span></span>Location</button>
+          <button type="button" data-section="notes"><span class="nav-mark" aria-hidden="true"><span class="nav-mark-line">W</span><span class="nav-mark-id">07</span></span>Notes</button>
+          <button type="button" data-section="tips"><span class="nav-mark" aria-hidden="true"><span class="nav-mark-line">Z</span><span class="nav-mark-id">08</span></span>Tips</button>
+        </nav>
+        <nav class="nav nav-useful" hidden aria-label="Useful stations">
+          <button class="active" data-page="prep"><span class="nav-mark" aria-hidden="true"><span class="nav-mark-line">Z</span><span class="nav-mark-id">05</span></span>Preparation</button>
+          <button data-page="avoid"><span class="nav-mark" aria-hidden="true"><span class="nav-mark-line">C</span><span class="nav-mark-id">06</span></span>What to avoid</button>
+          <button data-page="contact"><span class="nav-mark" aria-hidden="true"><span class="nav-mark-line">M</span><span class="nav-mark-id">07</span></span>Contact</button>
+          <button data-page="travelog"><span class="nav-mark" aria-hidden="true"><span class="nav-mark-line">T</span><span class="nav-mark-id">08</span></span>Travelog</button>
+        </nav>
+
+        <div class="topbar-partners" aria-label="Partners">
+          <span class="partner-logo partner-placeholder">[PLACEHOLDER]</span>
+          <span class="partner-logo partner-placeholder">[PLACEHOLDER]</span>
+        </div>
+      </div>
+    </header>
+
+    <header class="m-subpage-head" id="mSubpageHead" hidden>
+      <div class="m-head">
+        <div class="m-head-side m-head-side--start">
+          <button type="button" class="brand-home brand-home--mobile" aria-label="Back to About">
+            <span class="brand-logo brand-logo--compact logo-placeholder">Forumetro</span>
+          </button>
+        </div>
+        <div class="m-head-center">
+          <strong id="mSubpageTitle">Preparation</strong>
+        </div>
+        <div class="m-head-side m-head-side--end m-head-partners" aria-label="Partners">
+          <span class="partner-logo partner-placeholder">[PLACEHOLDER]</span>
+          <span class="partner-logo partner-placeholder">[PLACEHOLDER]</span>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <section class="page active" id="page-day">
+        <div class="desktop-day desktop-only">
+          <div class="date-strip" id="dateStrip" aria-label="Delegation dates"></div>
+
+          <section class="dashboard">
+            <article class="main-card">
+              <section class="day-section" id="section-overview">
+                <div class="overview">
+                  <div>
+                    <h2 id="title">[PLACEHOLDER] Day 1</h2>
+                    <p id="theme"></p>
+                  </div>
+
+                  <div class="photo" id="dayPhoto" aria-label="Day image"></div>
+                </div>
+
+                <div class="divider"></div>
+                <div class="highlights" id="highlights"></div>
+              </section>
+
+              <section class="day-section" id="section-schedule">
+                <h3 class="day-section-title">Schedule</h3>
+                <div class="schedule-list" id="scheduleList"></div>
+              </section>
+
+              <section class="day-section" id="section-location">
+                <h3 class="day-section-title">Location</h3>
+                <p class="day-section-body" id="dayLocation"></p>
+                <div class="day-map-frame" id="dayLocationMap" hidden>
+                  <iframe
+                    class="day-map-embed"
+                    title="Day location map"
+                    allowfullscreen=""
+                    loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade"
+                  ></iframe>
+                </div>
+              </section>
+
+              <section class="day-section" id="section-notes">
+                <h3 class="day-section-title">Notes</h3>
+                <p class="day-section-body" id="dayNotes"></p>
+              </section>
+
+              <section class="day-section" id="section-tips">
+                <div class="tip">
+                  <strong>Tip of the day</strong>
+                  <span id="tipText"></span>
+                </div>
+              </section>
+            </article>
+          </section>
+        </div>
+
+        <div class="mobile-wrap">
+          <div class="mobile-app">
+            <div class="m-chrome">
+              <header class="m-head">
+                <div class="m-head-side m-head-side--start">
+                  <button type="button" class="brand-home brand-home--mobile" aria-label="Back to About">
+                    <span class="brand-logo brand-logo--compact logo-placeholder">Forumetro</span>
+                  </button>
+                </div>
+                <div class="m-head-center">
+                  <strong id="mHeadDay">DAY 1</strong>
+                </div>
+                <div class="m-head-side m-head-side--end m-head-partners" aria-label="Partners">
+                  <span class="partner-logo partner-placeholder">[PLACEHOLDER]</span>
+                  <span class="partner-logo partner-placeholder">[PLACEHOLDER]</span>
+                </div>
+              </header>
+
+              <div class="m-days">
+                <div class="m-days-row" id="mDaysRow"></div>
+              </div>
+            </div>
+
+            <div class="m-content">
+              <section class="m-block m-section" id="m-section-overview">
+                <div class="m-hero">
+                  <h2 id="mDayTitle">[PLACEHOLDER] Day 1</h2>
+                  <p id="mTheme"></p>
+                </div>
+              </section>
+
+              <section class="m-block m-section" id="m-section-schedule">
+                <h3>Program timeline</h3>
+                <div class="m-schedule" id="mSchedule"></div>
+              </section>
+
+              <section class="m-block m-section" id="m-section-location">
+                <h3>Location</h3>
+                <p class="m-section-body" id="mLocation"></p>
+                <div class="day-map-frame day-map-frame--mobile" id="mLocationMap" hidden>
+                  <iframe
+                    class="day-map-embed day-map-embed--mobile"
+                    title="Day location map"
+                    allowfullscreen=""
+                    loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade"
+                  ></iframe>
+                </div>
+              </section>
+
+              <section class="m-block m-section" id="m-section-notes">
+                <h3>Notes</h3>
+                <p class="m-section-body" id="mNotes"></p>
+              </section>
+
+              <section class="m-block m-section" id="m-section-tips">
+                <div class="m-tip-card">
+                  <span class="m-tip-label">Tip of the day</span>
+                  <p class="m-section-body" id="mTip"></p>
+                </div>
+              </section>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="page" id="page-prep">
+        <div class="subpage">
+          <div class="subhead">
+            <div>
+              <h2>Preparation</h2>
+              <p>Everything you need to know before you travel.</p>
+            </div>
+            <button class="back" data-page="day" type="button">Back to day program</button>
+          </div>
+
+          <div class="grid" id="prepGrid"></div>
+
+          <div class="guide-hebrew prep-hebrew" dir="rtl" lang="he">
+            <h3 class="guide-hebrew-title">הוראות הכנה</h3>
+            <div class="grid" id="prepGridHe"></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="page avoid-page" id="page-avoid">
+        <div class="subpage">
+          <div class="subhead">
+            <div>
+              <h2>What to avoid</h2>
+              <p>Respect local customs and ensure a smooth, meaningful experience.</p>
+            </div>
+            <button class="back" data-page="day" type="button">Back to day program</button>
+          </div>
+
+          <div class="grid" id="avoidGrid"></div>
+
+          <div class="guide-hebrew avoid-hebrew" dir="rtl" lang="he">
+            <h3 class="guide-hebrew-title">מה להימנע</h3>
+            <div class="grid" id="avoidGridHe"></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="page" id="page-contact">
+        <div class="subpage contact-page">
+          <div class="subhead">
+            <div>
+              <h2>Contact</h2>
+              <p>Support and emergency details for the delegation.</p>
+            </div>
+            <button class="back" data-page="day" type="button">Back to day program</button>
+          </div>
+
+          <div class="contact-grid">
+            <article class="contact-card">
+              <h3>Delegation hotel</h3>
+              <div class="contact-card-body">
+                <p class="contact-lead">To be confirmed</p>
+                <p class="contact-sub">Hotel name and address will be shared with the delegation before travel.</p>
+              </div>
+            </article>
+
+            <article class="contact-card">
+              <h3>Program team</h3>
+              <ul class="contact-people">
+                <li class="contact-person">
+                  <span class="contact-person-name">Hadas Kushelevich</span>
+                  <a class="contact-phone" href="tel:+818087351677">+81 80-8735-1677</a>
+                </li>
+                <li class="contact-person">
+                  <span class="contact-person-name">Ofer Bilik</span>
+                  <a class="contact-phone" href="tel:+8190377438191">+81 90-3774-38191</a>
+                </li>
+                <li class="contact-person">
+                  <span class="contact-person-name">Masha Robeen</span>
+                  <a class="contact-phone" href="tel:+972504412944">+972 50-441-2944</a>
+                </li>
+              </ul>
+            </article>
+
+            <article class="contact-card contact-card--wide">
+              <h3>Emergency contacts</h3>
+              <ul class="contact-emergency">
+                <li>
+                  <span class="contact-label">Police</span>
+                  <a class="contact-phone" href="tel:110">110</a>
+                </li>
+                <li>
+                  <span class="contact-label">Ambulance / Fire</span>
+                  <a class="contact-phone" href="tel:119">119</a>
+                </li>
+                <li>
+                  <span class="contact-label">Japan Visitor Hotline</span>
+                  <a class="contact-phone" href="tel:+815038162787">050-3816-2787</a>
+                </li>
+                <li>
+                  <span class="contact-label">Lost &amp; Found</span>
+                  <a class="contact-phone" href="tel:0570550142">057-0550-142</a>
+                </li>
+              </ul>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="page" id="page-travelog">
+        <div class="subpage travelog-page">
+          <div class="subhead">
+            <div>
+              <h2>Travelog</h2>
+              <p>Photos and notes from the Tokyo visit will appear here during the program.</p>
+            </div>
+            <button class="back" data-page="prep" type="button">Back to preparation</button>
+          </div>
+
+          <article class="travelog-empty">
+            <h3>Coming during the visit</h3>
+            <p>This page will collect snapshots and short notes from the delegation days in Tokyo. Check back once the program begins.</p>
+          </article>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script src="./app.js?v=86"></script>
+</body>
+</html>
