@@ -540,11 +540,11 @@
         '<h3 class="about-subhead">'+mapTitle+'</h3>' +
         '<div class="about-overview-gallery">' +
           '<figure class="about-overview-map">' +
-            '<img src="images/about-metro-map.png?v=4" alt="The planned Tel Aviv Metro network"/>' +
+            '<img src="images/about-metro-map.jpg?v=5" alt="The planned Tel Aviv Metro network"/>' +
           '</figure>' +
           '<div class="about-overview-stations">' +
-            '<img src="images/about-station-interior.png?v=3" alt="Planned metro station interior"/>' +
-            '<img class="about-station-aerial" src="images/about-station-aerial.png?v=4" alt="Planned metro station aerial view"/>' +
+            '<img src="images/about-station-interior.jpg?v=5" alt="Planned metro station interior"/>' +
+            '<img class="about-station-aerial" src="images/about-station-aerial.jpg?v=5" alt="Planned metro station aerial view"/>' +
           '</div>' +
         '</div>' +
       '</div>';

@@ -39,6 +39,7 @@
       --site-nav-height: 76px;
     }
     html { overflow-x: clip; overflow-y: auto; }
+    html:has(body.home-page) { overflow: hidden; height: 100%; }
     body { margin: 0; padding-top: var(--site-nav-height, 76px); font-family: 'Noto Sans', 'Noto Sans Hebrew', 'Noto Sans JP', 'Segoe UI', sans-serif; min-height: 100vh; overflow-x: clip; overflow-y: visible; background: var(--paper); color: var(--navy); }
     body.about-page, #about-page { background: #F7F8FA; }
     nav.metro-nav {
@@ -407,14 +408,16 @@
     #home-page, #about-page, #participants-page, #team-page, #program-page, #useful-page { display: none; }
     #home-page.active, #about-page.active, #participants-page.active, #team-page.active, #program-page.active, #useful-page.active { display: block; }
     body.home-page {
-      height: auto;
-      max-height: none;
-      overflow-y: auto;
+      height: 100dvh;
+      min-height: 100dvh;
+      max-height: 100dvh;
+      overflow: hidden;
+      box-sizing: border-box;
     }
     #home-page.active {
-      height: auto;
-      max-height: none;
-      overflow: visible;
+      height: calc(100dvh - var(--site-nav-height, 76px));
+      max-height: calc(100dvh - var(--site-nav-height, 76px));
+      overflow: hidden;
     }
     #program-page.active, #useful-page.active {
       display: block;
@@ -504,8 +507,10 @@
       position: relative;
       display: grid;
       grid-template-columns: minmax(0, 36fr) minmax(0, 64fr);
-      grid-template-rows: auto auto;
+      grid-template-rows: minmax(0, 1fr) auto;
       align-items: stretch;
+      height: 100%;
+      min-height: 0;
       overflow: hidden;
       background: #fff;
       isolation: isolate;
@@ -516,20 +521,24 @@
       grid-column: 2;
       grid-row: 1;
       min-width: 0;
+      min-height: 0;
+      height: 100%;
       display: flex;
       align-items: center;
       padding: 0;
       pointer-events: none;
       z-index: 0;
       background: #a4ccdf;
+      overflow: hidden;
     }
     .home-map img {
       position: relative;
       display: block;
       width: 100%;
-      height: auto;
+      height: 100%;
       max-width: 100%;
-      object-fit: contain;
+      object-fit: cover;
+      object-position: center center;
       -webkit-mask-image: linear-gradient(to right, transparent, #000 4%);
       mask-image: linear-gradient(to right, transparent, #000 4%);
       opacity: 1;
@@ -555,6 +564,7 @@
       flex-direction: column;
       justify-content: center;
       min-width: 0;
+      min-height: 0;
       width: auto;
       max-width: none;
       padding: 24px clamp(24px, 3vw, 48px);
@@ -667,6 +677,7 @@
       grid-column: 1 / -1;
       grid-row: 2;
       align-self: stretch;
+      flex-shrink: 0;
       display: grid;
       grid-template-columns: repeat(4, minmax(0, 1fr));
       gap: 0;
@@ -956,8 +967,13 @@
       .home-title { font-size: 34px; }
       .home-sub { font-size: 18px; max-width: 100%; min-width: 0; white-space: normal !important; }
       .home-sub-rest { display: block; }
+      html:has(body.home-page) {
+        height: auto;
+        overflow-y: auto;
+      }
       body.home-page {
         height: auto;
+        min-height: 0;
         max-height: none;
         overflow: auto;
       }
@@ -1290,8 +1306,8 @@
     }
     .about-overview-map {
       margin: 0;
-      background: #fff;
-      border-radius: 16px;
+      background: #F4F7FB;
+      border-radius: 20px;
       border: 1px solid var(--line-mute);
       overflow: hidden;
     }
@@ -1300,11 +1316,11 @@
       width: 100%;
       height: 100%;
       display: block;
-      object-fit: cover;
     }
     .about-overview-map img {
-      transform: scale(1.06);
-      transform-origin: center center;
+      object-fit: contain;
+      object-position: center;
+      transform: none;
     }
     .about-overview-stations {
       display: flex;
@@ -1313,15 +1329,16 @@
       min-height: 0;
     }
     .about-overview-stations img {
-      border-radius: 16px;
+      border-radius: 20px;
+      border: 1px solid var(--line-mute);
       flex: 1 1 0;
       min-height: 140px;
       object-fit: cover;
+      overflow: hidden;
     }
     .about-station-aerial {
-      border: 1px solid var(--line-mute);
-      background: #d8dde3;
-      object-position: center 28%;
+      background: #eef2f6;
+      object-position: center;
     }
     .about-delegation-layout > p:last-of-type { margin-bottom: 14px; }
     #about-delegation .about-panel {
@@ -3002,6 +3019,6 @@
     </div>
   </main>
 
-  <script src="script.js?v=259"></script>
+  <script src="script.js?v=260"></script>
 </body>
 </html>
