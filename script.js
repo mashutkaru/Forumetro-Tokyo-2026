@@ -70,7 +70,7 @@
 
   const STEERING_COMMITTEE = [
     { id:"sc1", key:"avi_haliva", nameEn:"Avi Haliva", nameJa:"ハリヴァ・アヴィ", nameHe:"", org:"Metro Authority", orgJa:"メトロ庁／長官", role:"Chair", roleJa:"", photo:"Avi Haliva.jpeg" },
-    { id:"sc2", key:"hila_waxberg", nameEn:"Hila Waxberg", nameJa:"ワックスバーグ・ヒラ", nameHe:"", org:"NTA Metropolitan Mass Transit System Ltd.", orgJa:"NTA（テルアビブ都市圏交通公社）／地方自治体部門長", role:"Head of Local Authorities Division", roleJa:"", photo:"Hila Waxberg.png" },
+    { id:"sc2", key:"hila_waxberg", nameEn:"Hila Wechsberg", nameJa:"ウェクスバーグ・ヒラ", nameHe:"", org:"NTA Metropolitan Mass Transit System Ltd.", orgJa:"NTA（テルアビブ都市圏交通公社）／地方自治体部門長", role:"Head of Local Authorities Division", roleJa:"", photo:"Hila Waxberg.png" },
     { id:"sc3", key:"tal_granit", nameEn:"Tal Granit", nameJa:"グラニット・タル", nameHe:"", org:"Ministry of Transport and Road Safety", orgJa:"イスラエル運輸・道路安全省", role:"", roleJa:"", photo:"Tal Granit.jpg" }
   ];
 
@@ -193,7 +193,21 @@
   var STEERING_BADGE = "Steering Committee";
   var STEERING_PHOTO_VER = 2;
 
-  var STEERING_BIOS = {};
+  var STEERING_BIOS = {
+    hila_waxberg: {
+      jaTitle: 'ヒラ・ウェクスバーグ',
+      bioEn: [
+        'Director of Local Authorities Partnerships at NTA. Leading municipal engagement and collaboration across partner local authorities for the Tel Aviv Metro and light rail projects.',
+        'Former Chief of Staff to the CEO at NTA, holding 15 years of experience in Israel\u2019s government-owned companies operating in the public transportation sector (Heavy rail and Light rail).',
+        'Holds a Master\u2019s degree in Public Policy (with honors) from Tel Aviv University.'
+      ],
+      bioJa: [
+        'NTA（都市交通公社）自治体連携部長。テルアビブのメトロおよびライトレール事業において、関係自治体との連携・協力を推進している。',
+        'NTAのCEO首席補佐官を歴任。幹線鉄道およびライトレールなどの公共交通分野を担うイスラエルの政府系企業で、15年の実務経験を持つ。',
+        'テルアビブ大学で公共政策の修士号を優秀な成績で取得。'
+      ]
+    }
+  };
 
   function steeringBioHtml(key) {
     var paras = STEERING_BIOS[key];
@@ -476,7 +490,7 @@
       }
       if (hint) hint.addEventListener('click', toggleFlip);
       flipEl.addEventListener('click', function (e) {
-        if (e.target.closest('.about-section-flip-hint, a')) return;
+        if (e.target.closest('.about-section-flip-hint, a, .about-overview-carousel')) return;
         toggleFlip(e);
       });
       requestAnimationFrame(syncFlipHeight);
@@ -538,14 +552,19 @@
     var overviewMedia = function (mapTitle) {
       return '<div class="about-overview-media">' +
         '<h3 class="about-subhead">'+mapTitle+'</h3>' +
-        '<div class="about-overview-gallery">' +
-          '<figure class="about-overview-map">' +
-            '<img src="images/about-metro-map.jpg?v=5" alt="The planned Tel Aviv Metro network"/>' +
-          '</figure>' +
-          '<div class="about-overview-stations">' +
-            '<img src="images/about-station-interior.jpg?v=5" alt="Planned metro station interior"/>' +
-            '<img class="about-station-aerial" src="images/about-station-aerial.jpg?v=5" alt="Planned metro station aerial view"/>' +
+        '<div class="about-overview-carousel">' +
+          '<div class="about-overview-gallery">' +
+            '<figure class="about-overview-map about-overview-slide">' +
+              '<img src="images/about-metro-map.jpg?v=5" alt="The planned Tel Aviv Metro network"/>' +
+            '</figure>' +
+            '<div class="about-overview-stations">' +
+              '<img class="about-overview-slide" src="images/about-station-interior.jpg?v=5" alt="Planned metro station interior"/>' +
+              '<img class="about-overview-slide about-station-aerial" src="images/about-station-aerial.jpg?v=5" alt="Planned metro station aerial view"/>' +
+            '</div>' +
           '</div>' +
+          '<button type="button" class="about-overview-prev" aria-label="Previous picture">&lt;</button>' +
+          '<button type="button" class="about-overview-next" aria-label="Next picture">&gt;</button>' +
+          '<div class="about-overview-dots" aria-hidden="true"><span class="is-active"></span><span></span><span></span></div>' +
         '</div>' +
       '</div>';
     };
@@ -708,6 +727,7 @@
       };
     });
     bindAboutSectionFlips(container);
+    initAboutOverviewCarousels(container);
     requestAnimationFrame(function () {
       requestAnimationFrame(syncAboutLineAnchor);
     });
@@ -870,6 +890,47 @@
   }
 
 
+  function initAboutOverviewCarousels(container) {
+    container.querySelectorAll('.about-overview-carousel').forEach(function (carousel) {
+      if (carousel.getAttribute('data-ready') === '1') return;
+      carousel.setAttribute('data-ready', '1');
+      var track = carousel.querySelector('.about-overview-gallery');
+      var prev = carousel.querySelector('.about-overview-prev');
+      var next = carousel.querySelector('.about-overview-next');
+      var dots = carousel.querySelectorAll('.about-overview-dots span');
+      if (!track || !prev || !next) return;
+      function slides() {
+        return track.querySelectorAll('.about-overview-slide');
+      }
+      function currentIndex() {
+        var nodes = slides();
+        var edge = track.getBoundingClientRect().left;
+        var best = 0;
+        var bestDist = Infinity;
+        for (var i = 0; i < nodes.length; i++) {
+          var dist = Math.abs(nodes[i].getBoundingClientRect().left - edge);
+          if (dist < bestDist) { bestDist = dist; best = i; }
+        }
+        return best;
+      }
+      function go(dir) {
+        var nodes = slides();
+        if (!nodes.length) return;
+        var i = Math.max(0, Math.min(nodes.length - 1, currentIndex() + dir));
+        var left = nodes[i].getBoundingClientRect().left - track.getBoundingClientRect().left + track.scrollLeft;
+        track.scrollTo({ left: left, behavior: 'smooth' });
+      }
+      function paint() {
+        var i = currentIndex();
+        dots.forEach(function (dot, n) { dot.classList.toggle('is-active', n === i); });
+      }
+      prev.addEventListener('click', function (e) { e.stopPropagation(); go(-1); });
+      next.addEventListener('click', function (e) { e.stopPropagation(); go(1); });
+      track.addEventListener('scroll', function () { window.requestAnimationFrame(paint); }, { passive: true });
+      paint();
+    });
+  }
+
   function initStaffCarousels(container) {
     container.querySelectorAll('.steering-carousel').forEach(function (carousel) {
       if (carousel.getAttribute('data-ready') === '1') return;
@@ -978,7 +1039,10 @@
         sectorCaptionHtml(s.label, s.mobile)+'</button>';
     })).join('');
 
-    var steeringSectionHtml = buildStaffCarouselSection('Steering Committee', STEERING_COMMITTEE, 'steering-section-main');
+    var steeringMembers = STEERING_COMMITTEE.map(function (member) {
+      return Object.assign({}, member, STEERING_BIOS[member.key] || {});
+    });
+    var steeringSectionHtml = buildStaffCarouselSection('Steering Committee', steeringMembers, 'steering-section-main');
     var programTeamMembers = PROGRAM_TEAM_ORDER.map(function (id) {
       var member = PROGRAM_TEAM.filter(function (m) { return m.id === id; })[0];
       return Object.assign({}, member, PROGRAM_BIOS[member.key] || {}, { badge: PROGRAM_TEAM_BADGE });
