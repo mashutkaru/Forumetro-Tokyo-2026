@@ -442,15 +442,18 @@
     });
   }
 
-  function buildAboutSectionFlipHtml(flipId, enHtml, jaHtml) {
+  function buildAboutSectionFlipHtml(flipId, enHtml, jaHtml, actionHtml) {
     return '<div class="about-section-flip" id="'+flipId+'" role="group" aria-label="Section language toggle">' +
       '<div class="about-section-flip-inner">' +
         '<div class="about-section-flip-face about-section-flip-front" lang="en">'+enHtml+'</div>' +
         '<div class="about-section-flip-face about-section-flip-back" lang="ja">'+jaHtml+'</div>' +
       '</div>' +
-      '<button type="button" class="about-section-flip-hint" data-hint-front="日本語" data-hint-back="English">' +
-        '<span class="about-section-flip-hint-label">日本語</span><span class="about-section-flip-hint-arrow" aria-hidden="true">→</span>' +
-      '</button>' +
+      '<div class="about-panel-actions">' +
+        (actionHtml || '') +
+        '<button type="button" class="about-section-flip-hint" data-hint-front="日本語" data-hint-back="English">' +
+          '<span class="about-section-flip-hint-label">日本語</span><span class="about-section-flip-hint-arrow" aria-hidden="true">→</span>' +
+        '</button>' +
+      '</div>' +
     '</div>';
   }
 
@@ -490,7 +493,7 @@
       }
       if (hint) hint.addEventListener('click', toggleFlip);
       flipEl.addEventListener('click', function (e) {
-        if (e.target.closest('.about-section-flip-hint, a, .about-overview-carousel')) return;
+        if (e.target.closest('.about-section-flip-hint, .cta-metro, a, .about-overview-carousel')) return;
         toggleFlip(e);
       });
       requestAnimationFrame(syncFlipHeight);
@@ -576,16 +579,7 @@
         '<p class="about-interest-d">'+detail+'</p>' +
       '</article>';
     };
-    var aboutStops = [
-      { id: 'about-overview', letter: 'M', num: '02', short: 'Overview', line: '#F62E36' },
-      { id: 'about-delegation', letter: 'T', num: '03', short: 'Delegation', line: '#009BBF' },
-      { id: 'about-interests', letter: 'C', num: '04', short: 'Program Objectives', line: '#00BB85' }
-    ];
-    var aboutStopsHtml = aboutStops.map(function (s) {
-      return '<button type="button" data-about-section="'+s.id+'" class="sector-btn" style="--station:'+s.line+'">' +
-        '<span class="nav-mark" aria-hidden="true"><span class="nav-mark-line">'+s.letter+'</span><span class="nav-mark-id">'+s.num+'</span></span>' +
-        '<span class="nav-caption">'+s.short+'</span></button>';
-    }).join('');
+    var aboutStopsHtml = buildAboutStopsHtml('');
 
     var overviewSectionEn =
       '<div class="about-overview-layout">' +
@@ -694,7 +688,12 @@
         '<section class="about-section" id="about-overview">' +
           '<h2 class="all-participants-title about-section-title">Forumetro Overview</h2>' +
           '<div class="about-panel">' +
-            buildAboutSectionFlipHtml('about-delegation-flip', overviewSectionEn, overviewSectionJa) +
+            buildAboutSectionFlipHtml(
+              'about-delegation-flip',
+              overviewSectionEn,
+              overviewSectionJa,
+              '<button type="button" id="cta-metro" class="home-cta cta-metro">Metro Project</button>'
+            ) +
           '</div>' +
         '</section>' +
         '<section class="about-section" id="about-delegation">' +
@@ -718,16 +717,189 @@
       '</div></div>';
 
     container.querySelector('#cta-participants').onclick = function () { setPage('participants'); };
-    container.querySelectorAll('#about-stops-bar [data-about-section]').forEach(function (btn) {
-      btn.onclick = function () {
-        var el = container.querySelector('#' + btn.getAttribute('data-about-section'));
+    var metroCta = container.querySelector('#cta-metro');
+    if (metroCta) {
+      metroCta.onclick = function (e) {
+        e.preventDefault();
+        e.stopPropagation();
+        setPage('metro');
+      };
+    }
+    bindAboutStops(container);
+    bindAboutSectionFlips(container);
+    initAboutOverviewCarousels(container);
+    requestAnimationFrame(function () {
+      requestAnimationFrame(syncAboutLineAnchor);
+    });
+  }
+
+  var ABOUT_STOPS = [
+    { id: 'about-overview', page: 'about', letter: 'M', num: '02', short: 'Overview', line: '#F62E36' },
+    { id: 'about-delegation', page: 'about', letter: 'T', num: '03', short: 'Delegation', line: '#009BBF' },
+    { id: 'about-interests', page: 'about', letter: 'C', num: '04', short: 'Program Objectives', line: '#00BB85' },
+    { id: 'metro-project', page: 'metro', letter: 'U', num: '05', short: 'Metro Project', line: '#C9A227' }
+  ];
+
+  function buildAboutStopsHtml(activeId) {
+    return ABOUT_STOPS.map(function (s) {
+      var active = s.id === activeId ? ' active' : '';
+      return '<button type="button" data-about-stop="'+s.id+'" class="sector-btn'+active+'" style="--station:'+s.line+'">' +
+        '<span class="nav-mark" aria-hidden="true"><span class="nav-mark-line">'+s.letter+'</span><span class="nav-mark-id">'+s.num+'</span></span>' +
+        '<span class="nav-caption">'+s.short+'</span></button>';
+    }).join('');
+  }
+
+  function bindAboutStops(container) {
+    container.querySelectorAll('#about-stops-bar [data-about-stop]').forEach(function (btn) {
+      btn.onclick = function () { openAboutStop(btn.getAttribute('data-about-stop')); };
+    });
+  }
+
+  function openAboutStop(id) {
+    var stop = null;
+    var i;
+    for (i = 0; i < ABOUT_STOPS.length; i++) {
+      if (ABOUT_STOPS[i].id === id) stop = ABOUT_STOPS[i];
+    }
+    if (!stop) return;
+    if (stop.page === 'metro') {
+      if (state.page !== 'metro') setPage('metro');
+      return;
+    }
+    if (state.page !== 'about') setPage('about');
+    requestAnimationFrame(function () {
+      requestAnimationFrame(function () {
+        var el = document.querySelector('#about-page #' + stop.id);
         if (!el) return;
         var y = el.getBoundingClientRect().top + window.pageYOffset - stickyHeaderOffset('about-page');
         window.scrollTo({ top: Math.max(0, y), behavior: 'smooth' });
-      };
+      });
     });
-    bindAboutSectionFlips(container);
-    initAboutOverviewCarousels(container);
+  }
+
+  function renderMetroPage(container) {
+    var pStyle = 'margin:0 0 16px;font-size:16px;line-height:1.85;color:#12263A';
+    var para = function (text) {
+      return '<p style="'+pStyle+'">'+text+'</p>';
+    };
+    var figure = function (src, alt, caption) {
+      return '<figure class="metro-figure metro-aside"><img src="'+src+'" alt="'+alt+'"/><figcaption>'+caption+'</figcaption></figure>';
+    };
+    var lineCard = function (color, name, meta, text) {
+      return '<article class="metro-line" style="--metro-line:'+color+'">' +
+        '<div class="metro-line-name">'+name+'</div>' +
+        '<div class="metro-line-meta">'+meta+'</div>' +
+        '<p>'+text+'</p></article>';
+    };
+    var themeCard = function (num, title, detail) {
+      return '<article class="about-interest-card" style="--line-interest:#C9A227">' +
+        '<div class="about-interest-num">'+num+'</div>' +
+        '<h3 class="about-interest-title">'+title+'</h3>' +
+        '<p class="about-interest-d">'+detail+'</p></article>';
+    };
+    var links = function (items) {
+      return '<ul class="metro-links">' + items.map(function (item) {
+        return '<li><a href="'+item[1]+'" target="_blank" rel="noopener">'+item[0]+'</a></li>';
+      }).join('') + '</ul>';
+    };
+    var stat = function (n, t) {
+      return '<div class="about-metro-stat"><div class="about-metro-stat-n">'+n+'</div><div class="about-metro-stat-t">'+t+'</div></div>';
+    };
+    var refItemsJa = [
+      ['NTA — テルアビブ・メトロ', 'https://www.nta.co.il/en/metro/'],
+      ['NTA — ライトレール', 'https://www.nta.co.il/en/light-rail/'],
+      ['NTA — メトロ整備・段階的開業', 'https://www.nta.co.il/en/metro-israel/'],
+      ['イスラエル計画局 — メトロおよびTAMA 70公式地図', 'https://www.gov.il/en/service/metro-system-map']
+    ];
+
+    var ja =
+      '<p class="about-lede">イスラエルの交通システム — 都市の成長、既存インフラ、テルアビブ都市圏メトロ</p>' +
+      '<p class="about-date">日本側受入機関向け事前資料 · Forumetro Tokyo 2026 · 2026年12月14日〜20日</p>' +
+      '<h3 class="about-subhead">01 · イスラエルの都市成長と交通課題</h3>' +
+      '<h4 class="metro-kicker">都市開発と大都市圏の構造</h4>' +
+      para('イスラエルは国土面積約22,000 km²、人口1,000万人超の高度に都市化した国です。人口増加率は多くの先進国より高く、住宅、雇用へのアクセス、インフラに対する需要が拡大しています。人口は現在の約1,000万人から2050年に約1,570万人へ増加すると推計されており、住宅・交通・都市基盤への負荷が一層高まる見込みです。') +
+      para('テルアビブ都市圏は「グッシュ・ダン」と呼ばれ、イスラエル最大の経済・雇用集積地です。複数の自治体にまたがり、業務地区、大学、住宅地、商業拠点が集積しています。鉄道が長年にわたり都市圏の形成を支えてきた首都圏東京とは異なり、イスラエルの郊外開発の多くは道路と自家用車を中心に進みました。') +
+      '<h4 class="metro-kicker">自動車依存と交通渋滞</h4>' +
+      para('通勤や自治体間の移動では、現在も自家用車への依存が高い状況です。2022年のイスラエルの自動車総走行距離は約659億台キロで、その約79％を自家用車が占めました。人口増加、郊外化、自動車保有の増加により、特にテルアビブへのアクセス道路で渋滞が深刻化しています。渋滞は移動時間の不確実性、雇用機会へのアクセス低下、大気汚染、生産性損失をもたらします。重要な課題は、自家用車に代わる信頼性の高い大容量の公共交通を統合的に整備することです。') +
+      '<h3 class="about-subhead">02 · 既存および整備中の公共交通</h3>' +
+      '<h4 class="metro-kicker">国鉄（Israel Railways）</h4>' +
+      figure('images/metro-brief-railways.jpg', 'イスラエル鉄道の路線図', 'イスラエル鉄道。旅客線、貨物専用線、計画中の路線。') +
+      para('イスラエル鉄道は、線路延長約1,500 km、駅数約72の全国ネットワークを運営し、テルアビブとエルサレム、ハイファ、ベエルシェバなどを結んでいます。路線拡張、電化、エルサレム〜テルアビブ高速鉄道によって都市間の接続性は向上しました。しかし、国鉄だけでは都市圏内のきめ細かな移動や最終目的地までのアクセスを十分に担えません。') +
+      '<h4 class="metro-kicker">バス：大手協同組合中心から複数事業者体制へ</h4>' +
+      para('バスは引き続き公共交通の基幹を担っています。歴史的には、国営企業ではなく組合員所有の協同組合として運営されたEggedが大きなシェアを占めていました。その後、競争入札と制度改革により、国の交通計画、免許・監督制度の下で、民間企業を含む多数の事業者が参入しました。主な事業者はEgged、Dan、Kavim、Metropoline、Superbusなどです。') +
+      '<h4 class="metro-kicker">パークアンドライドとネットワーク統合</h4>' +
+      figure('images/metro-brief-parkride.jpg', 'イスラエルのパークアンドライド施設の航空写真', 'パークアンドライド施設（イスラエル、2026年10月開業）。駐車場とバスサービスを一体化した交通結節拠点。テルアビブ都市圏中心部への自動車流入の削減を目指します。') +
+      para('新たなパークアンドライド施設、バス優先レーン、交通結節ターミナルの整備は、郊外からの自動車移動を公共交通へ転換し、中心業務地区に流入する車両を減らすことを目的としています。効果を発揮するには、便利な乗換え、高頻度運行、信頼性の高い接続交通が不可欠です。') +
+      '<h4 class="metro-kicker">都市型ライトレール</h4>' +
+      para('エルサレムでは2011年にイスラエル初の近代的ライトレールが開業しました。テルアビブ都市圏では、Dankalレッドラインが2023年に開業し、バト・ヤム、テルアビブ、ラマト・ガン、ブネイ・ブラク、ペタハ・ティクヴァを約24 kmにわたって結びます。グリーンラインとパープルラインも整備中です。3路線全体では約90 km、139駅・停留所が計画されています（NTA計画値）。') +
+      '<h3 class="about-subhead">03 · テルアビブ都市圏のメトロ・ライトレール</h3>' +
+      '<h4 class="metro-kicker">ライトレールとメトロの整備｜2026年</h4>' +
+      para('テルアビブ都市圏では、Dankalライトレール（LRT）と計画中のテルアビブ・メトロという、相互補完的な2つの都市鉄道ネットワークを整備しています。交通接続性の向上、自動車依存の低減、公共交通指向型開発（TOD）の促進を目指しています。') +
+      '<h4 class="metro-kicker">ライトレール（LRT）ネットワーク</h4>' +
+      para('Dankalは3路線で構成され、総延長は約90 km、駅・停留所数は130以上です。グリーンラインとパープルラインの開業時期は、事業の進捗により変更される可能性があります。') +
+      '<div class="metro-lines">' +
+        lineCard('#F62E36', 'レッドライン', '2023年8月開業', 'ペタハ・ティクヴァ、テルアビブ、バト・ヤムを結ぶ約24 km。地下区間と地上区間を組み合わせています。') +
+        lineCard('#00BB85', 'グリーンライン', '建設中', 'ヘルツリヤおよびテルアビブ北部からホロン、リション・レツィヨンを結ぶ約39 km。') +
+        lineCard('#8F76D6', 'パープルライン', '建設中', '東部郊外とテルアビブ中心部を結ぶ約27 km。主に地上を走行します。') +
+      '</div>' +
+      '<h4 class="metro-kicker">計画中の大容量メトロネットワーク</h4>' +
+      para('イスラエル最大規模の交通インフラ計画で、全線地下の3路線から構成されます。全線開業時の想定利用者数は1日約200万人回です。初期開業段階は2037年頃と見込まれていますが、事業進捗により変更される可能性があります。') +
+      '<div class="about-metro-stats">' +
+        stat('150', '計画延長（km）') +
+        stat('109', '駅') +
+        stat('4', '車両基地') +
+        stat('24', '自治体') +
+        stat('3', '路線 · M1 / M2 / M3') +
+        stat('200万', '1日あたりの利用者（全線開業時）') +
+      '</div>' +
+      '<div class="metro-lines">' +
+        lineCard('#2F6BFF', 'M1', '南北軸', '北部・南部の郊外と都市圏中心部を結びます。') +
+        lineCard('#0B6B3A', 'M2', '東西軸', '東部自治体とテルアビブ中心部・南部を結びます。') +
+        lineCard('#E87722', 'M3', '半環状線', '中心市街地を経由せずに、郊外の主要拠点間を結びます。') +
+      '</div>' +
+      '<h4 class="metro-kicker">現在の入札・調達状況｜2026年10月</h4>' +
+      para('NTAは主要インフラの調達段階に進んでいます。Infra 1（トンネル・駅建設）の事前資格審査（PQ）は2026年6月に応募を締め切りました。NTAによると、33社で構成する20の企業連合が13工区への参加を競っており、最初の工区入札は2026年末以降に予定されています。Infra 2（鉄道システム等）のPQは2026年8月に開始され、応募期限は2027年1月、主要入札は2027年中に予定されています。先行工事や車両基地関連の調達も進行中です。これらは調達手続き上の節目であり、主要建設契約の落札決定を意味するものではありません。') +
+      links([['NTA公式入札・調達情報', 'https://www.nta.co.il/en/tenders/']]) +
+      '<h4 class="metro-kicker">駅周辺まちづくりと TAMA 70</h4>' +
+      '<div class="metro-stack">' +
+        figure('images/metro-brief-network.jpg', '計画中のテルアビブ・ライトレールとメトロの路線図', '計画ネットワーク。ライトレール（赤・緑・紫）とメトロM1・M2・M3。') +
+        figure('images/metro-brief-shibuya.jpg', '駅周辺の公共空間と歩行者動線のイメージ', '駅周辺の公共空間。歩行者動線、街路、そして駅を囲むまち。') +
+      '</div>' +
+      para('テルアビブ・メトロは交通整備にとどまらず、都市圏の空間構造を変えることが期待されています。TAMA 70は将来のメトロ駅周辺を対象とするイスラエルの国家的都市計画枠組みで、高密度・複合用途の開発、公共空間の改善、歩行者アクセスの向上を推進します。') +
+      '<h3 class="about-subhead">04 · FORUMETRO TOKYO 2026：専門家視察団</h3>' +
+      '<h4 class="metro-kicker">参加者について</h4>' +
+      para('Forumetro Tokyo 2026には、テルアビブ都市圏メトロの計画、政策、事業推進に関わるイスラエルの上級専門家約50名が参加します。政府省庁、交通・インフラ関係機関、広域・基礎自治体、都市技師、建築家、都市計画家などで構成されます。日本側では、日本で登録された団体IJACが現地支援を行います。') +
+      '<h4 class="metro-kicker">なぜ日本・東京なのか</h4>' +
+      para('東京は、高密度で信頼性の高い鉄道網が都市圏の成長を支え、活気ある駅周辺地区を形成し、公共インフラと商業・市民生活を結び付ける仕組みを示しています。公営・民営鉄道事業者、自治体の都市計画、長期的なエリアマネジメントの組合せは、イスラエルにとって特に参考になります。') +
+      '<h4 class="metro-kicker">主な学習テーマ</h4>' +
+      '<div class="about-interest-list">' +
+        themeCard('01', '一つのネットワーク', '事業者間のネットワーク計画、鉄道運行、乗換結節の統合。') +
+        themeCard('02', '駅周辺のまち', '駅周辺開発、公共空間、歩行者ネットワーク。') +
+        themeCard('03', '機関をまたぐ連携', '中央政府、自治体、鉄道会社、開発事業者の連携。') +
+        themeCard('04', '工事中も続く都市', '地域社会との対話と、長期工事中の都市活動の維持。') +
+        themeCard('05', '学ぶ場所', '都心、渋谷、新宿、下北沢、新たな駅周辺地区から得られる教訓。') +
+      '</div>' +
+      '<p class="metro-question">私たちの中心的な問いは、メトロを単なる交通投資にとどめず、都市圏の長期的な変革を支える枠組みへと発展させるにはどうすればよいか、ということです。</p>' +
+      '<h4 class="metro-kicker">参考資料・公式地図</h4>' +
+      links(refItemsJa);
+
+    container.innerHTML = '<div class="about-page-shell">' +
+      '<div class="participants-header-wrap">' +
+        '<div class="participants-header-inner">' +
+          '<div class="participants-header-copy"><h1>About</h1></div>' +
+          '<div class="stats-bar-wrap" id="about-stops-bar">'+buildAboutStopsHtml('metro-project')+'</div>' +
+        '</div>' +
+      '</div>' +
+      '<div class="participants-content about-page-content">' +
+        '<section class="about-section" id="metro-project">' +
+          '<h2 class="all-participants-title about-section-title">Metro Project</h2>' +
+          '<div class="about-panel" lang="ja">' +
+            ja +
+          '</div>' +
+        '</section>' +
+      '</div></div>';
+
+    bindAboutStops(container);
     requestAnimationFrame(function () {
       requestAnimationFrame(syncAboutLineAnchor);
     });
@@ -1329,12 +1501,13 @@
   }
 
   function syncAboutLineAnchor() {
-    if (state.page !== 'about') return;
+    if (state.page !== 'about' && state.page !== 'metro') return;
+    var rootId = state.page === 'metro' ? 'metro-page' : 'about-page';
     var join = document.querySelector('.metro-branch-connect');
     if (join) join.hidden = true;
     document.body.classList.remove('about-scrolled');
-    var header = document.querySelector('#about-page .participants-header-wrap');
-    var stats = document.querySelector('#about-stops-bar');
+    var header = document.querySelector('#' + rootId + ' .participants-header-wrap');
+    var stats = document.querySelector('#' + rootId + ' #about-stops-bar');
     var firstMark = stats && stats.querySelector('.sector-btn .nav-mark');
     var btn = document.querySelector('nav .nav-btn[data-page="about"]');
     if (!header) return;
@@ -1410,11 +1583,26 @@
     });
   }
 
-  function setPage(page) {
+  function syncPageUrl(page, replace) {
+    var url = new URL(window.location.href);
+    if (page === 'home') url.searchParams.delete('page');
+    else url.searchParams.set('page', page);
+    var next = url.pathname + url.search + url.hash;
+    var current = window.location.pathname + window.location.search + window.location.hash;
+    if (next === current) return;
+    if (replace) history.replaceState({ page: page }, '', next);
+    else history.pushState({ page: page }, '', next);
+  }
+
+  function setPage(page, options) {
+    options = options || {};
+    var known = { home: 1, about: 1, metro: 1, participants: 1, team: 1, program: 1, useful: 1 };
+    if (!known[page]) page = 'home';
     var pageChanged = state.page !== page;
     state.page = page;
     document.querySelectorAll('.nav-btn').forEach(function(b){
-      var isCurrent = b.getAttribute('data-page') === page;
+      var btnPage = b.getAttribute('data-page');
+      var isCurrent = btnPage === page || (page === 'metro' && btnPage === 'about');
       b.classList.toggle('active', isCurrent);
       if (isCurrent) {
         try { b.scrollIntoView({ inline: 'nearest', block: 'nearest', behavior: 'smooth' }); } catch (e) {}
@@ -1422,6 +1610,7 @@
     });
     document.getElementById('home-page').classList.toggle('active', page==='home');
     document.getElementById('about-page').classList.toggle('active', page==='about');
+    document.getElementById('metro-page').classList.toggle('active', page==='metro');
     document.getElementById('participants-page').classList.toggle('active', page==='participants');
     document.getElementById('team-page').classList.toggle('active', page==='team');
     document.getElementById('program-page').classList.toggle('active', page==='program');
@@ -1430,7 +1619,8 @@
     document.body.classList.toggle('program-page', page==='program');
     document.body.classList.toggle('useful-page', page==='useful');
     document.body.classList.toggle('home-page', page==='home');
-    document.body.classList.toggle('about-page', page==='about');
+    document.body.classList.toggle('about-page', page==='about' || page==='metro');
+    document.body.classList.toggle('metro-page', page==='metro');
     document.body.classList.toggle('participants-page', page==='participants');
     document.body.classList.toggle('about-scrolled', false);
     updateSiteNavHeight();
@@ -1441,6 +1631,12 @@
     if (page === 'home') renderHomePage(document.getElementById('home-page'), setPage);
     else if (page === 'about') {
       renderAboutPage(document.getElementById('about-page'), setPage);
+      requestAnimationFrame(function () {
+        requestAnimationFrame(syncAboutLineAnchor);
+      });
+    }
+    else if (page === 'metro') {
+      renderMetroPage(document.getElementById('metro-page'));
       requestAnimationFrame(function () {
         requestAnimationFrame(syncAboutLineAnchor);
       });
@@ -1469,6 +1665,7 @@
       scrollToTop();
       requestAnimationFrame(scrollToTop);
     }
+    if (!options.skipUrl) syncPageUrl(page, !!options.replaceUrl);
   }
 
   function setActiveSector(s) {
@@ -1531,7 +1728,7 @@
   });
   window.addEventListener('resize', onNavLayout);
   window.addEventListener('scroll', function () {
-    if (state.page === 'about') syncAboutLineAnchor();
+    if (state.page === 'about' || state.page === 'metro') syncAboutLineAnchor();
   }, { passive: true });
   if (window.visualViewport) {
     window.visualViewport.addEventListener('resize', onNavLayout);
@@ -1549,5 +1746,9 @@
     }
   }
   updateSiteNavHeight();
-  setPage(new URLSearchParams(window.location.search).get('page') || 'home');
+  setPage(new URLSearchParams(window.location.search).get('page') || 'home', { replaceUrl: true });
+  window.addEventListener('popstate', function () {
+    var page = (history.state && history.state.page) || new URLSearchParams(window.location.search).get('page') || 'home';
+    setPage(page, { skipUrl: true });
+  });
 })();
