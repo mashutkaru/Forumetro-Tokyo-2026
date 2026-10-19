@@ -4,6 +4,16 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>FORUMETRO TOKYO 2026</title>
+  <script>
+    (function () {
+      try {
+        if (new URLSearchParams(location.search).get('page') !== 'metro') return;
+        var path = location.pathname.replace(/index\.html$/, '');
+        if (path.charAt(path.length - 1) !== '/') path += '/';
+        location.replace(path + 'metro/');
+      } catch (e) {}
+    })();
+  </script>
   <link rel="icon" type="image/png" sizes="32x32" href="https://mashutkaru.github.io/Forumetro-Tokyo-2026/images/favicon-32.png?v=5" />
   <link rel="icon" type="image/png" sizes="16x16" href="https://mashutkaru.github.io/Forumetro-Tokyo-2026/images/favicon-16.png?v=5" />
   <link rel="shortcut icon" href="https://mashutkaru.github.io/Forumetro-Tokyo-2026/favicon.ico?v=5" />
@@ -3301,6 +3311,6 @@
     </div>
   </main>
 
-  <script src="script.js?v=267"></script>
+  <script src="script.js?v=268"></script>
 </body>
 </html>

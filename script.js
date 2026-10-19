@@ -1583,7 +1583,29 @@
     });
   }
 
+  function siteRootPath() {
+    var path = window.location.pathname;
+    path = path.replace(/\/metro\/index\.html$/, '/');
+    path = path.replace(/\/metro\/?$/, '/');
+    path = path.replace(/\/index\.html$/, '/');
+    if (path.charAt(path.length - 1) !== '/') path += '/';
+    return path;
+  }
+
+  function onMetroSharePath() {
+    return /\/metro\/?$/.test(window.location.pathname) || /\/metro\/index\.html$/.test(window.location.pathname);
+  }
+
   function syncPageUrl(page, replace) {
+    if (onMetroSharePath()) {
+      if (page !== 'metro') return;
+      var clean = siteRootPath() + 'metro/';
+      var here = window.location.pathname.replace(/\/index\.html$/, '/');
+      if (here.charAt(here.length - 1) !== '/') here += '/';
+      if (here === clean && !window.location.search && !window.location.hash) return;
+      history.replaceState({ page: 'metro' }, '', clean);
+      return;
+    }
     var url = new URL(window.location.href);
     if (page === 'home') url.searchParams.delete('page');
     else url.searchParams.set('page', page);
@@ -1598,6 +1620,15 @@
     options = options || {};
     var known = { home: 1, about: 1, metro: 1, participants: 1, team: 1, program: 1, useful: 1 };
     if (!known[page]) page = 'home';
+    if (page === 'metro' && !onMetroSharePath()) {
+      window.location.href = siteRootPath() + 'metro/';
+      return;
+    }
+    if (page !== 'metro' && onMetroSharePath()) {
+      var root = siteRootPath();
+      window.location.href = page === 'home' ? root : root + '?page=' + page;
+      return;
+    }
     var pageChanged = state.page !== page;
     state.page = page;
     document.querySelectorAll('.nav-btn').forEach(function(b){
@@ -1746,7 +1777,13 @@
     }
   }
   updateSiteNavHeight();
-  setPage(new URLSearchParams(window.location.search).get('page') || 'home', { replaceUrl: true });
+  var openingPage = window.FORUMETRO_PAGE || new URLSearchParams(window.location.search).get('page') || 'home';
+  if (onMetroSharePath()) openingPage = 'metro';
+  if (openingPage === 'metro' && !onMetroSharePath()) {
+    window.location.replace(siteRootPath() + 'metro/');
+  } else {
+    setPage(openingPage, { replaceUrl: true });
+  }
   window.addEventListener('popstate', function () {
     var page = (history.state && history.state.page) || new URLSearchParams(window.location.search).get('page') || 'home';
     setPage(page, { skipUrl: true });
