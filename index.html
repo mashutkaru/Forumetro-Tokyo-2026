@@ -398,7 +398,7 @@
       z-index: 3;
       background: var(--nav-bg);
       color: var(--nav-text);
-      padding: 0 5px;
+      padding: 8px 5px 0;
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
@@ -833,8 +833,10 @@
         flex: 0 0 auto;
         position: relative !important;
         top: auto !important;
+        z-index: 30 !important;
+        background: #fff !important;
         box-shadow: none !important;
-        padding: 4px 12px 2px !important;
+        padding: 4px 12px 8px !important;
       }
       .program-embed-title .participants-header-inner {
         gap: 2px !important;
@@ -938,7 +940,7 @@
       nav button.nav-btn .nav-caption,
       nav button.nav-btn .nav-label-full,
       nav button.nav-btn .nav-label-short {
-        padding: 0 2px;
+        padding: 8px 2px 0;
         font-size: 9px;
         max-width: 100%;
       }
@@ -1750,7 +1752,14 @@
     }
     .stats-bar-wrap .sector-btn .nav-caption {
       background: transparent;
-      padding: 0;
+      padding: 4px 2px 0;
+    }
+    #program-page .program-embed-title,
+    #useful-page .program-embed-title {
+      position: relative;
+      z-index: 30;
+      background: #fff;
+      padding-bottom: 8px !important;
     }
     body.about-page #about-stops-bar .sector-btn {
       white-space: normal;
@@ -2676,7 +2685,7 @@
     .about-banner h1 { font-family: 'Noto Sans', sans-serif; }
     .about-banner > div:first-child,
     .team-banner > div:first-child { padding: 32px 24px !important; }
-    .participants-header-wrap { padding: 10px 48px 16px !important; }
+    .participants-header-wrap { padding: 8px 48px 6px !important; }
     .participants-header-copy { gap: 4px !important; }
     .participants-header-wrap .stats-bar-wrap { padding-top: 4px !important; padding-bottom: 0 !important; }
     .participants-header-copy h1 { margin: 0 !important; }
