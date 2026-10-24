@@ -1573,29 +1573,14 @@
     .about-panel-actions:has(.cta-metro) {
       align-self: stretch;
       width: 100%;
-      display: grid;
-      grid-template-columns: 1fr auto 1fr;
-      justify-items: start;
-      align-items: center;
+      justify-content: center;
     }
-    .about-panel-actions .about-section-flip-hint { margin: 0; }
-    .about-panel-actions:has(.cta-metro) .about-section-flip-hint {
-      grid-column: 2;
-      justify-self: center;
-      height: 36px;
-      padding-top: 0;
-      padding-bottom: 0;
-      box-sizing: border-box;
+    .about-panel-actions .cta-metro,
+    .about-cta .home-cta {
+      min-width: 196px;
     }
     .about-panel-actions .cta-metro {
-      grid-column: 1;
       margin: 0;
-      height: 36px;
-      padding: 0 18px;
-      font-size: 13px;
-      font-weight: 800;
-      line-height: 1;
-      box-sizing: border-box;
     }
     .participants-header-wrap {
       position: relative;
@@ -1809,9 +1794,19 @@
       height: 38px;
       aspect-ratio: 32 / 38;
     }
+    .about-lang-btn {
+      grid-column: 3;
+      justify-self: end;
+      align-self: center;
+      position: relative;
+      z-index: 2;
+      margin: 0;
+      text-transform: none;
+      letter-spacing: 0.04em;
+    }
     @media (min-width: 901px) {
       body.about-page .participants-header-inner {
-        grid-template-columns: auto minmax(0, 1fr);
+        grid-template-columns: auto minmax(0, 1fr) auto;
       }
       body.participants-page .participants-header-inner {
         grid-template-columns: auto auto minmax(0, 1fr);
@@ -2715,12 +2710,16 @@
       .about-panel-actions:has(.cta-metro) {
         align-self: stretch;
         width: 100%;
+        justify-content: center;
       }
-      .about-panel-actions .about-section-flip-hint { margin: 0 !important; }
-      .about-panel-actions .cta-metro {
-        height: 36px !important;
-        padding: 0 16px !important;
-        font-size: 13px !important;
+      .about-panel-actions .cta-metro,
+      .about-cta button {
+        width: 100%;
+        max-width: 280px;
+        height: auto !important;
+        padding: 14px 20px !important;
+        font-size: 15px !important;
+        box-sizing: border-box;
       }
       .about-grid { display: flex !important; flex-direction: column !important; gap: 24px !important; }
       .about-grid .about-col-ja { border-left: none !important; border-top: 1px solid rgba(255,255,255,0.35) !important; padding-left: 0 !important; padding-top: 24px !important; }
@@ -2842,6 +2841,33 @@
         align-items: center;
         text-align: center;
         gap: 2px !important;
+      }
+      body.about-page .participants-header-inner {
+        display: grid !important;
+        grid-template-columns: 1fr;
+        grid-template-areas: "title" "stops";
+        align-items: center;
+        justify-items: stretch;
+        text-align: center;
+        gap: 6px 0 !important;
+      }
+      body.about-page .participants-header-copy {
+        grid-area: title;
+        align-items: center !important;
+        text-align: center !important;
+      }
+      body.about-page .participants-header-wrap h1 {
+        text-align: center !important;
+        justify-content: center !important;
+      }
+      body.about-page .about-lang-btn {
+        grid-area: title;
+        justify-self: end;
+        align-self: center;
+        margin: 0 !important;
+      }
+      body.about-page #about-stops-bar {
+        grid-area: stops;
       }
       .participants-header-copy {
         gap: 0 !important;
@@ -3272,7 +3298,7 @@
       <iframe
         class="program-frame"
         title="FORUMETRO TOKYO 2026 Program"
-        data-src="program/index.html?embed=1&amp;page=day&amp;v=100"
+        data-src="program/index.html?embed=1&amp;page=day&amp;v=101"
         referrerpolicy="no-referrer-when-downgrade"
         allow="fullscreen"
       ></iframe>
@@ -3311,6 +3337,6 @@
     </div>
   </main>
 
-  <script src="script.js?v=268"></script>
+  <script src="script.js?v=272"></script>
 </body>
 </html>

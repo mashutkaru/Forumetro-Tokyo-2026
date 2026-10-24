@@ -33,6 +33,12 @@
   </noscript>
   <script>
     (function () {
+      if (location.protocol === 'file:') {
+        var fileRoot = location.href.replace(/metro\/index\.html.*$/, '').replace(/metro\/?(?:[?#].*)?$/, '');
+        if (fileRoot.slice(-1) !== '/') fileRoot += '/';
+        location.replace(fileRoot + 'index.html?page=metro');
+        return;
+      }
       var root = location.pathname.replace(/\/metro\/index\.html$/, '/').replace(/\/metro\/?$/, '/');
       if (root.charAt(root.length - 1) !== '/') root += '/';
       var baseEl = document.createElement('base');

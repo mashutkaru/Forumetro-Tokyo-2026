@@ -71,7 +71,7 @@
   const STEERING_COMMITTEE = [
     { id:"sc1", key:"avi_haliva", nameEn:"Avi Haliva", nameJa:"ハリヴァ・アヴィ", nameHe:"", org:"Metro Authority", orgJa:"メトロ庁／長官", role:"Chair", roleJa:"", photo:"Avi Haliva.jpeg" },
     { id:"sc2", key:"hila_waxberg", nameEn:"Hila Wechsberg", nameJa:"ウェクスバーグ・ヒラ", nameHe:"", org:"NTA Metropolitan Mass Transit System Ltd.", orgJa:"NTA（テルアビブ都市圏交通公社）／地方自治体部門長", role:"Head of Local Authorities Division", roleJa:"", photo:"Hila Waxberg.png" },
-    { id:"sc3", key:"tal_granit", nameEn:"Tal Granit", nameJa:"グラニット・タル", nameHe:"", org:"Ministry of Transport and Road Safety", orgJa:"イスラエル運輸・道路安全省", role:"", roleJa:"", photo:"Tal Granit.jpg" }
+    { id:"sc3", key:"tal_granit", nameEn:"Tal Granit", nameJa:"グラニット・タル", nameHe:"", org:"Ministry of Transport and Road Safety", orgJa:"イスラエル運輸・道路安全省／国家メトロ庁", role:"Head of Budget Department", roleJa:"予算部長", photo:"Tal Granit.jpg" }
   ];
 
   var PROGRAM_TEAM_BADGE = "Program Team";
@@ -194,6 +194,23 @@
   var STEERING_PHOTO_VER = 2;
 
   var STEERING_BIOS = {
+    avi_haliva: {
+      jaTitle: 'ハリヴァ・アヴィ',
+      bioEn: [
+        'Avi Haliva serves as Director General of the Israel Metro Authority, the government authority responsible for leading and overseeing the Tel Aviv Metropolitan Metro Project, the most complex and costly infrastructure project in Israel\u2019s history. In this capacity, he is at the forefront of a major national infrastructure initiative of strategic importance to Israel\u2019s transportation system and long-term development.',
+        'With over 20 years of continuous senior leadership experience in the Israeli public sector, Mr. Haliva brings extensive expertise in public administration, government management, and institutional leadership. Prior to his current appointment, he served for approximately eight years as Deputy Civil Service Commissioner, with responsibility for guiding and overseeing approximately 55 government ministries and affiliated agencies. His work focused on strengthening human capital management, enhancing organizational effectiveness, and improving the efficiency and quality of public service delivery across government.',
+        'Previously, Mr. Haliva served for a decade as Senior Deputy Director General for Administration and Human Resources across three government ministries: Education, Interior, and Religious Services. He also served as an adviser to the Director General of the Prime Minister\u2019s Office on legal, economic, and governmental affairs.',
+        'Mr. Haliva holds a Bachelor of Laws (LL.B.) and an Executive Master of Public Policy, both from the Hebrew University of Jerusalem.',
+        'Alongside his distinguished career in public service, Mr. Haliva has served for more than 26 years in the Israel Defense Forces reserves, holding the rank of Colonel. His most recent military appointment was as Acting Commander of the 55th Reserve Paratroopers Brigade.'
+      ],
+      bioJa: [
+        'アヴィ・ハリヴァは、イスラエル・メトロ庁の長官です。同庁は、イスラエル史上最も複雑かつ大規模なインフラ事業であるテルアビブ都市圏メトロ事業の推進と監督を担う政府機関です。この職務を通じ、イスラエルの交通システムと長期的な発展にとって戦略的に重要な国家インフラ事業の最前線に立っています。',
+        'イスラエルの公共部門で20年以上にわたり上級管理職を務めてきたハリヴァ氏は、行政管理、政府運営、組織マネジメントに豊富な専門性を有しています。現職に就く前は、約8年間、国家公務員委員会の副委員長として、約55の政府省庁および関連機関の指導・監督を担当しました。人的資本管理の強化、組織の実効性の向上、政府全体における公共サービスの効率と質の改善に取り組みました。',
+        'それ以前は、教育省、内務省、宗教サービス省の3省庁で、約10年間、行政・人事担当の上級副長官を務めました。また、首相府長官の顧問として、法務、経済、政府運営に関する助言も行いました。',
+        'ヘブライ大学で法学士（LL.B.）および公共政策のエグゼクティブ修士号を取得しています。',
+        '公務と並行して、イスラエル国防軍の予備役に26年以上勤務し、大佐の階級にあります。直近の軍務では、第55予備役空挺旅団の代行旅団長を務めました。'
+      ]
+    },
     hila_waxberg: {
       jaTitle: 'ヒラ・ウェクスバーグ',
       bioEn: [
@@ -205,6 +222,19 @@
         'NTA（都市交通公社）自治体連携部長。テルアビブのメトロおよびライトレール事業において、関係自治体との連携・協力を推進している。',
         'NTAのCEO首席補佐官を歴任。幹線鉄道およびライトレールなどの公共交通分野を担うイスラエルの政府系企業で、15年の実務経験を持つ。',
         'テルアビブ大学で公共政策の修士号を優秀な成績で取得。'
+      ]
+    },
+    tal_granit: {
+      jaTitle: 'グラニット・タル',
+      bioEn: [
+        'Tal Granit heads the Budget Department at Israel\u2019s National Metro Authority, which leads the development of the Tel Aviv (Gush Dan) Metro, one of the largest infrastructure projects in the country\u2019s history. He oversees the project\u2019s overall budget and helps shape its procurement strategy, including the design of major tenders, the framework for approving them, and the oversight of the executing company (NTA). He also reports regularly on project progress to the Authority\u2019s steering committee and to the Knesset.',
+        'Previously, at the Ministry of Transport\u2019s Infrastructure Administration, Tal managed budgets for major national projects, including Israel Railways, Ayalon Highways and other mega-infrastructure projects, and played a leading part in advancing Israel Railways\u2019 development plan and master agreement.',
+        'Earlier in his career, he served as an economist at the Accountant General\u2019s Division of the Ministry of Finance and at the Planning and Budgeting Committee of the Council for Higher Education. He holds BA and MA degrees in Economics from the Hebrew University of Jerusalem.'
+      ],
+      bioJa: [
+        'タル・グラニットは、イスラエル国家メトロ庁の予算部長です。同庁は、イスラエル史上最大級のインフラ事業の一つであるテルアビブ（グッシュ・ダン）メトロの整備を主導しています。事業全体の予算を統括し、主要な入札の設計、その承認の枠組み、実施主体であるNTAの監督を含む調達戦略の形成に携わっています。また、事業の進捗について、庁の運営委員会およびクネセト（国会）へ定期的に報告しています。',
+        'それ以前は、運輸省インフラ管理局において、イスラエル鉄道、アヤロン・ハイウェイをはじめとする国家的な大規模インフラ事業の予算を担当し、イスラエル鉄道の開発計画および基本協定の推進で中心的な役割を果たしました。',
+        'キャリアの初期には、財務省会計総局および高等教育評議会の計画・予算委員会でエコノミストを務めました。ヘブライ大学で経済学の学士号および修士号を取得しています。'
       ]
     }
   };
@@ -239,9 +269,10 @@
   }
 
   function buildStaffCarouselSection(title, members, sectionClass) {
-    var boxStyle = 'background:#063755;box-shadow:0 10px 28px rgba(6,55,85,0.22);margin-bottom:32px;--staff-count:'+members.length;
+    var boxStyle = 'background:#063755;box-shadow:0 10px 28px rgba(6,55,85,0.22);margin-bottom:32px;--staff-count:'+Math.max(members.length, 1);
     var cardsHtml = members.map(renderSteeringCard).join('');
-    return '<section class="steering-section '+sectionClass+'" id="'+sectionClass+'">' +
+    var hidden = members.length === 0 ? ' hidden' : '';
+    return '<section class="steering-section '+sectionClass+'" id="'+sectionClass+'"'+hidden+'>' +
       '<h2 class="all-participants-title steering-section-heading">'+title+'</h2>' +
       '<div class="about-box steering-section-box" style="'+boxStyle+'">' +
         '<div class="steering-carousel">' +
@@ -339,7 +370,7 @@
     "tal_mills": { orgJa:"JDC-ELKA／リーダーシップ・プログラム部門長", roleJa:"" },
     "avi_haliva": { orgJa:"メトロ庁／長官", roleJa:"" },
     "hila_waxberg": { orgJa:"NTA（テルアビブ都市圏交通公社）／地方自治体部門長", roleJa:"" },
-    "tal_granit": { orgJa:"イスラエル運輸・道路安全省", roleJa:"" },
+    "tal_granit": { orgJa:"イスラエル運輸・道路安全省／国家メトロ庁", roleJa:"予算部長" },
     "dana_dover_ali_bing": { orgJa:"イスラエル財務省／インフラ予算部門副部長／予算局インフラ担当", roleJa:"" },
     "uri_gil": { orgJa:"JDC-ELKA／最高経営責任者", roleJa:"" },
     "sigal_gabai": { orgJa:"メトロ規制委員会／委員長", roleJa:"" },
@@ -426,13 +457,21 @@
   }
 
   var SECTOR_ORDER = ["Local Government","Government-Owned Company","Central Government"];
+  function personMatchesQuery(person, search) {
+    var q = (search || '').trim().toLowerCase();
+    if (!q) return true;
+    var fields = [person.nameEn, person.nameJa, person.nameHe, person.org, person.orgJa, person.orgLine2, person.role, person.roleJa, person.backOrg];
+    for (var i = 0; i < fields.length; i++) {
+      if (fields[i] && String(fields[i]).toLowerCase().indexOf(q) >= 0) return true;
+    }
+    return false;
+  }
+
   function filterParticipants(activeSector, search) {
     var sectorKey = (activeSector === 'steering' || activeSector === 'program-team') ? 'all' : activeSector;
     var list = PARTICIPANTS.filter(function (p) {
       const ms = sectorKey === "all" || p.sector === sectorKey;
-      const q = search.toLowerCase();
-      const mq = !q || p.nameEn.toLowerCase().indexOf(q) >= 0 || (p.nameJa || '').indexOf(q) >= 0 || (p.nameHe || '').indexOf(q) >= 0 || (p.org || '').toLowerCase().indexOf(q) >= 0 || (p.orgLine2 || '').toLowerCase().indexOf(q) >= 0 || (p.role || '').toLowerCase().indexOf(q) >= 0;
-      return ms && mq;
+      return ms && personMatchesQuery(p, search);
     });
     return list.sort(function (a, b) {
       var ia = SECTOR_ORDER.indexOf(a.sector);
@@ -443,61 +482,60 @@
   }
 
   function buildAboutSectionFlipHtml(flipId, enHtml, jaHtml, actionHtml) {
-    return '<div class="about-section-flip" id="'+flipId+'" role="group" aria-label="Section language toggle">' +
+    return '<div class="about-section-flip" id="'+flipId+'" role="group" aria-label="Section language">' +
       '<div class="about-section-flip-inner">' +
         '<div class="about-section-flip-face about-section-flip-front" lang="en">'+enHtml+'</div>' +
         '<div class="about-section-flip-face about-section-flip-back" lang="ja">'+jaHtml+'</div>' +
       '</div>' +
-      '<div class="about-panel-actions">' +
-        (actionHtml || '') +
-        '<button type="button" class="about-section-flip-hint" data-hint-front="日本語" data-hint-back="English">' +
-          '<span class="about-section-flip-hint-label">日本語</span><span class="about-section-flip-hint-arrow" aria-hidden="true">→</span>' +
-        '</button>' +
-      '</div>' +
+      (actionHtml ? '<div class="about-panel-actions">' + actionHtml + '</div>' : '') +
     '</div>';
   }
 
   function bindAboutSectionFlips(container) {
-    container.querySelectorAll('.about-section-flip').forEach(function (flipEl) {
-      if (flipEl.getAttribute('data-bound') === '1') return;
-      flipEl.setAttribute('data-bound', '1');
-      var hint = flipEl.querySelector('.about-section-flip-hint');
+    var langBtn = container.querySelector('#about-lang-btn');
+    var flips = container.querySelectorAll('.about-section-flip');
+
+    function syncFlipHeight(flipEl) {
       var inner = flipEl.querySelector('.about-section-flip-inner');
       var front = flipEl.querySelector('.about-section-flip-front');
       var back = flipEl.querySelector('.about-section-flip-back');
-      function syncFlipHeight() {
-        if (!inner || !front || !back) return;
-        inner.style.minHeight = '';
-        var visible = flipEl.classList.contains('is-flipped') ? back : front;
-        var h = visible.scrollHeight;
-        if (h > 0) inner.style.minHeight = h + 'px';
-      }
-      function updateFlipHint(flipped) {
-        if (!hint) return;
-        var label = hint.querySelector('.about-section-flip-hint-label');
-        var arrow = hint.querySelector('.about-section-flip-hint-arrow');
-        if (label && arrow) {
-          label.textContent = flipped ? hint.getAttribute('data-hint-back') : hint.getAttribute('data-hint-front');
-          arrow.textContent = flipped ? '←' : '→';
-          hint.classList.toggle('is-flipped', flipped);
-        }
-      }
-      function toggleFlip(e) {
-        if (e) {
-          e.preventDefault();
-          e.stopPropagation();
-        }
-        var flipped = flipEl.classList.toggle('is-flipped');
-        updateFlipHint(flipped);
-        syncFlipHeight();
-      }
-      if (hint) hint.addEventListener('click', toggleFlip);
-      flipEl.addEventListener('click', function (e) {
-        if (e.target.closest('.about-section-flip-hint, .cta-metro, a, .about-overview-carousel')) return;
-        toggleFlip(e);
+      if (!inner || !front || !back) return;
+      inner.style.minHeight = '';
+      var visible = flipEl.classList.contains('is-flipped') ? back : front;
+      var h = visible.scrollHeight;
+      if (h > 0) inner.style.minHeight = h + 'px';
+    }
+
+    function setFlipped(flipped) {
+      flips.forEach(function (flipEl) {
+        flipEl.classList.toggle('is-flipped', flipped);
+        syncFlipHeight(flipEl);
       });
-      requestAnimationFrame(syncFlipHeight);
-      window.addEventListener('resize', syncFlipHeight);
+      if (!langBtn) return;
+      var label = langBtn.querySelector('.about-lang-btn-label');
+      if (label) label.textContent = flipped ? 'English' : '日本語';
+      langBtn.classList.toggle('is-flipped', flipped);
+      langBtn.setAttribute('aria-pressed', flipped ? 'true' : 'false');
+      langBtn.setAttribute('aria-label', flipped ? 'Show English' : 'Show Japanese');
+    }
+
+    if (langBtn && langBtn.getAttribute('data-bound') !== '1') {
+      langBtn.setAttribute('data-bound', '1');
+      langBtn.addEventListener('click', function (e) {
+        e.preventDefault();
+        setFlipped(!langBtn.classList.contains('is-flipped'));
+      });
+    }
+
+    flips.forEach(function (flipEl) {
+      if (flipEl.getAttribute('data-bound') === '1') return;
+      flipEl.setAttribute('data-bound', '1');
+      flipEl.addEventListener('click', function (e) {
+        if (e.target.closest('.cta-metro, a, .about-overview-carousel')) return;
+        setFlipped(!flipEl.classList.contains('is-flipped'));
+      });
+      requestAnimationFrame(function () { syncFlipHeight(flipEl); });
+      window.addEventListener('resize', function () { syncFlipHeight(flipEl); });
     });
   }
 
@@ -682,6 +720,9 @@
         '<div class="participants-header-inner">' +
           '<div class="participants-header-copy"><h1>About</h1></div>' +
           '<div class="stats-bar-wrap" id="about-stops-bar">'+aboutStopsHtml+'</div>' +
+          '<button type="button" class="about-section-flip-hint about-lang-btn" id="about-lang-btn" aria-pressed="false" aria-label="Show Japanese">' +
+            '<span class="about-lang-btn-label">日本語</span>' +
+          '</button>' +
         '</div>' +
       '</div>' +
       '<div class="participants-content about-page-content">' +
@@ -1213,13 +1254,14 @@
 
     var steeringMembers = STEERING_COMMITTEE.map(function (member) {
       return Object.assign({}, member, STEERING_BIOS[member.key] || {});
-    });
+    }).filter(function (member) { return personMatchesQuery(member, search); });
     var steeringSectionHtml = buildStaffCarouselSection('Steering Committee', steeringMembers, 'steering-section-main');
     var programTeamMembers = PROGRAM_TEAM_ORDER.map(function (id) {
       var member = PROGRAM_TEAM.filter(function (m) { return m.id === id; })[0];
       return Object.assign({}, member, PROGRAM_BIOS[member.key] || {}, { badge: PROGRAM_TEAM_BADGE });
-    });
+    }).filter(function (member) { return personMatchesQuery(member, search); });
     var programTeamSectionHtml = buildStaffCarouselSection('Program Team', programTeamMembers, 'program-team-section');
+    var hasSearch = !!(search || '').trim();
 
     var searchRow = container.querySelector('.search-row');
     var cardsContainer = container.querySelector('#cards-container');
@@ -1256,18 +1298,24 @@
       bindParticipantCardFlips(container);
     } else {
       container.querySelector('#stats-bar').outerHTML = '<div class="stats-bar-wrap" id="stats-bar">'+statsHtml+'</div>';
+      var steeringEl = container.querySelector('#steering-section-main');
+      var programEl = container.querySelector('#program-team-section');
+      if (steeringEl) steeringEl.outerHTML = steeringSectionHtml;
+      if (programEl) programEl.outerHTML = programTeamSectionHtml;
       cardsContainer = container.querySelector('#cards-container');
       cardsContainer.innerHTML = filtered.map(renderParticipantCard).join('');
       isEmpty = container.querySelector('.participants-empty');
-      isEmpty.style.display = filtered.length === 0 ? 'block' : 'none';
+      var allSection = container.querySelector('#participants-all');
+      if (allSection) allSection.hidden = hasSearch && filtered.length === 0;
+      isEmpty.style.display = filtered.length === 0 && steeringMembers.length === 0 && programTeamMembers.length === 0 ? 'block' : 'none';
     }
 
     container.querySelectorAll('#stats-bar [data-sector]').forEach(function(btn){
       btn.onclick = function () { setActiveSector(btn.getAttribute('data-sector')); };
     });
 
-    bindSearchInput(container, search, setSearch);
     placeParticipantsSearch(container);
+    bindSearchInput(container, search, setSearch);
 
     bindStaffCardFlips(container);
     bindParticipantCardFlips(container);
@@ -1319,6 +1367,7 @@
       if (row.parentNode !== content) content.insertBefore(row, content.firstChild);
       return;
     }
+    if (row.parentNode === inner && (!stats || row.nextElementSibling === stats)) return;
     if (stats) inner.insertBefore(row, stats);
     else inner.appendChild(row);
   }
@@ -1326,31 +1375,43 @@
   function bindSearchInput(container, search, setSearch) {
     var input = container.querySelector('#search-input');
     if (!input) return;
-    input.value = search;
+    var keepFocus = document.activeElement === input;
+    var caret = keepFocus ? input.selectionEnd : null;
+    if (input.value !== search) input.value = search;
+    input.disabled = false;
+    input.readOnly = false;
     input.oninput = function () { setSearch(this.value); };
+    if (keepFocus && document.activeElement !== input) {
+      input.focus();
+      if (typeof caret === 'number') {
+        try { input.setSelectionRange(caret, caret); } catch (e) {}
+      }
+    }
   }
 
   function scrollToParticipantCard(card) {
     scrollToParticipantsTarget(card);
   }
 
-  function scrollParticipantsAfterSearch(search, filtered) {
+  function scrollParticipantsAfterSearch(search) {
     if (searchScrollTimer) {
       clearTimeout(searchScrollTimer);
       searchScrollTimer = null;
     }
     if (state.page !== 'participants') return;
     var q = (search || '').trim();
-    if (!q || !filtered.length) return;
+    if (!q) return;
 
-    var firstId = String(filtered[0].id);
     searchScrollTimer = setTimeout(function () {
       searchScrollTimer = null;
       var page = document.getElementById('participants-page');
       if (!page) return;
-      var card = page.querySelector('#cards-container .participant-card[data-id="' + firstId + '"]');
+      var card = page.querySelector('#steering-section-main:not([hidden]) .steering-card, #program-team-section:not([hidden]) .steering-card, #cards-container .participant-card');
+      if (!card) return;
+      var track = card.closest('.steering-carousel-track');
+      if (track) track.scrollTo({ left: Math.max(0, card.offsetLeft - 16), behavior: 'smooth' });
       scrollToParticipantCard(card);
-    }, 1000);
+    }, 300);
   }
 
   function scrollParticipantsAfterSector(sector) {
@@ -1583,6 +1644,10 @@
     });
   }
 
+  function isLocalFile() {
+    return window.location.protocol === 'file:';
+  }
+
   function siteRootPath() {
     var path = window.location.pathname;
     path = path.replace(/\/metro\/index\.html$/, '/');
@@ -1620,7 +1685,7 @@
     options = options || {};
     var known = { home: 1, about: 1, metro: 1, participants: 1, team: 1, program: 1, useful: 1 };
     if (!known[page]) page = 'home';
-    if (page === 'metro' && !onMetroSharePath()) {
+    if (page === 'metro' && !onMetroSharePath() && !isLocalFile()) {
       window.location.href = siteRootPath() + 'metro/';
       return;
     }
@@ -1706,10 +1771,19 @@
   }
 
   function setSearch(s) {
+    var input = document.getElementById('search-input');
+    var keepFocus = !!(input && document.activeElement === input);
+    var caret = keepFocus ? input.selectionEnd : null;
     state.search = s;
-    var filtered = filterParticipants(state.activeSector, state.search);
     renderParticipantsPage(document.getElementById('participants-page'), state.activeSector, state.search, setActiveSector, setSearch);
-    scrollParticipantsAfterSearch(s, filtered);
+    input = document.getElementById('search-input');
+    if (keepFocus && input && document.activeElement !== input) {
+      input.focus();
+      if (typeof caret === 'number') {
+        try { input.setSelectionRange(caret, caret); } catch (e) {}
+      }
+    }
+    scrollParticipantsAfterSearch(s);
   }
 
   document.querySelectorAll('.nav-btn').forEach(function(btn){
@@ -1779,7 +1853,7 @@
   updateSiteNavHeight();
   var openingPage = window.FORUMETRO_PAGE || new URLSearchParams(window.location.search).get('page') || 'home';
   if (onMetroSharePath()) openingPage = 'metro';
-  if (openingPage === 'metro' && !onMetroSharePath()) {
+  if (openingPage === 'metro' && !onMetroSharePath() && !isLocalFile()) {
     window.location.replace(siteRootPath() + 'metro/');
   } else {
     setPage(openingPage, { replaceUrl: true });
