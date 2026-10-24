@@ -883,7 +883,7 @@ function setProgramNavActive(section) {
 function goToDaySection(section) {
   const name = section === "day" ? "overview" : section;
   setProgramNavActive(name);
-  if (window.matchMedia("(max-width: 1050px)").matches || document.documentElement.classList.contains("is-mobile-embed")) {
+  if (window.matchMedia("(max-width: 900px)").matches || document.documentElement.classList.contains("is-mobile-embed")) {
     scrollToMobileSection(name);
   } else {
     scrollToDaySection(name);
@@ -1155,7 +1155,7 @@ function applyLineAnchor(data) {
   var useful = data && data.anchor === "useful";
   var nav = document.querySelector(useful ? ".topbar .nav-useful" : ".topbar .nav-program") || document.querySelector(".topbar .nav");
   var topbar = document.querySelector(".topbar");
-  if (window.matchMedia("(max-width: 1050px)").matches || document.documentElement.classList.contains("is-mobile-embed")) {
+  if (window.matchMedia("(max-width: 900px)").matches || document.documentElement.classList.contains("is-mobile-embed")) {
     if (nav) {
       nav.classList.remove("line-anchored", "line-anchored-reverse", "line-anchored-useful", "line-anchored-end");
       nav.style.marginLeft = "";
@@ -1237,7 +1237,7 @@ window.applyForumetroLineAnchor = applyLineAnchor;
 try {
   if (new URLSearchParams(window.location.search).get("branch") === "useful") {
     applyBranchPlates(true);
-    if (!document.documentElement.classList.contains("is-mobile-embed") && !window.matchMedia("(max-width: 1050px)").matches) {
+    if (!document.documentElement.classList.contains("is-mobile-embed") && !window.matchMedia("(max-width: 900px)").matches) {
       var usefulNav = document.querySelector(".topbar .nav-useful");
       if (usefulNav) usefulNav.classList.add("line-anchored", "line-anchored-useful");
     }

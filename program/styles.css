@@ -699,7 +699,7 @@ main {
   letter-spacing: 0.1em;
 }
 
-@media (min-width: 1051px) {
+@media (min-width: 901px) {
   header.desktop-only {
     position: fixed;
     top: 0;
@@ -713,13 +713,14 @@ main {
   }
 
   html.is-embedded header.desktop-only {
-    position: relative;
-    top: auto;
+    position: sticky;
+    top: 0;
     left: auto;
     right: auto;
     width: 100%;
     z-index: 1100;
     flex: 0 0 auto;
+    background: #fff;
   }
 
   html.is-embedded,
@@ -996,7 +997,7 @@ main {
   padding: 30px 34px;
 }
 
-@media (min-width: 1051px) {
+@media (min-width: 901px) {
   .highlights--5 {
     grid-template-columns: repeat(5, minmax(0, 1fr));
     gap: clamp(8px, 1.1vw, 18px);
@@ -1235,7 +1236,7 @@ main {
   height: auto;
 }
 
-@media (max-width: 1050px) {
+@media (max-width: 900px) {
   .timeline-plan-embed {
     min-height: 420px;
   }
@@ -1910,7 +1911,7 @@ main {
 
 /* Responsive */
 
-@media (max-width: 1050px) {
+@media (max-width: 900px) {
   :root {
     --mobile-tab-height: 0px;
   }
@@ -2140,7 +2141,7 @@ main {
   }
 }
 
-@media (max-width: 1180px) and (min-width: 1051px) {
+@media (max-width: 1180px) and (min-width: 901px) {
   .overview {
     grid-template-columns: 1fr;
   }
@@ -2155,7 +2156,7 @@ main {
 }
 
 /* When nested inside the Delegation site iframe */
-@media (max-width: 1050px) {
+@media (max-width: 900px) {
   html.is-embedded,
   html.is-embedded body {
     height: 100% !important;

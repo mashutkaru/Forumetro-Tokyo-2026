@@ -455,7 +455,14 @@
     .program-embed-title {
       display: none;
     }
-    body.program-view { overflow: hidden; }
+    html:has(body.program-view) { overflow: hidden; height: 100%; }
+    body.program-view {
+      height: 100dvh;
+      max-height: 100dvh;
+      min-height: 0;
+      overflow: hidden;
+      box-sizing: border-box;
+    }
     body.program-page nav.metro-nav,
     body.about-page nav.metro-nav,
     body.useful-page nav.metro-nav,
@@ -3316,7 +3323,7 @@
       <iframe
         class="program-frame"
         title="FORUMETRO TOKYO 2026 Program"
-        data-src="program/index.html?embed=1&amp;page=day&amp;v=101"
+        data-src="program/index.html?embed=1&amp;page=day&amp;v=102"
         referrerpolicy="no-referrer-when-downgrade"
         allow="fullscreen"
       ></iframe>
@@ -3348,7 +3355,7 @@
       <iframe
         class="program-frame"
         title="FORUMETRO TOKYO 2026 Useful Information"
-        data-src="program/index.html?embed=1&amp;page=prep&amp;branch=useful&amp;v=100"
+        data-src="program/index.html?embed=1&amp;page=prep&amp;branch=useful&amp;v=101"
         referrerpolicy="no-referrer-when-downgrade"
         allow="fullscreen"
       ></iframe>
