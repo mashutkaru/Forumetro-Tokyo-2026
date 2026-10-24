@@ -1571,9 +1571,9 @@
       margin-top: 14px;
     }
     .about-panel-actions:has(.cta-metro) {
-      align-self: stretch;
-      width: 100%;
-      justify-content: center;
+      align-self: flex-start;
+      width: auto;
+      justify-content: flex-start;
     }
     .about-panel-actions .cta-metro,
     .about-cta .home-cta {
@@ -1787,6 +1787,15 @@
     }
     .stats-bar-wrap .sector-btn.active .nav-mark {
       box-shadow: 0 0 0 3px #fff, 0 0 0 5px var(--station, var(--navy));
+    }
+    body.about-page #about-stops-bar .sector-btn.active {
+      z-index: 2;
+    }
+    body.about-page #about-stops-bar .sector-btn.active .nav-mark {
+      box-shadow: 0 0 0 3px #fff, 0 0 0 7px var(--station, var(--navy));
+    }
+    body.about-page #about-stops-bar .sector-btn.active .nav-caption {
+      color: var(--station, var(--navy));
     }
     .stats-bar-wrap .nav-mark {
       flex: 0 0 auto;
@@ -3337,6 +3346,6 @@
     </div>
   </main>
 
-  <script src="script.js?v=272"></script>
+  <script src="script.js?v=274"></script>
 </body>
 </html>

@@ -271,7 +271,7 @@
   function buildStaffCarouselSection(title, members, sectionClass) {
     var boxStyle = 'background:#063755;box-shadow:0 10px 28px rgba(6,55,85,0.22);margin-bottom:32px;--staff-count:'+Math.max(members.length, 1);
     var cardsHtml = members.map(renderSteeringCard).join('');
-    var hidden = members.length === 0 ? ' hidden' : '';
+    var hidden = members.length === 0 ? ' hidden style="display:none"' : '';
     return '<section class="steering-section '+sectionClass+'" id="'+sectionClass+'"'+hidden+'>' +
       '<h2 class="all-participants-title steering-section-heading">'+title+'</h2>' +
       '<div class="about-box steering-section-box" style="'+boxStyle+'">' +
@@ -617,7 +617,7 @@
         '<p class="about-interest-d">'+detail+'</p>' +
       '</article>';
     };
-    var aboutStopsHtml = buildAboutStopsHtml('');
+    var aboutStopsHtml = buildAboutStopsHtml('about-overview');
 
     var overviewSectionEn =
       '<div class="about-overview-layout">' +
@@ -790,6 +790,36 @@
     }).join('');
   }
 
+  var aboutStopLockUntil = 0;
+
+  function setAboutStopActive(id) {
+    var rootId = state.page === 'metro' ? 'metro-page' : 'about-page';
+    var bar = document.querySelector('#' + rootId + ' #about-stops-bar');
+    if (!bar) return;
+    bar.querySelectorAll('[data-about-stop]').forEach(function (btn) {
+      var on = btn.getAttribute('data-about-stop') === id;
+      btn.classList.toggle('active', on);
+      if (on) btn.setAttribute('aria-current', 'true');
+      else btn.removeAttribute('aria-current');
+    });
+  }
+
+  function syncAboutStopFromScroll() {
+    if (state.page !== 'about') return;
+    if (Date.now() < aboutStopLockUntil) return;
+    var line = stickyHeaderOffset('about-page');
+    var current = 'about-overview';
+    var i;
+    for (i = 0; i < ABOUT_STOPS.length; i++) {
+      var stop = ABOUT_STOPS[i];
+      if (stop.page !== 'about') continue;
+      var el = document.getElementById(stop.id);
+      if (!el) continue;
+      if (el.getBoundingClientRect().top <= line + 12) current = stop.id;
+    }
+    setAboutStopActive(current);
+  }
+
   function bindAboutStops(container) {
     container.querySelectorAll('#about-stops-bar [data-about-stop]').forEach(function (btn) {
       btn.onclick = function () { openAboutStop(btn.getAttribute('data-about-stop')); };
@@ -807,7 +837,9 @@
       if (state.page !== 'metro') setPage('metro');
       return;
     }
+    aboutStopLockUntil = Date.now() + 900;
     if (state.page !== 'about') setPage('about');
+    setAboutStopActive(stop.id);
     requestAnimationFrame(function () {
       requestAnimationFrame(function () {
         var el = document.querySelector('#about-page #' + stop.id);
@@ -1297,17 +1329,18 @@
       bindStaffCardFlips(container);
       bindParticipantCardFlips(container);
     } else {
-      container.querySelector('#stats-bar').outerHTML = '<div class="stats-bar-wrap" id="stats-bar">'+statsHtml+'</div>';
+      var statsEl = container.querySelector('#stats-bar');
+      if (statsEl) statsEl.outerHTML = '<div class="stats-bar-wrap" id="stats-bar">'+statsHtml+'</div>';
       var steeringEl = container.querySelector('#steering-section-main');
       var programEl = container.querySelector('#program-team-section');
       if (steeringEl) steeringEl.outerHTML = steeringSectionHtml;
       if (programEl) programEl.outerHTML = programTeamSectionHtml;
       cardsContainer = container.querySelector('#cards-container');
-      cardsContainer.innerHTML = filtered.map(renderParticipantCard).join('');
+      if (cardsContainer) cardsContainer.innerHTML = filtered.map(renderParticipantCard).join('');
       isEmpty = container.querySelector('.participants-empty');
       var allSection = container.querySelector('#participants-all');
       if (allSection) allSection.hidden = hasSearch && filtered.length === 0;
-      isEmpty.style.display = filtered.length === 0 && steeringMembers.length === 0 && programTeamMembers.length === 0 ? 'block' : 'none';
+      if (isEmpty) isEmpty.style.display = filtered.length === 0 && steeringMembers.length === 0 && programTeamMembers.length === 0 ? 'block' : 'none';
     }
 
     container.querySelectorAll('#stats-bar [data-sector]').forEach(function(btn){
@@ -1375,18 +1408,17 @@
   function bindSearchInput(container, search, setSearch) {
     var input = container.querySelector('#search-input');
     if (!input) return;
-    var keepFocus = document.activeElement === input;
-    var caret = keepFocus ? input.selectionEnd : null;
-    if (input.value !== search) input.value = search;
+    if (document.activeElement !== input && input.value !== search) input.value = search;
     input.disabled = false;
     input.readOnly = false;
-    input.oninput = function () { setSearch(this.value); };
-    if (keepFocus && document.activeElement !== input) {
-      input.focus();
-      if (typeof caret === 'number') {
-        try { input.setSelectionRange(caret, caret); } catch (e) {}
-      }
+    if (input.getAttribute('data-bound') === '1') return;
+    input.setAttribute('data-bound', '1');
+    function syncFromInput() {
+      setSearch(input.value);
     }
+    input.addEventListener('input', syncFromInput);
+    input.addEventListener('keyup', syncFromInput);
+    input.addEventListener('change', syncFromInput);
   }
 
   function scrollToParticipantCard(card) {
@@ -1406,10 +1438,14 @@
       searchScrollTimer = null;
       var page = document.getElementById('participants-page');
       if (!page) return;
+      page.querySelectorAll('.steering-carousel-track').forEach(function (track) {
+        var section = track.closest('section');
+        if (section && section.hidden) return;
+        track.scrollLeft = 0;
+      });
+      var input = document.getElementById('search-input');
+      if (input && document.activeElement === input) return;
       var card = page.querySelector('#steering-section-main:not([hidden]) .steering-card, #program-team-section:not([hidden]) .steering-card, #cards-container .participant-card');
-      if (!card) return;
-      var track = card.closest('.steering-carousel-track');
-      if (track) track.scrollTo({ left: Math.max(0, card.offsetLeft - 16), behavior: 'smooth' });
       scrollToParticipantCard(card);
     }, 300);
   }
@@ -1771,18 +1807,9 @@
   }
 
   function setSearch(s) {
-    var input = document.getElementById('search-input');
-    var keepFocus = !!(input && document.activeElement === input);
-    var caret = keepFocus ? input.selectionEnd : null;
+    if (state.search === s) return;
     state.search = s;
     renderParticipantsPage(document.getElementById('participants-page'), state.activeSector, state.search, setActiveSector, setSearch);
-    input = document.getElementById('search-input');
-    if (keepFocus && input && document.activeElement !== input) {
-      input.focus();
-      if (typeof caret === 'number') {
-        try { input.setSelectionRange(caret, caret); } catch (e) {}
-      }
-    }
     scrollParticipantsAfterSearch(s);
   }
 
@@ -1833,7 +1860,10 @@
   });
   window.addEventListener('resize', onNavLayout);
   window.addEventListener('scroll', function () {
-    if (state.page === 'about' || state.page === 'metro') syncAboutLineAnchor();
+    if (state.page === 'about' || state.page === 'metro') {
+      syncAboutLineAnchor();
+      syncAboutStopFromScroll();
+    }
   }, { passive: true });
   if (window.visualViewport) {
     window.visualViewport.addEventListener('resize', onNavLayout);
