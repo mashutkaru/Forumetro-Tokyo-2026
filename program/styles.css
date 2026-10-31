@@ -1,5 +1,5 @@
 /* FORUMETRO TOKYO 2026 */
-@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+Hebrew:wght@400;600;700&family=Noto+Sans+JP:wght@400;500;700&display=swap");
 
 :root {
   --navy: #12263A;
@@ -43,7 +43,7 @@ body {
   margin: 0;
   background: var(--bg);
   color: var(--ink);
-  font-family: Inter, "Noto Sans JP", ui-sans-serif, system-ui, -apple-system, "Hiragino Sans", "Yu Gothic", sans-serif;
+  font-family: Inter, "Noto Sans Hebrew", "Noto Sans JP", ui-sans-serif, system-ui, -apple-system, "Hiragino Sans", "Yu Gothic", sans-serif;
 }
 
 button {
@@ -607,8 +607,58 @@ html.is-embedded .nav.line-anchored-useful button[data-page="prep"]::after {
   font-size: 12px;
 }
 
-html.embed-branch-useful .program-lang-btn {
+html.embed-branch-useful .program-lang-btn--ja {
   display: none !important;
+}
+
+html.lang-he .main-card,
+html.lang-he .m-content,
+html.lang-he .subpage {
+  direction: rtl;
+}
+
+html.lang-he .topbar,
+html.lang-he .m-head {
+  direction: ltr;
+}
+
+html.lang-he .date-strip,
+html.lang-he .m-days,
+html.lang-he .m-days-row {
+  direction: rtl;
+}
+
+html.lang-he .date-num,
+html.lang-he .m-date b {
+  direction: ltr;
+  unicode-bidi: isolate;
+}
+
+html.lang-he .time,
+html.lang-he .timeline-plan-time,
+html.lang-he .m-schedule-item__head small,
+html.lang-he .contact-phone {
+  direction: ltr;
+  unicode-bidi: isolate;
+}
+
+html:not(.lang-he) .guide-hebrew {
+  display: none;
+}
+
+html.lang-he #prepGrid,
+html.lang-he #avoidGrid {
+  display: none;
+}
+
+html.lang-he .guide-hebrew {
+  margin-top: 0;
+  padding-top: 0;
+  border-top: 0;
+}
+
+html.lang-he .guide-hebrew-title {
+  display: none;
 }
 
 html.is-mobile-embed .program-lang-btn--mobile {
@@ -1611,7 +1661,11 @@ main {
 .mobile-app {
   display: flex;
   flex-direction: column;
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
   min-height: 100dvh;
+  overflow-x: hidden;
   background: var(--bg);
 }
 
@@ -1620,6 +1674,9 @@ main {
   position: sticky;
   top: 0;
   z-index: 120;
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
   background: var(--bg);
   box-shadow: 0 8px 20px rgba(33, 79, 99, 0.1);
 }
@@ -1637,6 +1694,7 @@ main {
 .m-head-side {
   display: flex;
   align-items: center;
+  gap: 8px;
   min-width: 0;
   flex: 0 0 auto;
 }
@@ -1685,6 +1743,10 @@ main {
 }
 
 .m-days {
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  overflow: hidden;
   padding: 10px 12px;
   background: #F4F6F8;
   border-bottom: 1px solid var(--line);
@@ -1692,6 +1754,9 @@ main {
 
 .m-days-row {
   display: flex;
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
   gap: 6px;
   overflow-x: auto;
   scroll-snap-type: x mandatory;
@@ -1826,13 +1891,17 @@ main {
 
 .m-section-body {
   margin: 0;
+  max-width: 100%;
   font-size: 15px;
   line-height: 1.6;
   white-space: pre-line;
+  overflow-wrap: anywhere;
 }
 
 .m-block {
   margin-bottom: 12px;
+  max-width: 100%;
+  min-width: 0;
   padding: 16px;
   background: #ffffff;
   border: 1px solid rgba(33, 79, 99, 0.06);
@@ -1870,7 +1939,7 @@ main {
   width: 100%;
   padding: 14px 16px;
   color: var(--ink);
-  text-align: left;
+  text-align: start;
   background: transparent;
   border: 0;
 }
@@ -1962,6 +2031,13 @@ main {
 @media (max-width: 900px) {
   :root {
     --mobile-tab-height: 0px;
+  }
+
+  html,
+  body {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
   }
 
   body {

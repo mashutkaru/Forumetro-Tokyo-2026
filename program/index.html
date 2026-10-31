@@ -37,7 +37,7 @@
     content="[PLACEHOLDER] Program guide details will be added here."
   />
   <meta name="twitter:image" content="https://mashutkaru.github.io/Forumetro-Tokyo-2026/images/og-image.jpg" />
-  <link rel="stylesheet" href="./styles.css?v=91" />
+  <link rel="stylesheet" href="./styles.css?v=94" />
 </head>
 <body>
   <script>
@@ -63,26 +63,26 @@
         </button>
 
         <div class="participants-header-copy program-page-title">
-          <h1 id="embedPageTitle" data-en="Program" data-ja="プログラム">Program</h1>
+          <h1 id="embedPageTitle" data-en="Program" data-ja="プログラム" data-he="תוכנית">Program</h1>
         </div>
 
         <nav class="nav nav-program" aria-label="Day sections">
-          <button class="active" type="button" data-section="overview"><span class="nav-mark" aria-hidden="true"><span class="nav-mark-line">T</span><span class="nav-mark-id">04</span></span><span class="nav-label" data-en="Day Program" data-ja="当日の行程">Day Program</span></button>
-          <button type="button" data-section="schedule"><span class="nav-mark" aria-hidden="true"><span class="nav-mark-line">C</span><span class="nav-mark-id">05</span></span><span class="nav-label" data-en="Schedule" data-ja="スケジュール">Schedule</span></button>
-          <button type="button" data-section="location"><span class="nav-mark" aria-hidden="true"><span class="nav-mark-line">M</span><span class="nav-mark-id">06</span></span><span class="nav-label" data-en="Location" data-ja="場所">Location</span></button>
-          <button type="button" data-section="notes"><span class="nav-mark" aria-hidden="true"><span class="nav-mark-line">W</span><span class="nav-mark-id">07</span></span><span class="nav-label" data-en="Notes" data-ja="備考">Notes</span></button>
-          <button type="button" data-section="tips"><span class="nav-mark" aria-hidden="true"><span class="nav-mark-line">Z</span><span class="nav-mark-id">08</span></span><span class="nav-label" data-en="Tips" data-ja="ヒント">Tips</span></button>
+          <button class="active" type="button" data-section="overview"><span class="nav-mark" aria-hidden="true"><span class="nav-mark-line">T</span><span class="nav-mark-id">04</span></span><span class="nav-label" data-en="Day Program" data-ja="当日の行程" data-he="תוכנית היום">Day Program</span></button>
+          <button type="button" data-section="schedule"><span class="nav-mark" aria-hidden="true"><span class="nav-mark-line">C</span><span class="nav-mark-id">05</span></span><span class="nav-label" data-en="Schedule" data-ja="スケジュール" data-he="לוח זמנים">Schedule</span></button>
+          <button type="button" data-section="location"><span class="nav-mark" aria-hidden="true"><span class="nav-mark-line">M</span><span class="nav-mark-id">06</span></span><span class="nav-label" data-en="Location" data-ja="場所" data-he="מיקום">Location</span></button>
+          <button type="button" data-section="notes"><span class="nav-mark" aria-hidden="true"><span class="nav-mark-line">W</span><span class="nav-mark-id">07</span></span><span class="nav-label" data-en="Notes" data-ja="備考" data-he="הערות">Notes</span></button>
+          <button type="button" data-section="tips"><span class="nav-mark" aria-hidden="true"><span class="nav-mark-line">Z</span><span class="nav-mark-id">08</span></span><span class="nav-label" data-en="Tips" data-ja="ヒント" data-he="טיפים">Tips</span></button>
         </nav>
         <nav class="nav nav-useful" hidden aria-label="Useful stations">
-          <button class="active" data-page="prep"><span class="nav-mark" aria-hidden="true"><span class="nav-mark-line">Z</span><span class="nav-mark-id">05</span></span>Preparation</button>
-          <button data-page="avoid"><span class="nav-mark" aria-hidden="true"><span class="nav-mark-line">C</span><span class="nav-mark-id">06</span></span>What to avoid</button>
-          <button data-page="contact"><span class="nav-mark" aria-hidden="true"><span class="nav-mark-line">M</span><span class="nav-mark-id">07</span></span>Contact</button>
-          <button data-page="travelog"><span class="nav-mark" aria-hidden="true"><span class="nav-mark-line">T</span><span class="nav-mark-id">08</span></span>Travelog</button>
+          <button class="active" data-page="prep"><span class="nav-mark" aria-hidden="true"><span class="nav-mark-line">Z</span><span class="nav-mark-id">05</span></span><span class="nav-label" data-en="Preparation" data-he="הכנה">Preparation</span></button>
+          <button data-page="avoid"><span class="nav-mark" aria-hidden="true"><span class="nav-mark-line">C</span><span class="nav-mark-id">06</span></span><span class="nav-label" data-en="What to avoid" data-he="מה להימנע">What to avoid</span></button>
+          <button data-page="contact"><span class="nav-mark" aria-hidden="true"><span class="nav-mark-line">M</span><span class="nav-mark-id">07</span></span><span class="nav-label" data-en="Contact" data-he="יצירת קשר">Contact</span></button>
+          <button data-page="travelog"><span class="nav-mark" aria-hidden="true"><span class="nav-mark-line">T</span><span class="nav-mark-id">08</span></span><span class="nav-label" data-en="Travelog" data-he="יומן מסע">Travelog</span></button>
         </nav>
 
         <div class="topbar-end">
-          <button type="button" class="program-lang-btn" id="programLangBtn" aria-pressed="false" aria-label="Show Japanese">
-            <span class="program-lang-btn-label">日本語</span>
+          <button type="button" class="program-lang-btn program-lang-btn--he" id="programLangBtnHe" data-lang="he" aria-pressed="false" aria-label="Show Hebrew">
+            <span class="program-lang-btn-label">עברית</span>
           </button>
           <div class="topbar-partners" aria-label="Partners">
             <span class="partner-logo partner-placeholder">[PLACEHOLDER]</span>
@@ -131,12 +131,12 @@
               </section>
 
               <section class="day-section" id="section-schedule">
-                <h3 class="day-section-title" data-en="Schedule" data-ja="スケジュール">Schedule</h3>
+                <h3 class="day-section-title" data-en="Schedule" data-ja="スケジュール" data-he="לוח זמנים">Schedule</h3>
                 <div class="schedule-list" id="scheduleList"></div>
               </section>
 
               <section class="day-section" id="section-location">
-                <h3 class="day-section-title" data-en="Location" data-ja="場所">Location</h3>
+                <h3 class="day-section-title" data-en="Location" data-ja="場所" data-he="מיקום">Location</h3>
                 <p class="day-section-body" id="dayLocation"></p>
                 <div class="day-map-frame" id="dayLocationMap" hidden>
                   <iframe
@@ -150,13 +150,13 @@
               </section>
 
               <section class="day-section" id="section-notes">
-                <h3 class="day-section-title" data-en="Notes" data-ja="備考">Notes</h3>
+                <h3 class="day-section-title" data-en="Notes" data-ja="備考" data-he="הערות">Notes</h3>
                 <p class="day-section-body" id="dayNotes"></p>
               </section>
 
               <section class="day-section" id="section-tips">
                 <div class="tip">
-                  <strong data-en="Tip of the day" data-ja="本日のヒント">Tip of the day</strong>
+                  <strong data-en="Tip of the day" data-ja="本日のヒント" data-he="הטיפ להיום">Tip of the day</strong>
                   <span id="tipText"></span>
                 </div>
               </section>
@@ -177,8 +177,8 @@
                   <strong id="mHeadDay">DAY 1</strong>
                 </div>
                 <div class="m-head-side m-head-side--end">
-                  <button type="button" class="program-lang-btn program-lang-btn--mobile" id="programLangBtnMobile" aria-pressed="false" aria-label="Show Japanese">
-                    <span class="program-lang-btn-label">日本語</span>
+                  <button type="button" class="program-lang-btn program-lang-btn--he program-lang-btn--mobile" id="programLangBtnHeMobile" data-lang="he" aria-pressed="false" aria-label="Show Hebrew">
+                    <span class="program-lang-btn-label">עברית</span>
                   </button>
                   <div class="m-head-partners" aria-label="Partners">
                     <span class="partner-logo partner-placeholder">[PLACEHOLDER]</span>
@@ -201,12 +201,12 @@
               </section>
 
               <section class="m-block m-section" id="m-section-schedule">
-                <h3 data-en="Program timeline" data-ja="行程">Program timeline</h3>
+                <h3 data-en="Program timeline" data-ja="行程" data-he="מהלך היום">Program timeline</h3>
                 <div class="m-schedule" id="mSchedule"></div>
               </section>
 
               <section class="m-block m-section" id="m-section-location">
-                <h3 data-en="Location" data-ja="場所">Location</h3>
+                <h3 data-en="Location" data-ja="場所" data-he="מיקום">Location</h3>
                 <p class="m-section-body" id="mLocation"></p>
                 <div class="day-map-frame day-map-frame--mobile" id="mLocationMap" hidden>
                   <iframe
@@ -220,13 +220,13 @@
               </section>
 
               <section class="m-block m-section" id="m-section-notes">
-                <h3 data-en="Notes" data-ja="備考">Notes</h3>
+                <h3 data-en="Notes" data-ja="備考" data-he="הערות">Notes</h3>
                 <p class="m-section-body" id="mNotes"></p>
               </section>
 
               <section class="m-block m-section" id="m-section-tips">
                 <div class="m-tip-card">
-                  <span class="m-tip-label" data-en="Tip of the day" data-ja="本日のヒント">Tip of the day</span>
+                  <span class="m-tip-label" data-en="Tip of the day" data-ja="本日のヒント" data-he="הטיפ להיום">Tip of the day</span>
                   <p class="m-section-body" id="mTip"></p>
                 </div>
               </section>
@@ -239,10 +239,10 @@
         <div class="subpage">
           <div class="subhead">
             <div>
-              <h2>Preparation</h2>
-              <p>Everything you need to know before you travel.</p>
+              <h2 data-en="Preparation" data-he="הכנה">Preparation</h2>
+              <p data-en="Everything you need to know before you travel." data-he="כל מה שצריך לדעת לפני הנסיעה.">Everything you need to know before you travel.</p>
             </div>
-            <button class="back" data-page="day" type="button">Back to day program</button>
+            <button class="back" data-page="day" type="button" data-en="Back to day program" data-he="חזרה לתוכנית היום">Back to day program</button>
           </div>
 
           <div class="grid" id="prepGrid"></div>
@@ -258,10 +258,10 @@
         <div class="subpage">
           <div class="subhead">
             <div>
-              <h2>What to avoid</h2>
-              <p>Respect local customs and ensure a smooth, meaningful experience.</p>
+              <h2 data-en="What to avoid" data-he="מה להימנע">What to avoid</h2>
+              <p data-en="Respect local customs and ensure a smooth, meaningful experience." data-he="כבוד למנהגים המקומיים, לחוויה חלקה ומשמעותית.">Respect local customs and ensure a smooth, meaningful experience.</p>
             </div>
-            <button class="back" data-page="day" type="button">Back to day program</button>
+            <button class="back" data-page="day" type="button" data-en="Back to day program" data-he="חזרה לתוכנית היום">Back to day program</button>
           </div>
 
           <div class="grid" id="avoidGrid"></div>
@@ -277,23 +277,23 @@
         <div class="subpage contact-page">
           <div class="subhead">
             <div>
-              <h2>Contact</h2>
-              <p>Support and emergency details for the delegation.</p>
+              <h2 data-en="Contact" data-he="יצירת קשר">Contact</h2>
+              <p data-en="Support and emergency details for the delegation." data-he="פרטי תמיכה וחירום למשלחת.">Support and emergency details for the delegation.</p>
             </div>
-            <button class="back" data-page="day" type="button">Back to day program</button>
+            <button class="back" data-page="day" type="button" data-en="Back to day program" data-he="חזרה לתוכנית היום">Back to day program</button>
           </div>
 
           <div class="contact-grid">
             <article class="contact-card">
-              <h3>Delegation hotel</h3>
+              <h3 data-en="Delegation hotel" data-he="מלון המשלחת">Delegation hotel</h3>
               <div class="contact-card-body">
-                <p class="contact-lead">To be confirmed</p>
-                <p class="contact-sub">Hotel name and address will be shared with the delegation before travel.</p>
+                <p class="contact-lead" data-en="To be confirmed" data-he="יאושר בהמשך">To be confirmed</p>
+                <p class="contact-sub" data-en="Hotel name and address will be shared with the delegation before travel." data-he="שם המלון והכתובת יימסרו למשלחת לפני הנסיעה.">Hotel name and address will be shared with the delegation before travel.</p>
               </div>
             </article>
 
             <article class="contact-card">
-              <h3>Program team</h3>
+              <h3 data-en="Program team" data-he="צוות התוכנית">Program team</h3>
               <ul class="contact-people">
                 <li class="contact-person">
                   <span class="contact-person-name">Hadas Kushelevich</span>
@@ -311,22 +311,22 @@
             </article>
 
             <article class="contact-card contact-card--wide">
-              <h3>Emergency contacts</h3>
+              <h3 data-en="Emergency contacts" data-he="אנשי קשר לחירום">Emergency contacts</h3>
               <ul class="contact-emergency">
                 <li>
-                  <span class="contact-label">Police</span>
+                  <span class="contact-label" data-en="Police" data-he="משטרה">Police</span>
                   <a class="contact-phone" href="tel:110">110</a>
                 </li>
                 <li>
-                  <span class="contact-label">Ambulance / Fire</span>
+                  <span class="contact-label" data-en="Ambulance / Fire" data-he="אמבולנס / כיבוי אש">Ambulance / Fire</span>
                   <a class="contact-phone" href="tel:119">119</a>
                 </li>
                 <li>
-                  <span class="contact-label">Japan Visitor Hotline</span>
+                  <span class="contact-label" data-en="Japan Visitor Hotline" data-he="קו חם למבקרים ביפן">Japan Visitor Hotline</span>
                   <a class="contact-phone" href="tel:+815038162787">050-3816-2787</a>
                 </li>
                 <li>
-                  <span class="contact-label">Lost &amp; Found</span>
+                  <span class="contact-label" data-en="Lost &amp; Found" data-he="אבידות ומציאות">Lost &amp; Found</span>
                   <a class="contact-phone" href="tel:0570550142">057-0550-142</a>
                 </li>
               </ul>
@@ -339,21 +339,21 @@
         <div class="subpage travelog-page">
           <div class="subhead">
             <div>
-              <h2>Travelog</h2>
-              <p>Photos and notes from the Tokyo visit will appear here during the program.</p>
+              <h2 data-en="Travelog" data-he="יומן מסע">Travelog</h2>
+              <p data-en="Photos and notes from the Tokyo visit will appear here during the program." data-he="תמונות והערות מהביקור בטוקיו יופיעו כאן במהלך התוכנית.">Photos and notes from the Tokyo visit will appear here during the program.</p>
             </div>
-            <button class="back" data-page="prep" type="button">Back to preparation</button>
+            <button class="back" data-page="prep" type="button" data-en="Back to preparation" data-he="חזרה להכנה">Back to preparation</button>
           </div>
 
           <article class="travelog-empty">
-            <h3>Coming during the visit</h3>
-            <p>This page will collect snapshots and short notes from the delegation days in Tokyo. Check back once the program begins.</p>
+            <h3 data-en="Coming during the visit" data-he="יופיע במהלך הביקור">Coming during the visit</h3>
+            <p data-en="This page will collect snapshots and short notes from the delegation days in Tokyo. Check back once the program begins." data-he="בעמוד זה ייאספו תמונות והערות קצרות מימי המשלחת בטוקיו. כדאי לחזור לכאן עם תחילת התוכנית.">This page will collect snapshots and short notes from the delegation days in Tokyo. Check back once the program begins.</p>
           </article>
         </div>
       </section>
     </main>
   </div>
 
-  <script src="./app.js?v=90"></script>
+  <script src="./app.js?v=96"></script>
 </body>
 </html>

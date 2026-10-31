@@ -838,6 +838,8 @@
       .program-embed-title {
         display: block;
         flex: 0 0 auto;
+        min-width: 0;
+        max-width: 100%;
         position: relative !important;
         top: auto !important;
         z-index: 30 !important;
@@ -887,12 +889,13 @@
       }
       #program-page .program-frame,
       #useful-page .program-frame {
-        flex: 1 1 auto;
+        flex: 1 1 0;
+        height: 0;
         min-height: 0;
         min-width: 0;
         width: 100%;
         max-width: 100%;
-        height: auto;
+        overflow: hidden;
       }
       nav .nav-buttons {
         order: 3;
@@ -932,7 +935,8 @@
         padding: 0 2px !important;
         font-size: 9px !important;
         line-height: 1.15 !important;
-        white-space: nowrap !important;
+        overflow: hidden;
+        white-space: normal !important;
         display: flex !important;
         flex-direction: column !important;
         align-items: center !important;
@@ -1829,6 +1833,20 @@
       text-transform: none;
       letter-spacing: 0.04em;
     }
+    .program-lang-group {
+      grid-column: 3;
+      justify-self: end;
+      align-self: center;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      position: relative;
+      z-index: 2;
+    }
+    .program-lang-group .about-lang-btn {
+      grid-column: auto;
+      margin: 0;
+    }
     @media (min-width: 901px) {
       body.about-page .participants-header-inner {
         grid-template-columns: auto minmax(0, 1fr) auto;
@@ -2638,7 +2656,7 @@
       cursor: pointer;
     }
     /* Participants header typography */
-    .participants-header-wrap, .participants-header-wrap * { font-family: 'Noto Sans', 'Noto Sans JP', sans-serif !important; }
+    .participants-header-wrap, .participants-header-wrap * { font-family: 'Noto Sans', 'Noto Sans Hebrew', 'Noto Sans JP', sans-serif !important; }
     .stats-bar-wrap { bottom: auto !important; }
     .sector-btn { overflow: visible; }
     .participant-card .card-front { gap: 0; }
@@ -2886,31 +2904,41 @@
         justify-content: center !important;
       }
       body.about-page .about-lang-btn,
-      body.program-page .about-lang-btn {
+      body.program-page .program-lang-group,
+      body.useful-page .program-lang-group {
         grid-area: title;
         justify-self: end;
         align-self: center;
         margin: 0 !important;
       }
-      body.program-page .participants-header-inner {
+      body.program-page .program-lang-group .about-lang-btn,
+      body.useful-page .program-lang-group .about-lang-btn {
+        padding: 8px 10px !important;
+        font-size: 12px !important;
+      }
+      body.program-page .participants-header-inner,
+      body.useful-page .participants-header-inner {
         display: grid !important;
-        grid-template-columns: 1fr;
+        grid-template-columns: minmax(0, 1fr);
         grid-template-areas: "title" "stops";
         align-items: center;
         justify-items: stretch;
         text-align: center;
         gap: 6px 0 !important;
       }
-      body.program-page .participants-header-copy {
+      body.program-page .participants-header-copy,
+      body.useful-page .participants-header-copy {
         grid-area: title;
         align-items: center !important;
         text-align: center !important;
       }
-      body.program-page .participants-header-wrap h1 {
+      body.program-page .participants-header-wrap h1,
+      body.useful-page .participants-header-wrap h1 {
         text-align: center !important;
         justify-content: center !important;
       }
-      body.program-page .program-section-bar {
+      body.program-page .program-section-bar,
+      body.useful-page .useful-section-bar {
         grid-area: stops;
       }
       body.about-page #about-stops-bar {
@@ -3317,38 +3345,40 @@
     <div id="program-page">
       <div class="participants-header-wrap program-embed-title">
         <div class="participants-header-inner">
-          <div class="participants-header-copy"><h1 id="programPageTitle" data-en="Program" data-ja="プログラム">Program</h1></div>
+          <div class="participants-header-copy"><h1 id="programPageTitle" data-en="Program" data-ja="プログラム" data-he="תוכנית">Program</h1></div>
           <div class="stats-bar-wrap program-section-bar" aria-label="Day sections">
             <button type="button" class="sector-btn active" data-section="overview" style="--station:#009BBF">
               <span class="nav-mark" aria-hidden="true"><span class="nav-mark-line">T</span><span class="nav-mark-id">04</span></span>
-              <span class="nav-caption" data-en="Day Program" data-ja="当日の行程">Day Program</span>
+              <span class="nav-caption" data-en="Day Program" data-ja="当日の行程" data-he="תוכנית היום">Day Program</span>
             </button>
             <button type="button" class="sector-btn" data-section="schedule" style="--station:#00BB85">
               <span class="nav-mark" aria-hidden="true"><span class="nav-mark-line">C</span><span class="nav-mark-id">05</span></span>
-              <span class="nav-caption" data-en="Schedule" data-ja="スケジュール">Schedule</span>
+              <span class="nav-caption" data-en="Schedule" data-ja="スケジュール" data-he="לוח זמנים">Schedule</span>
             </button>
             <button type="button" class="sector-btn" data-section="location" style="--station:#F62E36">
               <span class="nav-mark" aria-hidden="true"><span class="nav-mark-line">M</span><span class="nav-mark-id">06</span></span>
-              <span class="nav-caption" data-en="Location" data-ja="場所">Location</span>
+              <span class="nav-caption" data-en="Location" data-ja="場所" data-he="מיקום">Location</span>
             </button>
             <button type="button" class="sector-btn" data-section="notes" style="--station:#C9A227">
               <span class="nav-mark" aria-hidden="true"><span class="nav-mark-line">W</span><span class="nav-mark-id">07</span></span>
-              <span class="nav-caption" data-en="Notes" data-ja="備考">Notes</span>
+              <span class="nav-caption" data-en="Notes" data-ja="備考" data-he="הערות">Notes</span>
             </button>
             <button type="button" class="sector-btn" data-section="tips" style="--station:#8F76D6">
               <span class="nav-mark" aria-hidden="true"><span class="nav-mark-line">Z</span><span class="nav-mark-id">08</span></span>
-              <span class="nav-caption" data-en="Tips" data-ja="ヒント">Tips</span>
+              <span class="nav-caption" data-en="Tips" data-ja="ヒント" data-he="טיפים">Tips</span>
             </button>
           </div>
-          <button type="button" class="about-section-flip-hint about-lang-btn" id="program-lang-btn" aria-pressed="false" aria-label="Show Japanese">
-            <span class="about-lang-btn-label">日本語</span>
-          </button>
+          <div class="program-lang-group">
+            <button type="button" class="about-section-flip-hint about-lang-btn" id="program-lang-he-btn" data-lang="he" aria-pressed="false" aria-label="Show Hebrew">
+              <span class="about-lang-btn-label">עברית</span>
+            </button>
+          </div>
         </div>
       </div>
       <iframe
         class="program-frame"
         title="FORUMETRO TOKYO 2026 Program"
-        data-src="program/index.html?embed=1&amp;page=day&amp;v=104"
+        data-src="program/index.html?embed=1&amp;page=day&amp;v=111"
         referrerpolicy="no-referrer-when-downgrade"
         allow="fullscreen"
       ></iframe>
@@ -3356,23 +3386,28 @@
     <div id="useful-page">
       <div class="participants-header-wrap program-embed-title">
         <div class="participants-header-inner">
-          <div class="participants-header-copy"><h1>Useful Information</h1></div>
+          <div class="participants-header-copy"><h1 id="usefulPageTitle" data-en="Useful Information" data-he="מידע שימושי">Useful Information</h1></div>
           <div class="stats-bar-wrap useful-section-bar" aria-label="Useful stations">
             <button type="button" class="sector-btn active" data-page="prep" style="--station:#8F76D6">
               <span class="nav-mark" aria-hidden="true"><span class="nav-mark-line">Z</span><span class="nav-mark-id">05</span></span>
-              <span class="nav-caption">Preparation</span>
+              <span class="nav-caption" data-en="Preparation" data-he="הכנה">Preparation</span>
             </button>
             <button type="button" class="sector-btn" data-page="avoid" style="--station:#00BB85">
               <span class="nav-mark" aria-hidden="true"><span class="nav-mark-line">C</span><span class="nav-mark-id">06</span></span>
-              <span class="nav-caption">What to avoid</span>
+              <span class="nav-caption" data-en="What to avoid" data-he="מה להימנע">What to avoid</span>
             </button>
             <button type="button" class="sector-btn" data-page="contact" style="--station:#F62E36">
               <span class="nav-mark" aria-hidden="true"><span class="nav-mark-line">M</span><span class="nav-mark-id">07</span></span>
-              <span class="nav-caption">Contact</span>
+              <span class="nav-caption" data-en="Contact" data-he="יצירת קשר">Contact</span>
             </button>
             <button type="button" class="sector-btn" data-page="travelog" style="--station:#009BBF">
               <span class="nav-mark" aria-hidden="true"><span class="nav-mark-line">T</span><span class="nav-mark-id">08</span></span>
-              <span class="nav-caption">Travelog</span>
+              <span class="nav-caption" data-en="Travelog" data-he="יומן מסע">Travelog</span>
+            </button>
+          </div>
+          <div class="program-lang-group">
+            <button type="button" class="about-section-flip-hint about-lang-btn" id="useful-lang-he-btn" data-lang="he" aria-pressed="false" aria-label="Show Hebrew">
+              <span class="about-lang-btn-label">עברית</span>
             </button>
           </div>
         </div>
@@ -3380,13 +3415,13 @@
       <iframe
         class="program-frame"
         title="FORUMETRO TOKYO 2026 Useful Information"
-        data-src="program/index.html?embed=1&amp;page=prep&amp;branch=useful&amp;v=101"
+        data-src="program/index.html?embed=1&amp;page=prep&amp;branch=useful&amp;v=104"
         referrerpolicy="no-referrer-when-downgrade"
         allow="fullscreen"
       ></iframe>
     </div>
   </main>
 
-  <script src="script.js?v=275"></script>
+  <script src="script.js?v=277"></script>
 </body>
 </html>

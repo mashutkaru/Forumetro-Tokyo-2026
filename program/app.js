@@ -617,49 +617,276 @@ const daysJa = [
   },
 ];
 
+const daysHe = [
+  {
+    w: "ב׳",
+    title: "ברוכים הבאים לטוקיו",
+    city: "נמל התעופה נריטה · המלון · LUMIVEIL TOKYO · שיודומה",
+    theme:
+      "היום הראשון מוקדש להגעה, למפגש עם הצוות המקומי ולהתארגנות במלון. קבלת פנים ב-LUMIVEIL TOKYO והליכת ערב בשיודומה מציגות את התוכנית ואת האזור שסביב המלון.",
+    tip: "החזיקו את הדרכון בהישג יד בנריטה. קבלת הפנים מתחילה במפגש בלובי בשעה 16:00.",
+    notesExtra:
+      "שעת הנחיתה והעומס בדרכים עשויים להזיז את ההסעה ואת הצ'ק-אין במלון. קבלת הפנים מתקיימת ב-LUMIVEIL TOKYO.",
+    items: [
+      ["הגעה", "נמל התעופה נריטה, 11:40"],
+      ["צ'ק-אין", "מלון, 15:30"],
+      ["קבלת פנים", "LUMIVEIL TOKYO, 17:00–20:00"],
+      ["סיור אוריינטציה", "שיודומה, 20:00–21:00"],
+    ],
+    program: [
+      ["11:40", "הגעה לנמל התעופה הבין-לאומי נריטה", "ביקורת גבולות, איסוף כבודה ומפגש עם צוות התיאום המקומי"],
+      ["13:00", "הסעה באוטובוס למרכז טוקיו", "מנמל התעופה נריטה אל המלון"],
+      ["15:30", "צ'ק-אין במלון", ""],
+      ["16:00–16:15", "מפגש בלובי המלון", "יציאה אל LUMIVEIL TOKYO"],
+      ["16:30", "הגעה ל-LUMIVEIL TOKYO", ""],
+      ["17:00–18:00", "מצגות פתיחה", "משלחת פורומטרו והצוות המארגן המקומי"],
+      ["18:00–20:00", "ארוחת ערב חגיגית", "LUMIVEIL TOKYO"],
+      ["20:00–21:00", "סיור אוריינטציה רגלי בהדרכת מומחה", "תחנת שיודומה/שינבשי"],
+    ],
+  },
+  {
+    w: "ג׳",
+    title: "מערכת הרכבות של טוקיו: רשתות, תחנות ותפעול",
+    city: "חדר הסמינרים במלון, טורנומון הילס וטוקיו מטרו",
+    theme:
+      "היום מציג את רשת הרכבות המטרופולינית של טוקיו ואת עקרונות התכנון, הבנייה והתפעול שלה. אחרי הרצאות הבוקר מתקיים ביקור בתחנת טורנומון הילס, ואחר הצהריים תדרוך של טוקיו מטרו.",
+    tip: "נעליים נוחות לביקור בתחנת טורנומון הילס.",
+    notesExtra:
+      "ארוחת הבוקר במלון; השעה טרם נקבעה. מקום התדרוך של טוקיו מטרו טרם נקבע. סיום הביקור בטורנומון הילס ותחילת ארוחת הצהריים עשויים להשתנות.",
+    items: [
+      ["הרצאה", "פרופ' Shigeru Morichi, 09:00–10:30"],
+      ["הרצאה", "Kazufumi Noyaki, 10:45–11:15"],
+      ["ביקור בתחנה", "טורנומון הילס, 11:30–12:30"],
+      ["טוקיו מטרו", "תדרוך תפעול, 14:00–16:00"],
+    ],
+    program: [
+      ["08:30–08:45", "תדרוך בוקר", "לובי המלון"],
+      ["09:00–10:30", "הרצאת פתיחה", "פרופ' Shigeru Morichi — רשת הרכבות המטרופולינית של טוקיו: התפתחות, מבנה ופיתוח עירוני"],
+      ["10:45–11:15", "הרצאה", "Kazufumi Noyaki, נשיא Metro Development — בניית מטרו: איזון בין קצב הבנייה לבין ההפרעה לציבור"],
+      ["11:30–12:30", "ביקור בתחנה בהדרכת מומחה", "תחנת טורנומון הילס — אדריכלות, הנדסה וחיבור לפיתוח עירוני מחודש"],
+      ["12:30–13:30", "ארוחת צהריים", "טורנומון הילס"],
+      ["13:30–14:00", "מעבר", "אל תדרוך אחר הצהריים של טוקיו מטרו"],
+      ["14:00–16:00", "תדרוך", "טוקיו מטרו — תפעול רכבת מטרופולינית. המקום טרם נקבע."],
+      ["16:30–17:30", "דיון קבוצתי", "סיכום ולקחים"],
+    ],
+  },
+  {
+    w: "ד׳",
+    title: "מוקדים עירוניים חדשים: פיתוח בהובלת הרכבת ועיר התחנה",
+    city: "שיודומה, שיבויה וקווי הפרברים של Tokyu",
+    theme:
+      "תחנות הרכבת בטוקיו פועלות כמוקדים עירוניים שמשלבים תחבורה, מסחר, תעסוקה ותרבות. היום עוסק בניהול האזור בשיודומה, בפיתוח מחדש של שיבויה, ובאופן שבו חברת Tokyu מחברת תפעול רכבות לפיתוח עירוני.",
+    tip: "הביקור בשיבויה סקיי מתוכנן לסביבות 15:30, במהלך הסיור בשיבויה.",
+    notesExtra:
+      "ארוחת הבוקר במלון; השעה טרם נקבעה. התדרוך בשיודומה והמעבר לשיבויה עדיין בתיאום זמנים. הפגישה עם Tokyu ממתינה לאישור. תחנות הסיור בפרברים טרם נקבעו.",
+    items: [
+      ["שיודומה", "תדרוך והליכה, 09:00–10:00"],
+      ["שיבויה", "תדרוך העיר, 10:00–12:00"],
+      ["Tokyu", "תדרוך וסיור בשיבויה, 13:30–16:30"],
+      ["סיור שטח", "Tatsuya Edakubo, 17:00–18:30"],
+    ],
+    program: [
+      ["08:30–08:45", "תדרוך בוקר", "מלון"],
+      ["09:00–09:30", "תדרוך ניהול אזור", "SIO-SITE Town Management — שיודומה, ממסוף מטענים ישן של הרכבת אל תחנה עירונית. מוצע; הזמן טרם נקבע."],
+      ["09:30–10:00", "סיור רגלי", "שיודומה. מוצע; הזמן טרם נקבע."],
+      ["10:00–12:00", "תדרוך", "עיריית שיבויה — פיתוח מחדש, תשתיות ושיתוף ציבורי-פרטי. לשכת המסחר של שיבויה, חדר הדרכה גדול בקומה 2, Shibuya 1-12-5, ליד Hikarie."],
+      ["12:00–13:30", "ארוחת צהריים", "שיבויה"],
+      ["13:30–14:30", "תדרוך", "Tokyu — רכבת ופיתוח עירוני משולבים. המקום בשיבויה טרם נקבע."],
+      ["14:30–16:30", "סיור בהדרכת מומחה", "שיבויה. שיבויה סקיי מתוכנן לסביבות 15:30."],
+      ["17:00–18:30", "סיור שטח בהדרכת מומחה", "Tatsuya Edakubo — חיי היוממות לאורך קווי הפרברים של Tokyu. התחנות טרם נקבעו."],
+    ],
+  },
+  {
+    w: "ה׳",
+    title: "ניהול המטרופולין: תחבורה ציבורית, תכנון ומדיניות",
+    city: "ממשלת המטרופולין של טוקיו, שינג'וקו ושגרירות ישראל",
+    theme:
+      "ניפגש עם הגופים שאחראים על תכנון ותפעול מערכת התחבורה המטרופולינית של טוקיו, ואחר כך נלך בתחנת שינג'וקו ונבקר בשגרירות ישראל.",
+    tip: "השאירו זמן לנהלי הביטחון בשגרירות ישראל. היציאה לשם מתחילה ב-15:00.",
+    notesExtra:
+      "ארוחת הבוקר במלון; השעה טרם נקבעה. המארחים של Toei ושל ממשלת המטרופולין, המדריך בשינג'וקו והשתתפות השגריר טרם אושרו.",
+    items: [
+      ["Toei", "תדרוך תחבורה ציבורית, 10:00–11:00"],
+      ["ממשלת המטרופולין", "תכנון מטרופוליני, 11:00–12:00"],
+      ["שינג'וקו", "סיור בבאסטה, 13:30–15:00"],
+      ["שגרירות", "שגריר ישראל, 16:00–17:00"],
+    ],
+    program: [
+      ["08:30–08:45", "תדרוך בוקר", "מלון"],
+      ["08:45–09:30", "מעבר לממשלת המטרופולין של טוקיו", ""],
+      ["09:30–10:00", "הגעה והיכרות", "ממשלת המטרופולין של טוקיו"],
+      ["10:00–11:00", "תדרוך", "Toei — אתגרים בתפעול תחבורה ציבורית. מוצע; המקום טרם נקבע."],
+      ["11:00–12:00", "תדרוך", "ממשלת המטרופולין של טוקיו — תכנון תחבורה מטרופולינית ותיאום. מוצע; המקום טרם נקבע."],
+      ["12:00–13:30", "ארוחת צהריים", "שינג'וקו"],
+      ["13:30–15:00", "סיור בבאסטה של שינג'וקו", "הליכה בהדרכת מומחה בתחנת שינג'וקו — מילימטרים ושניות: החוויה האנושית בתחנת הרכבת העמוסה בעולם. המדריך טרם נקבע."],
+      ["15:00–16:00", "מעבר לשגרירות ישראל", "הגעה ונהלי ביטחון"],
+      ["16:00–17:00", "פגישה", "שגריר ישראל ביפן. חדר הסמינרים על שם רבין. כפוף לאישור."],
+      ["17:00–18:00", "דיון קבוצתי", "סיכום ולקחים"],
+    ],
+  },
+  {
+    w: "ו׳",
+    title: "בקנה מידה אנושי: מאצ'יזוקורי, קהילה ותשתית רכבת",
+    city: "אולם העירייה קיטאזאווה, שימוקיטה סנרוגאי וקיטאמי",
+    theme:
+      "נצא לשכונות הרכבת בפרברי טוקיו כדי לראות איך תשתית יכולה לשפר מרחב ציבורי ולחזק קהילות. העיר סטאגאיה ורכבת אודאקיו מציגות מקרה של מאצ'יזוקורי, השתתפות ופיתוח בקנה מידה אנושי.",
+    tip: "השבת נכנסת ב-16:12. חלק מהמשתתפים יצטרכו לחזור למלון מוקדם יותר.",
+    notesExtra:
+      "ארוחת הבוקר במלון; השעה טרם נקבעה. הסידורים בסטאגאיה כפופים לאישור המארחים. מקום התדרוך ב-13:00, הכניסה למוסך קיטאמי והמסלול הסופי טרם נקבעו. השבת נכנסת בסביבות 16:12.",
+    items: [
+      ["סטאגאיה", "תדרוך מאצ'יזוקורי, 09:00–10:30"],
+      ["שכונה", "שימוקיטה סנרוגאי ו-BONUS TRACK, 10:30–12:00"],
+      ["קיטאמי", "ביקור בכיכר ובמוסך, 14:15–15:00"],
+      ["שבת", "כניסת שבת 16:12"],
+    ],
+    program: [
+      ["07:45–08:00", "תדרוך בוקר", "מלון"],
+      ["08:00–09:00", "מעבר לאולם העירייה קיטאזאווה", "סטאגאיה"],
+      ["09:00–10:30", "תדרוך", "עיריית סטאגאיה — מאצ'יזוקורי בקנה מידה אנושי ובניית קהילה. אולם העירייה קיטאזאווה."],
+      ["10:30–12:00", "הליכה בשכונה בהדרכת מומחה", "צוות המאצ'יזוקורי של סטאגאיה — שימוקיטה סנרוגאי ו-BONUS TRACK: הטמנת הרכבת, שימוש מחדש בקרקע ומרחב ציבורי"],
+      ["12:00–13:00", "ארוחת צהריים ארוזה", "אולם העירייה קיטאזאווה. מתוכנן."],
+      ["13:00–13:45", "תדרוך", "נציג כיכר קיטאמי פוראי — פארק מעל מוסך הרכבת. המקום טרם נקבע."],
+      ["13:45–14:15", "מעבר לכיכר קיטאמי פוראי", "המסלול טרם נקבע"],
+      ["14:15–15:00", "ביקור באתר", "כיכר קיטאמי פוראי ומוסך אודאקיו בקיטאמי. הכניסה כפופה לאישור המארחים."],
+      ["15:00–16:00", "חזרה למלון", ""],
+      ["16:12", "כניסת שבת", "חלק מהמשתתפים עשויים לחזור מוקדם יותר"],
+    ],
+  },
+  {
+    w: "ש׳",
+    title: "להכיר את טוקיו: תרבות, מרחב ציבורי וחיי עיר",
+    city: "טוקיו — סיור עצמאי",
+    theme:
+      "היום פנוי לסיור עצמאי בטוקיו ולמפגש עם שכונות היסטוריות, נוף וחיי היומיום בעיר. ביקורים לבחירה מראים איך מקומות מסורתיים, מסחר והעיר בת-זמננו יושבים זה לצד זה.",
+    tip: "אחרי ארוחת הבוקר היום פנוי. פעילות קבוצתית מתוכננת ל-18:00.",
+    notesExtra: "הביקורים העצמאיים הם לבחירה. הפעילות הקבוצתית ומקום המפגש טרם נקבעו.",
+    items: [
+      ["גנים", "גני המאריקיו"],
+      ["גינזה", "רחובות, אדריכלות ומרחב ציבורי"],
+      ["אסאקוסה", "מקדש סנסוג'י"],
+      ["ערב", "פעילות קבוצתית, 18:00"],
+    ],
+    program: [
+      ["08:00–09:00", "ארוחת בוקר", "מלון"],
+      [
+        "09:00",
+        "סיור עירוני לבחירה",
+        "ביקורים עצמאיים",
+        [
+          ["", "גני המאריקיו", "נוף מסורתי וקו המים המודרני של טוקיו."],
+          ["", "גינזה", "רחובות מסחריים, אדריכלות ומרחב ציבורי."],
+          ["", "אסאקוסה / מקדש סנסוג'י", "טוקיו ההיסטורית, רחובות קניות מסורתיים ומורשת דתית."],
+        ],
+      ],
+      ["18:00", "פעילות קבוצתית", "הפרטים טרם נקבעו"],
+    ],
+  },
+  {
+    w: "א׳",
+    title: "העתיד של טוקיו: טקאנאווה גייטוויי וסיכום",
+    city: "Takanawa Gateway City",
+    theme:
+      "הבוקר מוקדש לביקור ב-Takanawa Gateway City עם JR East, ומציג דגם חדש של פיתוח עירוני בהובלת הרכבת. ארוחת צהריים מסכמת עוברת ללקחים לתכנון ולבניית המטרו המטרופוליני של תל אביב. אחר הצהריים פנוי.",
+    tip: "התוכנית הקבוצתית מסתיימת אחרי ארוחת הצהריים. מ-14:00 הזמן פנוי לקניות ולתוכניות אישיות.",
+    notesExtra:
+      "ארוחת הבוקר במלון; השעה טרם נקבעה. פרטי הביקור של JR East ומקום ארוחת הצהריים המסכמת טרם נקבעו.",
+    items: [
+      ["מעבר", "תחנת טקאנאווה גייטוויי, 09:00–09:30"],
+      ["טקאנאווה", "ביקור באתר של JR East, 09:30–11:30"],
+      ["דיון", "ארוחת צהריים מסכמת, 12:00–14:00"],
+      ["זמן פנוי", "מ-14:00"],
+    ],
+    program: [
+      ["08:30–08:45", "תדרוך בוקר", "מלון"],
+      ["09:00–09:30", "מעבר לתחנת טקאנאווה גייטוויי", ""],
+      ["09:30–11:30", "ביקור באתר", "JR East — TAKANAWA GATEWAY CITY: אדריכלות, חיבור בין תחנה לעיר, רשתות להולכי רגל וחדשנות. הפרטים טרם נקבעו."],
+      ["11:30–12:00", "מעבר למקום ארוחת הצהריים", "המקום טרם נקבע"],
+      ["12:00–14:00", "ארוחת צהריים מסכמת ודיון", "מטוקיו לתל אביב: לקחים לבניית מטרו מטרופוליני"],
+      ["14:00", "זמן פנוי", "קניות ופעילויות עצמאיות"],
+    ],
+  },
+  {
+    w: "ב׳",
+    title: "פיתוח, שימור ויציאה",
+    city: "המלון · העיר צ'ואו וגינזה · נמל התעופה נריטה",
+    theme:
+      "הבוקר האחרון בוחן איך פיתוח ושימור נפגשים בעיר צ'ואו ובגינזה. אחרי תדרוך עירוני קצר והליכה בהדרכת מומחה נחזור לכיוון המלון, נאכל צהריים ונצא לנמל התעופה נריטה.",
+    tip: "הצ'ק-אאוט בסביבות 08:30. האוטובוס לנריטה יוצא ב-13:30, והטיסה ממריאה ב-17:40.",
+    notesExtra:
+      "סידורי ארוחת הבוקר טרם נקבעו. המקום בעיר צ'ואו, המסלול בגינזה וההסעה לשדה טרם נקבעו.",
+    items: [
+      ["צ'ק-אאוט", "בסביבות 08:30"],
+      ["העיר צ'ואו", "תדרוך, 09:30–10:00"],
+      ["גינזה", "הליכה בהדרכת מומחה, 10:00–12:00"],
+      ["טיסה", "המראה מנריטה, 17:40"],
+    ],
+    program: [
+      ["08:30", "צ'ק-אאוט מהמלון", "סידורי ארוחת הבוקר טרם נקבעו"],
+      ["09:30–10:00", "תדרוך", "העיר צ'ואו. הסידורים הסופיים טרם נקבעו."],
+      ["10:00–12:00", "סיור רגלי בהדרכת מומחה", "גינזה, בחזרה לכיוון המלון. המסלול הסופי טרם נקבע."],
+      ["12:00–13:00", "ארוחת צהריים", ""],
+      ["13:30", "יציאת האוטובוס לנמל התעופה נריטה", "מהמלון"],
+      ["15:00", "צ'ק-אין בשדה", "ביטחון ונהלי יציאה בנריטה"],
+      ["17:40", "המראת הטיסה מנריטה", ""],
+    ],
+  },
+];
+
 days.forEach((day, index) => {
   day.ja = daysJa[index];
+  day.he = daysHe[index];
 });
 
 let programLang = "en";
 
 function viewDay(day) {
   const base = { ...day, titleEn: day.title };
-  if (programLang !== "ja" || !day.ja) return base;
-  const ja = day.ja;
+  const pack = programLang === "ja" ? day.ja : programLang === "he" ? day.he : null;
+  if (!pack) return base;
   return {
     ...base,
-    w: ja.w || day.w,
-    title: ja.title,
-    city: ja.city,
-    theme: ja.theme,
-    tip: ja.tip,
-    notesExtra: ja.notesExtra,
+    w: pack.w || day.w,
+    title: pack.title,
+    city: pack.city,
+    theme: pack.theme,
+    tip: pack.tip,
+    notesExtra: pack.notesExtra,
     items: day.items.map((item, index) => {
-      const translated = ja.items[index] || [];
+      const translated = pack.items[index] || [];
       return [translated[0] || item[0], translated[1] || item[1], item[2]];
     }),
-    program: ja.program,
+    program: pack.program,
   };
 }
 
 function textForLang(el) {
-  return programLang === "ja" ? el.getAttribute("data-ja") : el.getAttribute("data-en");
+  if (programLang === "ja") return el.getAttribute("data-ja") || el.getAttribute("data-en");
+  if (programLang === "he") return el.getAttribute("data-he") || el.getAttribute("data-en");
+  return el.getAttribute("data-en");
+}
+
+function dayCountLabel(index) {
+  const n = index + 1;
+  if (programLang === "ja") return `${n}日目`;
+  if (programLang === "he") return `יום ${n}`;
+  return `DAY ${n}`;
 }
 
 function applyChromeLanguage() {
-  document.documentElement.lang = programLang === "ja" ? "ja" : "en";
-  document.querySelectorAll("[data-en][data-ja]").forEach((el) => {
+  document.documentElement.lang = programLang === "ja" ? "ja" : programLang === "he" ? "he" : "en";
+  document.documentElement.classList.toggle("lang-he", programLang === "he");
+  document.querySelectorAll("[data-en]").forEach((el) => {
     const text = textForLang(el);
     if (text) el.textContent = text;
   });
   document.querySelectorAll(".program-lang-btn").forEach((btn) => {
+    const target = btn.dataset.lang === "he" ? "he" : "ja";
+    const active = programLang === target;
     const label = btn.querySelector(".program-lang-btn-label");
-    const showingJa = programLang === "ja";
-    if (label) label.textContent = showingJa ? "English" : "日本語";
-    btn.classList.toggle("is-flipped", showingJa);
-    btn.setAttribute("aria-pressed", showingJa ? "true" : "false");
-    btn.setAttribute("aria-label", showingJa ? "Show English" : "Show Japanese");
+    if (label) label.textContent = active ? "English" : target === "he" ? "עברית" : "日本語";
+    btn.classList.toggle("is-flipped", active);
+    btn.setAttribute("aria-pressed", active ? "true" : "false");
+    btn.setAttribute("aria-label", active ? "Show English" : target === "he" ? "Show Hebrew" : "Show Japanese");
   });
 }
 
@@ -672,7 +899,7 @@ function notifyParentLanguage() {
 }
 
 function setProgramLang(lang) {
-  const next = lang === "ja" ? "ja" : "en";
+  let next = lang === "he" ? "he" : "en";
   if (next === programLang) {
     applyChromeLanguage();
     notifyParentLanguage();
@@ -685,7 +912,6 @@ function setProgramLang(lang) {
 }
 
 const prep = [
-  ["Accommodation", ["Delegation hotel details will be confirmed before travel.", "See the Contact page for the latest information."]],
   ["Travel Documents", ["Passport, visa, insurance and copies.", "Israeli passports do not need special visa procedures."]],
   ["Arrival & Entry Procedures", ["Complete Visit Japan Web declaration: https://services.digital.go.jp/en/visit-japan-web/", "Register flight and personal details.", "Save QR code for airport entry."]],
   ["Currency & Payments", ["Bring 10,000–20,000 JPY cash.", "Cards accepted in large stores.", "Cash needed for small shops and taxis."]],
@@ -790,6 +1016,7 @@ const byId = (id) => document.getElementById(id);
 function runTests() {
   console.assert(days.length === 8, "Expected 8 program days");
   console.assert(days.every((day) => day.ja && day.ja.program.length === day.program.length), "Each day needs a Japanese itinerary");
+  console.assert(days.every((day) => day.he && day.he.program.length === day.program.length), "Each day needs a Hebrew itinerary");
   console.assert(days[0].title.indexOf("Welcome") !== -1, "Day 1 should welcome the delegation to Tokyo");
   console.assert(days[0].program[0][0] === "11:40", "Day 1 should arrive at 11:40");
   console.assert(days[7].title.indexOf("Departure") !== -1, "Day 8 should include departure");
@@ -1012,7 +1239,8 @@ function renderSchedulePlanBlock(plan, { mobile = false } = {}) {
 function renderScheduleBadge(link) {
   if (!link) return "";
 
-  return `<a class="badge badge-link" href="${link}" target="_blank" rel="noopener noreferrer">Website Link</a>`;
+  const label = programLang === "he" ? "קישור לאתר" : programLang === "ja" ? "ウェブサイト" : "Website Link";
+  return `<a class="badge badge-link" href="${link}" target="_blank" rel="noopener noreferrer">${label}</a>`;
 }
 
 function mobileScheduleHasDetails(entry) {
@@ -1106,7 +1334,7 @@ function getDayNotes(day) {
 function renderDesktopDay(day) {
   const sideDay = byId("sideDay");
   const sideDate = byId("sideDate");
-  if (sideDay) sideDay.textContent = programLang === "ja" ? `${currentDayIndex + 1}日目` : `DAY ${currentDayIndex + 1}`;
+  if (sideDay) sideDay.textContent = dayCountLabel(currentDayIndex);
   if (sideDate) sideDate.textContent = `${formatWeekday(day.w)}, ${day.d}`;
   byId("title").textContent = day.title;
   byId("theme").textContent = day.theme;
@@ -1154,9 +1382,13 @@ function renderDesktopDay(day) {
 function renderMobileDay(day) {
   const dayLabel = programLang === "ja"
     ? `${currentDayIndex + 1}日目、${day.w}、${day.d}`
-    : `DAY ${currentDayIndex + 1}, ${formatWeekday(day.w)}, ${day.d}`;
+    : programLang === "he"
+      ? `${dayCountLabel(currentDayIndex)}, ${day.w}, ${day.d}`
+      : `DAY ${currentDayIndex + 1}, ${formatWeekday(day.w)}, ${day.d}`;
 
-  byId("mHeadDay").textContent = dayLabel;
+  const headDay = byId("mHeadDay");
+  headDay.textContent = dayLabel;
+  headDay.dir = programLang === "he" ? "rtl" : "ltr";
   byId("mDayTitle").textContent = day.title;
   byId("mTheme").textContent = day.theme;
 
@@ -1272,16 +1504,18 @@ function showPage(pageName) {
   });
 
   const subpageTitles = {
-    prep: "Preparation",
-    avoid: "What to Avoid",
-    contact: "Contact",
-    travelog: "Travelog",
+    prep: { en: "Preparation", he: "הכנה" },
+    avoid: { en: "What to Avoid", he: "מה להימנע" },
+    contact: { en: "Contact", he: "יצירת קשר" },
+    travelog: { en: "Travelog", he: "יומן מסע" },
   };
   const subpageHead = document.getElementById("mSubpageHead");
   const subpageTitle = document.getElementById("mSubpageTitle");
   if (subpageHead && subpageTitle) {
     if (subpageTitles[pageName]) {
-      subpageTitle.textContent = subpageTitles[pageName];
+      subpageTitle.setAttribute("data-en", subpageTitles[pageName].en);
+      subpageTitle.setAttribute("data-he", subpageTitles[pageName].he);
+      subpageTitle.textContent = textForLang(subpageTitle);
       subpageHead.hidden = false;
       document.body.classList.add("m-subpage-view");
     } else {
@@ -1447,7 +1681,8 @@ function initEvents() {
     const langButton = event.target.closest(".program-lang-btn");
     if (langButton) {
       event.preventDefault();
-      setProgramLang(programLang === "ja" ? "en" : "ja");
+      const target = langButton.dataset.lang === "he" ? "he" : "ja";
+      setProgramLang(programLang === target ? "en" : target);
       return;
     }
 
@@ -1499,9 +1734,13 @@ function applyBranchPlates(useful) {
   if (title && !useful) {
     title.setAttribute("data-en", "Program");
     title.setAttribute("data-ja", "プログラム");
+    title.setAttribute("data-he", "תוכנית");
     title.textContent = textForLang(title);
   } else if (title) {
-    title.textContent = "Useful Information";
+    title.setAttribute("data-en", "Useful Information");
+    title.setAttribute("data-he", "מידע שימושי");
+    title.removeAttribute("data-ja");
+    title.textContent = textForLang(title);
   }
   if (programNav) programNav.hidden = !!useful;
   if (usefulNav) usefulNav.hidden = !useful;
