@@ -2885,11 +2885,33 @@
         text-align: center !important;
         justify-content: center !important;
       }
-      body.about-page .about-lang-btn {
+      body.about-page .about-lang-btn,
+      body.program-page .about-lang-btn {
         grid-area: title;
         justify-self: end;
         align-self: center;
         margin: 0 !important;
+      }
+      body.program-page .participants-header-inner {
+        display: grid !important;
+        grid-template-columns: 1fr;
+        grid-template-areas: "title" "stops";
+        align-items: center;
+        justify-items: stretch;
+        text-align: center;
+        gap: 6px 0 !important;
+      }
+      body.program-page .participants-header-copy {
+        grid-area: title;
+        align-items: center !important;
+        text-align: center !important;
+      }
+      body.program-page .participants-header-wrap h1 {
+        text-align: center !important;
+        justify-content: center !important;
+      }
+      body.program-page .program-section-bar {
+        grid-area: stops;
       }
       body.about-page #about-stops-bar {
         grid-area: stops;
@@ -3295,35 +3317,38 @@
     <div id="program-page">
       <div class="participants-header-wrap program-embed-title">
         <div class="participants-header-inner">
-          <div class="participants-header-copy"><h1>Program</h1></div>
+          <div class="participants-header-copy"><h1 id="programPageTitle" data-en="Program" data-ja="プログラム">Program</h1></div>
           <div class="stats-bar-wrap program-section-bar" aria-label="Day sections">
             <button type="button" class="sector-btn active" data-section="overview" style="--station:#009BBF">
               <span class="nav-mark" aria-hidden="true"><span class="nav-mark-line">T</span><span class="nav-mark-id">04</span></span>
-              <span class="nav-caption">Day Program</span>
+              <span class="nav-caption" data-en="Day Program" data-ja="当日の行程">Day Program</span>
             </button>
             <button type="button" class="sector-btn" data-section="schedule" style="--station:#00BB85">
               <span class="nav-mark" aria-hidden="true"><span class="nav-mark-line">C</span><span class="nav-mark-id">05</span></span>
-              <span class="nav-caption">Schedule</span>
+              <span class="nav-caption" data-en="Schedule" data-ja="スケジュール">Schedule</span>
             </button>
             <button type="button" class="sector-btn" data-section="location" style="--station:#F62E36">
               <span class="nav-mark" aria-hidden="true"><span class="nav-mark-line">M</span><span class="nav-mark-id">06</span></span>
-              <span class="nav-caption">Location</span>
+              <span class="nav-caption" data-en="Location" data-ja="場所">Location</span>
             </button>
             <button type="button" class="sector-btn" data-section="notes" style="--station:#C9A227">
               <span class="nav-mark" aria-hidden="true"><span class="nav-mark-line">W</span><span class="nav-mark-id">07</span></span>
-              <span class="nav-caption">Notes</span>
+              <span class="nav-caption" data-en="Notes" data-ja="備考">Notes</span>
             </button>
             <button type="button" class="sector-btn" data-section="tips" style="--station:#8F76D6">
               <span class="nav-mark" aria-hidden="true"><span class="nav-mark-line">Z</span><span class="nav-mark-id">08</span></span>
-              <span class="nav-caption">Tips</span>
+              <span class="nav-caption" data-en="Tips" data-ja="ヒント">Tips</span>
             </button>
           </div>
+          <button type="button" class="about-section-flip-hint about-lang-btn" id="program-lang-btn" aria-pressed="false" aria-label="Show Japanese">
+            <span class="about-lang-btn-label">日本語</span>
+          </button>
         </div>
       </div>
       <iframe
         class="program-frame"
         title="FORUMETRO TOKYO 2026 Program"
-        data-src="program/index.html?embed=1&amp;page=day&amp;v=102"
+        data-src="program/index.html?embed=1&amp;page=day&amp;v=104"
         referrerpolicy="no-referrer-when-downgrade"
         allow="fullscreen"
       ></iframe>
@@ -3362,6 +3387,6 @@
     </div>
   </main>
 
-  <script src="script.js?v=274"></script>
+  <script src="script.js?v=275"></script>
 </body>
 </html>

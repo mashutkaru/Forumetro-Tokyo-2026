@@ -1359,7 +1359,7 @@
     });
   }
 
-  var state = { page: 'home', activeSector: 'all', search: '' };
+  var state = { page: 'home', activeSector: 'all', search: '', programLang: 'en' };
   var searchScrollTimer = null;
 
   function isMobileViewport() {
@@ -1515,6 +1515,9 @@
         syncProgramLineAnchor();
         requestAnimationFrame(syncProgramLineAnchor);
         setTimeout(syncProgramLineAnchor, 80);
+        try {
+          frame.contentWindow.postMessage({ type: 'forumetro:set-lang', lang: state.programLang || 'en' }, '*');
+        } catch (e) {}
       });
     }
     if (page === 'program' || page === 'useful') {
@@ -1820,7 +1823,36 @@
     };
   });
 
+  function applyProgramLangChrome(lang) {
+    state.programLang = lang === 'ja' ? 'ja' : 'en';
+    var showingJa = state.programLang === 'ja';
+    var root = document.getElementById('program-page');
+    if (root) {
+      root.querySelectorAll('[data-en][data-ja]').forEach(function (el) {
+        el.textContent = showingJa ? el.getAttribute('data-ja') : el.getAttribute('data-en');
+      });
+    }
+    var langBtn = document.getElementById('program-lang-btn');
+    if (!langBtn) return;
+    var label = langBtn.querySelector('.about-lang-btn-label');
+    if (label) label.textContent = showingJa ? 'English' : '日本語';
+    langBtn.classList.toggle('is-flipped', showingJa);
+    langBtn.setAttribute('aria-pressed', showingJa ? 'true' : 'false');
+    langBtn.setAttribute('aria-label', showingJa ? 'Show English' : 'Show Japanese');
+  }
+
   document.querySelector('#program-page').addEventListener('click', function (event) {
+    var langBtn = event.target.closest('#program-lang-btn');
+    if (langBtn) {
+      event.preventDefault();
+      var next = state.programLang === 'ja' ? 'en' : 'ja';
+      applyProgramLangChrome(next);
+      var frame = document.querySelector('#program-page .program-frame');
+      if (frame && frame.contentWindow) {
+        frame.contentWindow.postMessage({ type: 'forumetro:set-lang', lang: next }, '*');
+      }
+      return;
+    }
     var btn = event.target.closest('.program-section-bar [data-section]');
     if (!btn) return;
     document.querySelectorAll('.program-section-bar [data-section]').forEach(function (item) {
@@ -1849,6 +1881,10 @@
     if (!event || !event.data) return;
     if (event.data.type === 'forumetro:line-join') {
       onProgramJoinMessage(event);
+      return;
+    }
+    if (event.data.type === 'forumetro:lang') {
+      applyProgramLangChrome(event.data.lang);
       return;
     }
     if (event.data.type === 'forumetro:keep-top') {

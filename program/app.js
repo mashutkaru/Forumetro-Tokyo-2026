@@ -98,65 +98,72 @@ const days = [
     w: "MON",
     d: "14.12",
     m: "DEC",
-    title: "Arrival & Introduction to Tokyo",
-    city: "Narita Airport → Hotel / Shiodome–Shinbashi",
+    title: "Welcome to Tokyo",
+    city: "Narita Airport → Hotel / LUMIVEIL TOKYO / Shiodome",
     theme:
-      "The opening day is dedicated to arrival, meeting the local team and settling into the hotel. A welcome gathering, introductory lecture and light dinner will establish the historical and urban context for the study program, highlighting how rail infrastructure has shaped modern Tokyo.",
-    tip: "After the walking tour, the evening is free to explore the Shimbashi area.",
+      "The opening day is dedicated to arrival, meeting the local team and settling into the hotel. An opening reception at LUMIVEIL TOKYO and an evening walk through Shiodome introduce the program and the area around the hotel.",
+    tip: "Keep your passport easy to reach at Narita. The reception begins with a lobby meeting at 16:00.",
+    notesExtra:
+      "Airport arrival and traffic may shift the coach transfer and hotel check-in. The reception is at LUMIVEIL TOKYO.",
     items: [
       ["ARRIVAL", "Narita Airport, 11:40", ICONS.plane],
-      ["CHECK-IN", "Hotel, 14:30", ICONS.suitcase],
-      ["OPENING", "Session with the local team, 16:00–18:00", ICONS.meeting],
-      ["WALK", "Shiodome–Shinbashi Station, 19:00–20:00", ICONS.stroll],
+      ["CHECK-IN", "Hotel, 15:30", ICONS.suitcase],
+      ["RECEPTION", "LUMIVEIL TOKYO, 17:00–20:00", ICONS.dinner],
+      ["WALK", "Shiodome, 20:00–21:00", ICONS.stroll],
     ],
     program: [
-      ["11:40", "Arrival at Narita International Airport", ""],
-      ["13:00", "Departure from the airport by bus", ""],
-      ["14:30", "Arrival at the hotel and check-in", ""],
-      ["16:00–18:00", "Opening session", "Forumetro delegation and local organizing team"],
-      ["18:00–19:00", "Light dinner", ""],
-      ["19:00–20:00", "Walking tour", "Shiodome–Shinbashi Station"],
-      ["20:00", "Free evening", "Explore the Shimbashi area"],
+      ["11:40", "Arrival at Narita International Airport", "Immigration, baggage collection and meeting the local coordination team"],
+      ["13:00", "Coach transfer to central Tokyo", "Narita Airport to the hotel"],
+      ["15:30", "Hotel check-in", ""],
+      ["16:00–16:15", "Meet in the hotel lobby", "Departure for LUMIVEIL TOKYO"],
+      ["16:30", "Arrival at LUMIVEIL TOKYO", ""],
+      ["17:00–18:00", "Opening presentations", "Forumetro delegation and local organizing team"],
+      ["18:00–20:00", "Banquet", "LUMIVEIL TOKYO"],
+      ["20:00–21:00", "Expert-led walking tour", "Shiodome"],
     ],
   },
   {
     w: "TUE",
     d: "15.12",
     m: "DEC",
-    title: "Understanding Tokyo's Rail System: Networks, Stations & Operations",
-    city: "Toranomon Hills and Tokyo Metro",
+    title: "Understanding Tokyo's Rail System: Networks, Stations and Operations",
+    city: "Hotel seminar room, Toranomon Hills and Tokyo Metro",
     theme:
-      "The day introduces Tokyo's metropolitan railway network and the principles behind its planning, engineering and operations. We will explore the rail system at both metropolitan and station scales.",
-    tip: "Wear comfortable shoes for the station walks at Toranomon Hills and Tokyo Metro.",
-    notesExtra: "The station for the afternoon Tokyo Metro walk is still to be confirmed.",
+      "The day introduces Tokyo's metropolitan railway network and the principles behind its planning, construction and operations. Morning lectures are followed by a visit to Toranomon Hills Station and an afternoon briefing with Tokyo Metro.",
+    tip: "Wear comfortable shoes for the visit to Toranomon Hills Station.",
+    notesExtra:
+      "Breakfast is at the hotel; the time is still to be confirmed. The Tokyo Metro briefing venue is still to be confirmed. The end of the Toranomon Hills visit and the start of lunch may be adjusted.",
     items: [
-      ["LECTURE", "Professor Shigeru Morichi, 09:00–10:00", ICONS.presentation],
-      ["STATION WALK", "Toranomon Hills, 10:30–12:00", ICONS.train],
-      ["TOKYO METRO", "Station walk and operations lecture, 14:00–16:00", ICONS.hub],
-      ["REFLECTION", "Group discussion, 16:00–17:00", ICONS.panel],
+      ["LECTURE", "Professor Shigeru Morichi, 09:00–10:30", ICONS.presentation],
+      ["LECTURE", "Kazufumi Noyaki, 10:45–11:15", ICONS.infrastructure],
+      ["STATION VISIT", "Toranomon Hills, 11:30–12:30", ICONS.train],
+      ["TOKYO METRO", "Operations briefing, 14:00–16:00", ICONS.hub],
     ],
     program: [
-      ["08:30–09:00", "Morning briefing", ""],
+      ["08:30–08:45", "Morning briefing", "Hotel lobby"],
       [
-        "09:00–10:00",
-        "Lecture",
+        "09:00–10:30",
+        "Opening lecture",
         "Professor Shigeru Morichi — Tokyo's Metropolitan Railway Network: Evolution, Structure and Urban Development",
       ],
-      ["10:00–10:30", "Travel to Toranomon Hills Station", ""],
       [
-        "10:30–12:00",
-        "Expert-led station walk",
-        "Professor Kazufumi Noyaki — Toranomon Hills Station: architecture, engineering and integration with urban redevelopment",
+        "10:45–11:15",
+        "Lecture",
+        "Kazufumi Noyaki, President of Metro Development — Metro Construction: Balancing Construction Speed and Public Disruption",
       ],
-      ["12:00–13:00", "Lunch at Toranomon Hills", ""],
-      ["13:00–14:00", "Travel to a Tokyo Metro station", ""],
       [
-        "14:00–15:00",
-        "Expert-led station walk",
-        "Tokyo Metro — station to be confirmed: passenger circulation, engineering and operational infrastructure",
+        "11:30–12:30",
+        "Expert-led station visit",
+        "Toranomon Hills Station — architecture, engineering and integration with urban redevelopment",
       ],
-      ["15:00–16:00", "Lecture", "Tokyo Metro — Operating a Metropolitan Railway"],
-      ["16:00–17:00", "Group activity", "Discussion, reflection and lessons learned"],
+      ["12:30–13:30", "Lunch", "Toranomon Hills"],
+      ["13:30–14:00", "Transfer", "To the afternoon Tokyo Metro briefing"],
+      [
+        "14:00–16:00",
+        "Briefing",
+        "Tokyo Metro — Operating a Metropolitan Railway. Venue to be confirmed.",
+      ],
+      ["16:30–17:30", "Group discussion", "Reflection and lessons learned"],
     ],
   },
   {
@@ -164,102 +171,151 @@ const days = [
     d: "16.12",
     m: "DEC",
     title: "New Urban Cores: Railway-Led Development and the Station City",
-    city: "Shibuya and Tokyu suburban railways",
+    city: "Shiodome, Shibuya and the Tokyu suburban railways",
     theme:
-      "Tokyo's railway stations act as urban centers integrating transportation, commerce, employment and culture. We will examine how public authorities and private railway companies shape new urban cores and everyday life around stations.",
-    tip: "The evening is free to explore a Tokyo neighborhood and its shopping streets.",
+      "Tokyo's railway stations act as urban centers integrating transportation, commerce, employment and culture. The day looks at area management in Shiodome, Shibuya's redevelopment, and how Tokyu combines railway operations with urban development.",
+    tip: "The Shibuya Sky visit is planned for about 15:30, during the Shibuya site tour.",
+    notesExtra:
+      "Breakfast is at the hotel; the time is still to be confirmed. The Shiodome briefing and the transfer to Shibuya are still being timed. The Tokyu meeting is pending confirmation. Stations for the suburban fieldwork are still to be confirmed.",
     items: [
-      ["SHIBUYA", "Station walking tour, 08:00–09:30", ICONS.hub],
-      ["LECTURE", "Shibuya Ward, 10:00–12:00", ICONS.building],
-      ["TOKYU", "Rail, real estate and urban development, 13:00–16:00", ICONS.infrastructure],
-      ["STATION WALK", "Tatsuya Edakubo, 16:00–18:00", ICONS.train],
+      ["SHIODOME", "Briefing and walk, 09:00–10:00", ICONS.building],
+      ["SHIBUYA", "City briefing, 10:00–12:00", ICONS.presentation],
+      ["TOKYU", "Briefing and Shibuya tour, 13:30–16:30", ICONS.infrastructure],
+      ["FIELDWORK", "Tatsuya Edakubo, 17:00–18:30", ICONS.train],
     ],
     program: [
-      ["07:30–08:00", "Morning briefing", ""],
-      ["08:00–09:30", "Walking tour", "Shibuya Station — redevelopment, layered connections and public space"],
-      ["10:00–12:00", "Lecture", "Shibuya Ward — municipal planning, station-city development and cultural identity"],
-      ["12:00–13:00", "Lunch", ""],
-      ["13:00–16:00", "Lecture", "Tokyu — integrated rail, real estate and urban development"],
-      ["16:00–18:00", "Expert-led station walk", "Tatsuya Edakubo — commuter life along Tokyu's suburban railways"],
-      ["18:00", "Free evening", "Explore a Tokyo neighborhood and shopping streets"],
+      ["08:30–08:45", "Morning briefing", "Hotel"],
+      [
+        "09:00–09:30",
+        "Area-management briefing",
+        "SIO-SITE Town Management — Shiodome, from a former railway freight yard to a city station. Proposed; timing to be confirmed.",
+      ],
+      ["09:30–10:00", "Walking tour", "Shiodome. Proposed; timing to be confirmed."],
+      [
+        "10:00–12:00",
+        "Briefing",
+        "Shibuya City — redevelopment, infrastructure and public–private cooperation. Shibuya Chamber of Commerce, 2F large training room, 1-12-5 Shibuya, near Hikarie.",
+      ],
+      ["12:00–13:30", "Lunch", "Shibuya"],
+      [
+        "13:30–14:30",
+        "Briefing",
+        "Tokyu — Integrated Railway and Urban Development. Venue in Shibuya to be confirmed.",
+      ],
+      [
+        "14:30–16:30",
+        "Expert-led site tour",
+        "Shibuya. Shibuya Sky is planned for about 15:30.",
+      ],
+      [
+        "17:00–18:30",
+        "Expert-led fieldwork",
+        "Tatsuya Edakubo — commuter life along Tokyu's suburban railways. Stations to be confirmed.",
+      ],
     ],
   },
   {
     w: "THU",
     d: "17.12",
     m: "DEC",
-    title: "Governing the Metropolis: Public Transport, Planning & Policy",
+    title: "Governing the Metropolis: Public Transport, Planning and Policy",
     city: "Tokyo Metropolitan Government, Shinjuku and the Israeli Embassy",
     theme:
-      "We will meet institutions responsible for planning, developing and operating Tokyo's metropolitan transportation system. The day explores the roles of public authorities, operator coordination and the challenges of metropolitan-scale planning.",
-    tip: "The visit to the Israeli Embassy includes arrival and security procedures from 14:00.",
+      "We will meet institutions responsible for planning and operating Tokyo's metropolitan transportation system, then walk Shinjuku Station and visit the Embassy of Israel.",
+    tip: "Allow time for security procedures at the Embassy of Israel. The transfer there begins at 15:00.",
+    notesExtra:
+      "Breakfast is at the hotel; the time is still to be confirmed. The Toei and Tokyo Metropolitan Government hosts, the Shinjuku guide, and the Ambassador's attendance are still to be confirmed.",
     items: [
-      ["TOEI", "Public transportation authority, 10:00–11:00", ICONS.presentation],
-      ["TMG", "Metropolitan planning and coordination, 11:00–12:00", ICONS.building],
-      ["SHINJUKU", "Station walk, 13:30–14:00", ICONS.train],
-      ["RECEPTION", "Israeli Ambassador to Japan, 15:00–16:00", ICONS.embassy],
+      ["TOEI", "Public transport briefing, 10:00–11:00", ICONS.presentation],
+      ["TMG", "Metropolitan planning, 11:00–12:00", ICONS.building],
+      ["SHINJUKU", "Busta tour, 13:30–15:00", ICONS.train],
+      ["EMBASSY", "Ambassador of Israel, 16:00–17:00", ICONS.embassy],
     ],
     program: [
-      ["07:45–08:45", "Breakfast and morning briefing", ""],
-      ["08:45–09:30", "Travel to Tokyo Metropolitan Government", ""],
-      ["09:30–10:00", "Arrival and introduction", ""],
-      ["10:00–11:00", "Lecture", "Toei — The Challenges of a Public Transportation Authority"],
-      ["11:00–12:00", "Lecture", "TMG Planning authority — Metropolitan Transportation Planning and Coordination"],
-      ["12:00–13:30", "Lunch", ""],
-      ["13:30–14:00", "Station walk", "Shinjuku"],
-      ["14:00–15:00", "Travel to the Israeli Embassy", "Arrival and security procedures"],
-      ["15:00–16:00", "Official reception", "Israeli Ambassador to Japan"],
-      ["16:00–18:00", "Group activity", "Discussion, reflection and lessons learned"],
+      ["08:30–08:45", "Morning briefing", "Hotel"],
+      ["08:45–09:30", "Transfer to the Tokyo Metropolitan Government", ""],
+      ["09:30–10:00", "Arrival and introduction", "Tokyo Metropolitan Government"],
+      [
+        "10:00–11:00",
+        "Briefing",
+        "Toei — Challenges of Operating Public Transport. Proposed; venue to be confirmed.",
+      ],
+      [
+        "11:00–12:00",
+        "Briefing",
+        "Tokyo Metropolitan Government — Metropolitan Transport Planning and Coordination. Proposed; venue to be confirmed.",
+      ],
+      ["12:00–13:30", "Lunch", "Shinjuku"],
+      [
+        "13:30–15:00",
+        "Shinjuku Busta tour",
+        "Expert-led walk at Shinjuku Station — Millimeters and Seconds: The Human Experience in the World's Busiest Railway Station. Guide to be confirmed.",
+      ],
+      ["15:00–16:00", "Transfer to the Embassy of Israel", "Arrival and security procedures"],
+      [
+        "16:00–17:00",
+        "Meeting",
+        "Ambassador of Israel to Japan. Rabin Seminar Room. Subject to confirmation.",
+      ],
+      ["17:00–18:00", "Group discussion", "Reflection and lessons learned"],
     ],
   },
   {
     w: "FRI",
     d: "18.12",
     m: "DEC",
-    title: "The Human Scale: Machizukuri, Community & Railway Infrastructure",
-    city: "Setagaya, Shimokitazawa and Kitami",
+    title: "The Human Scale: Machizukuri, Community and Railway Infrastructure",
+    city: "Kitazawa Town Hall, Shimokita Senrogai and Kitami",
     theme:
-      "We will head into Tokyo's suburban railway neighborhoods to see how infrastructure can improve public space and strengthen communities. Setagaya Ward and Odakyu Railway offer a compelling case of Machizukuri, participation and human-scale development.",
-    tip: "Shabbat begins at 16:12. Three participants may need to return earlier.",
+      "We will head into Tokyo's suburban railway neighborhoods to see how infrastructure can improve public space and strengthen communities. Setagaya City and Odakyu Railway offer a case of Machizukuri, participation and human-scale development.",
+    tip: "Shabbat begins at 16:12. Some participants may need to return to the hotel earlier.",
     notesExtra:
-      "Shabbat begins at 16:12. Three participants may need an earlier return. Lunch is in Shimokitazawa or Seijo-Gakuenmae, and the route to Kitami Fureai Plaza is still to be confirmed.",
+      "Breakfast is at the hotel; the time is still to be confirmed. The Setagaya arrangements are subject to host confirmation. The 13:00 briefing venue, access to the Kitami depot, and the final route are still to be confirmed. Shabbat begins around 16:12.",
     items: [
-      ["SETAGAYA", "Machizukuri lecture, 09:30–10:30", ICONS.community],
+      ["SETAGAYA", "Machizukuri briefing, 09:00–10:30", ICONS.community],
       ["NEIGHBORHOOD", "Shimokita Senrogai and BONUS TRACK, 10:30–12:00", ICONS.stroll],
-      ["ODAKYU", "Kitami Fureai Plaza and depot, 14:00–15:00", ICONS.park],
+      ["KITAMI", "Plaza and depot visit, 14:15–15:00", ICONS.park],
       ["SHABBAT", "Begins at 16:12", ICONS.home],
     ],
     program: [
-      ["07:15–08:15", "Breakfast", ""],
-      ["08:15–08:30", "Morning briefing", ""],
-      ["08:30–09:30", "Travel to Setagaya", "Kitazawa Town Hall"],
-      ["09:30–10:30", "Lecture", "Setagaya Ward — Human-Scale Machizukuri and Community Building"],
+      ["07:45–08:00", "Morning briefing", "Hotel"],
+      ["08:00–09:00", "Transfer to Kitazawa Town Hall", "Setagaya"],
+      [
+        "09:00–10:30",
+        "Briefing",
+        "Setagaya City — Human-Scale Machizukuri and Community Building. Kitazawa Town Hall.",
+      ],
       [
         "10:30–12:00",
         "Expert-led neighborhood walk",
-        "Setagaya Ward Machizukuri Team — Shimokita Senrogai and BONUS TRACK: railway undergrounding, reuse of land and public space",
+        "Setagaya Machizukuri team — Shimokita Senrogai and BONUS TRACK: railway undergrounding, reuse of land and public space",
       ],
-      ["12:00–13:00", "Lunch", "Shimokitazawa or Seijo-Gakuenmae (to be confirmed)"],
-      ["13:00–14:00", "Transfer to Kitami Fureai Plaza", "Route to be confirmed"],
+      ["12:00–13:00", "Boxed lunch", "Kitazawa Town Hall. Planned."],
       [
-        "14:00–15:00",
-        "Expert-led site visit",
-        "Odakyu — Kitami Fureai Plaza and Odakyu Depot: public park above railway infrastructure",
+        "13:00–13:45",
+        "Briefing",
+        "Kitami Fureai Plaza representative — a park above the railway depot. Venue to be confirmed.",
+      ],
+      ["13:45–14:15", "Transfer to Kitami Fureai Plaza", "Route to be confirmed"],
+      [
+        "14:15–15:00",
+        "Site visit",
+        "Kitami Fureai Plaza and the Odakyu Kitami Depot. Access is subject to host approval.",
       ],
       ["15:00–16:00", "Return to the hotel", ""],
-      ["16:12", "Shabbat begins", "Three participants may need an earlier return"],
+      ["16:12", "Shabbat begins", "Some participants may return earlier"],
     ],
   },
   {
     w: "SAT",
     d: "19.12",
     m: "DEC",
-    title: "Exploring Tokyo: Culture, Public Space & Urban Life",
+    title: "Exploring Tokyo: Culture, Public Space and Urban Life",
     city: "Tokyo — independent exploration",
     theme:
-      "Today offers time to explore Tokyo independently and experience its diverse historic neighborhoods, landscapes and everyday urban life. Optional visits reveal connections between traditional places, commerce and the contemporary city.",
-    tip: "The morning and afternoon are free. A group activity is planned for 18:00.",
-    notesExtra: "The group activity at 18:00 is still to be confirmed.",
+      "Today offers time to explore Tokyo independently and experience its historic neighborhoods, landscapes and everyday urban life. Optional visits show how traditional places, commerce and the contemporary city sit side by side.",
+    tip: "The day is free after breakfast. A group activity is planned for 18:00.",
+    notesExtra: "Independent visits are optional. The group activity and its meeting point are still to be confirmed.",
     items: [
       ["GARDENS", "Hamarikyu Gardens", ICONS.park],
       ["GINZA", "Streets, architecture and public space", ICONS.stroll],
@@ -267,81 +323,366 @@ const days = [
       ["EVENING", "Group activity, 18:00", ICONS.event],
     ],
     program: [
-      ["08:00–09:00", "Breakfast", ""],
+      ["08:00–09:00", "Breakfast", "Hotel"],
       [
         "09:00",
         "Optional city exploration",
-        "",
+        "Independent visits",
         [
           ["", "Hamarikyu Gardens", "Traditional landscape and Tokyo's modern waterfront."],
           ["", "Ginza", "Commercial streets, architecture and public space."],
           ["", "Asakusa / Sensoji Temple", "Historic Tokyo, traditional shopping streets and religious heritage."],
         ],
       ],
-      ["18:00", "Group activity", "To be confirmed"],
+      ["18:00", "Group activity", "Details to be confirmed"],
     ],
   },
   {
     w: "SUN",
     d: "20.12",
     m: "DEC",
-    title: "The Future Tokyo: Takanawa Gateway & Closing Reflections",
-    city: "Tokyo Station and Takanawa Gateway",
+    title: "Tokyo's Future: Takanawa Gateway and Closing Reflections",
+    city: "Takanawa Gateway City",
     theme:
-      "Our final day explores new approaches to railway-led urban development at Takanawa Gateway. We will close the visit by reflecting on lessons for the planning and implementation of the Tel Aviv Metropolitan Metro.",
-    tip: "The day moves from a walking tour to lunch and discussion, then on to Takanawa Gateway City.",
+      "The morning is a site visit to Takanawa Gateway City with JR East, looking at a new model of railway-led urban development. A closing lunch turns to lessons for planning and building the Tel Aviv Metropolitan Metro. The afternoon is free.",
+    tip: "The group program ends after lunch. From 14:00 the time is free for shopping and independent plans.",
+    notesExtra:
+      "Breakfast is at the hotel; the time is still to be confirmed. The JR East visit details and the closing lunch venue are still to be confirmed.",
     items: [
-      ["TOKYO STATION", "Walking tour, 09:00–11:30", ICONS.train],
-      ["DISCUSSION", "From Tokyo to Tel Aviv, 12:00–14:00", ICONS.panel],
-      ["TRANSFER", "Takanawa Gateway Station, 14:00–14:30", ICONS.transfer],
-      ["TAKANAWA", "Gateway City walking tour, 14:30–17:00", ICONS.innovation],
+      ["TRANSFER", "Takanawa Gateway Station, 09:00–09:30", ICONS.transfer],
+      ["TAKANAWA", "JR East site visit, 09:30–11:30", ICONS.innovation],
+      ["DISCUSSION", "Closing lunch, 12:00–14:00", ICONS.panel],
+      ["FREE TIME", "From 14:00", ICONS.leisure],
     ],
     program: [
-      ["08:00–09:00", "Breakfast", ""],
-      ["09:00–11:30", "Walking tour", "Tokyo Station"],
-      ["11:30–12:00", "Travel to Tokyo Station", ""],
+      ["08:30–08:45", "Morning briefing", "Hotel"],
+      ["09:00–09:30", "Transfer to Takanawa Gateway Station", ""],
+      [
+        "09:30–11:30",
+        "Site visit",
+        "JR East — TAKANAWA GATEWAY CITY: architecture, station-city integration, pedestrian networks and innovation. Details to be confirmed.",
+      ],
+      ["11:30–12:00", "Transfer to the lunch venue", "Venue to be confirmed"],
       [
         "12:00–14:00",
-        "Lunch and discussion",
-        "Little Edo — From Tokyo to Tel Aviv: Lessons for Building a Metropolitan Metro",
+        "Closing lunch and discussion",
+        "From Tokyo to Tel Aviv: Lessons for Building a Metropolitan Metro",
       ],
-      ["14:00–14:30", "Travel to Takanawa Gateway Station", ""],
-      [
-        "14:30–17:00",
-        "Walking tour",
-        "Takanawa Gateway City — architecture, station-city integration, pedestrian networks and innovation",
-      ],
+      ["14:00", "Free time", "Shopping and independent activities"],
     ],
   },
   {
     w: "MON",
     d: "21.12",
     m: "DEC",
-    title: "Nihonbashi, Chūō City & Departure",
-    city: "Nihonbashi and Chūō City → Narita Airport",
+    title: "Development, Preservation and Departure",
+    city: "Hotel → Chūō City and Ginza → Narita Airport",
     theme:
-      "Our final morning will explore how railway infrastructure supports urban renewal within Tokyo's historic center. An expert-led walk through Nihonbashi and a visit focused on Chūō City's municipal perspective will examine the relationship between stations, streets, public spaces and private development. We will then return to the hotel and transfer to Narita Airport for our departure.",
-    tip: "Check-out is at 08:00. The bus leaves Nihonbashi at 13:30, and the flight departs Narita at 17:20.",
+      "The final morning looks at how development and preservation meet in Chūō City and Ginza. After a short municipal briefing and an expert-led walk, we return toward the hotel, have lunch, and transfer to Narita Airport.",
+    tip: "Check-out is about 08:30. The coach leaves for Narita at 13:30, and the flight departs at 17:40.",
+    notesExtra:
+      "Breakfast arrangements are still to be confirmed. The Chūō City venue, the Ginza route, and the airport transfer are still to be confirmed.",
     items: [
-      ["CHECK-OUT", "08:00–09:00", ICONS.suitcase],
-      ["WALK", "Nihonbashi and Chūō City, 09:00–12:00", ICONS.stroll],
-      ["TRANSFER", "Bus from Nihonbashi, 13:30", ICONS.transfer],
-      ["FLIGHT", "Departs Narita, 17:20", ICONS.plane],
+      ["CHECK-OUT", "About 08:30", ICONS.suitcase],
+      ["CHŪŌ CITY", "Briefing, 09:30–10:00", ICONS.building],
+      ["GINZA", "Expert-led walk, 10:00–12:00", ICONS.stroll],
+      ["FLIGHT", "Departs Narita, 17:40", ICONS.plane],
     ],
     program: [
-      ["08:00–09:00", "Check-out", ""],
+      ["08:30", "Hotel check-out", "Breakfast arrangements to be confirmed"],
+      ["09:30–10:00", "Briefing", "Chūō City. Final arrangements to be confirmed."],
       [
-        "09:00–12:00",
-        "Expert-led walk",
-        "Nihonbashi and Chūō City — station-area development, pedestrian accessibility, public space and preservation of historic urban character",
+        "10:00–12:00",
+        "Expert-led walking tour",
+        "Ginza, returning toward the hotel. Final route to be confirmed.",
       ],
       ["12:00–13:00", "Lunch", ""],
-      ["13:30", "Departure from Nihonbashi by bus", ""],
-      ["15:00", "Arrival at Narita International Airport", ""],
-      ["17:20", "Flight departure from Narita", ""],
+      ["13:30", "Coach departure for Narita Airport", "From the hotel"],
+      ["15:00", "Airport check-in", "Security and departure procedures at Narita"],
+      ["17:40", "Flight departure from Narita", ""],
     ],
   },
 ];
+
+const daysJa = [
+  {
+    w: "月",
+    title: "東京へようこそ",
+    city: "成田空港 → ホテル／ルミヴェール東京／汐留",
+    theme:
+      "初日は到着、現地チームとの対面、ホテルへの到着にあてられます。ルミヴェール東京での開会レセプションと、汐留の夕方の徒歩視察で、プログラムとホテル周辺のまちを紹介します。",
+    tip: "成田空港ではパスポートを取り出しやすくしておいてください。レセプションは16:00のロビー集合から始まります。",
+    notesExtra:
+      "空港到着や道路状況により、貸切バスの移動とホテルのチェックイン時刻が変わることがあります。レセプションはルミヴェール東京で行います。",
+    items: [
+      ["到着", "成田空港、11:40"],
+      ["チェックイン", "ホテル、15:30"],
+      ["レセプション", "ルミヴェール東京、17:00–20:00"],
+      ["徒歩視察", "汐留、20:00–21:00"],
+    ],
+    program: [
+      ["11:40", "成田国際空港に到着", "入国審査、手荷物受取、現地運営チームとの合流"],
+      ["13:00", "貸切バスで東京都心へ", "成田空港からホテルへ"],
+      ["15:30", "ホテルチェックイン", ""],
+      ["16:00–16:15", "ホテルロビーに集合", "ルミヴェール東京へ出発"],
+      ["16:30", "ルミヴェール東京に到着", ""],
+      ["17:00–18:00", "開会発表", "FORUMETRO視察団と現地運営チーム"],
+      ["18:00–20:00", "懇親会", "ルミヴェール東京"],
+      ["20:00–21:00", "専門家による徒歩視察", "汐留"],
+    ],
+  },
+  {
+    w: "火",
+    title: "東京の鉄道システムを学ぶ：ネットワーク、駅、運営",
+    city: "ホテル会議室、虎ノ門ヒルズ、東京メトロ",
+    theme:
+      "この日は、東京の都市鉄道ネットワークと、その計画、建設、運営の考え方を学びます。午前の講演のあと、虎ノ門ヒルズ駅を訪れ、午後は東京メトロの説明を受けます。",
+    tip: "虎ノ門ヒルズ駅の視察に備え、歩きやすい靴でお越しください。",
+    notesExtra:
+      "朝食はホテルでとります。時刻は未定です。東京メトロの説明会場は未定です。虎ノ門ヒルズの視察終了と昼食の開始時刻は、調整される場合があります。",
+    items: [
+      ["講演", "森地茂教授、09:00–10:30"],
+      ["講演", "野焼計史、10:45–11:15"],
+      ["駅視察", "虎ノ門ヒルズ、11:30–12:30"],
+      ["東京メトロ", "運営に関する説明、14:00–16:00"],
+    ],
+    program: [
+      ["08:30–08:45", "朝の事前説明", "ホテルロビー"],
+      ["09:00–10:30", "開会講演", "森地茂教授 — 東京の都市鉄道ネットワーク：変遷、構造、都市開発"],
+      ["10:45–11:15", "講演", "メトロ開発株式会社 代表取締役社長 野焼計史 — 地下鉄建設：工期短縮と市民生活への影響の両立"],
+      ["11:30–12:30", "専門家による駅視察", "虎ノ門ヒルズ駅 — 建築、エンジニアリング、都市再開発との一体的整備"],
+      ["12:30–13:30", "昼食", "虎ノ門ヒルズ"],
+      ["13:30–14:00", "移動", "午後の東京メトロ説明会場へ"],
+      ["14:00–16:00", "説明", "東京メトロ — 大都市圏鉄道の運営。会場は未定。"],
+      ["16:30–17:30", "意見交換", "振り返りと学びの共有"],
+    ],
+  },
+  {
+    w: "水",
+    title: "新たな都市拠点：鉄道を軸とした開発と駅を中心とするまちづくり",
+    city: "汐留、渋谷、東急沿線",
+    theme:
+      "東京の鉄道駅は、交通、商業、雇用、文化が重なる都市の拠点です。この日は、汐留のエリアマネジメント、渋谷の再開発、東急による鉄道と都市開発の一体的な展開を見ます。",
+    tip: "渋谷スカイの見学は、渋谷視察の途中、15:30頃を予定しています。",
+    notesExtra:
+      "朝食はホテルでとります。時刻は未定です。汐留の説明と渋谷への移動時刻は調整中です。東急との面談は確認待ちです。郊外鉄道の訪問駅は未定です。",
+    items: [
+      ["汐留", "説明と徒歩視察、09:00–10:00"],
+      ["渋谷", "区による説明、10:00–12:00"],
+      ["東急", "説明と渋谷視察、13:30–16:30"],
+      ["現地調査", "枝久保達也、17:00–18:30"],
+    ],
+    program: [
+      ["08:30–08:45", "朝の事前説明", "ホテル"],
+      ["09:00–09:30", "エリアマネジメントの説明", "SIO-SITEタウンマネジメント — 汐留。旧鉄道貨物ヤードから都市の駅へ。調整中。"],
+      ["09:30–10:00", "徒歩視察", "汐留。調整中。"],
+      ["10:00–12:00", "説明", "渋谷区 — 再開発、基盤整備、官民連携。渋谷区商工会館2階大研修室、渋谷1-12-5、ヒカリエ近く。"],
+      ["12:00–13:30", "昼食", "渋谷"],
+      ["13:30–14:30", "説明", "東急 — 鉄道事業と都市開発の一体的な展開。渋谷の会場は未定。"],
+      ["14:30–16:30", "専門家による現地視察", "渋谷。渋谷スカイは15:30頃を予定。"],
+      ["17:00–18:30", "専門家による現地調査", "枝久保達也 — 東急沿線の通勤の暮らし。訪問駅は未定。"],
+    ],
+  },
+  {
+    w: "木",
+    title: "大都市圏のガバナンス：公共交通、計画、政策",
+    city: "東京都庁、新宿、駐日イスラエル大使館",
+    theme:
+      "東京の都市交通を計画し運営する機関と会い、その後、新宿駅を歩き、駐日イスラエル大使館を訪問します。",
+    tip: "駐日イスラエル大使館では保安手続きの時間を見てください。移動は15:00に始まります。",
+    notesExtra:
+      "朝食はホテルでとります。時刻は未定です。都営交通と東京都の説明担当者、新宿の案内者、大使の出席は未定です。",
+    items: [
+      ["都営", "公共交通の説明、10:00–11:00"],
+      ["東京都", "都市圏の計画、11:00–12:00"],
+      ["新宿", "バスタ視察、13:30–15:00"],
+      ["大使館", "駐日イスラエル大使、16:00–17:00"],
+    ],
+    program: [
+      ["08:30–08:45", "朝の事前説明", "ホテル"],
+      ["08:45–09:30", "東京都庁へ移動", ""],
+      ["09:30–10:00", "到着と導入説明", "東京都庁"],
+      ["10:00–11:00", "説明", "都営交通 — 公共交通事業者としての運営上の課題。調整中。会場は未定。"],
+      ["11:00–12:00", "説明", "東京都 — 大都市圏の交通計画と関係者間の調整。調整中。会場は未定。"],
+      ["12:00–13:30", "昼食", "新宿"],
+      ["13:30–15:00", "新宿バスタ視察", "専門家による新宿駅の徒歩視察 — ミリメートルと秒：世界で最も利用者の多い鉄道駅における人の体験。案内者は未定。"],
+      ["15:00–16:00", "駐日イスラエル大使館へ移動", "到着と保安手続き"],
+      ["16:00–17:00", "面談", "駐日イスラエル大使。ラビン会議室。出席は要確認。"],
+      ["17:00–18:00", "意見交換", "振り返りと学びの共有"],
+    ],
+  },
+  {
+    w: "金",
+    title: "人の目線に立ったまちづくり：地域コミュニティと鉄道インフラ",
+    city: "北沢タウンホール、下北線路街、喜多見",
+    theme:
+      "東京の郊外鉄道のまちを訪れ、インフラが公共空間と地域コミュニティをどのように支えられるかを見ます。世田谷区と小田急電鉄は、まちづくり、参加、人のスケールの開発の事例です。",
+    tip: "安息日（シャバット）は16:12に始まります。一部の参加者は、これより早くホテルに戻る必要があります。",
+    notesExtra:
+      "朝食はホテルでとります。時刻は未定です。世田谷区の最終行程は受入先の確認が必要です。13:00の説明会場、喜多見電車基地への立入り、最終経路は未定です。シャバットは16:12頃に始まります。",
+    items: [
+      ["世田谷", "まちづくりの説明、09:00–10:30"],
+      ["まち歩き", "下北線路街とBONUS TRACK、10:30–12:00"],
+      ["喜多見", "広場と車両基地、14:15–15:00"],
+      ["シャバット", "16:12に開始"],
+    ],
+    program: [
+      ["07:45–08:00", "朝の事前説明", "ホテル"],
+      ["08:00–09:00", "北沢タウンホールへ移動", "世田谷"],
+      ["09:00–10:30", "説明", "世田谷区 — 人の目線に立ったまちづくりと地域コミュニティの形成。北沢タウンホール。"],
+      ["10:30–12:00", "専門家による地域視察", "世田谷区まちづくりチーム — 下北線路街とBONUS TRACK：鉄道の地下化、用地の再利用、公共空間"],
+      ["12:00–13:00", "弁当", "北沢タウンホール。予定。"],
+      ["13:00–13:45", "説明", "きたみふれあい広場の担当者 — 車両基地の上の公園。会場は未定。"],
+      ["13:45–14:15", "きたみふれあい広場へ移動", "経路は未定"],
+      ["14:15–15:00", "現地視察", "きたみふれあい広場と小田急喜多見電車基地。立入りは受入先の承認が必要。"],
+      ["15:00–16:00", "ホテルへ帰着", ""],
+      ["16:12", "シャバット開始", "一部の参加者は早めに戻る場合があります"],
+    ],
+  },
+  {
+    w: "土",
+    title: "東京を知る：文化、公共空間、都市の暮らし",
+    city: "東京 — 各自での見学",
+    theme:
+      "この日は東京を各自で歩き、歴史のあるまち、風景、日常の都市生活に触れます。任意の見学では、伝統的な場所、商業、現代の都市が隣り合う様子が見られます。",
+    tip: "朝食のあとは自由時間です。18:00にグループ活動を予定しています。",
+    notesExtra: "各自の見学は任意です。グループ活動の内容と集合場所は未定です。",
+    items: [
+      ["庭園", "浜離宮恩賜庭園"],
+      ["銀座", "通り、建築、公共空間"],
+      ["浅草", "浅草寺"],
+      ["夕方", "グループ活動、18:00"],
+    ],
+    program: [
+      ["08:00–09:00", "朝食", "ホテル"],
+      [
+        "09:00",
+        "任意の市内見学",
+        "各自で参加",
+        [
+          ["", "浜離宮恩賜庭園", "伝統的な風景と東京の現代的な水辺。"],
+          ["", "銀座", "商業の通り、建築、公共空間。"],
+          ["", "浅草・浅草寺", "歴史のある東京、伝統的な商店街、宗教的な遺産。"],
+        ],
+      ],
+      ["18:00", "グループ活動", "内容は未定"],
+    ],
+  },
+  {
+    w: "日",
+    title: "東京の未来：高輪ゲートウェイと研修の総括",
+    city: "高輪ゲートウェイシティ",
+    theme:
+      "午前はJR東日本とともに高輪ゲートウェイシティを訪れ、鉄道を軸とした新しい都市開発を見ます。閉会昼食では、テルアビブ都市圏メトロの計画と整備への示唆を話し合います。午後は自由時間です。",
+    tip: "グループのプログラムは昼食のあとで終わります。14:00以降は買い物や各自の予定に使えます。",
+    notesExtra: "朝食はホテルでとります。時刻は未定です。JR東日本の視察内容と閉会昼食の会場は未定です。",
+    items: [
+      ["移動", "高輪ゲートウェイ駅、09:00–09:30"],
+      ["高輪", "JR東日本の現地視察、09:30–11:30"],
+      ["意見交換", "閉会昼食、12:00–14:00"],
+      ["自由時間", "14:00以降"],
+    ],
+    program: [
+      ["08:30–08:45", "朝の事前説明", "ホテル"],
+      ["09:00–09:30", "高輪ゲートウェイ駅へ移動", ""],
+      ["09:30–11:30", "現地視察", "JR東日本 — 高輪ゲートウェイシティ：建築、駅とまちの一体整備、歩行者ネットワーク、イノベーション。詳細は未定。"],
+      ["11:30–12:00", "昼食会場へ移動", "会場は未定"],
+      ["12:00–14:00", "閉会昼食と意見交換", "東京からテルアビブへ：都市圏メトロ整備への示唆"],
+      ["14:00", "自由時間", "買い物と各自の活動"],
+    ],
+  },
+  {
+    w: "月",
+    title: "開発と保全、そして出発",
+    city: "ホテル → 中央区・銀座 → 成田空港",
+    theme:
+      "最終日の午前は、中央区と銀座で開発と保全がどのように向き合うかを見ます。区の短い説明と専門家による徒歩視察のあと、ホテル方面に戻り、昼食をとって成田空港へ移動します。",
+    tip: "チェックアウトは8:30頃です。成田空港行きの貸切バスは13:30に出発し、フライトは17:40に出発します。",
+    notesExtra: "朝食の手配は未定です。中央区の会場、銀座の経路、空港への送迎は未定です。",
+    items: [
+      ["チェックアウト", "8:30頃"],
+      ["中央区", "説明、09:30–10:00"],
+      ["銀座", "専門家による徒歩視察、10:00–12:00"],
+      ["フライト", "成田出発、17:40"],
+    ],
+    program: [
+      ["08:30", "ホテルチェックアウト", "朝食の手配は未定"],
+      ["09:30–10:00", "説明", "中央区。最終行程は未定。"],
+      ["10:00–12:00", "専門家による徒歩視察", "銀座。ホテル方面へ戻ります。最終経路は未定。"],
+      ["12:00–13:00", "昼食", ""],
+      ["13:30", "成田空港へ貸切バスで出発", "ホテルから"],
+      ["15:00", "空港チェックイン", "成田空港での保安検査と出国手続き"],
+      ["17:40", "成田空港を出発", ""],
+    ],
+  },
+];
+
+days.forEach((day, index) => {
+  day.ja = daysJa[index];
+});
+
+let programLang = "en";
+
+function viewDay(day) {
+  const base = { ...day, titleEn: day.title };
+  if (programLang !== "ja" || !day.ja) return base;
+  const ja = day.ja;
+  return {
+    ...base,
+    w: ja.w || day.w,
+    title: ja.title,
+    city: ja.city,
+    theme: ja.theme,
+    tip: ja.tip,
+    notesExtra: ja.notesExtra,
+    items: day.items.map((item, index) => {
+      const translated = ja.items[index] || [];
+      return [translated[0] || item[0], translated[1] || item[1], item[2]];
+    }),
+    program: ja.program,
+  };
+}
+
+function textForLang(el) {
+  return programLang === "ja" ? el.getAttribute("data-ja") : el.getAttribute("data-en");
+}
+
+function applyChromeLanguage() {
+  document.documentElement.lang = programLang === "ja" ? "ja" : "en";
+  document.querySelectorAll("[data-en][data-ja]").forEach((el) => {
+    const text = textForLang(el);
+    if (text) el.textContent = text;
+  });
+  document.querySelectorAll(".program-lang-btn").forEach((btn) => {
+    const label = btn.querySelector(".program-lang-btn-label");
+    const showingJa = programLang === "ja";
+    if (label) label.textContent = showingJa ? "English" : "日本語";
+    btn.classList.toggle("is-flipped", showingJa);
+    btn.setAttribute("aria-pressed", showingJa ? "true" : "false");
+    btn.setAttribute("aria-label", showingJa ? "Show English" : "Show Japanese");
+  });
+}
+
+function notifyParentLanguage() {
+  try {
+    if (window.parent && window.parent !== window) {
+      window.parent.postMessage({ type: "forumetro:lang", lang: programLang }, "*");
+    }
+  } catch (e) {}
+}
+
+function setProgramLang(lang) {
+  const next = lang === "ja" ? "ja" : "en";
+  if (next === programLang) {
+    applyChromeLanguage();
+    notifyParentLanguage();
+    return;
+  }
+  programLang = next;
+  applyChromeLanguage();
+  render({ resetNav: false });
+  notifyParentLanguage();
+}
 
 const prep = [
   ["Accommodation", ["Delegation hotel details will be confirmed before travel.", "See the Contact page for the latest information."]],
@@ -448,10 +789,11 @@ const byId = (id) => document.getElementById(id);
 
 function runTests() {
   console.assert(days.length === 8, "Expected 8 program days");
-  console.assert(days[0].title.indexOf("Arrival") !== -1, "Day 1 should be arrival in Tokyo");
+  console.assert(days.every((day) => day.ja && day.ja.program.length === day.program.length), "Each day needs a Japanese itinerary");
+  console.assert(days[0].title.indexOf("Welcome") !== -1, "Day 1 should welcome the delegation to Tokyo");
   console.assert(days[0].program[0][0] === "11:40", "Day 1 should arrive at 11:40");
   console.assert(days[7].title.indexOf("Departure") !== -1, "Day 8 should include departure");
-  console.assert(days[7].program[days[7].program.length - 1][0] === "17:20", "Day 8 flight should depart at 17:20");
+  console.assert(days[7].program[days[7].program.length - 1][0] === "17:40", "Day 8 flight should depart at 17:40");
   console.assert(!dayPhotos[days[0].title], "Days without photos should not force old images");
   console.assert(!dayMaps[days[0].title], "Days without maps should not force old maps");
   console.assert(prep.length >= 1 && avoid.length >= 1, "Preparation and avoid pages should have content");
@@ -501,14 +843,17 @@ function setCurrentDay(index) {
 function renderDateStrip() {
   byId("dateStrip").innerHTML = days
     .map(
-      (day, index) => `
+      (day, index) => {
+        const view = viewDay(day);
+        return `
         <button class="date-btn ${index === currentDayIndex ? "active" : ""}" data-day="${index}" type="button">
           <span>
-            <span class="date-week">${day.w}</span>
+            <span class="date-week">${view.w}</span>
             <span class="date-num">${day.d}</span>
           </span>
         </button>
-      `
+      `;
+      }
     )
     .join("");
 
@@ -517,7 +862,7 @@ function renderDateStrip() {
 function renderDayMap(frameId, day) {
   const frame = byId(frameId);
   const iframe = frame.querySelector("iframe");
-  const map = dayMaps[day.title];
+  const map = dayMaps[day.titleEn || day.title];
 
   if (map) {
     frame.hidden = false;
@@ -761,7 +1106,7 @@ function getDayNotes(day) {
 function renderDesktopDay(day) {
   const sideDay = byId("sideDay");
   const sideDate = byId("sideDate");
-  if (sideDay) sideDay.textContent = `DAY ${currentDayIndex + 1}`;
+  if (sideDay) sideDay.textContent = programLang === "ja" ? `${currentDayIndex + 1}日目` : `DAY ${currentDayIndex + 1}`;
   if (sideDate) sideDate.textContent = `${formatWeekday(day.w)}, ${day.d}`;
   byId("title").textContent = day.title;
   byId("theme").textContent = day.theme;
@@ -772,7 +1117,7 @@ function renderDesktopDay(day) {
 
   const photoEl = byId("dayPhoto");
   const overviewEl = photoEl.closest(".overview");
-  const photoUrl = dayPhotos[day.title];
+  const photoUrl = dayPhotos[day.titleEn || day.title];
 
   if (photoUrl) {
     photoEl.hidden = false;
@@ -807,7 +1152,9 @@ function renderDesktopDay(day) {
 }
 
 function renderMobileDay(day) {
-  const dayLabel = `DAY ${currentDayIndex + 1}, ${formatWeekday(day.w)}, ${day.d}`;
+  const dayLabel = programLang === "ja"
+    ? `${currentDayIndex + 1}日目、${day.w}、${day.d}`
+    : `DAY ${currentDayIndex + 1}, ${formatWeekday(day.w)}, ${day.d}`;
 
   byId("mHeadDay").textContent = dayLabel;
   byId("mDayTitle").textContent = day.title;
@@ -815,11 +1162,14 @@ function renderMobileDay(day) {
 
   byId("mDaysRow").innerHTML = days
     .map(
-      (entry, index) => `
-        <button class="m-date ${index === currentDayIndex ? "active" : ""}" data-day="${index}" type="button" aria-label="${entry.w} ${entry.d}">
-          ${entry.w}<br><b>${entry.d}</b>
+      (entry, index) => {
+        const view = viewDay(entry);
+        return `
+        <button class="m-date ${index === currentDayIndex ? "active" : ""}" data-day="${index}" type="button" aria-label="${view.w} ${entry.d}">
+          ${view.w}<br><b>${entry.d}</b>
         </button>
-      `
+      `;
+      }
     )
     .join("");
 
@@ -899,13 +1249,13 @@ function scheduleEmbedResize() {
   requestAnimationFrame(resizeScheduleEmbeds);
 }
 
-function render() {
-  const day = days[currentDayIndex];
+function render(options) {
+  const day = viewDay(days[currentDayIndex]);
 
   renderDateStrip();
   renderDesktopDay(day);
   renderMobileDay(day);
-  resetPanelNav();
+  if (!options || options.resetNav !== false) resetPanelNav();
 }
 
 function formatWeekday(day) {
@@ -1094,6 +1444,13 @@ function initEvents() {
       return;
     }
 
+    const langButton = event.target.closest(".program-lang-btn");
+    if (langButton) {
+      event.preventDefault();
+      setProgramLang(programLang === "ja" ? "en" : "ja");
+      return;
+    }
+
     const scheduleToggle = event.target.closest(".m-schedule-item__toggle:not(.m-schedule-item__toggle--static)");
     if (scheduleToggle) {
       toggleMobileScheduleItem(scheduleToggle);
@@ -1122,6 +1479,7 @@ window.addEventListener("message", (event) => {
   if (event.data.type === "forumetro:line-anchor") applyLineAnchor(event.data);
   if (event.data.type === "forumetro:go-section" && event.data.section) goToDaySection(event.data.section);
   if (event.data.type === "forumetro:go-page" && event.data.page) showPage(event.data.page);
+  if (event.data.type === "forumetro:set-lang") setProgramLang(event.data.lang);
 });
 
 var lastLineAnchor = null;
@@ -1138,7 +1496,13 @@ function applyBranchPlates(useful) {
   var programNav = document.querySelector(".nav-program");
   var usefulNav = document.querySelector(".nav-useful");
   var title = document.getElementById("embedPageTitle");
-  if (title) title.textContent = useful ? "Useful Information" : "Program";
+  if (title && !useful) {
+    title.setAttribute("data-en", "Program");
+    title.setAttribute("data-ja", "プログラム");
+    title.textContent = textForLang(title);
+  } else if (title) {
+    title.textContent = "Useful Information";
+  }
   if (programNav) programNav.hidden = !!useful;
   if (usefulNav) usefulNav.hidden = !useful;
   var nav = useful ? usefulNav : programNav;

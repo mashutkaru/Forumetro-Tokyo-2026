@@ -37,7 +37,7 @@
     content="[PLACEHOLDER] Program guide details will be added here."
   />
   <meta name="twitter:image" content="https://mashutkaru.github.io/Forumetro-Tokyo-2026/images/og-image.jpg" />
-  <link rel="stylesheet" href="./styles.css?v=90" />
+  <link rel="stylesheet" href="./styles.css?v=91" />
 </head>
 <body>
   <script>
@@ -63,15 +63,15 @@
         </button>
 
         <div class="participants-header-copy program-page-title">
-          <h1 id="embedPageTitle">Program</h1>
+          <h1 id="embedPageTitle" data-en="Program" data-ja="プログラム">Program</h1>
         </div>
 
         <nav class="nav nav-program" aria-label="Day sections">
-          <button class="active" type="button" data-section="overview"><span class="nav-mark" aria-hidden="true"><span class="nav-mark-line">T</span><span class="nav-mark-id">04</span></span>Day Program</button>
-          <button type="button" data-section="schedule"><span class="nav-mark" aria-hidden="true"><span class="nav-mark-line">C</span><span class="nav-mark-id">05</span></span>Schedule</button>
-          <button type="button" data-section="location"><span class="nav-mark" aria-hidden="true"><span class="nav-mark-line">M</span><span class="nav-mark-id">06</span></span>Location</button>
-          <button type="button" data-section="notes"><span class="nav-mark" aria-hidden="true"><span class="nav-mark-line">W</span><span class="nav-mark-id">07</span></span>Notes</button>
-          <button type="button" data-section="tips"><span class="nav-mark" aria-hidden="true"><span class="nav-mark-line">Z</span><span class="nav-mark-id">08</span></span>Tips</button>
+          <button class="active" type="button" data-section="overview"><span class="nav-mark" aria-hidden="true"><span class="nav-mark-line">T</span><span class="nav-mark-id">04</span></span><span class="nav-label" data-en="Day Program" data-ja="当日の行程">Day Program</span></button>
+          <button type="button" data-section="schedule"><span class="nav-mark" aria-hidden="true"><span class="nav-mark-line">C</span><span class="nav-mark-id">05</span></span><span class="nav-label" data-en="Schedule" data-ja="スケジュール">Schedule</span></button>
+          <button type="button" data-section="location"><span class="nav-mark" aria-hidden="true"><span class="nav-mark-line">M</span><span class="nav-mark-id">06</span></span><span class="nav-label" data-en="Location" data-ja="場所">Location</span></button>
+          <button type="button" data-section="notes"><span class="nav-mark" aria-hidden="true"><span class="nav-mark-line">W</span><span class="nav-mark-id">07</span></span><span class="nav-label" data-en="Notes" data-ja="備考">Notes</span></button>
+          <button type="button" data-section="tips"><span class="nav-mark" aria-hidden="true"><span class="nav-mark-line">Z</span><span class="nav-mark-id">08</span></span><span class="nav-label" data-en="Tips" data-ja="ヒント">Tips</span></button>
         </nav>
         <nav class="nav nav-useful" hidden aria-label="Useful stations">
           <button class="active" data-page="prep"><span class="nav-mark" aria-hidden="true"><span class="nav-mark-line">Z</span><span class="nav-mark-id">05</span></span>Preparation</button>
@@ -80,9 +80,14 @@
           <button data-page="travelog"><span class="nav-mark" aria-hidden="true"><span class="nav-mark-line">T</span><span class="nav-mark-id">08</span></span>Travelog</button>
         </nav>
 
-        <div class="topbar-partners" aria-label="Partners">
-          <span class="partner-logo partner-placeholder">[PLACEHOLDER]</span>
-          <span class="partner-logo partner-placeholder">[PLACEHOLDER]</span>
+        <div class="topbar-end">
+          <button type="button" class="program-lang-btn" id="programLangBtn" aria-pressed="false" aria-label="Show Japanese">
+            <span class="program-lang-btn-label">日本語</span>
+          </button>
+          <div class="topbar-partners" aria-label="Partners">
+            <span class="partner-logo partner-placeholder">[PLACEHOLDER]</span>
+            <span class="partner-logo partner-placeholder">[PLACEHOLDER]</span>
+          </div>
         </div>
       </div>
     </header>
@@ -126,12 +131,12 @@
               </section>
 
               <section class="day-section" id="section-schedule">
-                <h3 class="day-section-title">Schedule</h3>
+                <h3 class="day-section-title" data-en="Schedule" data-ja="スケジュール">Schedule</h3>
                 <div class="schedule-list" id="scheduleList"></div>
               </section>
 
               <section class="day-section" id="section-location">
-                <h3 class="day-section-title">Location</h3>
+                <h3 class="day-section-title" data-en="Location" data-ja="場所">Location</h3>
                 <p class="day-section-body" id="dayLocation"></p>
                 <div class="day-map-frame" id="dayLocationMap" hidden>
                   <iframe
@@ -145,13 +150,13 @@
               </section>
 
               <section class="day-section" id="section-notes">
-                <h3 class="day-section-title">Notes</h3>
+                <h3 class="day-section-title" data-en="Notes" data-ja="備考">Notes</h3>
                 <p class="day-section-body" id="dayNotes"></p>
               </section>
 
               <section class="day-section" id="section-tips">
                 <div class="tip">
-                  <strong>Tip of the day</strong>
+                  <strong data-en="Tip of the day" data-ja="本日のヒント">Tip of the day</strong>
                   <span id="tipText"></span>
                 </div>
               </section>
@@ -171,9 +176,14 @@
                 <div class="m-head-center">
                   <strong id="mHeadDay">DAY 1</strong>
                 </div>
-                <div class="m-head-side m-head-side--end m-head-partners" aria-label="Partners">
-                  <span class="partner-logo partner-placeholder">[PLACEHOLDER]</span>
-                  <span class="partner-logo partner-placeholder">[PLACEHOLDER]</span>
+                <div class="m-head-side m-head-side--end">
+                  <button type="button" class="program-lang-btn program-lang-btn--mobile" id="programLangBtnMobile" aria-pressed="false" aria-label="Show Japanese">
+                    <span class="program-lang-btn-label">日本語</span>
+                  </button>
+                  <div class="m-head-partners" aria-label="Partners">
+                    <span class="partner-logo partner-placeholder">[PLACEHOLDER]</span>
+                    <span class="partner-logo partner-placeholder">[PLACEHOLDER]</span>
+                  </div>
                 </div>
               </header>
 
@@ -191,12 +201,12 @@
               </section>
 
               <section class="m-block m-section" id="m-section-schedule">
-                <h3>Program timeline</h3>
+                <h3 data-en="Program timeline" data-ja="行程">Program timeline</h3>
                 <div class="m-schedule" id="mSchedule"></div>
               </section>
 
               <section class="m-block m-section" id="m-section-location">
-                <h3>Location</h3>
+                <h3 data-en="Location" data-ja="場所">Location</h3>
                 <p class="m-section-body" id="mLocation"></p>
                 <div class="day-map-frame day-map-frame--mobile" id="mLocationMap" hidden>
                   <iframe
@@ -210,13 +220,13 @@
               </section>
 
               <section class="m-block m-section" id="m-section-notes">
-                <h3>Notes</h3>
+                <h3 data-en="Notes" data-ja="備考">Notes</h3>
                 <p class="m-section-body" id="mNotes"></p>
               </section>
 
               <section class="m-block m-section" id="m-section-tips">
                 <div class="m-tip-card">
-                  <span class="m-tip-label">Tip of the day</span>
+                  <span class="m-tip-label" data-en="Tip of the day" data-ja="本日のヒント">Tip of the day</span>
                   <p class="m-section-body" id="mTip"></p>
                 </div>
               </section>
@@ -344,6 +354,6 @@
     </main>
   </div>
 
-  <script src="./app.js?v=88"></script>
+  <script src="./app.js?v=90"></script>
 </body>
 </html>
