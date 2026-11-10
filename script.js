@@ -49,7 +49,6 @@
     { id:22, key:"bel_raz", nameEn:"Bel Raz", nameJa:"ラズ・ベル", nameHe:"", sector:"Local Government", org:"Ra'anana", role:"Director of Engineering Development and Infrastructure Division", photo:"Bel Raz.jpg" },
     { id:23, key:"benny_koritz", nameEn:"Benny Koritz", nameJa:"コリッツ・ベニー", nameHe:"", sector:"Local Government", org:"Tel Aviv-Yafo", role:"Director of Long-Term Transport Planning", photo:"Benny Koritz.jpg" },
     { id:24, key:"maor_turgeman", nameEn:"Maor Turgeman", nameJa:"トゥルジェマン・マオール", nameHe:"", sector:"Local Government", org:"Tel Aviv-Yafo", role:"Director of Public Transport Department", photo:"Maor Turgeman.jpg" },
-    { id:25, key:"gil_weiss", nameEn:"Gil Weiss", nameJa:"ワイス・ギル", nameHe:"", sector:"Government-Owned Company", org:"NTA Metropolitan Mass Transit System Ltd.", role:"Deputy CEO, Engineering Technology Center", photo:"Gil Weiss.jpg" },
     { id:26, key:"michael_feinberg", nameEn:"Michael Feinberg", nameJa:"ファインバーグ・ミハエル", nameHe:"", sector:"Government-Owned Company", org:"NTA Metropolitan Mass Transit System Ltd.", role:"Director, Architecture/Engineering Unit", photo:"Michael Feinberg.jpg" },
     { id:27, key:"adi_kain_karni", nameEn:"Adi Kain Karni", nameJa:"カイン・カルニ・アディ", nameHe:"", sector:"Government-Owned Company", org:"NTA Metropolitan Mass Transit System Ltd.", role:"Vice President, Metro Line M2", photo:"Adi Kain Karni.jpg" },
     { id:28, key:"kobi_ben_atar", nameEn:"Kobi Ben Atar", nameJa:"ベン・アタール・コビ", nameHe:"", sector:"Government-Owned Company", org:"NTA Metropolitan Mass Transit System Ltd.", role:"Vice President and Director, M1 Metro Directorate", photo:"Kobi Ben Atar.jpg" },
@@ -71,7 +70,9 @@
   const STEERING_COMMITTEE = [
     { id:"sc1", key:"avi_haliva", nameEn:"Avi Haliva", nameJa:"ハリヴァ・アヴィ", nameHe:"", org:"Metro Authority", orgJa:"メトロ庁／長官", role:"Chair", roleJa:"", photo:"Avi Haliva.jpeg" },
     { id:"sc2", key:"hila_waxberg", nameEn:"Hila Wechsberg", nameJa:"ウェクスバーグ・ヒラ", nameHe:"", org:"NTA Metropolitan Mass Transit System Ltd.", orgJa:"NTA（テルアビブ都市圏交通公社）／地方自治体部門長", role:"Head of Local Authorities Division", roleJa:"", photo:"Hila Waxberg.png" },
-    { id:"sc3", key:"tal_granit", nameEn:"Tal Granit", nameJa:"グラニット・タル", nameHe:"", org:"Ministry of Transport and Road Safety", orgJa:"イスラエル運輸・道路安全省／国家メトロ庁", role:"Head of Budget Department", roleJa:"予算部長", photo:"Tal Granit.jpg" }
+    { id:"sc3", key:"tal_granit", nameEn:"Tal Granit", nameJa:"グラニット・タル", nameHe:"", org:"Ministry of Transport and Road Safety", orgJa:"イスラエル運輸・道路安全省／国家メトロ庁", role:"Head of Budget Department", roleJa:"予算部長", photo:"Tal Granit.jpg", photoVer:3 },
+    { id:"sc4", key:"itamar_ben_meir", nameEn:"Itamar Ben Meir", nameJa:"ベン・メイル・イタマル", nameHe:"", org:"NTA Metropolitan Mass Transit System Ltd.", orgJa:"NTA（テルアビブ都市圏交通公社）／最高経営責任者（CEO）", role:"CEO", roleJa:"", photo:"Itamar Ben Meir.jpeg", photoVer:3 },
+    { id:"sc6", key:"yodfat_afek_arazi", nameEn:"Yodfat Afek Arazi", nameJa:"アフェク・アラジ・ヨドファト", nameHe:"", org:"NTA Metropolitan Mass Transit System Ltd.", orgJa:"NTA（テルアビブ都市圏交通公社）／取締役会会長", role:"Chair of the Board", roleJa:"", photo:"Yodfat Afek Arazi.jpg" }
   ];
 
   var PROGRAM_TEAM_BADGE = "Program Team";
@@ -83,10 +84,9 @@
     { id:"pt3", key:"masha_robeen", nameEn:"Masha Robeen", nameJa:"マーシャ・ルビーン", nameHe:"", org:"Japan-Israel AgeTech", orgJa:"Japan–Israel AgeTech 創設者・プロダクトマネージャー", role:"Delegation Coordinator", roleJa:"", photo:"Masha_Robeen.png", backOrg:"Founder & Product Manager, Japan–Israel AgeTech" },
     { id:"pt4", key:"dror_manuel_tzipori", nameEn:"Dror Manuel Zipori", nameJa:"ツィポリ・ドロール・マヌエル", nameHe:"", org:"JDC-ELKA", orgJa:"JDC-ELKA／プログラム・ディレクター", role:"Program Director", roleJa:"", photo:"Dror Manuel Tzipori.jpg" },
     { id:"pt5", key:"aluma_margalit_aviaz", nameEn:"Aluma Margalit Aviaz", nameJa:"マルガリット・アルマ・アヴィアズ", nameHe:"", org:"JDC-ELKA", orgJa:"JDC-ELKA／プログラム・コーディネーター", role:"Program Coordinator", roleJa:"", photo:"Aluma  Margalit Aviaz.png" },
-    { id:"pt6", key:"chen_rosenak", nameEn:"Chen Rosenak", nameJa:"ローゼナク・ヘン", nameHe:"", org:"Publica / JDC-ELKA", orgJa:"パブリカ／JDC-ELKA／プログラム・ディレクター", role:"Program Director", roleJa:"", photo:"Chen Rosenak.jpg" },
-    { id:"pt7", key:"tal_mills", nameEn:"Tal Mills", nameJa:"ミルズ・タル", nameHe:"", org:"JDC-ELKA", orgJa:"JDC-ELKA／リーダーシップ・プログラム部門長", role:"Head of Leadership Programs", roleJa:"", photo:"Tal_Miles.png" }
+    { id:"pt6", key:"chen_rosenak", nameEn:"Chen Rosenak", nameJa:"ローゼナク・ヘン", nameHe:"", org:"Publica / JDC-ELKA", orgJa:"パブリカ／JDC-ELKA／プログラム・ディレクター", role:"Program Director", roleJa:"", photo:"Chen Rosenak.jpg" }
   ];
-  var PROGRAM_TEAM_ORDER = ["pt7", "pt4", "pt6", "pt5", "pt1", "pt2", "pt3"];
+  var PROGRAM_TEAM_ORDER = ["pt4", "pt6", "pt5", "pt1", "pt2", "pt3"];
 
   var PROGRAM_BIOS = {
     dror_manuel_tzipori: {
@@ -130,21 +130,6 @@
         'アルマはForumetroのプログラム・コーディネーターであり、JDC-ELKAにおいてモビリティ分野を担当しています。プロジェクト管理、調整、教育・コミュニティプログラムの実施において豊富な経験を有しています。',
         'これまでのさまざまな役職において、多様なパートナー、チーム、対象者が関わる複雑なプログラムの企画・調整を担い、計画プロセスを主導してきました。特に、Taglitプログラムの調整・運営を担当したほか、構想段階から実施に至るまで、運営および教育システムの開発を管理してきました。',
         'また、グループ・ファシリテーションに豊富な経験を持つ認定ファシリテーターでもあります。戦略的思考、組織運営・マネジメント能力、意義あるパートナーシップを構築する力を兼ね備え、社会的インパクトのある教育活動に強くコミットしています。'
-      ]
-    },
-    tal_mills: {
-      jaTitle: 'マイルズ・タル',
-      bioEn: [
-        'Tal Miles is the Director of National Public System Network Initiatives at JDC Elka, where she leads large-scale collaborations and cross-sector partnerships to strengthen public systems and address complex societal challenges. Working closely with leaders across central and local government, civil society, and professional networks, she designs and implements initiatives that translate collaboration into meaningful, lasting change in the public sector.',
-        'Prior to this role, Tal served as CEO of the Israel Green Building Council, where she led national efforts to advance sustainable urban development. Partnering with government decision-makers, municipalities, industry, and civil society, she promoted policies and practices that integrate environmental, social, and economic sustainability. Earlier, she held senior leadership positions at the Council, including VP of Operations and Training.',
-        'Beyond her formal roles, Tal is an active community entrepreneur and a dedicated advocate for the inclusion of people with special needs.',
-        'Tal holds a BA in Community Coordination from the Open University and Beit Berl College, and an MA in Mediation and Conflict Resolution from Tel Aviv University.'
-      ],
-      bioJa: [
-        'マイルズ・タル氏は、JDC-ELKA（イスラエル・エルカ）において、全国公共システム・ネットワーク・イニシアティブ担当ディレクターを務めています。中央政府、地方自治体、市民社会組織、専門家ネットワークなど、多様な主体との連携を通じて、大規模な協働プロジェクトや分野横断的なパートナーシップを推進し、公共システムの強化と複雑な社会課題の解決に取り組んでいます。',
-        '現職に就く以前は、イスラエル・グリーンビルディング協会の最高経営責任者（CEO）を務め、持続可能な都市開発の推進に向けた全国的な取り組みを主導しました。政府機関、自治体、産業界、市民社会との連携を通じて、環境・社会・経済の持続可能性を統合した政策や実践の普及に尽力しました。また、それ以前には同協会において事業運営・研修担当副代表（VP of Operations and Training）などの要職を歴任しています。',
-        '職務以外でも、地域社会に根ざしたコミュニティ活動や社会起業に積極的に取り組むとともに、特別な支援を必要とする人々の包摂と社会参加の推進にも力を注いでいます。',
-        'オープン大学およびベイト・ベルル・カレッジにてコミュニティ・コーディネーションの学士号を取得し、テルアビブ大学にて調停・紛争解決学の修士号を取得しています。'
       ]
     },
     dr_hadas_kushelevich: {
@@ -235,6 +220,36 @@
         'タル・グラニットは、イスラエル国家メトロ庁の予算部長です。同庁は、イスラエル史上最大級のインフラ事業の一つであるテルアビブ（グッシュ・ダン）メトロの整備を主導しています。事業全体の予算を統括し、主要な入札の設計、その承認の枠組み、実施主体であるNTAの監督を含む調達戦略の形成に携わっています。また、事業の進捗について、庁の運営委員会およびクネセト（国会）へ定期的に報告しています。',
         'それ以前は、運輸省インフラ管理局において、イスラエル鉄道、アヤロン・ハイウェイをはじめとする国家的な大規模インフラ事業の予算を担当し、イスラエル鉄道の開発計画および基本協定の推進で中心的な役割を果たしました。',
         'キャリアの初期には、財務省会計総局および高等教育評議会の計画・予算委員会でエコノミストを務めました。ヘブライ大学で経済学の学士号および修士号を取得しています。'
+      ]
+    },
+    itamar_ben_meir: {
+      jaTitle: 'ベン・メイル・イタマル',
+      bioEn: [
+        'Itamar Ben Meir is the CEO of NTA, the government company responsible for building the Tel Aviv Metropolitan Metro and light rail network, national infrastructure projects with an estimated investment of over 200 billion shekels.',
+        'He brings extensive experience in managing national transportation systems and leading large-scale infrastructure projects. Prior to his appointment at NTA, he served as CEO of Netivei Ayalon, where he led a major strategic transformation. He also served as CEO of the Drive Group, which develops, operates and maintains key transportation arteries in Israel, including Route 6 and the Carmel Tunnels, employing over 550 people and delivering advanced technological solutions in transportation and infrastructure.',
+        'Earlier in his career, he served as Deputy CEO and CFO of Moriya, the Jerusalem Development Company, where he managed budgets, financial reporting and capital raising, and as Director of the Finance Department at the Israel Nature and Parks Authority, where he was responsible for financial management, payroll and ERP system implementation.',
+        'He holds a bachelor\u2019s degree in economics and accounting from the Hebrew University of Jerusalem and a master\u2019s degree in accounting from Bar-Ilan University, both earned with Dean\u2019s Honors. A Certified Public Accountant, he also lectures in the MBA and Executive MBA programs at the Hebrew University Business School, teaching financial accounting and financial statement analysis. He served in the Israel Defense Forces as a commanding officer in the Intelligence Corps, Unit 8200, and volunteers as Chairman of the Kiryat Yearim Youth Village, supporting education and social development for at-risk youth.'
+      ],
+      bioJa: [
+        'イタマル・ベン・メイルは、テルアビブ都市圏メトロおよびライトレール網の整備を担う政府系企業NTAの最高経営責任者（CEO）です。これらの国家的インフラ事業の投資規模は、2,000億シェケルを超えると見込まれています。',
+        '国家的な交通システムの運営と、大規模インフラ事業の推進に豊富な経験を有しています。NTAへの就任前は、ネティベイ・アヤロンのCEOとして大規模な戦略転換を主導しました。また、ドライブ・グループのCEOも務め、6号線やカルメル・トンネルなどイスラエルの主要交通動脈の開発・運営・維持管理を担いました。同グループは550人以上を雇用し、交通・インフラ分野で先進的な技術ソリューションを提供しています。',
+        'それ以前は、エルサレム開発公社モリヤの副CEO兼最高財務責任者（CFO）として、予算、財務報告、資金調達を統括しました。また、イスラエル自然・公園局の財務部長として、財務管理、給与、ERPシステムの導入を担当しました。',
+        'ヘブライ大学で経済学・会計学の学士号、バル＝イラン大学で会計学の修士号を取得し、いずれも学部長賞を受賞しています。公認会計士（CPA）でもあり、ヘブライ大学ビジネススクールのMBAおよびエグゼクティブMBAプログラムで、財務会計と財務諸表分析を講義しています。イスラエル国防軍では情報部隊8200部隊の指揮官として勤務し、キルヤト・イエアリム青少年村の理事長として、支援を必要とする若者の教育と社会的成長を支えるボランティア活動も行っています。'
+      ]
+    },
+    yodfat_afek_arazi: {
+      jaTitle: 'アフェク・アラジ・ヨドファト',
+      bioEn: [
+        'Yodfat Afek Arazi serves as Chair of the Board of NTA, the Israeli government-owned company responsible for advancing the Metro and Light Rail projects in the Tel Aviv metropolitan area.',
+        'She brings extensive executive leadership experience in public-sector management, infrastructure development, strategic planning, and corporate governance.',
+        'Prior to joining NTA in 2025, she served as Director General of Bat Yam Municipality (2019\u20132024) and Senior Deputy Director of Israel\u2019s Government Companies Authority (2014\u20132019), where she oversaw major state-owned infrastructure and utility companies, including Israel Railways and Israel Electric Corporation.',
+        'Yodfat holds an M.A. in Law from Bar-Ilan University and a B.A. in Economics and Political Science from the Hebrew University of Jerusalem. She is also a graduate of the Maoz Senior Public Leadership Program, which included executive education at Harvard Business School.'
+      ],
+      bioJa: [
+        'ヨドファト・アフェク・アラジは、テルアビブ都市圏のメトロおよびライトレール事業を推進するイスラエル政府系企業NTAの取締役会会長です。',
+        '公共部門のマネジメント、インフラ整備、戦略計画、コーポレート・ガバナンスにおいて、豊富な経営リーダーシップの経験を有しています。',
+        '2025年にNTAへ就任する以前は、バット・ヤム市の事務総長（2019～2024年）およびイスラエル政府企業庁の上級次長（2014～2019年）を務め、イスラエル鉄道やイスラエル電力公社をはじめとする主要な国有インフラ・公益企業を監督しました。',
+        'バル＝イラン大学で法学修士号、ヘブライ大学で経済学・政治学の学士号を取得しています。また、ハーバード・ビジネス・スクールでの幹部教育を含む、マオズ上級公共リーダーシップ・プログラムの修了者です。'
       ]
     }
   };
@@ -367,7 +382,6 @@
     "dror_manuel_tzipori": { orgJa:"JDC-ELKA／プログラム・ディレクター", roleJa:"" },
     "aluma_margalit_aviaz": { orgJa:"JDC-ELKA／プログラム・コーディネーター", roleJa:"" },
     "chen_rosenak": { orgJa:"パブリカ／JDC-ELKA／プログラム・ディレクター", roleJa:"" },
-    "tal_mills": { orgJa:"JDC-ELKA／リーダーシップ・プログラム部門長", roleJa:"" },
     "avi_haliva": { orgJa:"メトロ庁／長官", roleJa:"" },
     "hila_waxberg": { orgJa:"NTA（テルアビブ都市圏交通公社）／地方自治体部門長", roleJa:"" },
     "tal_granit": { orgJa:"イスラエル運輸・道路安全省／国家メトロ庁", roleJa:"予算部長" },
@@ -398,7 +412,6 @@
     "bel_raz": { orgJa:"ラアナナ市／技術開発・インフラ部長", roleJa:"" },
     "benny_koritz": { orgJa:"テルアビブ・ヤフォ市／長期交通計画部長", roleJa:"" },
     "maor_turgeman": { orgJa:"テルアビブ・ヤフォ市／公共交通部長", roleJa:"" },
-    "gil_weiss": { orgJa:"NTA（テルアビブ都市圏交通公社）／技術・エンジニアリングセンター副CEO", roleJa:"" },
     "michael_feinberg": { orgJa:"NTA（テルアビブ都市圏交通公社）／建築・エンジニアリング部門長", roleJa:"" },
     "adi_kain_karni": { orgJa:"NTA（テルアビブ都市圏交通公社）／メトロM2線担当副社長", roleJa:"" },
     "kobi_ben_atar": { orgJa:"NTA（テルアビブ都市圏交通公社）／副社長兼M1メトロ事業局長", roleJa:"" },
