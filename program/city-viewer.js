@@ -1,5 +1,6 @@
 import * as THREE from "three";
 import { OrbitControls } from "three/addons/controls/OrbitControls.js";
+import { RoomEnvironment } from "three/addons/environments/RoomEnvironment.js";
 import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
 
 const loader = new GLTFLoader();
@@ -69,12 +70,17 @@ function create(mount) {
   renderer.toneMapping = THREE.NoToneMapping;
   renderer.setClearColor(0xf4f6f8, 1);
 
-  scene.add(new THREE.HemisphereLight(0xffffff, 0xffffff, 0.9));
-  const key = new THREE.DirectionalLight(0xffffff, 1.25);
-  key.position.set(1, 1.35, 1);
+  const pmrem = new THREE.PMREMGenerator(renderer);
+  scene.environment = pmrem.fromScene(new RoomEnvironment(), 0.04).texture;
+  scene.environmentIntensity = 0.7;
+  pmrem.dispose();
+
+  scene.add(new THREE.HemisphereLight(0xffffff, 0xe7eef2, 0.35 * Math.PI));
+  const key = new THREE.DirectionalLight(0xfff6ea, 0.9 * Math.PI);
+  key.position.set(0.55, 1.45, 0.4);
   scene.add(key);
-  const fill = new THREE.DirectionalLight(0xffffff, 0.55);
-  fill.position.set(-0.85, 0.55, -1);
+  const fill = new THREE.DirectionalLight(0xffffff, 0.28 * Math.PI);
+  fill.position.set(-0.9, 0.55, -0.35);
   scene.add(fill);
 
   const controls = new OrbitControls(camera, canvas);

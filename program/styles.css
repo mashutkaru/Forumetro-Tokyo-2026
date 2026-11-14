@@ -1081,6 +1081,10 @@ main {
   display: none;
 }
 
+.city-viewer[hidden] {
+  display: none !important;
+}
+
 .city-viewer {
   position: relative;
   display: flex;

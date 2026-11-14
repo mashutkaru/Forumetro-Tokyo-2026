@@ -1513,17 +1513,6 @@ function modelTitle(model) {
   return model.title || "";
 }
 
-function setModelStationVisible(show) {
-  document.querySelectorAll('.nav-program [data-section="model"]').forEach((button) => {
-    button.classList.toggle("is-unavailable", !show);
-  });
-  try {
-    if (window.parent && window.parent !== window) {
-      window.parent.postMessage({ type: "forumetro:model-station", show: show }, "*");
-    }
-  } catch (e) {}
-}
-
 function paintModelChoices(models) {
   const several = models.length > 1;
   ["dayModelPicker", "mModelPicker"].forEach((id) => {
@@ -1553,9 +1542,12 @@ function syncCityModel(day) {
   const show = models.length > 0;
   ["section-model", "m-section-model"].forEach((id) => {
     const section = byId(id);
-    if (section) section.hidden = !show;
+    if (section) section.hidden = false;
   });
-  setModelStationVisible(show);
+  ["dayModelEmpty", "mModelEmpty"].forEach((id) => {
+    const el = byId(id);
+    if (el) el.hidden = show;
+  });
   if (cityModelDay !== day.d) {
     cityModelDay = day.d;
     cityModelIndex = 0;
@@ -1563,9 +1555,13 @@ function syncCityModel(day) {
   if (cityModelIndex >= models.length) cityModelIndex = 0;
   paintModelChoices(models);
   if (!show) {
-    if (cityViewer) cityViewer.setActive(false);
+    if (cityViewer) {
+      cityViewer.element.hidden = true;
+      cityViewer.setActive(false);
+    }
     return;
   }
+  if (cityViewer) cityViewer.element.hidden = false;
   if (!window.ForumetroCityViewer) return;
   const mount = byId(usesMobileProgram() ? "mModelMount" : "dayModelMount");
   if (!mount) return;
