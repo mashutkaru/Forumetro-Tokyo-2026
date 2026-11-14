@@ -123,7 +123,7 @@ const days = [
     ],
     models: [
       {
-        src: "../models/shinbashi.glb",
+        src: "../models/Shinbashi-Shiodome-city-model.glb?v=2",
         title: "Shimbashi and Shiodome",
         titleJa: "新橋・汐留",
         titleHe: "שינבאשי ושיודומה",
@@ -175,7 +175,7 @@ const days = [
     ],
     models: [
       {
-        src: "../models/Toranomon-city-model.glb",
+        src: "../models/Toranomon-city-model.glb?v=2",
         title: "Toranomon Hills",
         titleJa: "虎ノ門ヒルズ",
         titleHe: "טורנומון הילס",
@@ -231,7 +231,7 @@ const days = [
     ],
     models: [
       {
-        src: "../models/Shibuya-city-model.glb",
+        src: "../models/Shibuya-city-model.glb?v=2",
         title: "Shibuya",
         titleJa: "渋谷",
         titleHe: "שיבויה",
@@ -285,7 +285,7 @@ const days = [
     ],
     models: [
       {
-        src: "../models/Shinjuku-city-model.glb",
+        src: "../models/Shinjuku-city-model.glb?v=2",
         title: "Shinjuku",
         titleJa: "新宿",
         titleHe: "שינג'וקו",
@@ -432,6 +432,14 @@ const days = [
       ["13:30", "Coach departure for Narita Airport", "From the hotel"],
       ["15:00", "Airport check-in", "Security and departure procedures at Narita"],
       ["17:40", "Flight departure from Narita", ""],
+    ],
+    models: [
+      {
+        src: "../models/Tokyo-Hibiya-Ginza.glb?v=2",
+        title: "Hibiya and Ginza",
+        titleJa: "日比谷・銀座",
+        titleHe: "היביה וגינזה",
+      },
     ],
   },
 ];
