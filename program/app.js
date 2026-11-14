@@ -283,6 +283,14 @@ const days = [
       ],
       ["17:00–18:00", "Group discussion", "Reflection and lessons learned"],
     ],
+    models: [
+      {
+        src: "../models/Shinjuku-city-model.glb",
+        title: "Shinjuku",
+        titleJa: "新宿",
+        titleHe: "שינג'וקו",
+      },
+    ],
   },
   {
     w: "FRI",
