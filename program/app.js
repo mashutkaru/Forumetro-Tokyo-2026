@@ -121,6 +121,14 @@ const days = [
       ["18:00–20:00", "Banquet", "LUMIVEIL TOKYO"],
       ["20:00–21:00", "Expert-led walking tour", "Shiodome"],
     ],
+    models: [
+      {
+        src: "../models/shinbashi.glb",
+        title: "Shimbashi and Shiodome",
+        titleJa: "新橋・汐留",
+        titleHe: "שינבאשי ושיודומה",
+      },
+    ],
   },
   {
     w: "TUE",
@@ -1024,7 +1032,7 @@ function runTests() {
   console.assert(!dayPhotos[days[0].title], "Days without photos should not force old images");
   console.assert(!dayMaps[days[0].title], "Days without maps should not force old maps");
   console.assert(prep.length >= 1 && avoid.length >= 1, "Preparation and avoid pages should have content");
-  ["overview", "schedule", "location", "notes", "tips"].forEach((name) => {
+  ["overview", "schedule", "location", "model", "notes", "tips"].forEach((name) => {
     console.assert(Boolean(byId(`section-${name}`)), `Missing #section-${name}`);
     console.assert(Boolean(byId(`m-section-${name}`)), `Missing #m-section-${name}`);
   });
@@ -1476,6 +1484,121 @@ function resetPanelNav() {
   setProgramNavActive("overview");
 }
 
+let cityViewer = null;
+let cityViewerUrl = "";
+let cityModelDay = "";
+let cityModelIndex = 0;
+
+function usesMobileProgram() {
+  return window.matchMedia("(max-width: 900px)").matches || document.documentElement.classList.contains("is-mobile-embed");
+}
+
+function escapeModelText(value) {
+  return String(value || "")
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;");
+}
+
+function dayModels(day) {
+  if (Array.isArray(day.models)) return day.models.filter((model) => model && model.src);
+  if (day.model && day.model.src) return [day.model];
+  return [];
+}
+
+function modelTitle(model) {
+  if (programLang === "ja") return model.titleJa || model.title || "";
+  if (programLang === "he") return model.titleHe || model.title || "";
+  return model.title || "";
+}
+
+function setModelStationVisible(show) {
+  document.querySelectorAll('.nav-program [data-section="model"]').forEach((button) => {
+    button.classList.toggle("is-unavailable", !show);
+  });
+  try {
+    if (window.parent && window.parent !== window) {
+      window.parent.postMessage({ type: "forumetro:model-station", show: show }, "*");
+    }
+  } catch (e) {}
+}
+
+function paintModelChoices(models) {
+  const several = models.length > 1;
+  ["dayModelPicker", "mModelPicker"].forEach((id) => {
+    const picker = byId(id);
+    if (!picker) return;
+    picker.hidden = !several;
+    picker.innerHTML = several
+      ? models
+          .map(
+            (model, index) =>
+              `<button type="button" class="city-model-chip${index === cityModelIndex ? " is-active" : ""}" data-model-index="${index}">${escapeModelText(modelTitle(model))}</button>`
+          )
+          .join("")
+      : "";
+  });
+  const caption = modelTitle(models[cityModelIndex] || {});
+  ["dayModelCaption", "mModelCaption"].forEach((id) => {
+    const el = byId(id);
+    if (!el) return;
+    el.hidden = several || !caption;
+    el.textContent = several ? "" : caption;
+  });
+}
+
+function syncCityModel(day) {
+  const models = dayModels(day);
+  const show = models.length > 0;
+  ["section-model", "m-section-model"].forEach((id) => {
+    const section = byId(id);
+    if (section) section.hidden = !show;
+  });
+  setModelStationVisible(show);
+  if (cityModelDay !== day.d) {
+    cityModelDay = day.d;
+    cityModelIndex = 0;
+  }
+  if (cityModelIndex >= models.length) cityModelIndex = 0;
+  paintModelChoices(models);
+  if (!show) {
+    if (cityViewer) cityViewer.setActive(false);
+    return;
+  }
+  if (!window.ForumetroCityViewer) return;
+  const mount = byId(usesMobileProgram() ? "mModelMount" : "dayModelMount");
+  if (!mount) return;
+  const moved = cityViewer && cityViewer.element.parentElement !== mount;
+  if (!cityViewer) {
+    cityViewer = window.ForumetroCityViewer.create(mount);
+    applyChromeLanguage();
+  } else if (moved) {
+    mount.appendChild(cityViewer.element);
+  }
+  cityViewer.setActive(true);
+  cityViewer.setOnSelect(null);
+  const nextUrl = models[cityModelIndex].src;
+  if (cityViewerUrl !== nextUrl) {
+    cityViewerUrl = nextUrl;
+    cityViewer.load(nextUrl);
+  } else if (moved && cityViewer.refit) {
+    cityViewer.refit();
+  }
+  window.requestAnimationFrame(() => {
+    if (!cityViewer) return;
+    cityViewer.resize();
+    if (moved) cityViewer.refit();
+  });
+}
+
+window.addEventListener("forumetro:viewer-ready", () => {
+  syncCityModel(viewDay(days[currentDayIndex]));
+});
+window.matchMedia("(max-width: 900px)").addEventListener("change", () => {
+  syncCityModel(viewDay(days[currentDayIndex]));
+});
+
 function scheduleEmbedResize() {
   resizeScheduleEmbeds();
   requestAnimationFrame(resizeScheduleEmbeds);
@@ -1487,6 +1610,7 @@ function render(options) {
   renderDateStrip();
   renderDesktopDay(day);
   renderMobileDay(day);
+  syncCityModel(day);
   if (!options || options.resetNav !== false) resetPanelNav();
 }
 
@@ -1669,6 +1793,13 @@ function initEvents() {
     const dayButton = event.target.closest("[data-day]");
     if (dayButton) {
       setCurrentDay(Number(dayButton.dataset.day));
+      return;
+    }
+
+    const modelChip = event.target.closest("[data-model-index]");
+    if (modelChip) {
+      cityModelIndex = Number(modelChip.dataset.modelIndex);
+      syncCityModel(viewDay(days[currentDayIndex]));
       return;
     }
 

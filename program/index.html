@@ -45,7 +45,7 @@
     content="[PLACEHOLDER] Program guide details will be added here."
   />
   <meta name="twitter:image" content="https://mashutkaru.github.io/Forumetro-Tokyo-2026/images/og-image.jpg" />
-  <link rel="stylesheet" href="./styles.css?v=94" />
+  <link rel="stylesheet" href="./styles.css?v=98" />
 </head>
 <body>
   <script>
@@ -78,8 +78,9 @@
           <button class="active" type="button" data-section="overview"><span class="nav-mark" aria-hidden="true"><span class="nav-mark-line">T</span><span class="nav-mark-id">04</span></span><span class="nav-label" data-en="Day Program" data-ja="当日の行程" data-he="תוכנית היום">Day Program</span></button>
           <button type="button" data-section="schedule"><span class="nav-mark" aria-hidden="true"><span class="nav-mark-line">C</span><span class="nav-mark-id">05</span></span><span class="nav-label" data-en="Schedule" data-ja="スケジュール" data-he="לוח זמנים">Schedule</span></button>
           <button type="button" data-section="location"><span class="nav-mark" aria-hidden="true"><span class="nav-mark-line">M</span><span class="nav-mark-id">06</span></span><span class="nav-label" data-en="Location" data-ja="場所" data-he="מיקום">Location</span></button>
-          <button type="button" data-section="notes"><span class="nav-mark" aria-hidden="true"><span class="nav-mark-line">W</span><span class="nav-mark-id">07</span></span><span class="nav-label" data-en="Notes" data-ja="備考" data-he="הערות">Notes</span></button>
-          <button type="button" data-section="tips"><span class="nav-mark" aria-hidden="true"><span class="nav-mark-line">Z</span><span class="nav-mark-id">08</span></span><span class="nav-label" data-en="Tips" data-ja="ヒント" data-he="טיפים">Tips</span></button>
+          <button type="button" data-section="model"><span class="nav-mark" aria-hidden="true"><span class="nav-mark-line">V</span><span class="nav-mark-id">07</span></span><span class="nav-label" data-en="3D Models" data-ja="3Dモデル" data-he="מודל תלת־ממד">3D Models</span></button>
+          <button type="button" data-section="notes"><span class="nav-mark" aria-hidden="true"><span class="nav-mark-line">W</span><span class="nav-mark-id">08</span></span><span class="nav-label" data-en="Notes" data-ja="備考" data-he="הערות">Notes</span></button>
+          <button type="button" data-section="tips"><span class="nav-mark" aria-hidden="true"><span class="nav-mark-line">Z</span><span class="nav-mark-id">09</span></span><span class="nav-label" data-en="Tips" data-ja="ヒント" data-he="טיפים">Tips</span></button>
         </nav>
         <nav class="nav nav-useful" hidden aria-label="Useful stations">
           <button class="active" data-page="prep"><span class="nav-mark" aria-hidden="true"><span class="nav-mark-line">Z</span><span class="nav-mark-id">05</span></span><span class="nav-label" data-en="Preparation" data-he="הכנה">Preparation</span></button>
@@ -157,6 +158,13 @@
                 </div>
               </section>
 
+              <section class="day-section" id="section-model">
+                <h3 class="day-section-title" data-en="3D Models" data-ja="3Dモデル" data-he="מודל תלת־ממד">3D Models</h3>
+                <div class="city-model-picker" id="dayModelPicker" hidden></div>
+                <p class="city-model-caption" id="dayModelCaption" hidden></p>
+                <div id="dayModelMount"></div>
+              </section>
+
               <section class="day-section" id="section-notes">
                 <h3 class="day-section-title" data-en="Notes" data-ja="備考" data-he="הערות">Notes</h3>
                 <p class="day-section-body" id="dayNotes"></p>
@@ -225,6 +233,13 @@
                     referrerpolicy="no-referrer-when-downgrade"
                   ></iframe>
                 </div>
+              </section>
+
+              <section class="m-block m-section" id="m-section-model">
+                <h3 data-en="3D Models" data-ja="3Dモデル" data-he="מודל תלת־ממד">3D Models</h3>
+                <div class="city-model-picker" id="mModelPicker" hidden></div>
+                <p class="city-model-caption" id="mModelCaption" hidden></p>
+                <div id="mModelMount"></div>
               </section>
 
               <section class="m-block m-section" id="m-section-notes">
@@ -362,6 +377,15 @@
     </main>
   </div>
 
-  <script src="./app.js?v=96"></script>
+  <script type="importmap">
+    {
+      "imports": {
+        "three": "https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js",
+        "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.170.0/examples/jsm/"
+      }
+    }
+  </script>
+  <script src="./app.js?v=100"></script>
+  <script type="module" src="./city-viewer.js?v=3"></script>
 </body>
 </html>

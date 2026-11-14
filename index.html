@@ -1743,7 +1743,10 @@
       pointer-events: none;
     }
     .program-section-bar::before {
-      background: linear-gradient(90deg, #009BBF, #00BB85, #F62E36, #C9A227, #8F76D6);
+      background: linear-gradient(90deg, #009BBF, #00BB85, #F62E36, #FF9500, #C9A227, #8F76D6);
+    }
+    .program-section-bar .sector-btn.is-unavailable {
+      display: none !important;
     }
     .useful-section-bar::before {
       background: linear-gradient(90deg, #8F76D6, #00BB85, #F62E36, #009BBF);
@@ -3367,12 +3370,16 @@
               <span class="nav-mark" aria-hidden="true"><span class="nav-mark-line">M</span><span class="nav-mark-id">06</span></span>
               <span class="nav-caption" data-en="Location" data-ja="場所" data-he="מיקום">Location</span>
             </button>
+            <button type="button" class="sector-btn" data-section="model" style="--station:#FF9500">
+              <span class="nav-mark" aria-hidden="true"><span class="nav-mark-line">V</span><span class="nav-mark-id">07</span></span>
+              <span class="nav-caption" data-en="3D Models" data-ja="3Dモデル" data-he="מודל תלת־ממד">3D Models</span>
+            </button>
             <button type="button" class="sector-btn" data-section="notes" style="--station:#C9A227">
-              <span class="nav-mark" aria-hidden="true"><span class="nav-mark-line">W</span><span class="nav-mark-id">07</span></span>
+              <span class="nav-mark" aria-hidden="true"><span class="nav-mark-line">W</span><span class="nav-mark-id">08</span></span>
               <span class="nav-caption" data-en="Notes" data-ja="備考" data-he="הערות">Notes</span>
             </button>
             <button type="button" class="sector-btn" data-section="tips" style="--station:#8F76D6">
-              <span class="nav-mark" aria-hidden="true"><span class="nav-mark-line">Z</span><span class="nav-mark-id">08</span></span>
+              <span class="nav-mark" aria-hidden="true"><span class="nav-mark-line">Z</span><span class="nav-mark-id">09</span></span>
               <span class="nav-caption" data-en="Tips" data-ja="ヒント" data-he="טיפים">Tips</span>
             </button>
           </div>
@@ -3386,7 +3393,7 @@
       <iframe
         class="program-frame"
         title="FORUMETRO TOKYO 2026 Program"
-        data-src="program/index.html?embed=1&amp;page=day&amp;v=111"
+        data-src="program/index.html?embed=1&amp;page=day&amp;v=116"
         referrerpolicy="no-referrer-when-downgrade"
         allow="fullscreen"
       ></iframe>
@@ -3430,6 +3437,6 @@
     </div>
   </main>
 
-  <script src="script.js?v=280"></script>
+  <script src="script.js?v=281"></script>
 </body>
 </html>

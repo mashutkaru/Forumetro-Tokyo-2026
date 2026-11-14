@@ -1927,6 +1927,12 @@
       onProgramJoinMessage(event);
       return;
     }
+    if (event.data.type === 'forumetro:model-station') {
+      document.querySelectorAll('#program-page [data-section="model"]').forEach(function (btn) {
+        btn.classList.toggle('is-unavailable', !event.data.show);
+      });
+      return;
+    }
     if (event.data.type === 'forumetro:lang') {
       var usefulFrame = document.querySelector('#useful-page .program-frame');
       if (usefulFrame && event.source === usefulFrame.contentWindow) applyUsefulLangChrome(event.data.lang);
