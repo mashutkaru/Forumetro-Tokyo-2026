@@ -173,6 +173,14 @@ const days = [
       ],
       ["16:30–17:30", "Group discussion", "Reflection and lessons learned"],
     ],
+    models: [
+      {
+        src: "../models/Toranomon-city-model.glb",
+        title: "Toranomon Hills",
+        titleJa: "虎ノ門ヒルズ",
+        titleHe: "טורנומון הילס",
+      },
+    ],
   },
   {
     w: "WED",
@@ -220,6 +228,14 @@ const days = [
         "Expert-led fieldwork",
         "Tatsuya Edakubo — commuter life along Tokyu's suburban railways. Stations to be confirmed.",
       ],
+    ],
+    models: [
+      {
+        src: "../models/Shibuya-city-model.glb",
+        title: "Shibuya",
+        titleJa: "渋谷",
+        titleHe: "שיבויה",
+      },
     ],
   },
   {
