@@ -416,6 +416,14 @@ const days = [
       ],
       ["14:00", "Free time", "Shopping and independent activities"],
     ],
+    models: [
+      {
+        src: "../models/Takanawa-Gateway-city-model.glb?v=1",
+        title: "Takanawa Gateway",
+        titleJa: "高輪ゲートウェイ",
+        titleHe: "טקאנאווה גייטוויי",
+      },
+    ],
   },
   {
     w: "MON",
