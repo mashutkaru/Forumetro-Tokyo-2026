@@ -435,7 +435,7 @@ const days = [
     ],
     models: [
       {
-        src: "../models/Tokyo-Hibiya-Ginza.glb?v=2",
+        src: "../models/Tokyo-Hibiya-Ginza.glb?v=3",
         title: "Hibiya and Ginza",
         titleJa: "日比谷・銀座",
         titleHe: "היביה וגינזה",
