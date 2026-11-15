@@ -337,6 +337,20 @@ const days = [
       ["15:00–16:00", "Return to the hotel", ""],
       ["16:12", "Shabbat begins", "Some participants may return earlier"],
     ],
+    models: [
+      {
+        src: "../models/Shimokita-Senrogai-city-model.glb?v=2",
+        title: "Shimokita Senrogai",
+        titleJa: "下北線路街",
+        titleHe: "שימוקיטה סנרוגאי",
+      },
+      {
+        src: "../models/Kita-city-model.glb?v=2",
+        title: "Kitami",
+        titleJa: "喜多見",
+        titleHe: "קיטאמי",
+      },
+    ],
   },
   {
     w: "SAT",
