@@ -285,7 +285,7 @@ const days = [
     ],
     models: [
       {
-        src: "../models/Shinjuku-city-model.glb?v=2",
+        src: "../models/Shinjuku-city-model.glb?v=3",
         title: "Shinjuku",
         titleJa: "新宿",
         titleHe: "שינג'וקו",
