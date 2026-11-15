@@ -175,7 +175,7 @@ const days = [
     ],
     models: [
       {
-        src: "../models/Toranomon-city-model.glb?v=2",
+        src: "../models/Toranomon-city-model.glb?v=3",
         title: "Toranomon Hills",
         titleJa: "虎ノ門ヒルズ",
         titleHe: "טורנומון הילס",
