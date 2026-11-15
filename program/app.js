@@ -231,7 +231,7 @@ const days = [
     ],
     models: [
       {
-        src: "../models/Shibuya-city-model.glb?v=3",
+        src: "../models/Shibuya-city-model.glb?v=5",
         title: "Shibuya",
         titleJa: "渋谷",
         titleHe: "שיבויה",
