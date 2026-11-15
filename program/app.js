@@ -123,7 +123,7 @@ const days = [
     ],
     models: [
       {
-        src: "../models/Shinbashi-Shiodome-city-model.glb?v=2",
+        src: "../models/Shinbashi-Shiodome-city-model.glb?v=3",
         title: "Shimbashi and Shiodome",
         titleJa: "新橋・汐留",
         titleHe: "שינבאשי ושיודומה",
