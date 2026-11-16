@@ -1978,8 +1978,20 @@ function scrollToDaySection(sectionName) {
   const scrollTarget =
     section.querySelector(".day-section-title") || section.querySelector(".tip") || section;
 
+  const run = () => {
+    updateDesktopScrollOffset();
+    const dateStrip = document.querySelector(".date-strip");
+    const scroller = getDesktopScroller();
+    const limitBottom = dateStrip
+      ? dateStrip.getBoundingClientRect().bottom + 14
+      : scroller.getBoundingClientRect().top + 12;
+    const y = scroller.scrollTop + scrollTarget.getBoundingClientRect().top - limitBottom;
+    scroller.scrollTo({ top: Math.max(0, y), behavior: "smooth" });
+    keepParentTop();
+  };
+
   requestAnimationFrame(() => {
-    scrollIframeTo(scrollTarget);
+    requestAnimationFrame(run);
   });
 }
 
@@ -2081,6 +2093,7 @@ function initEvents() {
     if (modelChip) {
       cityModelIndex = Number(modelChip.dataset.modelIndex);
       syncCityModel(viewDay(days[currentDayIndex]));
+      goToDaySection("model");
       return;
     }
 

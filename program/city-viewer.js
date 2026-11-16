@@ -2,6 +2,16 @@ import * as THREE from "three";
 import { OrbitControls } from "three/addons/controls/OrbitControls.js";
 import { RoomEnvironment } from "three/addons/environments/RoomEnvironment.js";
 import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
+import { createForumetroCompass } from "./forumetro-compass.js?v=1";
+
+// Geographic north, clockwise from world -Z toward +X.
+// Leave empty until a model's north is checked against its map.
+const VERIFIED_NORTH = new Map([
+]);
+function northForUrl(url) {
+  const key = new URL(url, document.baseURI).pathname;
+  return VERIFIED_NORTH.has(key) ? VERIFIED_NORTH.get(key) : null;
+}
 
 const loader = new GLTFLoader();
 
@@ -116,6 +126,11 @@ function create(mount) {
   let needsFit = false;
   let panLimits = null;
 
+  const compass = createForumetroCompass({
+    THREE, stage, camera, controls, requestRender: kick,
+    northDegrees: null
+  });
+
   function clampPan() {
     if (!panLimits) return;
     const before = controls.target.clone();
@@ -138,6 +153,7 @@ function create(mount) {
       frame = window.requestAnimationFrame(loop);
       controls.update();
       clampPan();
+      compass.update();
       renderer.render(scene, camera);
     };
     frame = window.requestAnimationFrame(loop);
@@ -273,6 +289,7 @@ function create(mount) {
       return;
     }
     currentUrl = url;
+    compass.setNorthDegrees(northForUrl(url));
     const token = ++loadToken;
     showProgress(null);
     loader.load(
@@ -388,6 +405,7 @@ function create(mount) {
     },
     resetView,
     setOnSelect,
+    setNorthDegrees: compass.setNorthDegrees,
   };
 }
 
