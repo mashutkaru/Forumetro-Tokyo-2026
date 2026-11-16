@@ -180,6 +180,12 @@ const days = [
         titleJa: "虎ノ門ヒルズ",
         titleHe: "טורנומון הילס",
       },
+      {
+        src: "../models/Tokyo-Hibiya-Ginza.glb?v=3",
+        title: "Hibiya and Ginza",
+        titleJa: "日比谷・銀座",
+        titleHe: "היביה וגינזה",
+      },
     ],
   },
   {
