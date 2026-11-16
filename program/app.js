@@ -1607,17 +1607,25 @@ function dayLineDetailHtml(line) {
 
 function revealDayLinePanel(panel) {
   if (!panel) return;
-  const anchor = panel.closest(".day-lines") || panel;
+  const row = panel.closest(".day-lines")?.querySelector(".day-lines-row") || panel;
   const mobile = usesMobileProgram();
   if (mobile) {
     const scroller = document.querySelector(".m-content");
     if (scroller) {
-      const top = scroller.scrollTop + anchor.getBoundingClientRect().top - scroller.getBoundingClientRect().top - 8;
+      const top = scroller.scrollTop + row.getBoundingClientRect().top - scroller.getBoundingClientRect().top - 8;
       scroller.scrollTo({ top: Math.max(0, top), behavior: "smooth" });
       return;
     }
   }
-  scrollIframeTo(anchor, 8);
+  updateDesktopScrollOffset();
+  const dateStrip = document.querySelector(".date-strip");
+  const scroller = getDesktopScroller();
+  const limitBottom = dateStrip
+    ? dateStrip.getBoundingClientRect().bottom + 14
+    : scroller.getBoundingClientRect().top + 12;
+  const y = scroller.scrollTop + row.getBoundingClientRect().top - limitBottom;
+  scroller.scrollTo({ top: Math.max(0, y), behavior: "smooth" });
+  keepParentTop();
 }
 
 function toggleDayLine(button) {
