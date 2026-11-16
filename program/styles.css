@@ -1640,13 +1640,18 @@ html.lang-he .day-line-panel {
 .line-tags {
   position: sticky;
   top: var(--header-height);
-  z-index: 5;
+  z-index: 20;
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
   margin: 0 0 14px;
   padding: 8px 0 10px;
   background: #fff;
+  box-shadow: 0 12px 0 #fff;
+}
+
+.line-panel[hidden] {
+  display: none;
 }
 
 html.is-embedded .line-tags {
@@ -1758,6 +1763,7 @@ html.is-embedded .line-tags {
 
 html.lang-he .line-page .line-tags,
 html.lang-he .line-page .line-note,
+html.lang-he .line-page .line-panel,
 html.lang-he .line-page .line-section {
   direction: ltr;
 }
@@ -1770,9 +1776,11 @@ html.lang-he .line-page .line-section {
 
 @media (max-width: 700px) {
   .line-tags {
-    position: static;
+    position: sticky;
+    top: 0;
     flex-wrap: nowrap;
     overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
     padding-bottom: 6px;
   }
 
@@ -1806,6 +1814,11 @@ html.lang-he .line-page .line-section {
   .line-table th {
     padding-bottom: 2px;
   }
+}
+
+html.is-mobile-embed .line-tags,
+html.is-embedded .line-tags {
+  top: 0;
 }
 
 .map-frame {

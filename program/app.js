@@ -1660,59 +1660,80 @@ function renderLinePage() {
   const tags = byId("lineTags");
   const sections = byId("lineSections");
   const profiles = window.LINE_PROFILES || [];
-  const labels = window.LINE_FIELD_LABELS || {};
   if (!tags || !sections || !profiles.length) return;
 
   tags.innerHTML = profiles.map((line) => {
     const ink = lineInk(line.color, line.ink);
-    return `<button type="button" class="line-tag" data-line="${line.id}" style="--line:${line.color};--line-ink:${ink}" aria-pressed="false">${line.label}</button>`;
+    return `<button type="button" class="line-tag" data-line="${line.id}" style="--line:${line.color};--line-ink:${ink}" aria-expanded="false">${escapeModelText(line.label)}</button>`;
   }).join("");
 
-  sections.innerHTML = profiles.map((line) => {
-    const rows = line.rows.map(([key, value]) => {
-      const names = labels[key] || [key, key, key];
-      return `<tr><th data-en="${names[0]}" data-ja="${names[1]}" data-he="${names[2]}">${names[0]}</th><td>${value}</td></tr>`;
-    }).join("");
-    const map = line.map
-      ? `<div class="line-map-scroll"><img class="line-map" src="./${line.map}" alt="${line.label} route map"></div>`
-      : "";
-    return `<article class="line-section" id="line-${line.id}" style="--line:${line.color}">
-      <p class="line-kicker">${line.code}</p>
-      <h3>${line.label}</h3>
-      ${map}
-      <p class="line-intro">${line.intro}</p>
-      <h4 class="line-profile-title" data-en="Technical &amp; operational profile" data-ja="技術・運行の概要" data-he="פרופיל טכני ותפעולי">Technical &amp; operational profile</h4>
-      <table class="line-table"><tbody>${rows}</tbody></table>
-    </article>`;
-  }).join("");
+  sections.innerHTML = `<div class="line-panel" id="linePanel" hidden></div>`;
 }
 
-function scrollLineSection(section) {
-  if (!section) return;
-  const tags = document.querySelector(".line-tags");
+function revealLinePanel(panel) {
+  if (!panel) return;
+  const tags = document.getElementById("lineTags");
+  const tagBottom = tags ? tags.getBoundingClientRect().bottom : 0;
+  const panelTop = panel.getBoundingClientRect().top;
+  if (panelTop >= tagBottom - 4 && panelTop < window.innerHeight * 0.55) return;
   const tagHeight = tags ? tags.offsetHeight : 0;
-  const mobile = window.matchMedia("(max-width: 900px)").matches || document.documentElement.classList.contains("is-mobile-embed");
-  if (mobile) {
-    const y = window.scrollY + section.getBoundingClientRect().top - tagHeight - 12;
+  const mobileEmbed = document.documentElement.classList.contains("is-mobile-embed");
+  const narrow = window.matchMedia("(max-width: 900px)").matches;
+  if (mobileEmbed) {
+    const scroller = document.getElementById("page-lines");
+    if (scroller) {
+      const top = scroller.scrollTop + panel.getBoundingClientRect().top - scroller.getBoundingClientRect().top - tagHeight - 8;
+      scroller.scrollTo({ top: Math.max(0, top), behavior: "smooth" });
+      return;
+    }
+  }
+  if (narrow) {
+    const head = document.getElementById("mSubpageHead");
+    const headH = head && !head.hidden ? head.offsetHeight : 0;
+    const y = window.scrollY + panel.getBoundingClientRect().top - tagHeight - headH - 8;
     window.scrollTo({ top: Math.max(0, y), behavior: "smooth" });
     return;
   }
-  scrollIframeTo(section, tagHeight + 12);
+  scrollIframeTo(panel, tagHeight + 8);
+}
+
+function setLineSelection(lineId, toggle) {
+  const panel = byId("linePanel");
+  const profiles = window.LINE_PROFILES || [];
+  const buttons = document.querySelectorAll("#lineTags .line-tag");
+  if (!panel || !buttons.length) return;
+  const active = document.querySelector("#lineTags .line-tag.is-active");
+  if (toggle && active && active.dataset.line === lineId) {
+    buttons.forEach((btn) => {
+      btn.classList.remove("is-active");
+      btn.setAttribute("aria-expanded", "false");
+    });
+    panel.hidden = true;
+    panel.innerHTML = "";
+    return;
+  }
+  const line = profiles.find((item) => item.id === lineId) || profiles.find((item) => item.id === "ginza");
+  if (!line) return;
+  buttons.forEach((btn) => {
+    const on = btn.dataset.line === line.id;
+    btn.classList.toggle("is-active", on);
+    btn.setAttribute("aria-expanded", on ? "true" : "false");
+    if (on && btn.parentElement) {
+      btn.parentElement.scrollTo({ left: Math.max(0, btn.offsetLeft - 8), behavior: "smooth" });
+    }
+  });
+  panel.style.setProperty("--line", line.color);
+  panel.innerHTML = dayLineDetailHtml(line);
+  panel.hidden = false;
+  requestAnimationFrame(() => revealLinePanel(panel));
 }
 
 function openLinePage(lineId) {
+  const arriving = !document.getElementById("page-lines")?.classList.contains("active");
   showPage("lines");
   setProgramNavActive("tips");
-  document.querySelectorAll("#lineTags .line-tag").forEach((btn) => {
-    const on = Boolean(lineId) && btn.dataset.line === lineId;
-    btn.classList.toggle("is-active", on);
-    btn.setAttribute("aria-pressed", on ? "true" : "false");
-  });
-  if (!lineId) return;
-  const section = document.getElementById(`line-${lineId}`);
-  requestAnimationFrame(() => {
-    requestAnimationFrame(() => scrollLineSection(section));
-  });
+  const current = document.querySelector("#lineTags .line-tag.is-active")?.dataset.line;
+  setLineSelection(lineId || (arriving ? "ginza" : current || "ginza"), false);
 }
 
 function resetPanelNav() {
@@ -2023,10 +2044,15 @@ function initEvents() {
       return;
     }
 
-    const lineButton = event.target.closest("[data-line]");
+    const lineButton = event.target.closest("#lineTags [data-line]");
     if (lineButton?.dataset.line) {
       event.preventDefault();
-      openLinePage(lineButton.dataset.line);
+      const onLines = document.getElementById("page-lines")?.classList.contains("active");
+      if (!onLines) {
+        openLinePage(lineButton.dataset.line);
+        return;
+      }
+      setLineSelection(lineButton.dataset.line, true);
       return;
     }
 
