@@ -979,7 +979,10 @@ const prep = [
   ["Currency & Payments", ["Bring 10,000–20,000 JPY cash.", "Cards accepted in large stores.", "Cash needed for small shops and taxis."]],
   ["Packing", ["Formal clothes for official visits.", "Closed shoes and socks.", "Comfortable walking shoes.", "Warm layers and a coat for December weather (about 5–12°C).", "Plug type A, voltage 100V."]],
   ["Order in Advance", ["Portable Wi‑Fi or SIM rental.", "Recommended: https://japan-wireless.com", "Business cards."]],
-  ["General Suggestions", ["Be punctual and arrive early.", "Keep phone silent in public.", "Bring personal medications."]],
+];
+
+const prepDuring = [
+  ["While you are there", ["Be punctual and arrive early.", "Keep phone silent in public.", "Bring personal medications."]],
 ];
 
 const prepHe = [
@@ -1019,7 +1022,10 @@ const prepHe = [
     "☐ Wi-Fi חינם זמין במלונות, אך מוגבל מאוד במרחבים ציבוריים.",
     "☐ כרטיסי ביקור.",
   ]],
-  ["המלצות כלליות", [
+];
+
+const prepDuringHe = [
+  ["בזמן הביקור", [
     "☐ להקפיד על עמידה בזמנים — להגיע מוקדם.",
     "☐ שימוש בטלפון במרחב הציבורי צריך להיות שקט.",
     "☐ יש להסיר נעליים במקדשים, בכניסה לחדרי מלון מסוימים ובחלק מהמסעדות.",
@@ -1086,10 +1092,12 @@ function runTests() {
   console.assert(!dayPhotos[days[0].title], "Days without photos should not force old images");
   console.assert(!dayMaps[days[0].title], "Days without maps should not force old maps");
   console.assert(prep.length >= 1 && avoid.length >= 1, "Preparation and avoid pages should have content");
-  ["overview", "schedule", "location", "model", "notes", "tips"].forEach((name) => {
+  ["overview", "schedule", "location", "model", "notes"].forEach((name) => {
     console.assert(Boolean(byId(`section-${name}`)), `Missing #section-${name}`);
     console.assert(Boolean(byId(`m-section-${name}`)), `Missing #m-section-${name}`);
   });
+  console.assert(Boolean(byId("page-lines")), "Missing #page-lines");
+  console.assert((window.LINE_PROFILES || []).length === 8, "Line info should list eight lines");
 }
 
 function getDesktopScroller() {
@@ -1400,7 +1408,6 @@ function renderDesktopDay(day) {
   if (sideDate) sideDate.textContent = `${formatWeekday(day.w)}, ${day.d}`;
   byId("title").textContent = day.title;
   byId("theme").textContent = day.theme;
-  byId("tipText").textContent = day.tip;
   byId("dayLocation").textContent = day.city;
   renderDayMap("dayLocationMap", day);
   byId("dayNotes").textContent = getDayNotes(day);
@@ -1474,7 +1481,6 @@ function renderMobileDay(day) {
   byId("mLocation").textContent = day.city;
   renderDayMap("mLocationMap", day);
   byId("mNotes").textContent = getDayNotes(day);
-  byId("mTip").textContent = day.tip;
 
   scrollMobileDateIntoView();
 }
@@ -1489,6 +1495,8 @@ function scrollMobileDateIntoView() {
 function renderGuides() {
   byId("prepGrid").innerHTML = prep.map(renderGuideCard).join("");
   byId("prepGridHe").innerHTML = prepHe.map(renderGuideCard).join("");
+  byId("prepDuringGrid").innerHTML = prepDuring.map(renderGuideCard).join("");
+  byId("prepDuringGridHe").innerHTML = prepDuringHe.map(renderGuideCard).join("");
   byId("avoidGrid").innerHTML = avoid.map(renderGuideCard).join("");
   byId("avoidGridHe").innerHTML = avoidHe.map(renderGuideCard).join("");
 }
@@ -1525,6 +1533,12 @@ function setProgramNavActive(section) {
 }
 
 function goToDaySection(section) {
+  if (section === "tips" || section === "lines") {
+    openLinePage();
+    return;
+  }
+  const onLines = document.getElementById("page-lines")?.classList.contains("active");
+  if (onLines) showPage("day", { scroll: false });
   const name = section === "day" ? "overview" : section;
   setProgramNavActive(name);
   if (window.matchMedia("(max-width: 900px)").matches || document.documentElement.classList.contains("is-mobile-embed")) {
@@ -1532,6 +1546,73 @@ function goToDaySection(section) {
   } else {
     scrollToDaySection(name);
   }
+}
+
+function lineInk(hex, fallback) {
+  if (fallback) return fallback;
+  const n = parseInt(String(hex || "").replace("#", ""), 16);
+  if (!Number.isFinite(n)) return "#ffffff";
+  const y = (((n >> 16) & 255) * 299 + ((n >> 8) & 255) * 587 + (n & 255) * 114) / 1000;
+  return y > 170 ? "#1c3344" : "#ffffff";
+}
+
+function renderLinePage() {
+  const tags = byId("lineTags");
+  const sections = byId("lineSections");
+  const profiles = window.LINE_PROFILES || [];
+  const labels = window.LINE_FIELD_LABELS || {};
+  if (!tags || !sections || !profiles.length) return;
+
+  tags.innerHTML = profiles.map((line) => {
+    const ink = lineInk(line.color, line.ink);
+    return `<button type="button" class="line-tag" data-line="${line.id}" style="--line:${line.color};--line-ink:${ink}" aria-pressed="false">${line.label}</button>`;
+  }).join("");
+
+  sections.innerHTML = profiles.map((line) => {
+    const rows = line.rows.map(([key, value]) => {
+      const names = labels[key] || [key, key, key];
+      return `<tr><th data-en="${names[0]}" data-ja="${names[1]}" data-he="${names[2]}">${names[0]}</th><td>${value}</td></tr>`;
+    }).join("");
+    const map = line.map
+      ? `<div class="line-map-scroll"><img class="line-map" src="./${line.map}" alt="${line.label} route map"></div>`
+      : "";
+    return `<article class="line-section" id="line-${line.id}" style="--line:${line.color}">
+      <p class="line-kicker">${line.code}</p>
+      <h3>${line.label}</h3>
+      ${map}
+      <p class="line-intro">${line.intro}</p>
+      <h4 class="line-profile-title" data-en="Technical &amp; operational profile" data-ja="技術・運行の概要" data-he="פרופיל טכני ותפעולי">Technical &amp; operational profile</h4>
+      <table class="line-table"><tbody>${rows}</tbody></table>
+    </article>`;
+  }).join("");
+}
+
+function scrollLineSection(section) {
+  if (!section) return;
+  const tags = document.querySelector(".line-tags");
+  const tagHeight = tags ? tags.offsetHeight : 0;
+  const mobile = window.matchMedia("(max-width: 900px)").matches || document.documentElement.classList.contains("is-mobile-embed");
+  if (mobile) {
+    const y = window.scrollY + section.getBoundingClientRect().top - tagHeight - 12;
+    window.scrollTo({ top: Math.max(0, y), behavior: "smooth" });
+    return;
+  }
+  scrollIframeTo(section, tagHeight + 12);
+}
+
+function openLinePage(lineId) {
+  showPage("lines");
+  setProgramNavActive("tips");
+  document.querySelectorAll(".line-tag").forEach((btn) => {
+    const on = Boolean(lineId) && btn.dataset.line === lineId;
+    btn.classList.toggle("is-active", on);
+    btn.setAttribute("aria-pressed", on ? "true" : "false");
+  });
+  if (!lineId) return;
+  const section = document.getElementById(`line-${lineId}`);
+  requestAnimationFrame(() => {
+    requestAnimationFrame(() => scrollLineSection(section));
+  });
 }
 
 function resetPanelNav() {
@@ -1668,7 +1749,7 @@ function formatWeekday(day) {
   return `${day[0]}${day.slice(1).toLowerCase()}`;
 }
 
-function showPage(pageName) {
+function showPage(pageName, options) {
   document.querySelectorAll(".page").forEach((page) => {
     page.classList.toggle("active", page.id === `page-${pageName}`);
   });
@@ -1678,16 +1759,18 @@ function showPage(pageName) {
   });
 
   const subpageTitles = {
-    prep: { en: "Preparation", he: "הכנה" },
-    avoid: { en: "What to Avoid", he: "מה להימנע" },
-    contact: { en: "Contact", he: "יצירת קשר" },
-    travelog: { en: "Travelog", he: "יומן מסע" },
+    prep: { en: "Preparation", ja: "準備", he: "הכנה" },
+    avoid: { en: "What to Avoid", ja: "注意事項", he: "מה להימנע" },
+    contact: { en: "Contact", ja: "連絡先", he: "יצירת קשר" },
+    travelog: { en: "Travelog", ja: "旅の記録", he: "יומן מסע" },
+    lines: { en: "Line info", ja: "路線情報", he: "מידע על הקווים" },
   };
   const subpageHead = document.getElementById("mSubpageHead");
   const subpageTitle = document.getElementById("mSubpageTitle");
   if (subpageHead && subpageTitle) {
     if (subpageTitles[pageName]) {
       subpageTitle.setAttribute("data-en", subpageTitles[pageName].en);
+      subpageTitle.setAttribute("data-ja", subpageTitles[pageName].ja);
       subpageTitle.setAttribute("data-he", subpageTitles[pageName].he);
       subpageTitle.textContent = textForLang(subpageTitle);
       subpageHead.hidden = false;
@@ -1698,14 +1781,13 @@ function showPage(pageName) {
     }
   }
 
-  window.scrollTo({ top: 0, behavior: "auto" });
-  scrollDesktopScroller(0, "auto");
-  keepParentTop();
-
-  const mobileContent = document.querySelector(".m-content");
-  if (mobileContent) {
-    mobileContent.scrollTo({ top: 0, behavior: "auto" });
+  if (!options || options.scroll !== false) {
+    window.scrollTo({ top: 0, behavior: "auto" });
+    scrollDesktopScroller(0, "auto");
+    const mobileContent = document.querySelector(".m-content");
+    if (mobileContent) mobileContent.scrollTo({ top: 0, behavior: "auto" });
   }
+  keepParentTop();
 }
 
 function setPanelActiveButton(button) {
@@ -1834,9 +1916,17 @@ function initEvents() {
       return;
     }
 
+    const lineButton = event.target.closest("[data-line]");
+    if (lineButton?.dataset.line) {
+      event.preventDefault();
+      openLinePage(lineButton.dataset.line);
+      return;
+    }
+
     const pageButton = event.target.closest(".nav-useful [data-page], .back[data-page]");
     if (pageButton) {
       showPage(pageButton.dataset.page);
+      if (pageButton.dataset.page === "day") setProgramNavActive("overview");
       return;
     }
 
@@ -1875,12 +1965,18 @@ function initEvents() {
 
 }
 
+renderLinePage();
 runTests();
 renderGuides();
 (function startFromQuery() {
   try {
     var params = new URLSearchParams(window.location.search);
     var startPage = params.get("page");
+    if (startPage === "lines") {
+      render();
+      openLinePage(params.get("line") || "");
+      return;
+    }
     if (startPage === "prep" || startPage === "avoid" || startPage === "contact" || startPage === "travelog") {
       showPage(startPage);
       return;
@@ -1893,8 +1989,18 @@ initEvents();
 window.addEventListener("message", (event) => {
   if (!event.data) return;
   if (event.data.type === "forumetro:line-anchor") applyLineAnchor(event.data);
-  if (event.data.type === "forumetro:go-section" && event.data.section) goToDaySection(event.data.section);
-  if (event.data.type === "forumetro:go-page" && event.data.page) showPage(event.data.page);
+  if (event.data.type === "forumetro:go-line" && event.data.line) {
+    openLinePage(event.data.line);
+    return;
+  }
+  if (event.data.type === "forumetro:go-section" && event.data.section) {
+    if (event.data.line) openLinePage(event.data.line);
+    else goToDaySection(event.data.section);
+  }
+  if (event.data.type === "forumetro:go-page" && event.data.page) {
+    if (event.data.page === "lines") openLinePage(event.data.line || "");
+    else showPage(event.data.page);
+  }
   if (event.data.type === "forumetro:set-lang") setProgramLang(event.data.lang);
 });
 

@@ -45,7 +45,7 @@
     content="[PLACEHOLDER] Program guide details will be added here."
   />
   <meta name="twitter:image" content="https://mashutkaru.github.io/Forumetro-Tokyo-2026/images/og-image.jpg" />
-  <link rel="stylesheet" href="./styles.css?v=99" />
+  <link rel="stylesheet" href="./styles.css?v=101" />
 </head>
 <body>
   <script>
@@ -79,8 +79,8 @@
           <button type="button" data-section="schedule"><span class="nav-mark" aria-hidden="true"><span class="nav-mark-line">C</span><span class="nav-mark-id">05</span></span><span class="nav-label" data-en="Schedule" data-ja="スケジュール" data-he="לוח זמנים">Schedule</span></button>
           <button type="button" data-section="location"><span class="nav-mark" aria-hidden="true"><span class="nav-mark-line">M</span><span class="nav-mark-id">06</span></span><span class="nav-label" data-en="Location" data-ja="場所" data-he="מיקום">Location</span></button>
           <button type="button" data-section="model"><span class="nav-mark" aria-hidden="true"><span class="nav-mark-line">V</span><span class="nav-mark-id">07</span></span><span class="nav-label" data-en="3D Models" data-ja="3Dモデル" data-he="מודל תלת־ממד">3D Models</span></button>
-          <button type="button" data-section="notes"><span class="nav-mark" aria-hidden="true"><span class="nav-mark-line">W</span><span class="nav-mark-id">08</span></span><span class="nav-label" data-en="Notes" data-ja="備考" data-he="הערות">Notes</span></button>
-          <button type="button" data-section="tips"><span class="nav-mark" aria-hidden="true"><span class="nav-mark-line">Z</span><span class="nav-mark-id">09</span></span><span class="nav-label" data-en="Tips" data-ja="ヒント" data-he="טיפים">Tips</span></button>
+          <button type="button" data-section="tips"><span class="nav-mark" aria-hidden="true"><span class="nav-mark-line">W</span><span class="nav-mark-id">08</span></span><span class="nav-label" data-en="Line info" data-ja="路線情報" data-he="מידע על הקווים">Line info</span></button>
+          <button type="button" data-section="notes"><span class="nav-mark" aria-hidden="true"><span class="nav-mark-line">Z</span><span class="nav-mark-id">09</span></span><span class="nav-label" data-en="Notes" data-ja="備考" data-he="הערות">Notes</span></button>
         </nav>
         <nav class="nav nav-useful" hidden aria-label="Useful stations">
           <button class="active" data-page="prep"><span class="nav-mark" aria-hidden="true"><span class="nav-mark-line">Z</span><span class="nav-mark-id">05</span></span><span class="nav-label" data-en="Preparation" data-he="הכנה">Preparation</span></button>
@@ -171,12 +171,6 @@
                 <p class="day-section-body" id="dayNotes"></p>
               </section>
 
-              <section class="day-section" id="section-tips">
-                <div class="tip">
-                  <strong data-en="Tip of the day" data-ja="本日のヒント" data-he="הטיפ להיום">Tip of the day</strong>
-                  <span id="tipText"></span>
-                </div>
-              </section>
             </article>
           </section>
         </div>
@@ -249,12 +243,6 @@
                 <p class="m-section-body" id="mNotes"></p>
               </section>
 
-              <section class="m-block m-section" id="m-section-tips">
-                <div class="m-tip-card">
-                  <span class="m-tip-label" data-en="Tip of the day" data-ja="本日のヒント" data-he="הטיפ להיום">Tip of the day</span>
-                  <p class="m-section-body" id="mTip"></p>
-                </div>
-              </section>
             </div>
           </div>
         </div>
@@ -264,18 +252,29 @@
         <div class="subpage">
           <div class="subhead">
             <div>
-              <h2 data-en="Preparation" data-he="הכנה">Preparation</h2>
-              <p data-en="Everything you need to know before you travel." data-he="כל מה שצריך לדעת לפני הנסיעה.">Everything you need to know before you travel.</p>
+              <h2 data-en="Preparation" data-ja="準備" data-he="הכנה">Preparation</h2>
+              <p data-en="What to arrange before you land, and what to keep in mind during the visit." data-ja="到着前に準備することと、滞在中に心がけることです。" data-he="מה לסדר לפני הנחיתה, ומה לזכור במהלך הביקור.">What to arrange before you land, and what to keep in mind during the visit.</p>
             </div>
-            <button class="back" data-page="day" type="button" data-en="Back to day program" data-he="חזרה לתוכנית היום">Back to day program</button>
+            <button class="back" data-page="day" type="button" data-en="Back to day program" data-ja="当日の行程に戻る" data-he="חזרה לתוכנית היום">Back to day program</button>
           </div>
 
-          <div class="grid" id="prepGrid"></div>
+          <section class="prep-part">
+            <h3 data-en="Preparation" data-ja="到着前" data-he="לפני ההגעה">Preparation</h3>
+            <p data-en="Before arriving in Japan." data-ja="日本に到着する前。" data-he="לפני ההגעה ליפן.">Before arriving in Japan.</p>
+            <div class="grid" id="prepGrid"></div>
+            <div class="guide-hebrew prep-hebrew" dir="rtl" lang="he">
+              <div class="grid" id="prepGridHe"></div>
+            </div>
+          </section>
 
-          <div class="guide-hebrew prep-hebrew" dir="rtl" lang="he">
-            <h3 class="guide-hebrew-title">הוראות הכנה</h3>
-            <div class="grid" id="prepGridHe"></div>
-          </div>
+          <section class="prep-part">
+            <h3 data-en="During the visit" data-ja="滞在中" data-he="במהלך הביקור">During the visit</h3>
+            <p data-en="Once the delegation is in Tokyo." data-ja="代表団が東京に着いてから。" data-he="כשהמשלחת כבר בטוקיו.">Once the delegation is in Tokyo.</p>
+            <div class="grid" id="prepDuringGrid"></div>
+            <div class="guide-hebrew prep-hebrew" dir="rtl" lang="he">
+              <div class="grid" id="prepDuringGridHe"></div>
+            </div>
+          </section>
         </div>
       </section>
 
@@ -376,6 +375,21 @@
           </article>
         </div>
       </section>
+
+      <section class="page" id="page-lines">
+        <div class="subpage line-page">
+          <div class="subhead">
+            <div>
+              <h2 data-en="Line info" data-ja="路線情報" data-he="מידע על הקווים">Line info</h2>
+              <p data-en="Technical and operational profiles of the lines on this visit. Choose a line to jump to its section." data-ja="この訪問で乗る・見る路線の技術と運行の概要です。路線を選ぶと、その節に移動します。" data-he="פרופילים טכניים ותפעוליים של הקווים בביקור. בחירת קו מעבירה אל הסעיף שלו.">Technical and operational profiles of the lines on this visit. Choose a line to jump to its section.</p>
+            </div>
+            <button class="back" data-page="day" type="button" data-en="Back to the day" data-ja="その日に戻る" data-he="חזרה ליום">Back to the day</button>
+          </div>
+          <div class="line-tags" id="lineTags" role="navigation" aria-label="Lines"></div>
+          <p class="line-note" data-en="Where the source profile leaves a figure unverified, it is shown that way." data-ja="出典で未確認とされた数字は、そのまま未確認と表示しています。" data-he="מספר שהמקור מסמן כלא מאומת מוצג כך.">Where the source profile leaves a figure unverified, it is shown that way.</p>
+          <div id="lineSections"></div>
+        </div>
+      </section>
     </main>
   </div>
 
@@ -387,7 +401,8 @@
       }
     }
   </script>
-  <script src="./app.js?v=108"></script>
+  <script src="./line-info.js?v=2"></script>
+  <script src="./app.js?v=112"></script>
   <script type="module" src="./city-viewer.js?v=4"></script>
 </body>
 </html>

@@ -887,8 +887,15 @@
         flex: 1 1 0;
         min-width: 0;
         padding: 0 1px !important;
-        font-size: 8px !important;
+        font-size: 10px !important;
+        line-height: 1.15;
         gap: 4px !important;
+      }
+      #program-page .program-section-bar .nav-caption,
+      #useful-page .useful-section-bar .nav-caption {
+        white-space: normal;
+        text-align: center;
+        line-height: 1.15;
       }
       #program-page .program-section-bar .nav-mark,
       #useful-page .useful-section-bar .nav-mark {
@@ -2989,7 +2996,7 @@
       .stats-bar-wrap::before { left: 12px; right: 12px; top: 11px; height: 6px; }
       body.participants-page .stats-bar-wrap .sector-btn:first-child::after { display: none; }
       .stats-bar-wrap .nav-mark { width: 26px; height: 30px; }
-      .stats-bar-wrap .sector-btn { flex: 1 1 0; padding: 0 1px !important; min-height: 0 !important; min-width: 0 !important; font-size: 8px !important; gap: 3px !important; white-space: normal !important; }
+      .stats-bar-wrap .sector-btn { flex: 1 1 0; padding: 0 1px !important; min-height: 44px !important; min-width: 0 !important; font-size: 10px !important; line-height: 1.15; gap: 3px !important; white-space: normal !important; }
       body.participants-page #stats-bar .sector-btn {
         font-size: 7px !important;
         letter-spacing: -0.04em;
@@ -3374,13 +3381,13 @@
               <span class="nav-mark" aria-hidden="true"><span class="nav-mark-line">V</span><span class="nav-mark-id">07</span></span>
               <span class="nav-caption" data-en="3D Models" data-ja="3Dモデル" data-he="מודל תלת־ממד">3D Models</span>
             </button>
-            <button type="button" class="sector-btn" data-section="notes" style="--station:#C9A227">
+            <button type="button" class="sector-btn" data-section="tips" style="--station:#C9A227">
               <span class="nav-mark" aria-hidden="true"><span class="nav-mark-line">W</span><span class="nav-mark-id">08</span></span>
-              <span class="nav-caption" data-en="Notes" data-ja="備考" data-he="הערות">Notes</span>
+              <span class="nav-caption" data-en="Line info" data-ja="路線情報" data-he="מידע על הקווים">Line info</span>
             </button>
-            <button type="button" class="sector-btn" data-section="tips" style="--station:#8F76D6">
+            <button type="button" class="sector-btn" data-section="notes" style="--station:#8F76D6">
               <span class="nav-mark" aria-hidden="true"><span class="nav-mark-line">Z</span><span class="nav-mark-id">09</span></span>
-              <span class="nav-caption" data-en="Tips" data-ja="ヒント" data-he="טיפים">Tips</span>
+              <span class="nav-caption" data-en="Notes" data-ja="備考" data-he="הערות">Notes</span>
             </button>
           </div>
           <div class="program-lang-group">
@@ -3393,7 +3400,7 @@
       <iframe
         class="program-frame"
         title="FORUMETRO TOKYO 2026 Program"
-        data-src="program/index.html?embed=1&amp;page=day&amp;v=121"
+        data-src="program/index.html?embed=1&amp;page=day&amp;v=125"
         referrerpolicy="no-referrer-when-downgrade"
         allow="fullscreen"
       ></iframe>
@@ -3430,7 +3437,7 @@
       <iframe
         class="program-frame"
         title="FORUMETRO TOKYO 2026 Useful Information"
-        data-src="program/index.html?embed=1&amp;page=prep&amp;branch=useful&amp;v=104"
+        data-src="program/index.html?embed=1&amp;page=prep&amp;branch=useful&amp;v=108"
         referrerpolicy="no-referrer-when-downgrade"
         allow="fullscreen"
       ></iframe>
