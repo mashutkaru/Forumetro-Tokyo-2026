@@ -394,6 +394,20 @@ const days = [
       ["18:00", "Group activity", "Details to be confirmed"],
     ],
     lines: ["asakusa"],
+    models: [
+      {
+        src: "../models/Odaiba-city-model.glb?v=1",
+        title: "Odaiba",
+        titleJa: "お台場",
+        titleHe: "אודאיבה",
+      },
+      {
+        src: "../models/Roppongi-city-model.glb?v=1",
+        title: "Roppongi",
+        titleJa: "六本木",
+        titleHe: "רופונגי",
+      },
+    ],
   },
   {
     w: "SUN",
