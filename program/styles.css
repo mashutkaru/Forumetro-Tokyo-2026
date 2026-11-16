@@ -624,14 +624,11 @@ html.lang-he .subpage {
 }
 
 html.lang-he .topbar,
-html.lang-he .m-head {
-  direction: ltr;
-}
-
+html.lang-he .m-head,
 html.lang-he .date-strip,
 html.lang-he .m-days,
 html.lang-he .m-days-row {
-  direction: rtl;
+  direction: ltr;
 }
 
 html.lang-he .date-num,
@@ -1340,6 +1337,18 @@ html.lang-he .day-line-panel {
   grid-template-columns: repeat(4, 1fr);
   gap: 30px;
   padding: 30px 34px;
+}
+
+.highlights--1 {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.highlights--2 {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.highlights--3 {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 
 @media (min-width: 901px) {

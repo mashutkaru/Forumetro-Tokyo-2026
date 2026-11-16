@@ -135,44 +135,48 @@ const days = [
     w: "TUE",
     d: "15.12",
     m: "DEC",
-    title: "Understanding Tokyo's Rail System: Networks, Stations and Operations",
-    city: "Hotel seminar room, Toranomon Hills and Tokyo Metro",
+    title: "Tokyo's Rail Network, Stations and Operations",
+    city: "Toranomon Hills and Tokyo Metro",
     theme:
-      "The day introduces Tokyo's metropolitan railway network and the principles behind its planning, construction and operations. Morning lectures are followed by a visit to Toranomon Hills Station and an afternoon briefing with Tokyo Metro.",
-    tip: "Wear comfortable shoes for the visit to Toranomon Hills Station.",
-    notesExtra:
-      "Breakfast is at the hotel; the time is still to be confirmed. The Tokyo Metro briefing venue is still to be confirmed. The end of the Toranomon Hills visit and the start of lunch may be adjusted.",
+      "The morning looks at how Tokyo's rail network was planned and financed, then follows a station from platform to street at Toranomon Hills. The afternoon goes inside a Tokyo Metro station to see how staff manage passengers and overnight work.",
+    tip: "The Toranomon Hills walk follows the route from the platform to the street.",
+    notesExtra: "",
     items: [
-      ["LECTURE", "Professor Shigeru Morichi, 09:00–10:30", ICONS.presentation],
-      ["LECTURE", "Kazufumi Noyaki, 10:45–11:15", ICONS.infrastructure],
-      ["STATION VISIT", "Toranomon Hills, 11:30–12:30", ICONS.train],
-      ["TOKYO METRO", "Operations briefing, 14:00–16:00", ICONS.hub],
+      ["LECTURE", "Professor Shigeru Morichi, 09:00–10:00", ICONS.presentation],
+      ["STATION", "Toranomon Hills with Kazufumi Noyaki, 10:00–12:00", ICONS.train],
+      ["TOKYO METRO", "Inside a station, 14:00–16:00", ICONS.hub],
     ],
     program: [
-      ["08:30–08:45", "Morning briefing", "Hotel lobby"],
       [
-        "09:00–10:30",
-        "Opening lecture",
-        "Professor Shigeru Morichi — Tokyo's Metropolitan Railway Network: Evolution, Structure and Urban Development",
+        "09:00–10:00",
+        "How Tokyo's Rail Network Shaped the City",
+        "Lecture · Professor Shigeru Morichi. Professor Morichi specializes in transportation policy and national development planning. He began his career at Japanese National Railways and later served as president of the Institute for Transport Policy Studies.",
+        [
+          ["", "The roles of public agencies and private railways in Tokyo's growth", ""],
+          ["", "Planning new metro lines, financing construction and recovering costs over time", ""],
+          ["", "Adapting Tokyo's railway development model to other cities", ""],
+        ],
       ],
       [
-        "10:45–11:15",
-        "Lecture",
-        "Kazufumi Noyaki, President of Metro Development — Metro Construction: Balancing Construction Speed and Public Disruption",
+        "10:00–12:00",
+        "Station Engineering and Integration with Urban Development",
+        "Expert-led walk · Kazufumi Noyaki. Kazufumi Noyaki formerly led Tokyo Metro's department for construction and infrastructure improvements. At Toranomon Hills, he will trace the route from platform to street to show how the station fits into the surrounding redevelopment.",
+        [
+          ["", "Tunnelling and enlarging underground stations in dense urban areas", ""],
+          ["", "Linking station concourses to nearby buildings and streets", ""],
+          ["", "Maintaining train service and pedestrian access through each construction phase", ""],
+        ],
       ],
-      [
-        "11:30–12:30",
-        "Expert-led station visit",
-        "Toranomon Hills Station — architecture, engineering and integration with urban redevelopment",
-      ],
-      ["12:30–13:30", "Lunch", "Toranomon Hills"],
-      ["13:30–14:00", "Transfer", "To the afternoon Tokyo Metro briefing"],
       [
         "14:00–16:00",
-        "Briefing",
-        "Tokyo Metro — Operating a Metropolitan Railway. Venue to be confirmed.",
+        "Operating the Metro: Inside a Tokyo Metro Station",
+        "Lecture · Tokyo Metro representative. Tokyo Metro's station teams manage passenger flows throughout the operating day. A representative will explain how staff anticipate crowding and schedule maintenance between the last train and the first.",
+        [
+          ["", "Station staff responsibilities throughout the operating day", ""],
+          ["", "Managing passenger flows at ticket gates, on platforms and through transfer passages", ""],
+          ["", "Scheduling overnight engineering work before the first train", ""],
+        ],
       ],
-      ["16:30–17:30", "Group discussion", "Reflection and lessons learned"],
     ],
     lines: ["ginza", "hibiya"],
     models: [
@@ -194,47 +198,47 @@ const days = [
     w: "WED",
     d: "16.12",
     m: "DEC",
-    title: "New Urban Cores: Railway-Led Development and the Station City",
-    city: "Shiodome, Shibuya and the Tokyu suburban railways",
+    title: "Shibuya: Planning, Tokyu and the Daily Commute",
+    city: "Shibuya Station and Tokyu's suburban lines",
     theme:
-      "Tokyo's railway stations act as urban centers integrating transportation, commerce, employment and culture. The day looks at area management in Shiodome, Shibuya's redevelopment, and how Tokyu combines railway operations with urban development.",
-    tip: "The Shibuya Sky visit is planned for about 15:30, during the Shibuya site tour.",
-    notesExtra:
-      "Breakfast is at the hotel; the time is still to be confirmed. The Shiodome briefing and the transfer to Shibuya are still being timed. The Tokyu meeting is pending confirmation. Stations for the suburban fieldwork are still to be confirmed.",
+      "The day stays around Shibuya Station: participatory planning with the ward, Tokyu's combination of railways, property and retail, and a walk along a suburban commute.",
+    tip: "The Tokyu session is a lecture and a walk through the station.",
+    notesExtra: "",
     items: [
-      ["SHIODOME", "Briefing and walk, 09:00–10:00", ICONS.building],
-      ["SHIBUYA", "City briefing, 10:00–12:00", ICONS.presentation],
-      ["TOKYU", "Briefing and Shibuya tour, 13:30–16:30", ICONS.infrastructure],
-      ["FIELDWORK", "Tatsuya Edakubo, 17:00–18:30", ICONS.train],
+      ["SHIBUYA CITY", "Machizukuri lecture, 10:00–12:00", ICONS.presentation],
+      ["TOKYU", "Lecture and station walk, 13:30–16:00", ICONS.building],
+      ["COMMUTE", "Tatsuya Edakubo, 16:30–18:00", ICONS.train],
     ],
     program: [
-      ["08:30–08:45", "Morning briefing", "Hotel"],
-      [
-        "09:00–09:30",
-        "Area-management briefing",
-        "SIO-SITE Town Management — Shiodome, from a former railway freight yard to a city station. Proposed; timing to be confirmed.",
-      ],
-      ["09:30–10:00", "Walking tour", "Shiodome. Proposed; timing to be confirmed."],
       [
         "10:00–12:00",
-        "Briefing",
-        "Shibuya City — redevelopment, infrastructure and public–private cooperation. Shibuya Chamber of Commerce, 2F large training room, 1-12-5 Shibuya, near Hikarie.",
-      ],
-      ["12:00–13:30", "Lunch", "Shibuya"],
-      [
-        "13:30–14:30",
-        "Briefing",
-        "Tokyu — Integrated Railway and Urban Development. Venue in Shibuya to be confirmed.",
-      ],
-      [
-        "14:30–16:30",
-        "Expert-led site tour",
-        "Shibuya. Shibuya Sky is planned for about 15:30.",
+        "Participatory Planning Around Shibuya Station",
+        "Lecture · Shibuya City, Machizukuri Department. Shibuya City's Machizukuri Department works with residents and local businesses on neighborhood planning. The session examines how their input shapes streets and public spaces as the station district is rebuilt.",
+        [
+          ["", "How residents and local businesses participate in neighborhood planning", ""],
+          ["", "How community proposals inform the design of streets and public spaces", ""],
+          ["", "Working with local businesses to maintain customer access during construction", ""],
+        ],
       ],
       [
-        "17:00–18:30",
-        "Expert-led fieldwork",
-        "Tatsuya Edakubo — commuter life along Tokyu's suburban railways. Stations to be confirmed.",
+        "13:30–16:00",
+        "Tokyu's Rail, Real Estate and Town Management",
+        "Lecture and expert-led station walk · Tokyu Corporation. Tokyu combines railway operations with property development and retail. The lecture and station walk explore how this business model shapes redevelopment around one of Tokyo's busiest interchanges.",
+        [
+          ["", "The town management company's role in coordinating activity across the district", ""],
+          ["", "Tokyu's vision for Shibuya Station and the surrounding streets and commercial spaces", ""],
+          ["", "Phasing construction to keep trains running, streets open and businesses accessible", ""],
+        ],
+      ],
+      [
+        "16:30–18:00",
+        "The Daily Commute Along Tokyu's Suburban Lines",
+        "Expert-led walk · Tatsuya Edakubo. Railway journalist Tatsuya Edakubo examines suburban rail from the passenger's perspective. The walk follows a commuter's route between station and neighborhood to explore how daily journeys shape local life.",
+        [
+          ["", "Commuters' daily routines, from the walk to the station to the journey home", ""],
+          ["", "Passenger customs on busy platforms and trains, from queueing to boarding a crowded carriage", ""],
+          ["", "The station as a neighborhood meeting place and a center for everyday life", ""],
+        ],
       ],
     ],
     lines: ["ginza"],
@@ -251,46 +255,48 @@ const days = [
     w: "THU",
     d: "17.12",
     m: "DEC",
-    title: "Governing the Metropolis: Public Transport, Planning and Policy",
-    city: "Tokyo Metropolitan Government, Shinjuku and the Israeli Embassy",
+    title: "Public Transport, Planning and Shinjuku Station",
+    city: "Toei, the Tokyo Metropolitan Government and Shinjuku Station",
     theme:
-      "We will meet institutions responsible for planning and operating Tokyo's metropolitan transportation system, then walk Shinjuku Station and visit the Embassy of Israel.",
-    tip: "Allow time for security procedures at the Embassy of Israel. The transfer there begins at 15:00.",
-    notesExtra:
-      "Breakfast is at the hotel; the time is still to be confirmed. The Toei and Tokyo Metropolitan Government hosts, the Shinjuku guide, and the Ambassador's attendance are still to be confirmed.",
+      "The morning is with Toei and the Tokyo Metropolitan Government, on public subway and bus services and how a transport project moves from policy to a local plan. The afternoon walks Shinjuku Station's south exit and the Busta bus terminal.",
+    tip: "The guide for the Shinjuku walk is still to be confirmed.",
+    notesExtra: "The guide for the Shinjuku station walk is still to be confirmed.",
     items: [
-      ["TOEI", "Public transport briefing, 10:00–11:00", ICONS.presentation],
-      ["TMG", "Metropolitan planning, 11:00–12:00", ICONS.building],
-      ["SHINJUKU", "Busta tour, 13:30–15:00", ICONS.train],
-      ["EMBASSY", "Ambassador of Israel, 16:00–17:00", ICONS.embassy],
+      ["TOEI", "Subway and buses, 10:00–11:00", ICONS.presentation],
+      ["TMG", "Planning across government, 11:00–12:00", ICONS.building],
+      ["SHINJUKU", "South Exit and Busta, 13:30–15:00", ICONS.train],
     ],
     program: [
-      ["08:30–08:45", "Morning briefing", "Hotel"],
-      ["08:45–09:30", "Transfer to the Tokyo Metropolitan Government", ""],
-      ["09:30–10:00", "Arrival and introduction", "Tokyo Metropolitan Government"],
       [
         "10:00–11:00",
-        "Briefing",
-        "Toei — Challenges of Operating Public Transport. Proposed; venue to be confirmed.",
+        "Running Tokyo's Public Subway and Bus Services",
+        "Lecture · Toei Transportation representative. Toei Transportation operates subways and buses for the Tokyo Metropolitan Government. Its representative will discuss what public ownership makes possible and where Toei depends on cooperation with other operators.",
+        [
+          ["", "The advantages and challenges of running a publicly owned transport network", ""],
+          ["", "Coordinating bus and subway services at interchange stations", ""],
+          ["", "Working with other railway companies on connections and passenger information", ""],
+        ],
       ],
       [
         "11:00–12:00",
-        "Briefing",
-        "Tokyo Metropolitan Government — Metropolitan Transport Planning and Coordination. Proposed; venue to be confirmed.",
+        "How Tokyo Plans Transport Across Levels of Government",
+        "Lecture · Tokyo Metropolitan Government planning representative. A metropolitan planning representative will explain how a proposed transport investment moves from a regional priority to a local project. The session follows the decisions that connect railway planning with land use around stations.",
+        [
+          ["", "The planning hierarchy, from national policy to metropolitan strategy and ward plans", ""],
+          ["", "The roles of the metropolitan government, wards and railway operators in advancing a project", ""],
+          ["", "Coordinating land use and station access when a project crosses ward boundaries", ""],
+        ],
       ],
-      ["12:00–13:30", "Lunch", "Shinjuku"],
       [
         "13:30–15:00",
-        "Shinjuku Busta tour",
-        "Expert-led walk at Shinjuku Station — Millimeters and Seconds: The Human Experience in the World's Busiest Railway Station. Guide to be confirmed.",
+        "Shinjuku Station's South Exit and Busta Bus Terminal",
+        "Station walk · Guide to be confirmed. The walk traces how former railway land around Shinjuku's South Exit was redeveloped after the privatization of Japanese National Railways. At Busta Shinjuku, participants will follow a passenger's route from the railway station to the highway bus terminal.",
+        [
+          ["", "Redevelopment of former railway land", ""],
+          ["", "Wayfinding between rail platforms and the highway bus terminal", ""],
+          ["", "Pedestrian connections across the station district", ""],
+        ],
       ],
-      ["15:00–16:00", "Transfer to the Embassy of Israel", "Arrival and security procedures"],
-      [
-        "16:00–17:00",
-        "Meeting",
-        "Ambassador of Israel to Japan. Rabin Seminar Room. Subject to confirmation.",
-      ],
-      ["17:00–18:00", "Group discussion", "Reflection and lessons learned"],
     ],
     lines: ["yamanote"],
     models: [
@@ -306,46 +312,37 @@ const days = [
     w: "FRI",
     d: "18.12",
     m: "DEC",
-    title: "The Human Scale: Machizukuri, Community and Railway Infrastructure",
-    city: "Kitazawa Town Hall, Shimokita Senrogai and Kitami",
+    title: "Community Planning Along Setagaya's Railway",
+    city: "Shimokita Senrogai and Kitami Fureai Plaza",
     theme:
-      "We will head into Tokyo's suburban railway neighborhoods to see how infrastructure can improve public space and strengthen communities. Setagaya City and Odakyu Railway offer a case of Machizukuri, participation and human-scale development.",
-    tip: "Shabbat begins at 16:12. Some participants may need to return to the hotel earlier.",
-    notesExtra:
-      "Breakfast is at the hotel; the time is still to be confirmed. The Setagaya arrangements are subject to host confirmation. The 13:00 briefing venue, access to the Kitami depot, and the final route are still to be confirmed. Shabbat begins around 16:12.",
+      "Setagaya City presents community planning along the railway, with a walk through Shimokita Senrogai. Odakyu then leads a visit to the public park above the working depot at Kitami.",
+    tip: "The morning walk includes BONUS TRACK at Shimokita Senrogai.",
+    notesExtra: "",
     items: [
-      ["SETAGAYA", "Machizukuri briefing, 09:00–10:30", ICONS.community],
-      ["NEIGHBORHOOD", "Shimokita Senrogai and BONUS TRACK, 10:30–12:00", ICONS.stroll],
-      ["KITAMI", "Plaza and depot visit, 14:15–15:00", ICONS.park],
-      ["SHABBAT", "Begins at 16:12", ICONS.home],
+      ["SETAGAYA", "Shimokita Senrogai, 09:30–12:00", ICONS.community],
+      ["KITAMI", "Park above the depot, 14:00–15:00", ICONS.park],
     ],
     program: [
-      ["07:45–08:00", "Morning briefing", "Hotel"],
-      ["08:00–09:00", "Transfer to Kitazawa Town Hall", "Setagaya"],
       [
-        "09:00–10:30",
-        "Briefing",
-        "Setagaya City — Human-Scale Machizukuri and Community Building. Kitazawa Town Hall.",
+        "09:30–12:00",
+        "Community Planning Along Setagaya's Railway Corridor",
+        "Lecture and expert-led neighborhood walk · Setagaya City. Kitazawa's community planning section works with residents on machizukuri, or community-led town planning. The walk through Shimokita Senrogai explores how the ward's planning, transport and parks teams approach the reuse of land above the Odakyu railway.",
+        [
+          ["", "Residents' role in Setagaya's neighborhood plans", ""],
+          ["", "Reuse of former railway land at Shimokita Senrogai", ""],
+          ["", "Walking routes, local shops and gathering places at BONUS TRACK", ""],
+        ],
       ],
       [
-        "10:30–12:00",
-        "Expert-led neighborhood walk",
-        "Setagaya Machizukuri team — Shimokita Senrogai and BONUS TRACK: railway undergrounding, reuse of land and public space",
+        "14:00–15:00",
+        "A Public Park Above a Working Depot",
+        "Expert-led site visit · Odakyu. Odakyu will lead a visit to Kitami Fureai Plaza and the railway depot beneath it. Participants will examine how the park connects to neighborhood streets while the depot continues to operate below.",
+        [
+          ["", "Park entrances from surrounding streets", ""],
+          ["", "The layout of the plaza above the depot", ""],
+          ["", "Boundaries between public space and railway operations", ""],
+        ],
       ],
-      ["12:00–13:00", "Boxed lunch", "Kitazawa Town Hall. Planned."],
-      [
-        "13:00–13:45",
-        "Briefing",
-        "Kitami Fureai Plaza representative — a park above the railway depot. Venue to be confirmed.",
-      ],
-      ["13:45–14:15", "Transfer to Kitami Fureai Plaza", "Route to be confirmed"],
-      [
-        "14:15–15:00",
-        "Site visit",
-        "Kitami Fureai Plaza and the Odakyu Kitami Depot. Access is subject to host approval.",
-      ],
-      ["15:00–16:00", "Return to the hotel", ""],
-      ["16:12", "Shabbat begins", "Some participants may return earlier"],
     ],
     lines: ["oedo", "odakyu"],
     models: [
@@ -462,31 +459,26 @@ const days = [
     w: "MON",
     d: "21.12",
     m: "DEC",
-    title: "Development, Preservation and Departure",
-    city: "Hotel → Chūō City and Ginza → Narita Airport",
+    title: "Planning Around Nihonbashi Station",
+    city: "Nihonbashi, Chūō City",
     theme:
-      "The final morning looks at how development and preservation meet in Chūō City and Ginza. After a short municipal briefing and an expert-led walk, we return toward the hotel, have lunch, and transfer to Narita Airport.",
-    tip: "Check-out is about 08:30. The coach leaves for Narita at 13:30, and the flight departs at 17:40.",
-    notesExtra:
-      "Breakfast arrangements are still to be confirmed. The Chūō City venue, the Ginza route, and the airport transfer are still to be confirmed.",
+      "Chūō City leads a walk around Nihonbashi Station, on fitting new station entrances, pedestrian routes and public space into a historic commercial district.",
+    tip: "The walk looks at new station entrances within Nihonbashi's historic streets.",
+    notesExtra: "",
     items: [
-      ["CHECK-OUT", "About 08:30", ICONS.suitcase],
-      ["CHŪŌ CITY", "Briefing, 09:30–10:00", ICONS.building],
-      ["GINZA", "Expert-led walk, 10:00–12:00", ICONS.stroll],
-      ["FLIGHT", "Departs Narita, 17:40", ICONS.plane],
+      ["NIHONBASHI", "Chūō City walk, 09:00–12:00", ICONS.stroll],
     ],
     program: [
-      ["08:30", "Hotel check-out", "Breakfast arrangements to be confirmed"],
-      ["09:30–10:00", "Briefing", "Chūō City. Final arrangements to be confirmed."],
       [
-        "10:00–12:00",
-        "Expert-led walking tour",
-        "Ginza, returning toward the hotel. Final route to be confirmed.",
+        "09:00–12:00",
+        "Planning Around Nihonbashi Station in a Historic Commercial District",
+        "Expert-led walk · Chūō City. Chūō City will introduce the planning choices involved in redeveloping sites around Nihonbashi Station. The walk will examine how new station entrances, pedestrian routes and public spaces can fit into a district defined by historic streets and buildings.",
+        [
+          ["", "Fitting accessible station entrances into the existing street network", ""],
+          ["", "Connecting new public spaces to the district's historic commercial streets", ""],
+          ["", "Preserving historic buildings and street patterns as station-area sites are redeveloped", ""],
+        ],
       ],
-      ["12:00–13:00", "Lunch", ""],
-      ["13:30", "Coach departure for Narita Airport", "From the hotel"],
-      ["15:00", "Airport check-in", "Security and departure procedures at Narita"],
-      ["17:40", "Flight departure from Narita", ""],
     ],
     lines: ["asakusa"],
     models: [
@@ -529,110 +521,175 @@ const daysJa = [
   },
   {
     w: "火",
-    title: "東京の鉄道システムを学ぶ：ネットワーク、駅、運営",
-    city: "ホテル会議室、虎ノ門ヒルズ、東京メトロ",
+    title: "東京の鉄道網、駅の整備、メトロの運営",
+    city: "虎ノ門ヒルズと東京メトロ",
     theme:
-      "この日は、東京の都市鉄道ネットワークと、その計画、建設、運営の考え方を学びます。午前の講演のあと、虎ノ門ヒルズ駅を訪れ、午後は東京メトロの説明を受けます。",
-    tip: "虎ノ門ヒルズ駅の視察に備え、歩きやすい靴でお越しください。",
-    notesExtra:
-      "朝食はホテルでとります。時刻は未定です。東京メトロの説明会場は未定です。虎ノ門ヒルズの視察終了と昼食の開始時刻は、調整される場合があります。",
+      "午前は、東京の鉄道網がどのように計画され、建設費が賄われてきたかを学び、虎ノ門ヒルズでホームから街路まで駅のつながりをたどります。午後は東京メトロの駅に入り、係員が乗客の流れと夜間作業をどう扱うかを見ます。",
+    tip: "虎ノ門ヒルズの視察は、ホームから街路までの経路をたどります。",
+    notesExtra: "",
     items: [
-      ["講演", "森地茂教授、09:00–10:30"],
-      ["講演", "野焼計史、10:45–11:15"],
-      ["駅視察", "虎ノ門ヒルズ、11:30–12:30"],
-      ["東京メトロ", "運営に関する説明、14:00–16:00"],
+      ["講演", "森地茂教授、09:00–10:00"],
+      ["駅", "野焼計史と虎ノ門ヒルズ、10:00–12:00"],
+      ["東京メトロ", "駅の内側、14:00–16:00"],
     ],
     program: [
-      ["08:30–08:45", "朝の事前説明", "ホテルロビー"],
-      ["09:00–10:30", "開会講演", "森地茂教授 — 東京の都市鉄道ネットワーク：変遷、構造、都市開発"],
-      ["10:45–11:15", "講演", "メトロ開発株式会社 代表取締役社長 野焼計史 — 地下鉄建設：工期短縮と市民生活への影響の両立"],
-      ["11:30–12:30", "専門家による駅視察", "虎ノ門ヒルズ駅 — 建築、エンジニアリング、都市再開発との一体的整備"],
-      ["12:30–13:30", "昼食", "虎ノ門ヒルズ"],
-      ["13:30–14:00", "移動", "午後の東京メトロ説明会場へ"],
-      ["14:00–16:00", "説明", "東京メトロ — 大都市圏鉄道の運営。会場は未定。"],
-      ["16:30–17:30", "意見交換", "振り返りと学びの共有"],
+      [
+        "09:00–10:00",
+        "東京の鉄道網は都市をどうかたちづくったか",
+        "講演 · 森地茂教授。森地教授は交通政策と国土計画を専門とします。日本鉄道に勤務したのち、運輸政策研究機構の会長を務めました。",
+        [
+          ["", "東京の成長における公的機関と私鉄の役割", ""],
+          ["", "新しい地下鉄路線の計画、建設費の調達、長期にわたる費用の回収", ""],
+          ["", "東京の鉄道整備のモデルを他の都市にどう活かすか", ""],
+        ],
+      ],
+      [
+        "10:00–12:00",
+        "駅のエンジニアリングと都市開発との一体整備",
+        "専門家による徒歩視察 · 野焼計史。野焼計史は、東京メトロで建設と基盤整備を担う部門を率いていました。虎ノ門ヒルズでは、ホームから街路までの経路をたどり、駅が周辺の再開発にどう納まるかを示します。",
+        [
+          ["", "密集した市街地でのトンネル施工と地下駅の拡大", ""],
+          ["", "駅のコンコースを周辺の建物や街路につなぐこと", ""],
+          ["", "工事の各段階で列車の運行と歩行者の通行を保つこと", ""],
+        ],
+      ],
+      [
+        "14:00–16:00",
+        "メトロの運営：東京メトロの駅の内側",
+        "講演 · 東京メトロの担当者。東京メトロの駅員は、営業時間を通して乗客の流れを扱います。担当者は、混雑を見込んだ人員配置と、終電から始発までの間に行う保守作業の組み立てを説明します。",
+        [
+          ["", "営業時間を通した駅員の役割", ""],
+          ["", "改札、ホーム、乗り換え通路での乗客の流れの管理", ""],
+          ["", "始発の前に終える夜間工事の日程", ""],
+        ],
+      ],
     ],
   },
   {
     w: "水",
-    title: "新たな都市拠点：鉄道を軸とした開発と駅を中心とするまちづくり",
-    city: "汐留、渋谷、東急沿線",
+    title: "渋谷：参加型の計画、東急、日々の通勤",
+    city: "渋谷駅と東急の郊外路線",
     theme:
-      "東京の鉄道駅は、交通、商業、雇用、文化が重なる都市の拠点です。この日は、汐留のエリアマネジメント、渋谷の再開発、東急による鉄道と都市開発の一体的な展開を見ます。",
-    tip: "渋谷スカイの見学は、渋谷視察の途中、15:30頃を予定しています。",
-    notesExtra:
-      "朝食はホテルでとります。時刻は未定です。汐留の説明と渋谷への移動時刻は調整中です。東急との面談は確認待ちです。郊外鉄道の訪問駅は未定です。",
+      "この日は渋谷駅の周辺です。区とともに進める参加型のまちづくり、鉄道・不動産・商業を組み合わせる東急の事業、そして郊外の通勤路を歩きます。",
+    tip: "東急のプログラムは、説明と駅の徒歩視察です。",
+    notesExtra: "",
     items: [
-      ["汐留", "説明と徒歩視察、09:00–10:00"],
-      ["渋谷", "区による説明、10:00–12:00"],
-      ["東急", "説明と渋谷視察、13:30–16:30"],
-      ["現地調査", "枝久保達也、17:00–18:30"],
+      ["渋谷区", "まちづくりの講演、10:00–12:00"],
+      ["東急", "説明と駅の視察、13:30–16:00"],
+      ["通勤", "枝久保達也、16:30–18:00"],
     ],
     program: [
-      ["08:30–08:45", "朝の事前説明", "ホテル"],
-      ["09:00–09:30", "エリアマネジメントの説明", "SIO-SITEタウンマネジメント — 汐留。旧鉄道貨物ヤードから都市の駅へ。調整中。"],
-      ["09:30–10:00", "徒歩視察", "汐留。調整中。"],
-      ["10:00–12:00", "説明", "渋谷区 — 再開発、基盤整備、官民連携。渋谷区商工会館2階大研修室、渋谷1-12-5、ヒカリエ近く。"],
-      ["12:00–13:30", "昼食", "渋谷"],
-      ["13:30–14:30", "説明", "東急 — 鉄道事業と都市開発の一体的な展開。渋谷の会場は未定。"],
-      ["14:30–16:30", "専門家による現地視察", "渋谷。渋谷スカイは15:30頃を予定。"],
-      ["17:00–18:30", "専門家による現地調査", "枝久保達也 — 東急沿線の通勤の暮らし。訪問駅は未定。"],
+      [
+        "10:00–12:00",
+        "渋谷駅周辺の参加型まちづくり",
+        "講演 · 渋谷区まちづくり推進部。渋谷区のまちづくり推進部は、住民や地元の事業者とともに地区の計画を進めます。駅周辺の再整備の中で、その意見が通りや公共空間のデザインにどう反映されるかを扱います。",
+        [
+          ["", "住民と地元事業者が地区の計画に参加するしくみ", ""],
+          ["", "地域からの提案が通りや公共空間のデザインにどう活きるか", ""],
+          ["", "工事中も来街者が店に来られるよう、地元事業者と調整すること", ""],
+        ],
+      ],
+      [
+        "13:30–16:00",
+        "東急の鉄道、不動産、タウンマネジメント",
+        "講演と専門家による駅の徒歩視察 · 東急株式会社。東急は鉄道の運行に、不動産開発と商業を組み合わせています。説明と駅の視察では、この事業の形が、東京でも特に乗換の多い地点の再開発をどう方向づけているかを見ます。",
+        [
+          ["", "地区全体の活動を調整するタウンマネジメント会社の役割", ""],
+          ["", "渋谷駅と周辺の通り、商業空間に対する東急の構想", ""],
+          ["", "列車を走らせ、通りを開け、店へのアクセスを保ったまま進める段階的な工事", ""],
+        ],
+      ],
+      [
+        "16:30–18:00",
+        "東急の郊外路線における日々の通勤",
+        "専門家による徒歩視察 · 枝久保達也。鉄道ジャーナリストの枝久保達也は、乗客の目線から郊外鉄道を見ています。駅とまちのあいだの通勤経路を歩き、日々の移動が地域の暮らしをどうかたちづくるかを探ります。",
+        [
+          ["", "駅までの徒歩から帰宅まで、定期利用者の一日の流れ", ""],
+          ["", "混んだホームと車内でのならび方、列への入り方などの乗車の習慣", ""],
+          ["", "地域の人が集まり、日常の拠点になる駅", ""],
+        ],
+      ],
     ],
   },
   {
     w: "木",
-    title: "大都市圏のガバナンス：公共交通、計画、政策",
-    city: "東京都庁、新宿、駐日イスラエル大使館",
+    title: "公共交通、都市計画、新宿駅",
+    city: "都営交通、東京都、新宿駅",
     theme:
-      "東京の都市交通を計画し運営する機関と会い、その後、新宿駅を歩き、駐日イスラエル大使館を訪問します。",
-    tip: "駐日イスラエル大使館では保安手続きの時間を見てください。移動は15:00に始まります。",
-    notesExtra:
-      "朝食はホテルでとります。時刻は未定です。都営交通と東京都の説明担当者、新宿の案内者、大使の出席は未定です。",
+      "午前は都営交通と東京都から、公営の地下鉄・バスと、交通の事業が政策から地区の計画になる過程を聞きます。午後は新宿駅の南口とバスタ新宿を歩きます。",
+    tip: "新宿の徒歩視察の案内者は未定です。",
+    notesExtra: "新宿駅の徒歩視察の案内者は未定です。",
     items: [
-      ["都営", "公共交通の説明、10:00–11:00"],
-      ["東京都", "都市圏の計画、11:00–12:00"],
-      ["新宿", "バスタ視察、13:30–15:00"],
-      ["大使館", "駐日イスラエル大使、16:00–17:00"],
+      ["都営", "地下鉄とバス、10:00–11:00"],
+      ["東京都", "行政の各層にまたがる計画、11:00–12:00"],
+      ["新宿", "南口とバスタ、13:30–15:00"],
     ],
     program: [
-      ["08:30–08:45", "朝の事前説明", "ホテル"],
-      ["08:45–09:30", "東京都庁へ移動", ""],
-      ["09:30–10:00", "到着と導入説明", "東京都庁"],
-      ["10:00–11:00", "説明", "都営交通 — 公共交通事業者としての運営上の課題。調整中。会場は未定。"],
-      ["11:00–12:00", "説明", "東京都 — 大都市圏の交通計画と関係者間の調整。調整中。会場は未定。"],
-      ["12:00–13:30", "昼食", "新宿"],
-      ["13:30–15:00", "新宿バスタ視察", "専門家による新宿駅の徒歩視察 — ミリメートルと秒：世界で最も利用者の多い鉄道駅における人の体験。案内者は未定。"],
-      ["15:00–16:00", "駐日イスラエル大使館へ移動", "到着と保安手続き"],
-      ["16:00–17:00", "面談", "駐日イスラエル大使。ラビン会議室。出席は要確認。"],
-      ["17:00–18:00", "意見交換", "振り返りと学びの共有"],
+      [
+        "10:00–11:00",
+        "東京の公営地下鉄とバスを運営する",
+        "講演 · 都営交通の担当者。都営交通は東京都のために地下鉄とバスを運行しています。担当者は、公営であることで可能になることと、他の事業者との協力が欠かせない点を話します。",
+        [
+          ["", "公営の交通ネットワークを運営する利点と課題", ""],
+          ["", "乗換駅でのバスと地下鉄の調整", ""],
+          ["", "他の鉄道会社との接続や、乗客への案内での協力", ""],
+        ],
+      ],
+      [
+        "11:00–12:00",
+        "行政の各層にまたがる東京の交通計画",
+        "講演 · 東京都の計画担当者。東京都の計画担当者が、交通への投資案が広域の優先事業から地区の事業になる過程を説明します。鉄道の計画と駅周辺の土地利用をつなぐ判断をたどります。",
+        [
+          ["", "国の政策から都の戦略、区の計画へと下りる計画の階層", ""],
+          ["", "事業を進めるうえでの都、区、鉄道事業者の役割", ""],
+          ["", "事業が区境をまたぐときの土地利用と駅へのアクセスの調整", ""],
+        ],
+      ],
+      [
+        "13:30–15:00",
+        "新宿駅南口とバスタ新宿",
+        "駅の徒歩視察 · 案内者は未定。日本国有鉄道の民営化のあと、新宿駅南口周辺の旧鉄道用地がどう再開発されたかをたどります。バスタ新宿では、鉄道駅から高速バス乗り場までの乗客の経路を歩きます。",
+        [
+          ["", "旧鉄道用地の再開発", ""],
+          ["", "鉄道のホームから高速バス乗り場までの案内", ""],
+          ["", "駅周辺を通る歩行者のつながり", ""],
+        ],
+      ],
     ],
   },
   {
     w: "金",
-    title: "人の目線に立ったまちづくり：地域コミュニティと鉄道インフラ",
-    city: "北沢タウンホール、下北線路街、喜多見",
+    title: "世田谷の鉄道沿線における地域のまちづくり",
+    city: "下北線路街ときたみふれあい広場",
     theme:
-      "東京の郊外鉄道のまちを訪れ、インフラが公共空間と地域コミュニティをどのように支えられるかを見ます。世田谷区と小田急電鉄は、まちづくり、参加、人のスケールの開発の事例です。",
-    tip: "安息日（シャバット）は16:12に始まります。一部の参加者は、これより早くホテルに戻る必要があります。",
-    notesExtra:
-      "朝食はホテルでとります。時刻は未定です。世田谷区の最終行程は受入先の確認が必要です。13:00の説明会場、喜多見電車基地への立入り、最終経路は未定です。シャバットは16:12頃に始まります。",
+      "世田谷区が、鉄道沿線での地域主体のまちづくりを紹介し、下北線路街を歩きます。そのあと小田急が、喜多見の車両基地の上にある公共の公園を案内します。",
+    tip: "午前のまち歩きには、下北線路街のBONUS TRACKが含まれます。",
+    notesExtra: "",
     items: [
-      ["世田谷", "まちづくりの説明、09:00–10:30"],
-      ["まち歩き", "下北線路街とBONUS TRACK、10:30–12:00"],
-      ["喜多見", "広場と車両基地、14:15–15:00"],
-      ["シャバット", "16:12に開始"],
+      ["世田谷", "下北線路街、09:30–12:00"],
+      ["喜多見", "車両基地の上の公園、14:00–15:00"],
     ],
     program: [
-      ["07:45–08:00", "朝の事前説明", "ホテル"],
-      ["08:00–09:00", "北沢タウンホールへ移動", "世田谷"],
-      ["09:00–10:30", "説明", "世田谷区 — 人の目線に立ったまちづくりと地域コミュニティの形成。北沢タウンホール。"],
-      ["10:30–12:00", "専門家による地域視察", "世田谷区まちづくりチーム — 下北線路街とBONUS TRACK：鉄道の地下化、用地の再利用、公共空間"],
-      ["12:00–13:00", "弁当", "北沢タウンホール。予定。"],
-      ["13:00–13:45", "説明", "きたみふれあい広場の担当者 — 車両基地の上の公園。会場は未定。"],
-      ["13:45–14:15", "きたみふれあい広場へ移動", "経路は未定"],
-      ["14:15–15:00", "現地視察", "きたみふれあい広場と小田急喜多見電車基地。立入りは受入先の承認が必要。"],
-      ["15:00–16:00", "ホテルへ帰着", ""],
-      ["16:12", "シャバット開始", "一部の参加者は早めに戻る場合があります"],
+      [
+        "09:30–12:00",
+        "世田谷の鉄道沿線における地域のまちづくり",
+        "講演と専門家によるまち歩き · 世田谷区。北沢の地域計画の担当は、住民とともにまちづくりを進めています。下北線路街のまち歩きでは、区の計画、交通、公園の担当が、小田急線の上の土地の再利用にどう向き合っているかを見ます。",
+        [
+          ["", "世田谷の地区計画における住民の役割", ""],
+          ["", "下北線路街における旧鉄道用地の再利用", ""],
+          ["", "BONUS TRACKの歩行路、地元の店、人が集まる場所", ""],
+        ],
+      ],
+      [
+        "14:00–15:00",
+        "稼働する車両基地の上の公共の公園",
+        "専門家による現地視察 · 小田急。小田急が、きたみふれあい広場とその下の車両基地を案内します。基地が下で動き続けながら、公園が周辺の街路とどうつながるかを見ます。",
+        [
+          ["", "周辺の街路からの公園の入り口", ""],
+          ["", "車両基地の上の広場の配置", ""],
+          ["", "公共空間と鉄道の運用区域との境界", ""],
+        ],
+      ],
     ],
   },
   {
@@ -689,26 +746,26 @@ const daysJa = [
   },
   {
     w: "月",
-    title: "開発と保全、そして出発",
-    city: "ホテル → 中央区・銀座 → 成田空港",
+    title: "日本橋駅周辺の計画",
+    city: "日本橋、中央区",
     theme:
-      "最終日の午前は、中央区と銀座で開発と保全がどのように向き合うかを見ます。区の短い説明と専門家による徒歩視察のあと、ホテル方面に戻り、昼食をとって成田空港へ移動します。",
-    tip: "チェックアウトは8:30頃です。成田空港行きの貸切バスは13:30に出発し、フライトは17:40に出発します。",
-    notesExtra: "朝食の手配は未定です。中央区の会場、銀座の経路、空港への送迎は未定です。",
+      "中央区の案内で日本橋駅の周辺を歩き、新しい駅の出入口、歩行者の経路、公共空間を、歴史のある商業地区にどう納めるかを見ます。",
+    tip: "日本橋の歴史のある街路の中に、新しい駅の出入口をどう入れるかを見ます。",
+    notesExtra: "",
     items: [
-      ["チェックアウト", "8:30頃"],
-      ["中央区", "説明、09:30–10:00"],
-      ["銀座", "専門家による徒歩視察、10:00–12:00"],
-      ["フライト", "成田出発、17:40"],
+      ["日本橋", "中央区による徒歩視察、09:00–12:00"],
     ],
     program: [
-      ["08:30", "ホテルチェックアウト", "朝食の手配は未定"],
-      ["09:30–10:00", "説明", "中央区。最終行程は未定。"],
-      ["10:00–12:00", "専門家による徒歩視察", "銀座。ホテル方面へ戻ります。最終経路は未定。"],
-      ["12:00–13:00", "昼食", ""],
-      ["13:30", "成田空港へ貸切バスで出発", "ホテルから"],
-      ["15:00", "空港チェックイン", "成田空港での保安検査と出国手続き"],
-      ["17:40", "成田空港を出発", ""],
+      [
+        "09:00–12:00",
+        "歴史のある商業地区における日本橋駅周辺の計画",
+        "専門家による徒歩視察 · 中央区。中央区が、日本橋駅周辺の敷地を再開発するときの計画上の選択を紹介します。新しい駅の出入口、歩行者の経路、公共空間を、歴史のある街路と建物が特徴の地区にどう納められるかを歩いて見ます。",
+        [
+          ["", "今ある街路のネットワークに、だれもが使える駅の出入口を納めること", ""],
+          ["", "新しい公共空間を、地区の歴史のある商業の街路につなぐこと", ""],
+          ["", "駅周辺の敷地を再開発するとき、歴史のある建物と街路の形を残すこと", ""],
+        ],
+      ],
     ],
   },
 ];
@@ -742,110 +799,175 @@ const daysHe = [
   },
   {
     w: "ג׳",
-    title: "מערכת הרכבות של טוקיו: רשתות, תחנות ותפעול",
-    city: "חדר הסמינרים במלון, טורנומון הילס וטוקיו מטרו",
+    title: "רשת הרכבות של טוקיו, תחנות ותפעול",
+    city: "טורנומון הילס וטוקיו מטרו",
     theme:
-      "היום מציג את רשת הרכבות המטרופולינית של טוקיו ואת עקרונות התכנון, הבנייה והתפעול שלה. אחרי הרצאות הבוקר מתקיים ביקור בתחנת טורנומון הילס, ואחר הצהריים תדרוך של טוקיו מטרו.",
-    tip: "נעליים נוחות לביקור בתחנת טורנומון הילס.",
-    notesExtra:
-      "ארוחת הבוקר במלון; השעה טרם נקבעה. מקום התדרוך של טוקיו מטרו טרם נקבע. סיום הביקור בטורנומון הילס ותחילת ארוחת הצהריים עשויים להשתנות.",
+      "הבוקר בוחן כיצד תוכננה ומומנה רשת הרכבות של טוקיו, ואז עוקב אחר תחנה מהרציף אל הרחוב בטורנומון הילס. אחר הצהריים נכנסים לתחנה של טוקיו מטרו ורואים איך הצוות מנהל את תנועת הנוסעים ואת העבודות בלילה.",
+    tip: "הסיור בטורנומון הילס עוקב אחר המסלול מהרציף אל הרחוב.",
+    notesExtra: "",
     items: [
-      ["הרצאה", "פרופ' Shigeru Morichi, 09:00–10:30"],
-      ["הרצאה", "Kazufumi Noyaki, 10:45–11:15"],
-      ["ביקור בתחנה", "טורנומון הילס, 11:30–12:30"],
-      ["טוקיו מטרו", "תדרוך תפעול, 14:00–16:00"],
+      ["הרצאה", "פרופ׳ שיגרו מוריצ׳י, 09:00–10:00"],
+      ["תחנה", "טורנומון הילס עם קזופומי נויאקי, 10:00–12:00"],
+      ["טוקיו מטרו", "בתוך תחנה, 14:00–16:00"],
     ],
     program: [
-      ["08:30–08:45", "תדרוך בוקר", "לובי המלון"],
-      ["09:00–10:30", "הרצאת פתיחה", "פרופ' Shigeru Morichi — רשת הרכבות המטרופולינית של טוקיו: התפתחות, מבנה ופיתוח עירוני"],
-      ["10:45–11:15", "הרצאה", "Kazufumi Noyaki, נשיא Metro Development — בניית מטרו: איזון בין קצב הבנייה לבין ההפרעה לציבור"],
-      ["11:30–12:30", "ביקור בתחנה בהדרכת מומחה", "תחנת טורנומון הילס — אדריכלות, הנדסה וחיבור לפיתוח עירוני מחודש"],
-      ["12:30–13:30", "ארוחת צהריים", "טורנומון הילס"],
-      ["13:30–14:00", "מעבר", "אל תדרוך אחר הצהריים של טוקיו מטרו"],
-      ["14:00–16:00", "תדרוך", "טוקיו מטרו — תפעול רכבת מטרופולינית. המקום טרם נקבע."],
-      ["16:30–17:30", "דיון קבוצתי", "סיכום ולקחים"],
+      [
+        "09:00–10:00",
+        "כיצד עיצבה רשת הרכבות של טוקיו את העיר",
+        "הרצאה · פרופ׳ שיגרו מוריצ׳י. פרופ׳ מוריצ׳י מתמחה במדיניות תחבורה ובתכנון פיתוח ברמה הלאומית. הוא החל את דרכו בחברת הרכבות הלאומית של יפן ובהמשך כיהן כנשיא המכון לחקר מדיניות התחבורה.",
+        [
+          ["", "חלקם של גופים ציבוריים ושל חברות רכבת פרטיות בצמיחתה של טוקיו", ""],
+          ["", "תכנון קווי מטרו חדשים, מימון הקמתם והחזר ההשקעה לאורך זמן", ""],
+          ["", "התאמת המודל של טוקיו לפיתוח מסילתי בערים אחרות", ""],
+        ],
+      ],
+      [
+        "10:00–12:00",
+        "הנדסת תחנות ושילובן בפיתוח העירוני",
+        "סיור מקצועי בהדרכת קזופומי נויאקי. קזופומי נויאקי עמד בעבר בראש המחלקה לבנייה ולשדרוג תשתיות בחברת טוקיו מטרו. בתחנת טורנומון הילס הוא יוביל את המשתתפים מהרציף אל הרחוב ויראה כיצד התחנה משתלבת במתחם המתחדש סביבה.",
+        [
+          ["", "כריית מנהרות והרחבת תחנות תת־קרקעיות בסביבה עירונית צפופה", ""],
+          ["", "חיבור אולמות התחנה למבנים ולרחובות סמוכים", ""],
+          ["", "שמירה על שירות הרכבות ועל מעברים פתוחים להולכי רגל בכל שלבי הבנייה", ""],
+        ],
+      ],
+      [
+        "14:00–16:00",
+        "תפעול המטרו מבפנים – בתחנה של טוקיו מטרו",
+        "הרצאה · נציג טוקיו מטרו. צוותי התחנות של טוקיו מטרו מנהלים את תנועת הנוסעים לאורך יום הפעילות. נציג החברה יסביר כיצד הצוותים נערכים לעומסים ומתזמנים עבודות תחזוקה בין הרכבת האחרונה בלילה לראשונה בבוקר.",
+        [
+          ["", "תחומי האחריות של צוות התחנה לאורך יום הפעילות", ""],
+          ["", "ניהול תנועת הנוסעים בשערי הכרטוס, ברציפים ובמעברי ההחלפה", ""],
+          ["", "תזמון עבודות תשתית בלילה והשלמתן לפני הרכבת הראשונה", ""],
+        ],
+      ],
     ],
   },
   {
     w: "ד׳",
-    title: "מוקדים עירוניים חדשים: פיתוח בהובלת הרכבת ועיר התחנה",
-    city: "שיודומה, שיבויה וקווי הפרברים של Tokyu",
+    title: "שיבויה: תכנון, טוקיו והנסיעה היומיומית",
+    city: "תחנת שיבויה וקווי הפרברים של טוקיו",
     theme:
-      "תחנות הרכבת בטוקיו פועלות כמוקדים עירוניים שמשלבים תחבורה, מסחר, תעסוקה ותרבות. היום עוסק בניהול האזור בשיודומה, בפיתוח מחדש של שיבויה, ובאופן שבו חברת Tokyu מחברת תפעול רכבות לפיתוח עירוני.",
-    tip: "הביקור בשיבויה סקיי מתוכנן לסביבות 15:30, במהלך הסיור בשיבויה.",
-    notesExtra:
-      "ארוחת הבוקר במלון; השעה טרם נקבעה. התדרוך בשיודומה והמעבר לשיבויה עדיין בתיאום זמנים. הפגישה עם Tokyu ממתינה לאישור. תחנות הסיור בפרברים טרם נקבעו.",
+      "היום נשאר סביב תחנת שיבויה: תכנון בשיתוף הציבור עם הרובע, השילוב של טוקיו בין רכבות, נדל״ן ומסחר, וסיור לאורך נסיעת יוממים בפרברים.",
+    tip: "המפגש עם טוקיו כולל הרצאה וסיור בתחנה.",
+    notesExtra: "",
     items: [
-      ["שיודומה", "תדרוך והליכה, 09:00–10:00"],
-      ["שיבויה", "תדרוך העיר, 10:00–12:00"],
-      ["Tokyu", "תדרוך וסיור בשיבויה, 13:30–16:30"],
-      ["סיור שטח", "Tatsuya Edakubo, 17:00–18:30"],
+      ["רובע שיבויה", "הרצאה על מאצ׳יזוקורי, 10:00–12:00"],
+      ["טוקיו", "הרצאה וסיור בתחנה, 13:30–16:00"],
+      ["נסיעה יומית", "טטסויה אדקובו, 16:30–18:00"],
     ],
     program: [
-      ["08:30–08:45", "תדרוך בוקר", "מלון"],
-      ["09:00–09:30", "תדרוך ניהול אזור", "SIO-SITE Town Management — שיודומה, ממסוף מטענים ישן של הרכבת אל תחנה עירונית. מוצע; הזמן טרם נקבע."],
-      ["09:30–10:00", "סיור רגלי", "שיודומה. מוצע; הזמן טרם נקבע."],
-      ["10:00–12:00", "תדרוך", "עיריית שיבויה — פיתוח מחדש, תשתיות ושיתוף ציבורי-פרטי. לשכת המסחר של שיבויה, חדר הדרכה גדול בקומה 2, Shibuya 1-12-5, ליד Hikarie."],
-      ["12:00–13:30", "ארוחת צהריים", "שיבויה"],
-      ["13:30–14:30", "תדרוך", "Tokyu — רכבת ופיתוח עירוני משולבים. המקום בשיבויה טרם נקבע."],
-      ["14:30–16:30", "סיור בהדרכת מומחה", "שיבויה. שיבויה סקיי מתוכנן לסביבות 15:30."],
-      ["17:00–18:30", "סיור שטח בהדרכת מומחה", "Tatsuya Edakubo — חיי היוממות לאורך קווי הפרברים של Tokyu. התחנות טרם נקבעו."],
+      [
+        "10:00–12:00",
+        "תכנון בשיתוף הציבור סביב תחנת שיבויה",
+        "הרצאה · מחלקת המאצ׳יזוקורי בעיריית רובע שיבויה. מחלקת המאצ׳יזוקורי של שיבויה עוסקת בתכנון שכונתי בשיתוף תושבים ועסקים מקומיים. המפגש יעסוק באופן שבו הצעותיהם משפיעות על עיצוב הרחובות והמרחבים הציבוריים במהלך פיתוחו מחדש של מתחם התחנה.",
+        [
+          ["", "שיתוף תושבים ועסקים מקומיים בתכנון השכונה", ""],
+          ["", "השפעתן של הצעות מהקהילה על עיצוב הרחובות והמרחב הציבורי", ""],
+          ["", "עבודה עם עסקים מקומיים לשמירה על גישת הלקוחות בזמן העבודות", ""],
+        ],
+      ],
+      [
+        "13:30–16:00",
+        "רכבות, נדל״ן וניהול המרחב העירוני בשיבויה – הגישה של טוקיו",
+        "הרצאה וסיור מקצועי בתחנה · תאגיד טוקיו (Tokyu). תאגיד טוקיו משלב הפעלת רכבות עם פיתוח נדל״ן ומסחר קמעונאי. ההרצאה והסיור יבחנו כיצד המודל העסקי הזה מעצב את הפיתוח סביב אחד ממוקדי ההחלפה העמוסים בטוקיו.",
+        [
+          ["", "תפקידה של החברה לניהול המתחם בתיאום הפעילות ברחבי האזור", ""],
+          ["", "החזון של טוקיו לתחנת שיבויה, לרחובות הסמוכים ולשטחי המסחר", ""],
+          ["", "חלוקת עבודות הבנייה לשלבים המאפשרים להמשיך להפעיל רכבות ולשמור על רחובות פתוחים ועל גישה לעסקים", ""],
+        ],
+      ],
+      [
+        "16:30–18:00",
+        "הנסיעה היומיומית בקווי הפרברים של טוקיו",
+        "סיור מקצועי בהדרכת טטסויה אדקובו. טטסויה אדקובו, עיתונאי המתמחה ברכבות, בוחן את הרכבת הפרברית מנקודת מבטם של הנוסעים. הסיור יתחקה אחר המסלול שבין השכונה לתחנה ויבחן כיצד הנסיעה היומיומית מעצבת את החיים המקומיים.",
+        [
+          ["", "שגרת הנוסעים הקבועים, מההליכה לתחנה ועד הדרך הביתה", ""],
+          ["", "תרבות הנסיעה ברציפים ובקרונות עמוסים, מהעמידה בתור ועד העלייה לקרון צפוף", ""],
+          ["", "התחנה כמקום מפגש שכונתי וכמוקד לחיי היומיום", ""],
+        ],
+      ],
     ],
   },
   {
     w: "ה׳",
-    title: "ניהול המטרופולין: תחבורה ציבורית, תכנון ומדיניות",
-    city: "ממשלת המטרופולין של טוקיו, שינג'וקו ושגרירות ישראל",
+    title: "תחבורה ציבורית, תכנון ותחנת שינג׳וקו",
+    city: "טואי, ממשלת המטרופולין של טוקיו ותחנת שינג׳וקו",
     theme:
-      "ניפגש עם הגופים שאחראים על תכנון ותפעול מערכת התחבורה המטרופולינית של טוקיו, ואחר כך נלך בתחנת שינג'וקו ונבקר בשגרירות ישראל.",
-    tip: "השאירו זמן לנהלי הביטחון בשגרירות ישראל. היציאה לשם מתחילה ב-15:00.",
-    notesExtra:
-      "ארוחת הבוקר במלון; השעה טרם נקבעה. המארחים של Toei ושל ממשלת המטרופולין, המדריך בשינג'וקו והשתתפות השגריר טרם אושרו.",
+      "הבוקר עם טואי ועם ממשלת המטרופולין של טוקיו: שירותי המטרו והאוטובוסים הציבוריים, והדרך שבה מיזם תחבורה עובר ממדיניות לתוכנית מקומית. אחר הצהריים סיור ביציאה הדרומית של תחנת שינג׳וקו ובמסוף בוסטה.",
+    tip: "זהות המדריך לסיור בשינג׳וקו טרם נקבעה.",
+    notesExtra: "זהות המדריך לסיור בתחנת שינג׳וקו טרם נקבעה.",
     items: [
-      ["Toei", "תדרוך תחבורה ציבורית, 10:00–11:00"],
-      ["ממשלת המטרופולין", "תכנון מטרופוליני, 11:00–12:00"],
-      ["שינג'וקו", "סיור בבאסטה, 13:30–15:00"],
-      ["שגרירות", "שגריר ישראל, 16:00–17:00"],
+      ["טואי", "מטרו ואוטובוסים, 10:00–11:00"],
+      ["הממשל המטרופוליני", "תכנון בין דרגי השלטון, 11:00–12:00"],
+      ["שינג׳וקו", "היציאה הדרומית ובוסטה, 13:30–15:00"],
     ],
     program: [
-      ["08:30–08:45", "תדרוך בוקר", "מלון"],
-      ["08:45–09:30", "מעבר לממשלת המטרופולין של טוקיו", ""],
-      ["09:30–10:00", "הגעה והיכרות", "ממשלת המטרופולין של טוקיו"],
-      ["10:00–11:00", "תדרוך", "Toei — אתגרים בתפעול תחבורה ציבורית. מוצע; המקום טרם נקבע."],
-      ["11:00–12:00", "תדרוך", "ממשלת המטרופולין של טוקיו — תכנון תחבורה מטרופולינית ותיאום. מוצע; המקום טרם נקבע."],
-      ["12:00–13:30", "ארוחת צהריים", "שינג'וקו"],
-      ["13:30–15:00", "סיור בבאסטה של שינג'וקו", "הליכה בהדרכת מומחה בתחנת שינג'וקו — מילימטרים ושניות: החוויה האנושית בתחנת הרכבת העמוסה בעולם. המדריך טרם נקבע."],
-      ["15:00–16:00", "מעבר לשגרירות ישראל", "הגעה ונהלי ביטחון"],
-      ["16:00–17:00", "פגישה", "שגריר ישראל ביפן. חדר הסמינרים על שם רבין. כפוף לאישור."],
-      ["17:00–18:00", "דיון קבוצתי", "סיכום ולקחים"],
+      [
+        "10:00–11:00",
+        "הפעלת שירותי המטרו והאוטובוסים הציבוריים בטוקיו",
+        "הרצאה · נציג רשות התחבורה טואי (Toei). טואי מפעילה קווי מטרו ואוטובוסים מטעם ממשלת מטרופולין טוקיו. נציג הרשות ידון באפשרויות שמקנה הבעלות הציבורית ובתחומים שבהם טואי תלויה בשיתוף פעולה עם מפעילים אחרים.",
+        [
+          ["", "היתרונות והאתגרים בהפעלת רשת תחבורה בבעלות ציבורית", ""],
+          ["", "תיאום שירותי האוטובוסים והמטרו בתחנות מעבר", ""],
+          ["", "שיתוף פעולה עם חברות רכבת אחרות בתכנון קישורים ובמסירת מידע לנוסעים", ""],
+        ],
+      ],
+      [
+        "11:00–12:00",
+        "תכנון התחבורה בטוקיו – מהמדיניות הארצית לתוכנית המקומית",
+        "הרצאה · נציג תחום התכנון בממשלת מטרופולין טוקיו. נציג צוות התכנון המטרופוליני יסביר כיצד השקעה בתחבורה שזוהתה כעדיפות אזורית מתגבשת לכדי מיזם מקומי. המפגש יתמקד בהחלטות המחברות בין תכנון הרכבת לבין שימושי הקרקע סביב התחנות.",
+        [
+          ["", "מדרג התכנון – ממדיניות ארצית דרך אסטרטגיה מטרופולינית ועד לתוכניות הרבעים", ""],
+          ["", "תפקידי הממשל המטרופוליני, הרבעים ומפעילי הרכבות בקידום מיזם תחבורתי", ""],
+          ["", "תיאום שימושי קרקע ודרכי גישה לתחנה במיזמים החוצים גבולות בין רבעים", ""],
+        ],
+      ],
+      [
+        "13:30–15:00",
+        "תחנת שינג׳וקו – היציאה הדרומית ומסוף האוטובוסים בוסטה",
+        "סיור בתחנה · זהות המדריך טרם נקבעה. הסיור יבחן כיצד פותחו מחדש שטחי הרכבת סביב היציאה הדרומית של תחנת שינג׳וקו בעקבות הפרטת חברת הרכבות הלאומית של יפן. בבוסטה שינג׳וקו יעברו המשתתפים במסלול הנוסע מתחנת הרכבת אל מסוף האוטובוסים הבין־עירוניים.",
+        [
+          ["", "פיתוח מחדש של שטחים ששימשו בעבר את הרכבת", ""],
+          ["", "התמצאות בדרך מרציפי הרכבת למסוף האוטובוסים הבין־עירוניים", ""],
+          ["", "רציפות מסלולי ההליכה ברחבי מתחם התחנה", ""],
+        ],
+      ],
     ],
   },
   {
     w: "ו׳",
-    title: "בקנה מידה אנושי: מאצ'יזוקורי, קהילה ותשתית רכבת",
-    city: "אולם העירייה קיטאזאווה, שימוקיטה סנרוגאי וקיטאמי",
+    title: "תכנון קהילתי לאורך תוואי הרכבת בסטגאיה",
+    city: "שימוקיטה סנרוגאי ופארק קיטאמי פוריאי פלאזה",
     theme:
-      "נצא לשכונות הרכבת בפרברי טוקיו כדי לראות איך תשתית יכולה לשפר מרחב ציבורי ולחזק קהילות. העיר סטאגאיה ורכבת אודאקיו מציגות מקרה של מאצ'יזוקורי, השתתפות ופיתוח בקנה מידה אנושי.",
-    tip: "השבת נכנסת ב-16:12. חלק מהמשתתפים יצטרכו לחזור למלון מוקדם יותר.",
-    notesExtra:
-      "ארוחת הבוקר במלון; השעה טרם נקבעה. הסידורים בסטאגאיה כפופים לאישור המארחים. מקום התדרוך ב-13:00, הכניסה למוסך קיטאמי והמסלול הסופי טרם נקבעו. השבת נכנסת בסביבות 16:12.",
+      "עיריית רובע סטגאיה מציגה תכנון קהילתי לאורך תוואי הרכבת, עם סיור בשימוקיטה סנרוגאי. אחר כך אודקיו מובילה ביקור בפארק הציבורי שמעל מתחם הרכבות בקיטאמי.",
+    tip: "סיור הבוקר כולל את מתחם BONUS TRACK בשימוקיטה סנרוגאי.",
+    notesExtra: "",
     items: [
-      ["סטאגאיה", "תדרוך מאצ'יזוקורי, 09:00–10:30"],
-      ["שכונה", "שימוקיטה סנרוגאי ו-BONUS TRACK, 10:30–12:00"],
-      ["קיטאמי", "ביקור בכיכר ובמוסך, 14:15–15:00"],
-      ["שבת", "כניסת שבת 16:12"],
+      ["סטגאיה", "שימוקיטה סנרוגאי, 09:30–12:00"],
+      ["קיטאמי", "פארק מעל מתחם הרכבות, 14:00–15:00"],
     ],
     program: [
-      ["07:45–08:00", "תדרוך בוקר", "מלון"],
-      ["08:00–09:00", "מעבר לאולם העירייה קיטאזאווה", "סטאגאיה"],
-      ["09:00–10:30", "תדרוך", "עיריית סטאגאיה — מאצ'יזוקורי בקנה מידה אנושי ובניית קהילה. אולם העירייה קיטאזאווה."],
-      ["10:30–12:00", "הליכה בשכונה בהדרכת מומחה", "צוות המאצ'יזוקורי של סטאגאיה — שימוקיטה סנרוגאי ו-BONUS TRACK: הטמנת הרכבת, שימוש מחדש בקרקע ומרחב ציבורי"],
-      ["12:00–13:00", "ארוחת צהריים ארוזה", "אולם העירייה קיטאזאווה. מתוכנן."],
-      ["13:00–13:45", "תדרוך", "נציג כיכר קיטאמי פוראי — פארק מעל מוסך הרכבת. המקום טרם נקבע."],
-      ["13:45–14:15", "מעבר לכיכר קיטאמי פוראי", "המסלול טרם נקבע"],
-      ["14:15–15:00", "ביקור באתר", "כיכר קיטאמי פוראי ומוסך אודאקיו בקיטאמי. הכניסה כפופה לאישור המארחים."],
-      ["15:00–16:00", "חזרה למלון", ""],
-      ["16:12", "כניסת שבת", "חלק מהמשתתפים עשויים לחזור מוקדם יותר"],
+      [
+        "09:30–12:00",
+        "תכנון קהילתי לאורך תוואי הרכבת בסטגאיה",
+        "הרצאה וסיור מקצועי בשכונה · עיריית רובע סטגאיה. היחידה לתכנון קהילתי בקיטזאווה מקדמת עם התושבים מאצ׳יזוקורי – תכנון עירוני בהובלת הקהילה. בסיור בשימוקיטה סנרוגאי נבחן כיצד צוותי התכנון, התחבורה והגנים של הרובע פועלים לשימוש מחודש בקרקע שמעל למסילת אודקיו.",
+        [
+          ["", "תפקיד התושבים בגיבוש תוכניות שכונתיות בסטגאיה", ""],
+          ["", "שימוש מחודש בשטחי המסילה לשעבר בשימוקיטה סנרוגאי", ""],
+          ["", "שבילי הליכה, חנויות מקומיות ומקומות מפגש במתחם BONUS TRACK", ""],
+        ],
+      ],
+      [
+        "14:00–15:00",
+        "פארק ציבורי מעל מתחם רכבות פעיל",
+        "ביקור מקצועי בהדרכת חברת אודקיו. נציגי אודקיו יובילו ביקור בפארק קיטאמי פוריאי פלאזה ובמתחם הדיור והתחזוקה של הרכבות שמתחתיו. המשתתפים יבחנו כיצד הפארק מתחבר לרחובות השכונה בעוד מתחם הרכבות ממשיך לפעול מתחתיו.",
+        [
+          ["", "הכניסות לפארק מרחובות השכונה", ""],
+          ["", "פריסת הרחבה הציבורית מעל מתחם הרכבות", ""],
+          ["", "ההפרדה בין השטח הפתוח לציבור לשטח התפעולי של הרכבת", ""],
+        ],
+      ],
     ],
   },
   {
@@ -903,27 +1025,26 @@ const daysHe = [
   },
   {
     w: "ב׳",
-    title: "פיתוח, שימור ויציאה",
-    city: "המלון · העיר צ'ואו וגינזה · נמל התעופה נריטה",
+    title: "תכנון סביב תחנת ניהונבאשי",
+    city: "ניהונבאשי, רובע צ׳ואו",
     theme:
-      "הבוקר האחרון בוחן איך פיתוח ושימור נפגשים בעיר צ'ואו ובגינזה. אחרי תדרוך עירוני קצר והליכה בהדרכת מומחה נחזור לכיוון המלון, נאכל צהריים ונצא לנמל התעופה נריטה.",
-    tip: "הצ'ק-אאוט בסביבות 08:30. האוטובוס לנריטה יוצא ב-13:30, והטיסה ממריאה ב-17:40.",
-    notesExtra:
-      "סידורי ארוחת הבוקר טרם נקבעו. המקום בעיר צ'ואו, המסלול בגינזה וההסעה לשדה טרם נקבעו.",
+      "נציגי רובע צ׳ואו מובילים סיור סביב תחנת ניהונבאשי, ובוחנים כיצד לשלב כניסות חדשות לתחנה, נתיבי הליכה ומרחבים ציבוריים ברובע מסחרי היסטורי.",
+    tip: "הסיור בוחן כניסות חדשות לתחנה בתוך הרחובות ההיסטוריים של ניהונבאשי.",
+    notesExtra: "",
     items: [
-      ["צ'ק-אאוט", "בסביבות 08:30"],
-      ["העיר צ'ואו", "תדרוך, 09:30–10:00"],
-      ["גינזה", "הליכה בהדרכת מומחה, 10:00–12:00"],
-      ["טיסה", "המראה מנריטה, 17:40"],
+      ["ניהונבאשי", "סיור עם רובע צ׳ואו, 09:00–12:00"],
     ],
     program: [
-      ["08:30", "צ'ק-אאוט מהמלון", "סידורי ארוחת הבוקר טרם נקבעו"],
-      ["09:30–10:00", "תדרוך", "העיר צ'ואו. הסידורים הסופיים טרם נקבעו."],
-      ["10:00–12:00", "סיור רגלי בהדרכת מומחה", "גינזה, בחזרה לכיוון המלון. המסלול הסופי טרם נקבע."],
-      ["12:00–13:00", "ארוחת צהריים", ""],
-      ["13:30", "יציאת האוטובוס לנמל התעופה נריטה", "מהמלון"],
-      ["15:00", "צ'ק-אין בשדה", "ביטחון ונהלי יציאה בנריטה"],
-      ["17:40", "המראת הטיסה מנריטה", ""],
+      [
+        "09:00–12:00",
+        "תכנון סביב תחנת ניהונבאשי בלב רובע מסחרי היסטורי",
+        "סיור מקצועי בהדרכת נציגי עיריית רובע צ׳ואו. נציגי רובע צ׳ואו יציגו את השיקולים התכנוניים בפיתוח מחדש של אתרים סביב תחנת ניהונבאשי. בסיור נבחן כיצד אפשר לשלב כניסות חדשות לתחנה, נתיבי הליכה ומרחבים ציבוריים במרקם של רחובות ומבנים היסטוריים.",
+        [
+          ["", "שילוב כניסות נגישות לתחנה במערך הרחובות הקיים", ""],
+          ["", "חיבור מרחבים ציבוריים חדשים לרחובות המסחר ההיסטוריים", ""],
+          ["", "שימור מבנים היסטוריים ותוואי רחובות בעת פיתוח מחדש של אתרים בסביבת התחנה", ""],
+        ],
+      ],
     ],
   },
 ];
@@ -1001,9 +1122,14 @@ function setProgramLang(lang) {
     notifyParentLanguage();
     return;
   }
+  const enteringHebrew = next === "he";
   programLang = next;
+  if (enteringHebrew) currentDayIndex = 0;
   applyChromeLanguage();
   render({ resetNav: false });
+  if (enteringHebrew && document.getElementById("page-day")?.classList.contains("active")) {
+    scrollDayViewToTop();
+  }
   notifyParentLanguage();
 }
 
@@ -1121,8 +1247,9 @@ function runTests() {
   console.assert(days.every((day) => day.he && day.he.program.length === day.program.length), "Each day needs a Hebrew itinerary");
   console.assert(days[0].title.indexOf("Welcome") !== -1, "Day 1 should welcome the delegation to Tokyo");
   console.assert(days[0].program[0][0] === "11:40", "Day 1 should arrive at 11:40");
-  console.assert(days[7].title.indexOf("Departure") !== -1, "Day 8 should include departure");
-  console.assert(days[7].program[days[7].program.length - 1][0] === "17:40", "Day 8 flight should depart at 17:40");
+  console.assert(days[7].title.indexOf("Nihonbashi") !== -1, "Day 8 should be the Nihonbashi walk");
+  console.assert(days[7].program[0][0] === "09:00–12:00", "Day 8 should start at 09:00");
+  console.assert(days.every((day) => day.ja.items.length === day.items.length && day.he.items.length === day.items.length), "Each day needs matching highlight cards");
   console.assert(!dayPhotos[days[0].title], "Days without photos should not force old images");
   console.assert(!dayMaps[days[0].title], "Days without maps should not force old maps");
   console.assert(prep.length >= 1 && avoid.length >= 1, "Preparation and avoid pages should have content");
@@ -1465,7 +1592,10 @@ function renderDesktopDay(day) {
   }
 
   const highlightsEl = byId("highlights");
-  highlightsEl.classList.toggle("highlights--5", day.items.length === 5);
+  highlightsEl.classList.remove("highlights--1", "highlights--2", "highlights--3", "highlights--5");
+  if ([1, 2, 3, 5].includes(day.items.length)) {
+    highlightsEl.classList.add("highlights--" + day.items.length);
+  }
   highlightsEl.innerHTML = day.items
     .map(
       ([title, text, icon]) => `
