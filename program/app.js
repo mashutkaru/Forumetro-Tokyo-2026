@@ -1539,23 +1539,7 @@ function toggleMobileScheduleItem(button) {
 }
 
 function renderScheduleEntry(entry) {
-  const [time, title, label, plan, link] = entry;
-  const planHtml = renderSchedulePlanBlock(plan);
-  const groupClass = planHtml ? " timeline-row--group" : "";
-  const badgeHtml = renderScheduleBadge(link);
-
-  return `
-    <div class="timeline-row${groupClass}">
-      <div class="time">${time}</div>
-      <div>●</div>
-      <div>
-        <h4>${title}</h4>
-        ${label ? `<p>${label}</p>` : ""}
-        ${planHtml}
-      </div>
-      ${badgeHtml}
-    </div>
-  `;
+  return renderMobileScheduleEntry(entry);
 }
 
 function getDayNotes(day) {
@@ -2394,13 +2378,14 @@ function applyLineAnchor(data) {
   var target = data.x;
   var vw = document.documentElement.clientWidth;
   var spaceRight = vw - target - 12;
-  if (navRight() - markCenter() > spaceRight) {
+  var hebrewProgram = !useful && document.documentElement.classList.contains("lang-he");
+  if (!hebrewProgram && navRight() - markCenter() > spaceRight) {
     var gaps = Math.max(1, nav.querySelectorAll("button").length - 1);
     var gapNow = parseFloat(window.getComputedStyle(nav).gap) || 32;
     nav.style.gap = Math.max(10, gapNow - (navRight() - markCenter() - spaceRight) / gaps) + "px";
     void nav.offsetWidth;
   }
-  if (navRight() - markCenter() > spaceRight + 4) {
+  if (!hebrewProgram && navRight() - markCenter() > spaceRight + 4) {
     nav.style.flexDirection = "row-reverse";
     nav.style.gap = "";
     nav.classList.add("line-anchored-reverse");
@@ -2409,6 +2394,22 @@ function applyLineAnchor(data) {
   var shift = target - markCenter();
   nav.style.marginLeft = shift + "px";
   void nav.offsetWidth;
+  if (hebrewProgram) {
+    var langBtn = document.querySelector(".topbar-end");
+    var limitLeft = langBtn ? langBtn.getBoundingClientRect().right - origin + 18 : 48;
+    var navLeft = nav.getBoundingClientRect().left - origin;
+    if (navLeft < limitLeft) {
+      var leftGaps = Math.max(1, nav.querySelectorAll("button").length - 1);
+      var leftGap = parseFloat(window.getComputedStyle(nav).gap) || 32;
+      nav.style.gap = Math.max(8, leftGap - (limitLeft - navLeft) / leftGaps) + "px";
+      nav.style.marginLeft = "0px";
+      nav.style.transform = "none";
+      void nav.offsetWidth;
+      shift = target - markCenter();
+      nav.style.marginLeft = shift + "px";
+      void nav.offsetWidth;
+    }
+  }
   if (Math.abs(target - markCenter()) > 4) {
     nav.style.transform = "translateX(" + (target - markCenter()) + "px)";
   }

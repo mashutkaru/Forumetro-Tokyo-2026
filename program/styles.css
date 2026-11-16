@@ -624,11 +624,41 @@ html.lang-he .subpage {
 }
 
 html.lang-he .topbar,
-html.lang-he .m-head,
+html.lang-he .m-head {
+  direction: ltr;
+}
+
+html.lang-he.is-embedded:not(.is-mobile-embed) .program-page-title {
+  left: auto;
+  right: 48px;
+  align-items: flex-end;
+}
+
+html.lang-he.is-embedded:not(.is-mobile-embed) .program-page-title h1 {
+  padding: 2px 0 2px 10px;
+}
+
+html.lang-he.is-embedded:not(.is-mobile-embed) .topbar-end {
+  position: absolute;
+  left: 48px;
+  right: auto;
+  top: 50%;
+  margin: 0;
+  transform: translateY(-50%);
+}
+
+html.lang-he.is-embedded:not(.is-mobile-embed) .nav.nav-program {
+  direction: rtl;
+}
+
+html.lang-he.is-embedded:not(.is-mobile-embed) .nav.nav-program.line-anchored::before {
+  background: linear-gradient(90deg, #8F76D6, #C9A227, #FF9500, #F62E36, #00BB85, #009BBF);
+}
+
 html.lang-he .date-strip,
 html.lang-he .m-days,
 html.lang-he .m-days-row {
-  direction: ltr;
+  direction: rtl;
 }
 
 html.lang-he .date-num,
@@ -1459,7 +1489,8 @@ html.lang-he .day-line-panel {
 }
 
 .schedule-list {
-  display: block;
+  display: grid;
+  gap: 10px;
   padding: 0 34px 34px;
 }
 
