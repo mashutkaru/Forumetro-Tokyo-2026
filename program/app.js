@@ -244,7 +244,7 @@ const days = [
     lines: ["ginza"],
     models: [
       {
-        src: "../models/Shibuya-city-model.glb?v=5",
+        src: "../models/Shibuya-city-model.glb?v=6",
         title: "Shibuya",
         titleJa: "渋谷",
         titleHe: "שיבויה",
