@@ -1277,18 +1277,46 @@ main {
 
 .day-lines {
   display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  grid-column: 1 / -1;
+  margin-top: 18px;
+}
+
+.day-lines-row {
+  display: flex;
   flex-wrap: wrap;
   gap: 8px;
-  margin-top: 18px;
 }
 
 .day-lines[hidden] {
   display: none;
 }
 
-html.lang-he .day-lines {
+html.lang-he .day-lines,
+html.lang-he .day-line-panel {
   direction: ltr;
   justify-content: flex-start;
+}
+
+.day-line-panel {
+  margin-top: 14px;
+  padding: 4px 16px 12px;
+  border: 1px solid rgba(33, 79, 99, 0.12);
+  border-top: 3px solid var(--line, var(--navy));
+  border-radius: 16px;
+  background: #fff;
+}
+
+.day-line-panel[hidden] {
+  display: none;
+}
+
+.day-line-detail h3 {
+  margin: 0 0 12px;
+  color: var(--navy);
+  font-size: 22px;
+  line-height: 1.25;
 }
 
 .photo {
@@ -2244,7 +2272,7 @@ html.lang-he .line-page .line-section {
 }
 
 @media (max-width: 700px) {
-  .day-lines {
+  .day-lines-row {
     flex-wrap: nowrap;
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
@@ -2252,8 +2280,12 @@ html.lang-he .line-page .line-section {
     padding-bottom: 4px;
   }
 
-  .day-lines .line-tag {
+  .day-lines-row .line-tag {
     flex: 0 0 auto;
+  }
+
+  .day-line-detail h3 {
+    font-size: 18px;
   }
 }
 

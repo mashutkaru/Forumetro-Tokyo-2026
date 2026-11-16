@@ -1572,12 +1572,80 @@ function renderDayLineTags(containerId, day) {
     .map((id) => profiles.find((line) => line.id === id))
     .filter(Boolean);
   el.hidden = lines.length === 0;
-  el.innerHTML = lines
+  const buttons = lines
     .map((line) => {
       const ink = lineInk(line.color, line.ink);
-      return `<button type="button" class="line-tag" data-line="${line.id}" style="--line:${line.color};--line-ink:${ink}">${line.label}</button>`;
+      return `<button type="button" class="line-tag" data-day-line="${line.id}" aria-expanded="false" style="--line:${line.color};--line-ink:${ink}">${escapeModelText(line.label)}</button>`;
     })
     .join("");
+  el.innerHTML = `<div class="day-lines-row">${buttons}</div><div class="day-line-panel" hidden></div>`;
+}
+
+function dayLineDetailHtml(line) {
+  const labels = window.LINE_FIELD_LABELS || {};
+  const profileNames = ["Technical & operational profile", "技術・運行の概要", "פרופיל טכני ותפעולי"];
+  const profileTitle = programLang === "ja" ? profileNames[1] : programLang === "he" ? profileNames[2] : profileNames[0];
+  const rows = line.rows
+    .map(([key, value]) => {
+      const names = labels[key] || [key, key, key];
+      const shown = programLang === "ja" ? names[1] : programLang === "he" ? names[2] : names[0];
+      return `<tr><th data-en="${escapeModelText(names[0])}" data-ja="${escapeModelText(names[1])}" data-he="${escapeModelText(names[2])}">${escapeModelText(shown)}</th><td>${escapeModelText(value)}</td></tr>`;
+    })
+    .join("");
+  const map = line.map
+    ? `<div class="line-map-scroll"><img class="line-map" src="./${line.map}" alt="${escapeModelText(line.label)} route map"></div>`
+    : "";
+  return `<div class="day-line-detail" style="--line:${line.color}">
+    <p class="line-kicker">${escapeModelText(line.code)}</p>
+    <h3>${escapeModelText(line.label)}</h3>
+    ${map}
+    <p class="line-intro">${escapeModelText(line.intro)}</p>
+    <h4 class="line-profile-title" data-en="${escapeModelText(profileNames[0])}" data-ja="${escapeModelText(profileNames[1])}" data-he="${escapeModelText(profileNames[2])}">${escapeModelText(profileTitle)}</h4>
+    <table class="line-table"><tbody>${rows}</tbody></table>
+  </div>`;
+}
+
+function revealDayLinePanel(panel) {
+  if (!panel) return;
+  const anchor = panel.closest(".day-lines") || panel;
+  const mobile = usesMobileProgram();
+  if (mobile) {
+    const scroller = document.querySelector(".m-content");
+    if (scroller) {
+      const top = scroller.scrollTop + anchor.getBoundingClientRect().top - scroller.getBoundingClientRect().top - 8;
+      scroller.scrollTo({ top: Math.max(0, top), behavior: "smooth" });
+      return;
+    }
+  }
+  scrollIframeTo(anchor, 8);
+}
+
+function toggleDayLine(button) {
+  const root = button.closest(".day-lines");
+  const panel = root && root.querySelector(".day-line-panel");
+  if (!root || !panel) return;
+  const wasOpen = button.classList.contains("is-active");
+  root.querySelectorAll(".line-tag").forEach((tag) => {
+    tag.classList.remove("is-active");
+    tag.setAttribute("aria-expanded", "false");
+  });
+  if (wasOpen) {
+    panel.hidden = true;
+    panel.innerHTML = "";
+    return;
+  }
+  const line = (window.LINE_PROFILES || []).find((item) => item.id === button.dataset.dayLine);
+  if (!line) return;
+  button.classList.add("is-active");
+  button.setAttribute("aria-expanded", "true");
+  const row = button.parentElement;
+  if (row && row.classList.contains("day-lines-row")) {
+    row.scrollTo({ left: Math.max(0, button.offsetLeft - 8), behavior: "smooth" });
+  }
+  panel.style.setProperty("--line", line.color);
+  panel.innerHTML = dayLineDetailHtml(line);
+  panel.hidden = false;
+  requestAnimationFrame(() => revealDayLinePanel(panel));
 }
 
 function lineInk(hex, fallback) {
@@ -1635,7 +1703,7 @@ function scrollLineSection(section) {
 function openLinePage(lineId) {
   showPage("lines");
   setProgramNavActive("tips");
-  document.querySelectorAll(".line-tag").forEach((btn) => {
+  document.querySelectorAll("#lineTags .line-tag").forEach((btn) => {
     const on = Boolean(lineId) && btn.dataset.line === lineId;
     btn.classList.toggle("is-active", on);
     btn.setAttribute("aria-pressed", on ? "true" : "false");
@@ -1945,6 +2013,13 @@ function initEvents() {
     if (homeButton) {
       event.preventDefault();
       goBackToDelegationAbout();
+      return;
+    }
+
+    const dayLineButton = event.target.closest("[data-day-line]");
+    if (dayLineButton?.dataset.dayLine) {
+      event.preventDefault();
+      toggleDayLine(dayLineButton);
       return;
     }
 
