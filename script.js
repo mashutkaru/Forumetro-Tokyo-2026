@@ -469,7 +469,6 @@
     return c;
   }
 
-  var SECTOR_ORDER = ["Local Government","Government-Owned Company","Central Government"];
   function personMatchesQuery(person, search) {
     var q = (search || '').trim().toLowerCase();
     if (!q) return true;
@@ -487,10 +486,7 @@
       return ms && personMatchesQuery(p, search);
     });
     return list.sort(function (a, b) {
-      var ia = SECTOR_ORDER.indexOf(a.sector);
-      var ib = SECTOR_ORDER.indexOf(b.sector);
-      if (ia !== ib) return ia - ib;
-      return a.id - b.id;
+      return a.nameEn.localeCompare(b.nameEn, "en", { sensitivity: "base" });
     });
   }
 
