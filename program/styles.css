@@ -655,6 +655,14 @@ html.lang-he.is-embedded:not(.is-mobile-embed) .nav.nav-program.line-anchored::b
   background: linear-gradient(90deg, #8F76D6, #C9A227, #FF9500, #F62E36, #00BB85, #009BBF);
 }
 
+html.lang-he.is-embedded:not(.is-mobile-embed) .nav.nav-useful {
+  direction: rtl;
+}
+
+html.lang-he.is-embedded:not(.is-mobile-embed) .nav.nav-useful.line-anchored::before {
+  background: linear-gradient(90deg, #009BBF, #F62E36, #00BB85, #8F76D6);
+}
+
 html.lang-he .date-strip,
 html.lang-he .m-days,
 html.lang-he .m-days-row {
@@ -1520,13 +1528,23 @@ html.lang-he .day-line-panel {
 }
 
 .timeline-plan {
-  display: grid;
-  gap: 10px;
-  margin-top: 14px;
-  padding: 14px 16px;
-  background: var(--soft);
-  border: 1px solid rgba(33, 79, 99, 0.08);
-  border-radius: 16px;
+  margin: 12px 0 0;
+  padding: 0;
+  padding-inline-start: 1.2em;
+  background: none;
+  border: 0;
+  list-style: disc;
+}
+
+.timeline-plan li {
+  margin: 0 0 8px;
+  color: #243d4d;
+  font-size: 14px;
+  line-height: 1.45;
+}
+
+.timeline-plan li:last-child {
+  margin-bottom: 0;
 }
 
 .timeline-plan-row {
@@ -1699,24 +1717,27 @@ html.is-embedded .line-tags {
 }
 
 .line-tag {
-  border: 1.5px solid color-mix(in srgb, var(--line, #214f63) 70%, #ffffff);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+  padding: 0;
+  border: 2px solid transparent;
   border-radius: 999px;
-  background: #fff;
-  color: var(--navy);
-  font: inherit;
-  font-size: 13px;
-  font-weight: 750;
-  line-height: 1.25;
-  letter-spacing: 0.01em;
-  padding: 10px 14px;
+  background: transparent;
+  line-height: 0;
   cursor: pointer;
-  text-align: start;
+}
+
+.line-icon {
+  display: block;
+  width: 48px;
+  height: 48px;
 }
 
 .line-tag.is-active {
-  background: var(--line, var(--navy));
-  color: var(--line-ink, #fff);
-  border-color: transparent;
+  background: transparent;
+  border-color: var(--line, var(--navy));
 }
 
 .line-note {
@@ -1834,8 +1855,7 @@ html.lang-he .line-page .line-section {
   }
 
   .line-tag {
-    font-size: 12px;
-    padding: 9px 12px;
+    padding: 0;
   }
 
   .line-section h3 {

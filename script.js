@@ -479,14 +479,34 @@
     return false;
   }
 
+  function familyName(person) {
+    var parts = String(person.nameEn || "").trim().split(/\s+/);
+    if (parts.length < 2) return parts[0] || "";
+    return parts.slice(1).join(" ");
+  }
+
+  function compareByFamilyName(a, b) {
+    var byFamily = familyName(a).localeCompare(familyName(b), "en", { sensitivity: "base" });
+    if (byFamily) return byFamily;
+    return String(a.nameEn).localeCompare(String(b.nameEn), "en", { sensitivity: "base" });
+  }
+
   function filterParticipants(activeSector, search) {
     var sectorKey = (activeSector === 'steering' || activeSector === 'program-team') ? 'all' : activeSector;
     var list = PARTICIPANTS.filter(function (p) {
       const ms = sectorKey === "all" || p.sector === sectorKey;
       return ms && personMatchesQuery(p, search);
     });
+    var groupOrder = SECTORS.map(function (s) { return s.key; }).filter(function (key) { return key !== "all"; });
     return list.sort(function (a, b) {
-      return a.nameEn.localeCompare(b.nameEn, "en", { sensitivity: "base" });
+      if (sectorKey === "all") {
+        var groupA = groupOrder.indexOf(a.sector);
+        var groupB = groupOrder.indexOf(b.sector);
+        if (groupA < 0) groupA = groupOrder.length;
+        if (groupB < 0) groupB = groupOrder.length;
+        if (groupA !== groupB) return groupA - groupB;
+      }
+      return compareByFamilyName(a, b);
     });
   }
 
@@ -1880,6 +1900,9 @@
       if (frame && frame.contentWindow) {
         frame.contentWindow.postMessage({ type: 'forumetro:set-lang', lang: next }, '*');
       }
+      requestAnimationFrame(function () {
+        requestAnimationFrame(syncProgramLineAnchor);
+      });
       return;
     }
     var btn = event.target.closest('.program-section-bar [data-section]');
@@ -1903,6 +1926,9 @@
       if (langFrame && langFrame.contentWindow) {
         langFrame.contentWindow.postMessage({ type: 'forumetro:set-lang', lang: next }, '*');
       }
+      requestAnimationFrame(function () {
+        requestAnimationFrame(syncProgramLineAnchor);
+      });
       return;
     }
     var btn = event.target.closest('.useful-section-bar [data-page]');

@@ -1131,6 +1131,13 @@ function setProgramLang(lang) {
     scrollDayViewToTop();
   }
   notifyParentLanguage();
+  if (lastLineAnchor) {
+    requestAnimationFrame(function () {
+      requestAnimationFrame(function () {
+        applyLineAnchor(lastLineAnchor);
+      });
+    });
+  }
 }
 
 const prep = [
@@ -1419,14 +1426,7 @@ function renderSchedulePlanBlock(plan, { mobile = false } = {}) {
       }
 
       if (!time) {
-        return `
-          <div class="timeline-plan-row timeline-plan-row--meta">
-            <div class="timeline-plan-body">
-              <strong>${title}</strong>
-              <p>${label}</p>
-            </div>
-          </div>
-        `;
+        return `<li>${title}${label ? ` <span>${label}</span>` : ""}</li>`;
       }
 
       return `
@@ -1464,7 +1464,10 @@ function renderSchedulePlanBlock(plan, { mobile = false } = {}) {
     })
     .join("");
 
-  return `<div class="timeline-plan">${rowHtml}${embedHtml}</div>`;
+  const listHtml = rowHtml.includes("<li>")
+    ? `<ul class="timeline-plan">${rowHtml}</ul>`
+    : rowHtml ? `<div class="timeline-plan-extra">${rowHtml}</div>` : "";
+  return `${listHtml}${embedHtml}`;
 }
 
 function renderScheduleBadge(link) {
@@ -1698,6 +1701,32 @@ function goToDaySection(section) {
   }
 }
 
+function lineEnglishName(line) {
+  return String(line.label || "").split("|")[0].replace(/\s+/g, " ").trim();
+}
+
+function lineIconSvg(line) {
+  const color = line.color;
+  const code = line.code || "";
+  if (line.id === "toyoko") {
+    return `<svg class="line-icon" viewBox="0 0 64 64" aria-hidden="true"><rect width="64" height="64" rx="14" fill="${color}"/><text x="32" y="42" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="26" font-weight="800" fill="#fff">TY</text></svg>`;
+  }
+  if (line.id === "odakyu") {
+    return `<svg class="line-icon" viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="32" fill="${color}"/><text x="32" y="42" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="800" fill="#fff">OH</text></svg>`;
+  }
+  if (line.id === "yamanote") {
+    return `<svg class="line-icon" viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="30" fill="#fff" stroke="${color}" stroke-width="8"/><circle cx="32" cy="32" r="22" fill="none" stroke="#111" stroke-width="3"/><text x="32" y="38" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="800" fill="#111">JY</text></svg>`;
+  }
+  const size = code.length > 1 ? 18 : 28;
+  return `<svg class="line-icon" viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="32" fill="${color}"/><circle cx="32" cy="32" r="20.5" fill="#fff"/><text x="32" y="42" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="${size}" font-weight="800" fill="#111">${code}</text></svg>`;
+}
+
+function lineTagButton(line, attr) {
+  const ink = lineInk(line.color, line.ink);
+  const name = escapeModelText(lineEnglishName(line));
+  return `<button type="button" class="line-tag" ${attr} aria-label="${name}" aria-expanded="false" style="--line:${line.color};--line-ink:${ink}">${lineIconSvg(line)}</button>`;
+}
+
 function renderDayLineTags(containerId, day) {
   const el = byId(containerId);
   if (!el) return;
@@ -1708,8 +1737,7 @@ function renderDayLineTags(containerId, day) {
   el.hidden = lines.length === 0;
   const buttons = lines
     .map((line) => {
-      const ink = lineInk(line.color, line.ink);
-      return `<button type="button" class="line-tag" data-day-line="${line.id}" aria-expanded="false" style="--line:${line.color};--line-ink:${ink}">${escapeModelText(line.label)}</button>`;
+      return lineTagButton(line, `data-day-line="${line.id}"`);
     })
     .join("");
   el.innerHTML = `<div class="day-lines-row">${buttons}</div><div class="day-line-panel" hidden></div>`;
@@ -1731,7 +1759,7 @@ function dayLineDetailHtml(line) {
     : "";
   return `<div class="day-line-detail" style="--line:${line.color}">
     <p class="line-kicker">${escapeModelText(line.code)}</p>
-    <h3>${escapeModelText(line.label)}</h3>
+    <h3>${escapeModelText(lineEnglishName(line))}</h3>
     ${map}
     <p class="line-intro">${escapeModelText(line.intro)}</p>
     <h4 class="line-profile-title" data-en="${escapeModelText(profileNames[0])}" data-ja="${escapeModelText(profileNames[1])}" data-he="${escapeModelText(profileNames[2])}">${escapeModelText(profileTitle)}</h4>
@@ -1805,8 +1833,7 @@ function renderLinePage() {
   if (!tags || !sections || !profiles.length) return;
 
   tags.innerHTML = profiles.map((line) => {
-    const ink = lineInk(line.color, line.ink);
-    return `<button type="button" class="line-tag" data-line="${line.id}" style="--line:${line.color};--line-ink:${ink}" aria-expanded="false">${escapeModelText(line.label)}</button>`;
+    return lineTagButton(line, `data-line="${line.id}"`);
   }).join("");
 
   sections.innerHTML = `<div class="line-panel" id="linePanel" hidden></div>`;
@@ -2378,14 +2405,14 @@ function applyLineAnchor(data) {
   var target = data.x;
   var vw = document.documentElement.clientWidth;
   var spaceRight = vw - target - 12;
-  var hebrewProgram = !useful && document.documentElement.classList.contains("lang-he");
-  if (!hebrewProgram && navRight() - markCenter() > spaceRight) {
+  var hebrewBar = document.documentElement.classList.contains("lang-he");
+  if (!hebrewBar && navRight() - markCenter() > spaceRight) {
     var gaps = Math.max(1, nav.querySelectorAll("button").length - 1);
     var gapNow = parseFloat(window.getComputedStyle(nav).gap) || 32;
     nav.style.gap = Math.max(10, gapNow - (navRight() - markCenter() - spaceRight) / gaps) + "px";
     void nav.offsetWidth;
   }
-  if (!hebrewProgram && navRight() - markCenter() > spaceRight + 4) {
+  if (!hebrewBar && navRight() - markCenter() > spaceRight + 4) {
     nav.style.flexDirection = "row-reverse";
     nav.style.gap = "";
     nav.classList.add("line-anchored-reverse");
@@ -2394,7 +2421,7 @@ function applyLineAnchor(data) {
   var shift = target - markCenter();
   nav.style.marginLeft = shift + "px";
   void nav.offsetWidth;
-  if (hebrewProgram) {
+  if (hebrewBar) {
     var langBtn = document.querySelector(".topbar-end");
     var limitLeft = langBtn ? langBtn.getBoundingClientRect().right - origin + 18 : 48;
     var navLeft = nav.getBoundingClientRect().left - origin;

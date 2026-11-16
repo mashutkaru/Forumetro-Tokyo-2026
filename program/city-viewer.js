@@ -5,12 +5,26 @@ import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
 import { createForumetroCompass } from "./forumetro-compass.js?v=1";
 
 // Geographic north, clockwise from world -Z toward +X.
-// Leave empty until a model's north is checked against its map.
+// Keys are the model path without the ?v= suffix. Shibuya is omitted:
+// its archive has no north-up map, so its compass stays unverified.
 const VERIFIED_NORTH = new Map([
+  ["models/Asakusa-city-model.glb", 0],
+  ["models/Kita-city-model.glb", 0],
+  ["models/Odaiba-satellite.glb", 0],
+  ["models/Roppongi-city-model.glb", 0],
+  ["models/Shimokita-Senrogai-city-model.glb", 0],
+  ["models/Shinbashi-Shiodome-city-model.glb", 0],
+  ["models/Shinjuku-city-model.glb", 0],
+  ["models/Takanawa-Gateway-city-model.glb", 0],
+  ["models/Tokyo-Hibiya-Ginza.glb", 0],
+  ["models/Toranomon-city-model.glb", 0],
 ]);
 function northForUrl(url) {
-  const key = new URL(url, document.baseURI).pathname;
-  return VERIFIED_NORTH.has(key) ? VERIFIED_NORTH.get(key) : null;
+  const path = new URL(url, document.baseURI).pathname;
+  for (const [key, value] of VERIFIED_NORTH) {
+    if (path.endsWith("/" + key)) return value;
+  }
+  return null;
 }
 
 const loader = new GLTFLoader();
