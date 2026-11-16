@@ -396,13 +396,19 @@ const days = [
     lines: ["asakusa"],
     models: [
       {
+        src: "../models/Asakusa-city-model.glb?v=1",
+        title: "Asakusa",
+        titleJa: "浅草",
+        titleHe: "אסאקוסה",
+      },
+      {
         src: "../models/Odaiba-satellite.glb?v=1",
         title: "Odaiba",
         titleJa: "お台場",
         titleHe: "אודאיבה",
       },
       {
-        src: "../models/Roppongi-city-model.glb?v=1",
+        src: "../models/Roppongi-city-model.glb?v=2",
         title: "Roppongi",
         titleJa: "六本木",
         titleHe: "רופונגי",
