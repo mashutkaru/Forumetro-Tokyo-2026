@@ -396,7 +396,7 @@ const days = [
     lines: ["asakusa"],
     models: [
       {
-        src: "../models/Odaiba-city-model.glb?v=1",
+        src: "../models/Odaiba-satellite.glb?v=1",
         title: "Odaiba",
         titleJa: "お台場",
         titleHe: "אודאיבה",
