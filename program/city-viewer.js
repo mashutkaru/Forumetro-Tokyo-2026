@@ -85,13 +85,21 @@ function create(mount) {
 
   const controls = new OrbitControls(camera, canvas);
   controls.enableDamping = true;
-  controls.dampingFactor = 0.08;
+  controls.dampingFactor = 0.12;
   controls.screenSpacePanning = true;
-  controls.zoomSpeed = 0.85;
-  controls.rotateSpeed = 0.7;
+  controls.zoomToCursor = true;
+  controls.zoomSpeed = 1.15;
+  controls.panSpeed = 1.35;
+  controls.rotateSpeed = 0.65;
+  // Drag moves the model. Right-drag (or a two-finger twist) turns it.
+  controls.mouseButtons = {
+    LEFT: THREE.MOUSE.PAN,
+    MIDDLE: THREE.MOUSE.DOLLY,
+    RIGHT: THREE.MOUSE.ROTATE,
+  };
   controls.touches = {
-    ONE: THREE.TOUCH.ROTATE,
-    TWO: THREE.TOUCH.DOLLY_PAN,
+    ONE: THREE.TOUCH.PAN,
+    TWO: THREE.TOUCH.DOLLY_ROTATE,
   };
 
   const raycaster = new THREE.Raycaster();
@@ -106,6 +114,15 @@ function create(mount) {
   let onSelect = null;
   let pointerDown = null;
   let needsFit = false;
+  let panLimits = null;
+
+  function clampPan() {
+    if (!panLimits) return;
+    const before = controls.target.clone();
+    controls.target.clamp(panLimits.min, panLimits.max);
+    const shift = controls.target.clone().sub(before);
+    if (shift.lengthSq() > 0) camera.position.add(shift);
+  }
 
   function shouldDraw() {
     return active && visible && !document.hidden && modelRoot;
@@ -120,6 +137,7 @@ function create(mount) {
       }
       frame = window.requestAnimationFrame(loop);
       controls.update();
+      clampPan();
       renderer.render(scene, camera);
     };
     frame = window.requestAnimationFrame(loop);
@@ -177,8 +195,9 @@ function create(mount) {
     camera.lookAt(center);
     camera.updateProjectionMatrix();
     controls.target.copy(center);
-    controls.minDistance = distance * 0.08;
+    controls.minDistance = distance * 0.035;
     controls.maxDistance = distance * 4;
+    panLimits = box.clone().expandByScalar(Math.max(size.x, size.y, size.z) * 0.08);
     controls.update();
     home = {
       position: camera.position.clone(),
@@ -245,6 +264,7 @@ function create(mount) {
     });
     modelRoot = null;
     home = null;
+    panLimits = null;
   }
 
   function load(url) {
@@ -320,6 +340,8 @@ function create(mount) {
     root.dataset.src = url;
     load(url);
   };
+
+  stage.addEventListener("touchmove", (event) => event.preventDefault(), { passive: false });
 
   canvas.addEventListener("pointerdown", (event) => {
     pointerDown = { x: event.clientX, y: event.clientY };

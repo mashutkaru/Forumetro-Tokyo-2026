@@ -121,6 +121,7 @@ const days = [
       ["18:00–20:00", "Banquet", "LUMIVEIL TOKYO"],
       ["20:00–21:00", "Expert-led walking tour", "Shiodome"],
     ],
+    lines: ["oedo", "asakusa", "ginza"],
     models: [
       {
         src: "../models/Shinbashi-Shiodome-city-model.glb?v=3",
@@ -173,6 +174,7 @@ const days = [
       ],
       ["16:30–17:30", "Group discussion", "Reflection and lessons learned"],
     ],
+    lines: ["ginza", "hibiya"],
     models: [
       {
         src: "../models/Toranomon-city-model.glb?v=3",
@@ -235,6 +237,7 @@ const days = [
         "Tatsuya Edakubo — commuter life along Tokyu's suburban railways. Stations to be confirmed.",
       ],
     ],
+    lines: ["ginza"],
     models: [
       {
         src: "../models/Shibuya-city-model.glb?v=5",
@@ -289,6 +292,7 @@ const days = [
       ],
       ["17:00–18:00", "Group discussion", "Reflection and lessons learned"],
     ],
+    lines: ["yamanote"],
     models: [
       {
         src: "../models/Shinjuku-city-model.glb?v=3",
@@ -343,6 +347,7 @@ const days = [
       ["15:00–16:00", "Return to the hotel", ""],
       ["16:12", "Shabbat begins", "Some participants may return earlier"],
     ],
+    lines: ["oedo", "odakyu"],
     models: [
       {
         src: "../models/Shimokita-Senrogai-city-model.glb?v=2",
@@ -388,6 +393,7 @@ const days = [
       ],
       ["18:00", "Group activity", "Details to be confirmed"],
     ],
+    lines: ["asakusa"],
   },
   {
     w: "SUN",
@@ -422,6 +428,7 @@ const days = [
       ],
       ["14:00", "Free time", "Shopping and independent activities"],
     ],
+    lines: ["yamanote", "asakusa"],
     models: [
       {
         src: "../models/Takanawa-Gateway-city-model.glb?v=1",
@@ -461,6 +468,7 @@ const days = [
       ["15:00", "Airport check-in", "Security and departure procedures at Narita"],
       ["17:40", "Flight departure from Narita", ""],
     ],
+    lines: ["asakusa"],
     models: [
       {
         src: "../models/Tokyo-Hibiya-Ginza.glb?v=3",
@@ -1414,6 +1422,7 @@ function renderDesktopDay(day) {
   if (sideDate) sideDate.textContent = `${formatWeekday(day.w)}, ${day.d}`;
   byId("title").textContent = day.title;
   byId("theme").textContent = day.theme;
+  renderDayLineTags("dayLines", day);
   byId("dayLocation").textContent = day.city;
   renderDayMap("dayLocationMap", day);
   byId("dayNotes").textContent = getDayNotes(day);
@@ -1466,6 +1475,7 @@ function renderMobileDay(day) {
   headDay.dir = programLang === "he" ? "rtl" : "ltr";
   byId("mDayTitle").textContent = day.title;
   byId("mTheme").textContent = day.theme;
+  renderDayLineTags("mDayLines", day);
 
   byId("mDaysRow").innerHTML = days
     .map(
@@ -1552,6 +1562,22 @@ function goToDaySection(section) {
   } else {
     scrollToDaySection(name);
   }
+}
+
+function renderDayLineTags(containerId, day) {
+  const el = byId(containerId);
+  if (!el) return;
+  const profiles = window.LINE_PROFILES || [];
+  const lines = (day.lines || [])
+    .map((id) => profiles.find((line) => line.id === id))
+    .filter(Boolean);
+  el.hidden = lines.length === 0;
+  el.innerHTML = lines
+    .map((line) => {
+      const ink = lineInk(line.color, line.ink);
+      return `<button type="button" class="line-tag" data-line="${line.id}" style="--line:${line.color};--line-ink:${ink}">${line.label}</button>`;
+    })
+    .join("");
 }
 
 function lineInk(hex, fallback) {

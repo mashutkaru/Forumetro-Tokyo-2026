@@ -1115,6 +1115,8 @@ main {
   height: min(62vh, 560px);
   min-height: 320px;
   background: var(--soft);
+  touch-action: none;
+  overscroll-behavior: none;
 }
 
 .city-viewer-stage canvas {
@@ -1271,6 +1273,22 @@ main {
   margin: 0;
   font-size: 17px;
   line-height: 1.7;
+}
+
+.day-lines {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 18px;
+}
+
+.day-lines[hidden] {
+  display: none;
+}
+
+html.lang-he .day-lines {
+  direction: ltr;
+  justify-content: flex-start;
 }
 
 .photo {
@@ -2219,6 +2237,24 @@ html.lang-he .line-page .line-section {
   color: var(--muted);
   font-size: 15px;
   line-height: 1.5;
+}
+
+.m-hero .day-lines {
+  margin-top: 14px;
+}
+
+@media (max-width: 700px) {
+  .day-lines {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    margin-right: -4px;
+    padding-bottom: 4px;
+  }
+
+  .day-lines .line-tag {
+    flex: 0 0 auto;
+  }
 }
 
 .m-section-tabs {
