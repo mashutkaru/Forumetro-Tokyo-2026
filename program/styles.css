@@ -1752,14 +1752,6 @@ html.is-embedded .line-tags {
   border-top: 1px solid rgba(33, 79, 99, 0.12);
 }
 
-.line-kicker {
-  margin: 0 0 6px;
-  color: var(--line, var(--navy));
-  font-size: 13px;
-  font-weight: 800;
-  letter-spacing: 0.08em;
-}
-
 .line-section h3 {
   margin: 0 0 12px;
   color: var(--navy);

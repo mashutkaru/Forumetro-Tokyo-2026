@@ -244,7 +244,7 @@ const days = [
     lines: ["ginza"],
     models: [
       {
-        src: "../models/Shibuya-city-model.glb?v=6",
+        src: "../models/Shibuya-city-model.glb?v=7",
         title: "Shibuya",
         titleJa: "渋谷",
         titleHe: "שיבויה",
@@ -1758,7 +1758,6 @@ function dayLineDetailHtml(line) {
     ? `<div class="line-map-scroll"><img class="line-map" src="./${line.map}" alt="${escapeModelText(line.label)} route map"></div>`
     : "";
   return `<div class="day-line-detail" style="--line:${line.color}">
-    <p class="line-kicker">${escapeModelText(line.code)}</p>
     <h3>${escapeModelText(lineEnglishName(line))}</h3>
     ${map}
     <p class="line-intro">${escapeModelText(line.intro)}</p>
