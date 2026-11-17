@@ -1601,15 +1601,6 @@ function renderDesktopDay(day) {
 }
 
 function renderMobileDay(day) {
-  const dayLabel = programLang === "ja"
-    ? `${currentDayIndex + 1}日目、${day.w}、${day.d}`
-    : programLang === "he"
-      ? `${dayCountLabel(currentDayIndex)}, ${day.w}, ${day.d}`
-      : `DAY ${currentDayIndex + 1}, ${formatWeekday(day.w)}, ${day.d}`;
-
-  const headDay = byId("mHeadDay");
-  headDay.textContent = dayLabel;
-  headDay.dir = programLang === "he" ? "rtl" : "ltr";
   byId("mDayTitle").textContent = day.title;
   byId("mTheme").textContent = day.theme;
   renderDayLineTags("mDayLines", day);

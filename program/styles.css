@@ -2206,6 +2206,14 @@ html.is-embedded .line-tags {
   width: auto;
 }
 
+.mobile-app .m-head-side--end {
+  margin-inline-start: auto;
+}
+
+html.is-embedded.is-mobile-embed .mobile-app .m-head {
+  display: none;
+}
+
 .m-head-center {
   flex: 1 1 auto;
   min-width: 0;
