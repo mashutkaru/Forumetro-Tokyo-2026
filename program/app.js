@@ -183,7 +183,7 @@ const days = [
     stations: ["toranomon", "ginza", "tokyo"],
     models: [
       {
-        src: "../models/Toranomon-city-model.glb?v=3",
+        src: "../models/Toranomon-city-model-complete.glb?v=1",
         title: "Toranomon Hills",
         titleJa: "虎ノ門ヒルズ",
         titleHe: "טורנומון הילס",

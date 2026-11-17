@@ -20,6 +20,7 @@ const VERIFIED_NORTH = new Map([
   ["models/Shinjuku-city-model.glb", 0],
   ["models/Takanawa-Gateway-city-model.glb", 0],
   ["models/Tokyo-Hibiya-Ginza.glb", 0],
+  ["models/Toranomon-city-model-complete.glb", 0],
   ["models/Toranomon-city-model.glb", 0],
 ]);
 function northForUrl(url) {
