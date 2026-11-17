@@ -248,9 +248,15 @@ const days = [
     models: [
       {
         src: "../models/Shibuya-city-model.glb?v=7",
-        title: "Shibuya",
-        titleJa: "渋谷",
-        titleHe: "שיבויה",
+        title: "Shibuya 1",
+        titleJa: "Shibuya 1",
+        titleHe: "Shibuya 1",
+      },
+      {
+        src: "../models/Shibuya-city-model-complete.glb?v=1",
+        title: "Shibuya 2",
+        titleJa: "Shibuya 2",
+        titleHe: "Shibuya 2",
       },
     ],
   },
@@ -1618,9 +1624,9 @@ function stationName(station) {
   return station.name;
 }
 
-function stationSignSvg(label) {
-  const size = label.length >= 6 ? 11 : label.length >= 4 ? 13 : 16;
-  return `<svg class="station-sign" viewBox="0 0 112 48" aria-hidden="true"><rect x="1.5" y="6" width="109" height="36" rx="6" fill="#173044"/><rect x="1.5" y="6" width="109" height="9" rx="4" fill="#d4a017"/><text x="56" y="33" text-anchor="middle" fill="#ffffff" font-family="Arial, Helvetica, sans-serif" font-size="${size}" font-weight="700">${label}</text></svg>`;
+function stationButtonLabel(station) {
+  if (programLang === "ja") return station.nameJa;
+  return station.name;
 }
 
 function stationDetailHtml(station) {
@@ -1658,8 +1664,8 @@ function renderDayStations(containerId, day) {
   container.hidden = false;
   container.innerHTML = `<div class="station-signs">${stations
     .map((station) => {
-      const label = stationName(station);
-      return `<button type="button" class="station-sign-btn" data-station="${station.sign}" aria-label="${label}" aria-expanded="false">${stationSignSvg(station.sign)}</button>`;
+      const label = escapeModelText(stationButtonLabel(station));
+      return `<button type="button" class="city-model-chip station-sign-btn" data-station="${station.sign}" dir="ltr" aria-label="${label}" aria-expanded="false">${label}</button>`;
     })
     .join("")}</div>
     <div class="station-stage">${firstMap ? stationMapHtml(firstMap) : ""}</div>

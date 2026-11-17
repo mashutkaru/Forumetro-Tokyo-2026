@@ -1752,23 +1752,7 @@ html.is-embedded .line-tags {
 }
 
 .station-sign-btn {
-  display: inline-flex;
-  padding: 0;
-  border: 2px solid transparent;
-  border-radius: 10px;
-  background: transparent;
-  line-height: 0;
   cursor: pointer;
-}
-
-.station-sign {
-  display: block;
-  width: 84px;
-  height: 36px;
-}
-
-.station-sign-btn.is-active {
-  border-color: var(--navy);
 }
 
 .station-map {

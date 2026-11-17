@@ -97,7 +97,7 @@ window.STATION_PROFILES = {
     nameJa: "新宿",
     nameHe: "שינג'וקו",
     sign: "新宿",
-    map: "",
+    map: "station-maps/shinjuku.jpg",
     body: "Shinjuku is the world’s busiest station, a city of rail lines, department stores and underground passages. It opened in 1885. Keio arrived in 1915, and the Odakyu terminal in 1927. The Marunouchi Line opened in 1959, the Toei Shinjuku Line in 1978, and the Ōedo Line in 1997, with the full loop in 2000. The New South Gate and Busta Shinjuku bus terminal opened in 2016. The west gate is being rebuilt through the 2020s.",
     total: "3,073,091",
     rows: [
