@@ -407,7 +407,7 @@ html.is-embedded .m-head-partners {
 }
 
 .nav.nav-program::before {
-  background: linear-gradient(90deg, #009BBF, #00BB85, #F62E36, #FF9500, #C9A227, #8F76D6);
+  background: linear-gradient(90deg, #009BBF, #00BB85, #F62E36, #FF9500, #C9A227);
 }
 
 .nav[hidden] {
@@ -542,7 +542,7 @@ html.is-embedded .nav.line-anchored-useful::before {
 }
 
 html.is-embedded .nav.nav-program.line-anchored::before {
-  background: linear-gradient(90deg, #009BBF, #00BB85, #F62E36, #FF9500, #C9A227, #8F76D6);
+  background: linear-gradient(90deg, #009BBF, #00BB85, #F62E36, #FF9500, #C9A227);
 }
 
 html.is-embedded .nav.line-anchored-reverse::before {
@@ -550,7 +550,7 @@ html.is-embedded .nav.line-anchored-reverse::before {
 }
 
 html.is-embedded .nav.nav-program.line-anchored-reverse::before {
-  background: linear-gradient(90deg, #8F76D6, #C9A227, #FF9500, #F62E36, #00BB85, #009BBF);
+  background: linear-gradient(90deg, #C9A227, #FF9500, #F62E36, #00BB85, #009BBF);
 }
 
 html.is-embedded .nav.line-anchored-useful.line-anchored-reverse::before {
@@ -652,7 +652,7 @@ html.lang-he.is-embedded:not(.is-mobile-embed) .nav.nav-program {
 }
 
 html.lang-he.is-embedded:not(.is-mobile-embed) .nav.nav-program.line-anchored::before {
-  background: linear-gradient(90deg, #8F76D6, #C9A227, #FF9500, #F62E36, #00BB85, #009BBF);
+  background: linear-gradient(90deg, #C9A227, #FF9500, #F62E36, #00BB85, #009BBF);
 }
 
 html.lang-he.is-embedded:not(.is-mobile-embed) .nav.nav-useful {
@@ -1747,8 +1747,16 @@ html.is-embedded .line-tags {
 .station-signs {
   display: flex;
   flex-wrap: wrap;
+  direction: ltr;
   gap: 8px;
   margin: 0 0 12px;
+  padding: 0 34px;
+}
+
+@media (max-width: 900px) {
+  .station-signs {
+    padding: 0;
+  }
 }
 
 .station-sign-btn {

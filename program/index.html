@@ -45,7 +45,7 @@
     content="[PLACEHOLDER] Program guide details will be added here."
   />
   <meta name="twitter:image" content="https://mashutkaru.github.io/Forumetro-Tokyo-2026/images/og-image.jpg" />
-  <link rel="stylesheet" href="./styles.css?v=116" />
+  <link rel="stylesheet" href="./styles.css?v=119" />
 </head>
 <body>
   <script>
@@ -80,7 +80,6 @@
           <button type="button" data-section="location"><span class="nav-mark" aria-hidden="true"><span class="nav-mark-line">M</span><span class="nav-mark-id">06</span></span><span class="nav-label" data-en="Location" data-ja="場所" data-he="מיקום">Location</span></button>
           <button type="button" data-section="model"><span class="nav-mark" aria-hidden="true"><span class="nav-mark-line">V</span><span class="nav-mark-id">07</span></span><span class="nav-label" data-en="3D Models" data-ja="3Dモデル" data-he="מודל תלת־ממד">3D Models</span></button>
           <button type="button" data-section="tips"><span class="nav-mark" aria-hidden="true"><span class="nav-mark-line">W</span><span class="nav-mark-id">08</span></span><span class="nav-label" data-en="Line info" data-ja="路線情報" data-he="מידע על הקווים">Line info</span></button>
-          <button type="button" data-section="notes"><span class="nav-mark" aria-hidden="true"><span class="nav-mark-line">Z</span><span class="nav-mark-id">09</span></span><span class="nav-label" data-en="Notes" data-ja="備考" data-he="הערות">Notes</span></button>
         </nav>
         <nav class="nav nav-useful" hidden aria-label="Useful stations">
           <button class="active" data-page="prep"><span class="nav-mark" aria-hidden="true"><span class="nav-mark-line">Z</span><span class="nav-mark-id">05</span></span><span class="nav-label" data-en="Preparation" data-he="הכנה">Preparation</span></button>
@@ -168,7 +167,7 @@
                 <div id="dayModelMount"></div>
               </section>
 
-              <section class="day-section" id="section-notes">
+              <section class="day-section" id="section-notes" hidden>
                 <h3 class="day-section-title" data-en="Notes" data-ja="備考" data-he="הערות">Notes</h3>
                 <p class="day-section-body" id="dayNotes"></p>
               </section>
@@ -239,7 +238,7 @@
                 <div id="mModelMount"></div>
               </section>
 
-              <section class="m-block m-section" id="m-section-notes">
+              <section class="m-block m-section" id="m-section-notes" hidden>
                 <h3 data-en="Notes" data-ja="備考" data-he="הערות">Notes</h3>
                 <p class="m-section-body" id="mNotes"></p>
               </section>
@@ -402,7 +401,7 @@
   </script>
   <script src="./line-info.js?v=2"></script>
   <script src="./station-info.js?v=2"></script>
-  <script src="./app.js?v=138"></script>
-  <script type="module" src="./city-viewer.js?v=8"></script>
+  <script src="./app.js?v=141"></script>
+  <script type="module" src="./city-viewer.js?v=9"></script>
 </body>
 </html>

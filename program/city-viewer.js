@@ -5,13 +5,16 @@ import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
 import { createForumetroCompass } from "./forumetro-compass.js?v=1";
 
 // Geographic north, clockwise from world -Z toward +X.
-// Keys are the model path without the ?v= suffix. Shibuya is omitted:
-// its archive has no north-up map, so its compass stays unverified.
+// Keys are the model path without the ?v= suffix.
+// 0 means the urbanSCAN model is north-up: north is world -Z.
+// Shibuya’s north-up map matches that same ground axis.
 const VERIFIED_NORTH = new Map([
   ["models/Asakusa-city-model.glb", 0],
   ["models/Kita-city-model.glb", 0],
   ["models/Odaiba-satellite.glb", 0],
   ["models/Roppongi-city-model.glb", 0],
+  ["models/Shibuya-city-model-complete.glb", 0],
+  ["models/Shibuya-city-model.glb", 0],
   ["models/Shimokita-Senrogai-city-model.glb", 0],
   ["models/Shinbashi-Shiodome-city-model.glb", 0],
   ["models/Shinjuku-city-model.glb", 0],

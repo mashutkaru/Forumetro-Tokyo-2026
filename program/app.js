@@ -247,16 +247,10 @@ const days = [
     stations: ["shibuya"],
     models: [
       {
-        src: "../models/Shibuya-city-model.glb?v=7",
-        title: "Shibuya 1",
-        titleJa: "Shibuya 1",
-        titleHe: "Shibuya 1",
-      },
-      {
         src: "../models/Shibuya-city-model-complete.glb?v=1",
-        title: "Shibuya 2",
-        titleJa: "Shibuya 2",
-        titleHe: "Shibuya 2",
+        title: "Shibuya",
+        titleJa: "Shibuya",
+        titleHe: "Shibuya",
       },
     ],
   },
@@ -308,7 +302,7 @@ const days = [
       ],
     ],
     lines: ["yamanote"],
-    stations: ["tochomae", "shinjuku"],
+    stations: ["shinjuku", "tochomae"],
     models: [
       {
         src: "../models/Shinjuku-city-model.glb?v=3",
@@ -787,7 +781,7 @@ const daysHe = [
     title: "ברוכים הבאים לטוקיו",
     city: "נמל התעופה נריטה · המלון · LUMIVEIL TOKYO · שיודומה",
     theme:
-      "היום הראשון מוקדש להגעה, למפגש עם הצוות המקומי ולהתארגנות במלון. קבלת פנים ב-LUMIVEIL TOKYO והליכת ערב בשיודומה מציגות את התוכנית ואת האזור שסביב המלון.",
+      "היום הראשון מוקדש להגעה, למפגש עם הצוות המקומי ולהתארגנות במלון. קבלת פנים ושיחת פתיחה ב-LUMIVEIL TOKYO וסיור אוריינטציה קצר בתחנת שיאודומה ושינבשי.",
     tip: "החזיקו את הדרכון בהישג יד בנריטה. קבלת הפנים מתחילה במפגש בלובי בשעה 16:00.",
     notesExtra:
       "שעת הנחיתה והעומס בדרכים עשויים להזיז את ההסעה ואת הצ'ק-אין במלון. קבלת הפנים מתקיימת ב-LUMIVEIL TOKYO.",
@@ -1660,15 +1654,16 @@ function renderDayStations(containerId, day) {
     container.innerHTML = "";
     return;
   }
-  const firstMap = stations.find((station) => station.map);
+  const shown = stations.find((station) => station.map) || stations[0];
   container.hidden = false;
   container.innerHTML = `<div class="station-signs">${stations
     .map((station) => {
       const label = escapeModelText(stationButtonLabel(station));
-      return `<button type="button" class="city-model-chip station-sign-btn" data-station="${station.sign}" dir="ltr" aria-label="${label}" aria-expanded="false">${label}</button>`;
+      const selected = station === shown ? " is-active" : "";
+      return `<button type="button" class="city-model-chip station-sign-btn${selected}" data-station="${station.sign}" dir="ltr" aria-label="${label}" aria-expanded="false">${label}</button>`;
     })
     .join("")}</div>
-    <div class="station-stage">${firstMap ? stationMapHtml(firstMap) : ""}</div>
+    <div class="station-stage">${shown.map ? stationMapHtml(shown) : ""}</div>
     <div class="station-panel" hidden></div>`;
   bindLineMapZoom(container);
 }
@@ -1691,6 +1686,7 @@ function toggleDayStation(button) {
   if (alreadyOpen) {
     panel.hidden = true;
     panel.innerHTML = "";
+    button.classList.add("is-active");
     return;
   }
   button.classList.add("is-active");
