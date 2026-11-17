@@ -1285,7 +1285,36 @@ function scrollDesktopScroller(top, behavior) {
   window.scrollTo({ top: top, behavior: behavior || "auto" });
 }
 
+let keepMobileDatesOpen = false;
+
+function showMobileDates() {
+  const days = document.querySelector(".m-days");
+  if (days) days.classList.remove("is-hidden");
+  keepMobileDatesOpen = true;
+  const scroller = document.querySelector(".m-content");
+  requestAnimationFrame(() => {
+    if (!scroller || scroller.scrollTop <= 4) keepMobileDatesOpen = false;
+  });
+}
+
+function bindMobileDateStrip() {
+  const scroller = document.querySelector(".m-content");
+  if (!scroller || scroller.dataset.datesBound === "1") return;
+  scroller.dataset.datesBound = "1";
+  scroller.addEventListener("scroll", () => {
+    if (keepMobileDatesOpen) {
+      if (scroller.scrollTop <= 4) keepMobileDatesOpen = false;
+      return;
+    }
+    if (scroller.scrollTop > 16) {
+      const days = document.querySelector(".m-days");
+      if (days) days.classList.add("is-hidden");
+    }
+  }, { passive: true });
+}
+
 function scrollDayViewToTop() {
+  showMobileDates();
   scrollDesktopScroller(0, "smooth");
 
   const mobileContent = document.querySelector(".m-content");
@@ -1684,6 +1713,7 @@ function goToDaySection(section) {
   if (onLines) showPage("day", { scroll: false });
   const name = section === "day" ? "overview" : section;
   setProgramNavActive(name);
+  if (name === "overview") showMobileDates();
   if (window.matchMedia("(max-width: 900px)").matches || document.documentElement.classList.contains("is-mobile-embed")) {
     scrollToMobileSection(name);
   } else {
@@ -2267,6 +2297,7 @@ function initEvents() {
     }
   });
 
+  bindMobileDateStrip();
 }
 
 renderLinePage();

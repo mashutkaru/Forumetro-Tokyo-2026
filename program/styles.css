@@ -2256,10 +2256,19 @@ html.is-embedded.is-mobile-embed .mobile-app .m-head {
   width: 100%;
   max-width: 100%;
   min-width: 0;
+  max-height: 140px;
   overflow: hidden;
   padding: 10px 12px;
   background: #F4F6F8;
   border-bottom: 1px solid var(--line);
+  transition: max-height 0.22s ease, padding 0.22s ease, border-bottom-color 0.22s ease;
+}
+
+.m-days.is-hidden {
+  max-height: 0;
+  padding-top: 0;
+  padding-bottom: 0;
+  border-bottom-color: transparent;
 }
 
 .m-days-row {
