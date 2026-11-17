@@ -1286,31 +1286,61 @@ function scrollDesktopScroller(top, behavior) {
 }
 
 let keepMobileDatesOpen = false;
+let keepMobileDatesTimer = 0;
+let mobileTouchY = null;
 
 function showMobileDates() {
   const days = document.querySelector(".m-days");
   if (days) days.classList.remove("is-hidden");
   keepMobileDatesOpen = true;
+  clearTimeout(keepMobileDatesTimer);
+  keepMobileDatesTimer = setTimeout(() => {
+    keepMobileDatesOpen = false;
+  }, 500);
   const scroller = document.querySelector(".m-content");
   requestAnimationFrame(() => {
     if (!scroller || scroller.scrollTop <= 4) keepMobileDatesOpen = false;
   });
 }
 
+function hideMobileDates() {
+  if (keepMobileDatesOpen) return;
+  const days = document.querySelector(".m-days");
+  if (!days || days.classList.contains("is-hidden")) return;
+  days.classList.add("is-hidden");
+}
+
 function bindMobileDateStrip() {
   const scroller = document.querySelector(".m-content");
   if (!scroller || scroller.dataset.datesBound === "1") return;
   scroller.dataset.datesBound = "1";
-  scroller.addEventListener("scroll", () => {
-    if (keepMobileDatesOpen) {
-      if (scroller.scrollTop <= 4) keepMobileDatesOpen = false;
-      return;
-    }
-    if (scroller.scrollTop > 16) {
-      const days = document.querySelector(".m-days");
-      if (days) days.classList.add("is-hidden");
-    }
+
+  const onMoveDown = () => {
+    if (scroller.scrollTop > 8) hideMobileDates();
+  };
+  scroller.addEventListener("scroll", onMoveDown, { passive: true });
+  document.addEventListener("scroll", onMoveDown, { passive: true, capture: true });
+
+  document.addEventListener("touchstart", (event) => {
+    mobileTouchY = event.touches[0] ? event.touches[0].clientY : null;
   }, { passive: true });
+  document.addEventListener("touchmove", (event) => {
+    if (!document.getElementById("page-day")?.classList.contains("active")) return;
+    const y = event.touches[0] ? event.touches[0].clientY : null;
+    if (mobileTouchY != null && y != null && mobileTouchY - y > 8) hideMobileDates();
+    mobileTouchY = y;
+  }, { passive: true });
+
+  const sentinel = document.createElement("div");
+  sentinel.setAttribute("aria-hidden", "true");
+  sentinel.style.cssText = "height:1px;margin:0;pointer-events:none;";
+  scroller.prepend(sentinel);
+  if ("IntersectionObserver" in window) {
+    const observer = new IntersectionObserver((entries) => {
+      if (scroller.scrollTop > 8 && !entries[0].isIntersecting) hideMobileDates();
+    }, { root: scroller, threshold: 1 });
+    observer.observe(sentinel);
+  }
 }
 
 function scrollDayViewToTop() {
@@ -2204,7 +2234,8 @@ function scrollToMobileSection(sectionName) {
     }
 
     if (sectionName === "overview") {
-      mobileContent.scrollTo({ top: 0, behavior: "smooth" });
+      mobileContent.scrollTo({ top: 0, behavior: "auto" });
+      showMobileDates();
       return;
     }
 
