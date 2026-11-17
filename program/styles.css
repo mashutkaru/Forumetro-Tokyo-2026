@@ -1740,6 +1740,106 @@ html.is-embedded .line-tags {
   border-color: var(--line, var(--navy));
 }
 
+.day-stations {
+  margin-top: 14px;
+}
+
+.station-signs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 0 0 12px;
+}
+
+.station-sign-btn {
+  display: inline-flex;
+  padding: 0;
+  border: 2px solid transparent;
+  border-radius: 10px;
+  background: transparent;
+  line-height: 0;
+  cursor: pointer;
+}
+
+.station-sign {
+  display: block;
+  width: 84px;
+  height: 36px;
+}
+
+.station-sign-btn.is-active {
+  border-color: var(--navy);
+}
+
+.station-map {
+  margin-bottom: 12px;
+}
+
+.station-panel[hidden] {
+  display: none;
+}
+
+.station-detail {
+  padding: 16px 18px 8px;
+  border: 1px solid rgba(23, 48, 68, 0.12);
+  border-radius: 18px;
+  background: #f7f4ee;
+}
+
+.station-detail h4,
+.station-detail h5 {
+  margin: 0 0 6px;
+  color: var(--navy);
+}
+
+.station-detail h5 {
+  margin-top: 16px;
+  font-size: 14px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.station-kana {
+  margin: 0 0 10px;
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.station-detail p {
+  margin: 0 0 10px;
+  line-height: 1.55;
+}
+
+.station-total {
+  margin: 0 0 8px;
+  font-size: 22px;
+  font-weight: 800;
+}
+
+.station-lines {
+  margin: 0 0 12px;
+  padding: 0;
+  list-style: none;
+}
+
+.station-lines li {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 8px 0;
+  border-top: 1px solid rgba(23, 48, 68, 0.1);
+}
+
+.station-lines b {
+  flex: 0 0 auto;
+  font-variant-numeric: tabular-nums;
+}
+
+.station-note {
+  color: var(--muted);
+  font-size: 13px;
+}
+
 .line-note {
   margin: 0 0 8px;
   color: var(--muted);
@@ -1825,6 +1925,12 @@ html.lang-he .line-page .line-section {
   .line-tags {
     top: 0;
   }
+
+  .line-map-scroll {
+    overflow: hidden;
+    touch-action: pan-y;
+    direction: ltr;
+  }
 }
 
 @media (max-width: 700px) {
@@ -1842,8 +1948,10 @@ html.lang-he .line-page .line-section {
   }
 
   .line-map {
-    width: 920px;
+    width: 100%;
     max-width: none;
+    height: auto;
+    transform-origin: 0 0;
   }
 
   .line-tag {

@@ -122,6 +122,7 @@ const days = [
       ["20:00–21:00", "Expert-led walking tour", "Shiodome"],
     ],
     lines: ["oedo", "asakusa", "ginza"],
+    stations: ["shimbashi"],
     models: [
       {
         src: "../models/Shinbashi-Shiodome-city-model.glb?v=3",
@@ -179,6 +180,7 @@ const days = [
       ],
     ],
     lines: ["ginza", "hibiya"],
+    stations: ["toranomon", "ginza", "tokyo"],
     models: [
       {
         src: "../models/Toranomon-city-model.glb?v=3",
@@ -242,6 +244,7 @@ const days = [
       ],
     ],
     lines: ["ginza"],
+    stations: ["shibuya"],
     models: [
       {
         src: "../models/Shibuya-city-model.glb?v=7",
@@ -299,6 +302,7 @@ const days = [
       ],
     ],
     lines: ["yamanote"],
+    stations: ["tochomae", "shinjuku"],
     models: [
       {
         src: "../models/Shinjuku-city-model.glb?v=3",
@@ -345,6 +349,7 @@ const days = [
       ],
     ],
     lines: ["oedo", "odakyu"],
+    stations: ["shimokitazawa", "higashi-kitazawa", "setagaya-daita", "kitami", "seijogakuen"],
     models: [
       {
         src: "../models/Shimokita-Senrogai-city-model.glb?v=2",
@@ -1607,6 +1612,89 @@ function getDayNotes(day) {
   return day.notesExtra ? `${day.theme}\n\n${day.notesExtra}` : day.theme;
 }
 
+function stationName(station) {
+  if (programLang === "ja") return station.nameJa;
+  if (programLang === "he") return station.nameHe;
+  return station.name;
+}
+
+function stationSignSvg(label) {
+  const size = label.length >= 6 ? 11 : label.length >= 4 ? 13 : 16;
+  return `<svg class="station-sign" viewBox="0 0 112 48" aria-hidden="true"><rect x="1.5" y="6" width="109" height="36" rx="6" fill="#173044"/><rect x="1.5" y="6" width="109" height="9" rx="4" fill="#d4a017"/><text x="56" y="33" text-anchor="middle" fill="#ffffff" font-family="Arial, Helvetica, sans-serif" font-size="${size}" font-weight="700">${label}</text></svg>`;
+}
+
+function stationDetailHtml(station) {
+  const heading = programLang === "ja" ? "1日あたりの乗降人員" : programLang === "he" ? "תנועת נוסעים ביום" : "Daily passenger movements";
+  const rows = station.rows
+    .map(([operator, route, count]) => `<li><span><strong>${operator}</strong> ${route}</span><b>${count}</b></li>`)
+    .join("");
+  return `<article class="station-detail">
+      <h4>${stationName(station)}</h4>
+      <p class="station-kana">${station.nameJa}</p>
+      <p dir="ltr">${station.body}</p>
+      <h5>${heading}</h5>
+      <p class="station-total" dir="ltr">${station.total}</p>
+      <ul class="station-lines" dir="ltr">${rows}</ul>
+      ${station.note ? `<p class="station-note" dir="ltr">${station.note}</p>` : ""}
+    </article>`;
+}
+
+function stationMapHtml(station) {
+  if (!station.map) return "";
+  const label = `${station.name} map`;
+  return `<div class="line-map-scroll station-map"><img class="line-map" src="./${station.map}" alt="${label}" draggable="false"></div>`;
+}
+
+function renderDayStations(containerId, day) {
+  const container = byId(containerId);
+  if (!container) return;
+  const stations = (day.stations || []).map((id) => window.STATION_PROFILES?.[id]).filter(Boolean);
+  if (!stations.length) {
+    container.hidden = true;
+    container.innerHTML = "";
+    return;
+  }
+  const firstMap = stations.find((station) => station.map);
+  container.hidden = false;
+  container.innerHTML = `<div class="station-signs">${stations
+    .map((station) => {
+      const label = stationName(station);
+      return `<button type="button" class="station-sign-btn" data-station="${station.sign}" aria-label="${label}" aria-expanded="false">${stationSignSvg(station.sign)}</button>`;
+    })
+    .join("")}</div>
+    <div class="station-stage">${firstMap ? stationMapHtml(firstMap) : ""}</div>
+    <div class="station-panel" hidden></div>`;
+  bindLineMapZoom(container);
+}
+
+function toggleDayStation(button) {
+  const block = button.closest(".day-stations");
+  if (!block) return;
+  const stations = (viewDay(days[currentDayIndex]).stations || [])
+    .map((id) => window.STATION_PROFILES?.[id])
+    .filter(Boolean);
+  const station = stations.find((item) => item.sign === button.dataset.station);
+  if (!station) return;
+  const panel = block.querySelector(".station-panel");
+  const stage = block.querySelector(".station-stage");
+  const alreadyOpen = button.classList.contains("is-active") && !panel.hidden;
+  block.querySelectorAll(".station-sign-btn").forEach((item) => {
+    item.classList.remove("is-active");
+    item.setAttribute("aria-expanded", "false");
+  });
+  if (alreadyOpen) {
+    panel.hidden = true;
+    panel.innerHTML = "";
+    return;
+  }
+  button.classList.add("is-active");
+  button.setAttribute("aria-expanded", "true");
+  stage.innerHTML = stationMapHtml(station);
+  panel.innerHTML = stationDetailHtml(station);
+  panel.hidden = false;
+  bindLineMapZoom(block);
+}
+
 function renderDesktopDay(day) {
   const sideDay = byId("sideDay");
   const sideDate = byId("sideDate");
@@ -1617,6 +1705,7 @@ function renderDesktopDay(day) {
   renderDayLineTags("dayLines", day);
   byId("dayLocation").textContent = day.city;
   renderDayMap("dayLocationMap", day);
+  renderDayStations("dayStations", day);
   byId("dayNotes").textContent = getDayNotes(day);
 
   const photoEl = byId("dayPhoto");
@@ -1682,6 +1771,7 @@ function renderMobileDay(day) {
 
   byId("mLocation").textContent = day.city;
   renderDayMap("mLocationMap", day);
+  renderDayStations("mStations", day);
   byId("mNotes").textContent = getDayNotes(day);
 
   scrollMobileDateIntoView();
@@ -1793,6 +1883,100 @@ function renderDayLineTags(containerId, day) {
   el.innerHTML = `<div class="day-lines-row">${buttons}</div><div class="day-line-panel" hidden></div>`;
 }
 
+function bindLineMapZoom(root) {
+  if (!root) return;
+  const mobile = window.matchMedia("(max-width: 900px)").matches || document.documentElement.classList.contains("is-mobile-embed");
+  if (!mobile) return;
+  root.querySelectorAll(".line-map-scroll").forEach((frame) => {
+    if (frame.dataset.zoomBound === "1") return;
+    const img = frame.querySelector(".line-map");
+    if (!img) return;
+    frame.dataset.zoomBound = "1";
+    let scale = 1;
+    let x = 0;
+    let y = 0;
+    let mode = "";
+    let start = null;
+    const maxScale = 6;
+
+    const apply = () => {
+      const viewW = frame.clientWidth;
+      const viewH = frame.clientHeight;
+      const imgW = img.offsetWidth * scale;
+      const imgH = img.offsetHeight * scale;
+      if (imgW <= viewW) x = (viewW - imgW) / 2;
+      else x = Math.min(0, Math.max(viewW - imgW, x));
+      if (imgH <= viewH) y = 0;
+      else y = Math.min(0, Math.max(viewH - imgH, y));
+      img.style.transform = `translate(${x}px, ${y}px) scale(${scale})`;
+      frame.style.touchAction = scale > 1.02 ? "none" : "pan-y";
+    };
+
+    const span = (a, b) => Math.hypot(a.clientX - b.clientX, a.clientY - b.clientY);
+
+    frame.addEventListener("touchstart", (event) => {
+      if (event.touches.length === 2) {
+        mode = "pinch";
+        const [a, b] = event.touches;
+        start = {
+          dist: Math.max(1, span(a, b)),
+          scale,
+          x,
+          y,
+          midX: (a.clientX + b.clientX) / 2,
+          midY: (a.clientY + b.clientY) / 2
+        };
+      } else if (event.touches.length === 1 && scale > 1.02) {
+        mode = "pan";
+        start = { x: event.touches[0].clientX, y: event.touches[0].clientY, ox: x, oy: y };
+      } else {
+        mode = "";
+      }
+    }, { passive: true });
+
+    frame.addEventListener("touchmove", (event) => {
+      if (mode === "pinch" && event.touches.length >= 2 && start) {
+        event.preventDefault();
+        const [a, b] = event.touches;
+        const next = Math.min(maxScale, Math.max(1, start.scale * (span(a, b) / start.dist)));
+        const rect = frame.getBoundingClientRect();
+        const mx = start.midX - rect.left;
+        const my = start.midY - rect.top;
+        const ratio = next / start.scale;
+        x = mx - (mx - start.x) * ratio;
+        y = my - (my - start.y) * ratio;
+        scale = next;
+        apply();
+        return;
+      }
+      if (mode === "pan" && event.touches.length === 1 && start && scale > 1.02) {
+        event.preventDefault();
+        x = start.ox + (event.touches[0].clientX - start.x);
+        y = start.oy + (event.touches[0].clientY - start.y);
+        apply();
+      }
+    }, { passive: false });
+
+    frame.addEventListener("touchend", (event) => {
+      if (event.touches.length === 0) mode = "";
+      else if (mode === "pinch" && event.touches.length < 2) mode = "";
+    });
+
+    frame.addEventListener("touchcancel", () => {
+      mode = "";
+    });
+
+    img.addEventListener("load", () => {
+      scale = 1;
+      x = 0;
+      y = 0;
+      apply();
+    });
+    img.style.transformOrigin = "0 0";
+    apply();
+  });
+}
+
 function dayLineDetailHtml(line) {
   const labels = window.LINE_FIELD_LABELS || {};
   const profileNames = ["Technical & operational profile", "技術・運行の概要", "פרופיל טכני ותפעולי"];
@@ -1805,7 +1989,7 @@ function dayLineDetailHtml(line) {
     })
     .join("");
   const map = line.map
-    ? `<div class="line-map-scroll"><img class="line-map" src="./${line.map}" alt="${escapeModelText(line.label)} route map"></div>`
+    ? `<div class="line-map-scroll"><img class="line-map" src="./${line.map}" alt="${escapeModelText(line.label)} route map" draggable="false"></div>`
     : "";
   return `<div class="day-line-detail" style="--line:${line.color}">
     <h3>${escapeModelText(lineEnglishName(line))}</h3>
@@ -1863,6 +2047,7 @@ function toggleDayLine(button) {
   }
   panel.style.setProperty("--line", line.color);
   panel.innerHTML = dayLineDetailHtml(line);
+  bindLineMapZoom(panel);
   panel.hidden = false;
   requestAnimationFrame(() => revealDayLinePanel(panel));
 }
@@ -1942,6 +2127,7 @@ function setLineSelection(lineId, toggle) {
   });
   panel.style.setProperty("--line", line.color);
   panel.innerHTML = dayLineDetailHtml(line);
+  bindLineMapZoom(panel);
   panel.hidden = false;
   requestAnimationFrame(() => revealLinePanel(panel));
 }
@@ -2265,6 +2451,13 @@ function initEvents() {
     if (homeButton) {
       event.preventDefault();
       goBackToDelegationAbout();
+      return;
+    }
+
+    const stationButton = event.target.closest("[data-station]");
+    if (stationButton?.dataset.station) {
+      event.preventDefault();
+      toggleDayStation(stationButton);
       return;
     }
 
