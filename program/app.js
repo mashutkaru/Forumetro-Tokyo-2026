@@ -1122,12 +1122,11 @@ function setProgramLang(lang) {
     notifyParentLanguage();
     return;
   }
-  const enteringHebrew = next === "he";
   programLang = next;
-  if (enteringHebrew) currentDayIndex = 0;
+  currentDayIndex = 0;
   applyChromeLanguage();
   render({ resetNav: false });
-  if (enteringHebrew && document.getElementById("page-day")?.classList.contains("active")) {
+  if (document.getElementById("page-day")?.classList.contains("active")) {
     scrollDayViewToTop();
   }
   notifyParentLanguage();
@@ -2307,6 +2306,11 @@ window.addEventListener("message", (event) => {
     else showPage(event.data.page);
   }
   if (event.data.type === "forumetro:set-lang") setProgramLang(event.data.lang);
+  if (event.data.type === "forumetro:reset-day" && currentDayIndex !== 0) {
+    currentDayIndex = 0;
+    render({ resetNav: false });
+    if (document.getElementById("page-day")?.classList.contains("active")) scrollDayViewToTop();
+  }
 });
 
 var lastLineAnchor = null;

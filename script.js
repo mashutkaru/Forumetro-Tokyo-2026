@@ -1820,6 +1820,12 @@
         document.querySelectorAll('.program-section-bar [data-section]').forEach(function (item) {
           item.classList.toggle('active', item.getAttribute('data-section') === 'overview');
         });
+        if (pageChanged) {
+          var programFrame = document.querySelector('#program-page .program-frame');
+          if (programFrame && programFrame.contentWindow) {
+            programFrame.contentWindow.postMessage({ type: 'forumetro:reset-day' }, '*');
+          }
+        }
       }
       if (page === 'useful') {
         document.querySelectorAll('.useful-section-bar [data-page]').forEach(function (item) {
@@ -1880,6 +1886,7 @@
 
   function applyProgramLangChrome(lang) {
     state.programLang = lang === 'he' ? 'he' : 'en';
+    document.body.classList.toggle('program-lang-he', state.programLang === 'he');
     paintPageLang(document.getElementById('program-page'), state.programLang);
     paintLangButton(document.getElementById('program-lang-he-btn'), state.programLang, 'he');
   }
