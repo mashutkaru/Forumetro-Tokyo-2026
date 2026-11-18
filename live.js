@@ -1,8 +1,9 @@
-/* Parent-owned local practice connection for L09.
-   Two tabs on this computer share the presenter's place in the site.
-   This is not the later account check. Anyone who can open the file
-   in this browser can press Present. */
+/* L09 live link. The parent page keeps the only connection to Supabase,
+   so a host phone and the visitors' phones share the same place on the site.
+   The publishable key is meant to be in the website. The secret key is not. */
 (function () {
+  var SUPABASE_URL = "https://rrnruwohjenoblvpmsjy.supabase.co";
+  var SUPABASE_KEY = "sb_publishable_4OtR2kNL_mw0tRreEaRXFw_pQ0JwxaB";
   var ORIGIN = window.location.origin;
   var TAB = Math.random().toString(36).slice(2, 10);
   var SECTIONS = { overview: 1, schedule: 1, location: 1, model: 1, tips: 1 };
@@ -29,6 +30,9 @@
   var frameReady = false;
   var heartbeat = 0;
   var outgoing = [];
+  var joined = false;
+  var opening = false;
+  var pending = [];
 
   function frameEl() {
     return document.querySelector("#program-page .program-frame");
@@ -89,20 +93,49 @@
   }
 
   function openChannel() {
-    if (channel || !window.BroadcastChannel) {
-      if (!window.BroadcastChannel) send({ type: "forumetro:live-status", status: "reconnecting" });
-      return;
-    }
-    channel = new BroadcastChannel("forumetro-l09");
-    channel.onmessage = onAir;
+    if (channel || opening) return;
+    opening = true;
+    import("https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm").then(function (mod) {
+      var client = mod.createClient(SUPABASE_URL, SUPABASE_KEY);
+      channel = client.channel("forumetro-l09", {
+        config: { broadcast: { self: false } }
+      });
+      channel.on("broadcast", { event: "live" }, function (payload) {
+        onAir({ data: payload && payload.payload });
+      });
+      channel.subscribe(function (status) {
+        if (status === "SUBSCRIBED") {
+          joined = true;
+          var queued = pending;
+          pending = [];
+          queued.forEach(sendNow);
+          return;
+        }
+        if (status === "CHANNEL_ERROR" || status === "TIMED_OUT" || status === "CLOSED") {
+          joined = false;
+          if (following) send({ type: "forumetro:live-status", status: "reconnecting" });
+        }
+      });
+    }).catch(function () {
+      opening = false;
+      if (following) send({ type: "forumetro:live-status", status: "reconnecting" });
+    });
+  }
+
+  function sendNow(msg) {
+    if (!channel || !joined) return;
+    channel.send({ type: "broadcast", event: "live", payload: msg }).catch(function () {
+      if (following) send({ type: "forumetro:live-status", status: "reconnecting" });
+    });
   }
 
   function broadcast(msg) {
     openChannel();
-    if (!channel) return;
-    try { channel.postMessage(msg); } catch (e) {
-      send({ type: "forumetro:live-status", status: "reconnecting" });
+    if (!joined) {
+      pending.push(msg);
+      return;
     }
+    sendNow(msg);
   }
 
   function remember(status, snapshot) {
