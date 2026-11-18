@@ -143,6 +143,11 @@ function create(mount) {
   let pointerDown = null;
   let needsFit = false;
   let panLimits = null;
+  let modelReady = false;
+  let suppressViewEvents = 0;
+  let viewTween = null;
+  const viewListeners = [];
+  const readyListeners = [];
 
   const compass = createForumetroCompass({
     THREE, stage, camera, controls, requestRender: kick,
@@ -169,7 +174,8 @@ function create(mount) {
         return;
       }
       frame = window.requestAnimationFrame(loop);
-      controls.update();
+      if (viewTween) stepTween();
+      else controls.update();
       clampPan();
       compass.update();
       renderer.render(scene, camera);
@@ -189,6 +195,8 @@ function create(mount) {
     if (needsFit && modelRoot) {
       needsFit = false;
       frameModel(modelRoot);
+      modelReady = true;
+      notifyReady();
       return;
     }
     kick();
@@ -303,9 +311,12 @@ function create(mount) {
 
   function load(url) {
     if (url === currentUrl && modelRoot) {
+      modelReady = true;
       kick();
+      notifyReady();
       return;
     }
+    modelReady = false;
     currentUrl = url;
     compass.setNorthDegrees(northForUrl(url));
     const token = ++loadToken;
@@ -358,6 +369,51 @@ function create(mount) {
     }
     fullSpan.textContent = textFor(fullSpan);
   }
+
+  function readView() {
+    return {
+      position: [camera.position.x, camera.position.y, camera.position.z],
+      target: [controls.target.x, controls.target.y, controls.target.z],
+      fov: camera.fov,
+      url: currentUrl,
+    };
+  }
+
+  function finiteTriple(value) {
+    return Array.isArray(value)
+      && value.length === 3
+      && value.every((n) => typeof n === "number" && Number.isFinite(n) && Math.abs(n) < 1e7);
+  }
+
+  function stepTween() {
+    if (!viewTween) return;
+    const t = viewTween.duration <= 0
+      ? 1
+      : Math.min(1, (performance.now() - viewTween.start) / viewTween.duration);
+    const eased = t * t * (3 - 2 * t);
+    camera.position.lerpVectors(viewTween.fromPos, viewTween.toPos, eased);
+    controls.target.lerpVectors(viewTween.fromTarget, viewTween.toTarget, eased);
+    camera.fov = viewTween.fromFov + (viewTween.toFov - viewTween.fromFov) * eased;
+    camera.updateProjectionMatrix();
+    if (t < 1) return;
+    controls.update();
+    viewTween = null;
+    suppressViewEvents = 0;
+  }
+
+  function emitView(settled) {
+    if (suppressViewEvents || !viewListeners.length) return;
+    const state = readView();
+    viewListeners.forEach((fn) => fn(state, settled));
+  }
+
+  function notifyReady() {
+    const url = currentUrl;
+    readyListeners.forEach((fn) => fn(url));
+  }
+
+  controls.addEventListener("change", () => emitView(false));
+  controls.addEventListener("end", () => emitView(true));
 
   root.querySelector('[data-action="reset"]').addEventListener("click", resetView);
   root.querySelector('[data-action="in"]').addEventListener("click", () => zoomBy(0.8));
@@ -424,6 +480,40 @@ function create(mount) {
     resetView,
     setOnSelect,
     setNorthDegrees: compass.setNorthDegrees,
+    getViewState: readView,
+    isModelReady(expectedKey) {
+      if (!modelReady || !modelRoot) return false;
+      if (!expectedKey) return true;
+      const path = new URL(currentUrl, document.baseURI).pathname;
+      return path.endsWith("/" + expectedKey);
+    },
+    setControlsEnabled(enabled) {
+      controls.enabled = Boolean(enabled);
+    },
+    setViewState(state, options) {
+      if (!state || !finiteTriple(state.position) || !finiteTriple(state.target)) return;
+      if (typeof state.fov !== "number" || state.fov < 10 || state.fov > 120) return;
+      const immediate = options && options.immediate;
+      suppressViewEvents = 1;
+      viewTween = {
+        fromPos: camera.position.clone(),
+        fromTarget: controls.target.clone(),
+        toPos: new THREE.Vector3(state.position[0], state.position[1], state.position[2]),
+        toTarget: new THREE.Vector3(state.target[0], state.target[1], state.target[2]),
+        fromFov: camera.fov,
+        toFov: state.fov,
+        start: performance.now(),
+        duration: immediate ? 0 : 300,
+      };
+      kick();
+      if (immediate) stepTween();
+    },
+    onViewChange(handler) {
+      if (typeof handler === "function") viewListeners.push(handler);
+    },
+    onModelReady(handler) {
+      if (typeof handler === "function") readyListeners.push(handler);
+    },
   };
 }
 

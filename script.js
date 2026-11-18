@@ -1809,6 +1809,7 @@
       window.location.href = page === 'home' ? root : root + '?page=' + page;
       return;
     }
+    var previousPage = state.page;
     var pageChanged = state.page !== page;
     state.page = page;
     document.querySelectorAll('.nav-btn').forEach(function(b){
@@ -1876,6 +1877,12 @@
         document.querySelectorAll('.useful-section-bar [data-page]').forEach(function (item) {
           item.classList.toggle('active', item.getAttribute('data-page') === 'prep');
         });
+      }
+    }
+    if (pageChanged && previousPage === 'program' && page !== 'program') {
+      var liveFrame = document.querySelector('#program-page .program-frame');
+      if (liveFrame && liveFrame.contentWindow) {
+        liveFrame.contentWindow.postMessage({ type: 'forumetro:live-leave' }, window.location.origin);
       }
     }
     if (pageChanged) {

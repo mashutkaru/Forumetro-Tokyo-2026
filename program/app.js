@@ -1456,6 +1456,7 @@ function setCurrentDay(index) {
   currentDayIndex = nextIndex;
   render();
   scrollDayViewToTop();
+  notePlace();
 }
 
 function renderDateStrip() {
@@ -2072,6 +2073,7 @@ function holdSectionSpy(section) {
 }
 
 function syncSectionFromScroll() {
+  if (liveMode === "follow") return;
   if (!document.getElementById("page-day")?.classList.contains("active")) return;
 
   const mobile = usesMobileProgram();
@@ -2133,6 +2135,10 @@ function setProgramNavActive(section) {
 }
 
 function goToDaySection(section) {
+  if (section === "live") {
+    if (window.ForumetroLive) window.ForumetroLive.enter();
+    return;
+  }
   const name = section === "day" ? "overview" : section === "lines" ? "tips" : section;
   holdSectionSpy(name);
   if (section === "tips" || section === "lines") {
@@ -2148,6 +2154,7 @@ function goToDaySection(section) {
   } else {
     scrollToDaySection(name);
   }
+  notePlace();
 }
 
 function lineEnglishName(line) {
@@ -2431,12 +2438,14 @@ function setLineSelection(lineId, toggle) {
   bindLineMapZoom(panel);
   panel.hidden = false;
   requestAnimationFrame(() => revealLinePanel(panel));
+  notePlace();
 }
 
 function notifyParentSection(section) {
   try {
     if (window.parent && window.parent !== window) {
-      window.parent.postMessage({ type: "forumetro:section", section }, "*");
+      const outgoing = liveMode === "follow" ? "live" : section;
+      window.parent.postMessage({ type: "forumetro:section", section: outgoing }, "*");
     }
   } catch (e) {}
 }
@@ -2458,6 +2467,153 @@ let cityViewer = null;
 let cityViewerUrl = "";
 let cityModelDay = "";
 let cityModelIndex = 0;
+let liveMode = "off";
+let applyingPlace = false;
+let applyToken = 0;
+let pendingLiveCamera = null;
+let lastAppliedKey = "";
+const placeListeners = [];
+const cameraListeners = [];
+
+function modelKey(url) {
+  try {
+    const path = new URL(url, document.baseURI).pathname;
+    const mark = "/models/";
+    const at = path.lastIndexOf(mark);
+    if (at < 0) return null;
+    return path.slice(at + 1);
+  } catch (e) {
+    return null;
+  }
+}
+
+function readPlace() {
+  const day = days[currentDayIndex];
+  const onLines = document.getElementById("page-lines")?.classList.contains("active");
+  let section = onLines
+    ? "tips"
+    : (document.querySelector(".nav-program [data-section].active")?.dataset.section || "overview");
+  if (section === "live" || section === "notes") section = "overview";
+  const line = onLines ? (document.querySelector("#lineTags .line-tag.is-active")?.dataset.line || null) : null;
+  const models = dayModels(viewDay(day));
+  const source = models[cityModelIndex] && models[cityModelIndex].src;
+  const model = source ? modelKey(source) : null;
+  let camera = null;
+  if (model && cityViewer && typeof cityViewer.getViewState === "function") {
+    const view = cityViewer.getViewState();
+    if (view) {
+      camera = {
+        position: view.position.map((n) => Math.round(n * 100) / 100),
+        target: view.target.map((n) => Math.round(n * 100) / 100),
+        fov: Math.round(view.fov * 100) / 100,
+      };
+    }
+  }
+  return { day: day.d, section, line, model, camera };
+}
+
+function notePlace() {
+  if (applyingPlace || liveMode !== "present") return;
+  const place = readPlace();
+  placeListeners.forEach((fn) => fn(place));
+}
+
+function noteCamera(settled) {
+  if (applyingPlace || liveMode !== "present") return;
+  cameraListeners.forEach((fn) => fn(settled));
+}
+
+function tryApplyLiveCamera() {
+  if (!pendingLiveCamera || !cityViewer || typeof cityViewer.isModelReady !== "function") return;
+  if (!cityViewer.isModelReady(pendingLiveCamera.model)) return;
+  cityViewer.setViewState(pendingLiveCamera.camera, { immediate: pendingLiveCamera.immediate });
+  pendingLiveCamera = null;
+}
+
+function applyPlace(snapshot, options) {
+  if (!snapshot || typeof snapshot.day !== "string") return;
+  const token = ++applyToken;
+  applyingPlace = true;
+  const index = days.findIndex((day) => day.d === snapshot.day);
+  const dayChanged = index >= 0 && index !== currentDayIndex;
+  if (index >= 0) currentDayIndex = index;
+  const models = dayModels(days[currentDayIndex]);
+  let modelChanged = false;
+  if (snapshot.model) {
+    const found = models.findIndex((model) => modelKey(model.src) === snapshot.model);
+    if (found >= 0 && (dayChanged || found !== cityModelIndex)) {
+      cityModelIndex = found;
+      modelChanged = true;
+    }
+  }
+  if (dayChanged) {
+    cityModelDay = days[currentDayIndex].d;
+    render({ resetNav: false });
+  } else if (modelChanged) {
+    syncCityModel(viewDay(days[currentDayIndex]));
+  }
+  const placeKey = [snapshot.day, snapshot.section, snapshot.line || "", snapshot.model || ""].join("|");
+  const placeChanged = placeKey !== lastAppliedKey;
+  lastAppliedKey = placeKey;
+  if (placeChanged) {
+    const onLines = document.getElementById("page-lines")?.classList.contains("active");
+    if (snapshot.section === "tips") {
+      const currentLine = document.querySelector("#lineTags .line-tag.is-active")?.dataset.line;
+      if (!onLines || (snapshot.line && currentLine !== snapshot.line)) openLinePage(snapshot.line || undefined);
+    } else if (snapshot.section) {
+      goToDaySection(snapshot.section);
+    }
+  }
+  pendingLiveCamera = snapshot.camera
+    ? { model: snapshot.model, camera: snapshot.camera, immediate: !(options && options.immediate === false) }
+    : null;
+  tryApplyLiveCamera();
+  if (liveMode === "follow") setProgramNavActive("live");
+  window.setTimeout(() => {
+    if (token === applyToken) applyingPlace = false;
+  }, 600);
+}
+
+function setLiveMode(mode) {
+  liveMode = mode === "present" || mode === "follow" ? mode : "off";
+  if (liveMode === "off") lastAppliedKey = "";
+  if (cityViewer && typeof cityViewer.setControlsEnabled === "function") {
+    cityViewer.setControlsEnabled(liveMode !== "follow");
+  }
+  if (liveMode === "follow") setProgramNavActive("live");
+  document.documentElement.classList.toggle("is-live-follow", liveMode === "follow");
+}
+
+function bindViewerLive(viewer) {
+  if (!viewer || viewer.__liveBound) return;
+  viewer.__liveBound = true;
+  if (typeof viewer.onViewChange === "function") viewer.onViewChange((state, settled) => noteCamera(settled));
+  if (typeof viewer.onModelReady === "function") {
+    viewer.onModelReady(() => {
+      tryApplyLiveCamera();
+      if (window.ForumetroLive && window.ForumetroLive.modelReady) window.ForumetroLive.modelReady();
+    });
+  }
+  if (liveMode === "follow" && typeof viewer.setControlsEnabled === "function") viewer.setControlsEnabled(false);
+}
+
+function leaveLiveFor(event) {
+  if (event.target.closest("#liveViewBanner, #liveHostOpen, [data-action='full'], .program-lang-btn")) return false;
+  if (event.target.closest('.nav-program [data-section="live"]')) return false;
+  return Boolean(event.target.closest(".nav-program [data-section], .nav-useful [data-page], .brand-home"));
+}
+
+window.ForumetroProgram = {
+  readPlace,
+  applyPlace,
+  setMode: setLiveMode,
+  onPlace(fn) {
+    if (typeof fn === "function") placeListeners.push(fn);
+  },
+  onCamera(fn) {
+    if (typeof fn === "function") cameraListeners.push(fn);
+  },
+};
 
 function usesMobileProgram() {
   return window.matchMedia("(max-width: 900px)").matches || document.documentElement.classList.contains("is-mobile-embed");
@@ -2556,6 +2712,7 @@ function syncCityModel(day) {
     cityViewer.resize();
     if (moved) cityViewer.refit();
   });
+  bindViewerLive(cityViewer);
 }
 
 window.addEventListener("forumetro:viewer-ready", () => {
@@ -2757,6 +2914,14 @@ function goBackToDelegationAbout() {
 
 function initEvents() {
   document.addEventListener("click", (event) => {
+    if (liveMode === "follow") {
+      if (leaveLiveFor(event) && window.ForumetroLive) {
+        window.ForumetroLive.leave();
+      } else if (event.target.closest("[data-day], [data-model-index], [data-line], [data-day-line], [data-station]")) {
+        event.preventDefault();
+        return;
+      }
+    }
     const homeButton = event.target.closest(".brand-home");
     if (homeButton) {
       event.preventDefault();
@@ -2871,6 +3036,11 @@ window.addEventListener("message", (event) => {
     return;
   }
   if (event.data.type === "forumetro:go-section" && event.data.section) {
+    if (event.data.section === "live") {
+      if (window.ForumetroLive) window.ForumetroLive.enter();
+      return;
+    }
+    if (liveMode === "follow" && window.ForumetroLive) window.ForumetroLive.leave();
     if (event.data.line) openLinePage(event.data.line);
     else goToDaySection(event.data.section);
   }

@@ -407,7 +407,7 @@ html.is-embedded .m-head-partners {
 }
 
 .nav.nav-program::before {
-  background: linear-gradient(90deg, #009BBF, #00BB85, #F62E36, #FF9500, #C9A227);
+  background: linear-gradient(90deg, #009BBF, #00BB85, #F62E36, #FF9500, #C9A227, #3B6FE0);
 }
 
 .nav[hidden] {
@@ -496,6 +496,7 @@ html:not(.embed-branch-useful) .nav-useful {
   display: none !important;
 }
 .nav button[data-section="tips"] { --station: #C9A227; }
+.nav button[data-section="live"] { --station: #3B6FE0; }
 .nav button[data-section="notes"] { --station: #8F76D6; }
 html.is-embedded .nav.line-anchored-useful button[data-page="prep"] { --station: #8F76D6; }
 html.is-embedded .nav.line-anchored-useful button[data-page="avoid"] { --station: #00BB85; }
@@ -542,7 +543,7 @@ html.is-embedded .nav.line-anchored-useful::before {
 }
 
 html.is-embedded .nav.nav-program.line-anchored::before {
-  background: linear-gradient(90deg, #009BBF, #00BB85, #F62E36, #FF9500, #C9A227);
+  background: linear-gradient(90deg, #009BBF, #00BB85, #F62E36, #FF9500, #C9A227, #3B6FE0);
 }
 
 html.is-embedded .nav.line-anchored-reverse::before {
@@ -550,7 +551,7 @@ html.is-embedded .nav.line-anchored-reverse::before {
 }
 
 html.is-embedded .nav.nav-program.line-anchored-reverse::before {
-  background: linear-gradient(90deg, #C9A227, #FF9500, #F62E36, #00BB85, #009BBF);
+  background: linear-gradient(90deg, #3B6FE0, #C9A227, #FF9500, #F62E36, #00BB85, #009BBF);
 }
 
 html.is-embedded .nav.line-anchored-useful.line-anchored-reverse::before {
@@ -652,7 +653,7 @@ html.lang-he.is-embedded:not(.is-mobile-embed) .nav.nav-program {
 }
 
 html.lang-he.is-embedded:not(.is-mobile-embed) .nav.nav-program.line-anchored::before {
-  background: linear-gradient(90deg, #C9A227, #FF9500, #F62E36, #00BB85, #009BBF);
+  background: linear-gradient(90deg, #3B6FE0, #C9A227, #FF9500, #F62E36, #00BB85, #009BBF);
 }
 
 html.lang-he.is-embedded:not(.is-mobile-embed) .nav.nav-useful {
@@ -3144,4 +3145,129 @@ html.is-embedded.is-mobile-embed .mobile-app .m-head {
   html.is-embedded .subpage {
     min-height: calc(100% - var(--mobile-tab-height));
   }
+}
+
+.live-view-banner {
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin: 0 0 8px;
+  padding: 10px 16px;
+  background: #214f63;
+  color: #fff;
+  direction: ltr;
+}
+
+.live-view-banner[hidden] {
+  display: none !important;
+}
+
+html.lang-he .live-view-banner {
+  direction: rtl;
+}
+
+.live-view-banner p {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 800;
+}
+
+.live-view-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.live-view-banner button {
+  border: 0;
+  border-radius: 999px;
+  padding: 8px 12px;
+  background: #fff;
+  color: #214f63;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.live-view-banner.is-ended {
+  background: #5c6b73;
+}
+
+html.is-mobile-embed.is-live-open .app {
+  position: relative;
+}
+
+html.is-mobile-embed.is-live-open .live-view-banner {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  margin: 0;
+  z-index: 60;
+}
+
+html.is-mobile-embed.is-live-open .page.active {
+  padding-top: 62px;
+}
+
+html.is-mobile-embed.is-live-open.is-live-gate .page.active {
+  padding-top: 132px;
+}
+
+.live-host-open {
+  position: fixed;
+  z-index: 70;
+  right: 16px;
+  bottom: calc(16px + env(safe-area-inset-bottom));
+  min-height: 44px;
+  padding: 10px 18px;
+  border: 0;
+  border-radius: 999px;
+  background: #214f63;
+  color: #fff;
+  font-family: inherit;
+  font-size: 15px;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+html.lang-he .live-host-open {
+  right: auto;
+  left: 16px;
+}
+
+.live-host-open[hidden],
+.live-host-gate[hidden],
+#liveHostTools[hidden] {
+  display: none !important;
+}
+
+.live-host-gate {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+}
+
+.live-host-gate label,
+.live-host-gate p {
+  font-size: 14px;
+  font-weight: 800;
+}
+
+.live-host-gate input {
+  flex: 1 1 150px;
+  min-height: 44px;
+  padding: 8px 14px;
+  border: 0;
+  border-radius: 999px;
+  font-family: inherit;
+  font-size: 16px;
+  direction: ltr;
 }

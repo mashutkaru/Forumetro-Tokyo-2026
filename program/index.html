@@ -45,7 +45,7 @@
     content="[PLACEHOLDER] Program guide details will be added here."
   />
   <meta name="twitter:image" content="https://mashutkaru.github.io/Forumetro-Tokyo-2026/images/og-image.jpg" />
-  <link rel="stylesheet" href="./styles.css?v=132" />
+  <link rel="stylesheet" href="./styles.css?v=136" />
 </head>
 <body>
   <script>
@@ -80,6 +80,7 @@
           <button type="button" data-section="location"><span class="nav-mark" aria-hidden="true"><span class="nav-mark-line">M</span><span class="nav-mark-id">06</span></span><span class="nav-label" data-en="Location" data-ja="場所" data-he="מיקום">Location</span></button>
           <button type="button" data-section="model"><span class="nav-mark" aria-hidden="true"><span class="nav-mark-line">V</span><span class="nav-mark-id">07</span></span><span class="nav-label" data-en="3D Models" data-ja="3Dモデル" data-he="מודל תלת־ממד">3D Models</span></button>
           <button type="button" data-section="tips"><span class="nav-mark" aria-hidden="true"><span class="nav-mark-line">W</span><span class="nav-mark-id">08</span></span><span class="nav-label" data-en="Line info" data-ja="路線情報" data-he="מידע על הקווים">Line info</span></button>
+          <button type="button" data-section="live"><span class="nav-mark" aria-hidden="true"><span class="nav-mark-line">L</span><span class="nav-mark-id">09</span></span><span class="nav-label" data-en="Live view" data-ja="ライブ表示" data-he="תצוגה חיה">Live view</span></button>
         </nav>
         <nav class="nav nav-useful" hidden aria-label="Useful stations">
           <button class="active" data-page="prep"><span class="nav-mark" aria-hidden="true"><span class="nav-mark-line">Z</span><span class="nav-mark-id">05</span></span><span class="nav-label" data-en="Preparation" data-he="הכנה">Preparation</span></button>
@@ -118,6 +119,19 @@
     </header>
 
     <main>
+      <div id="liveViewBanner" class="live-view-banner" hidden>
+        <form id="liveHostGate" class="live-host-gate" hidden>
+          <label for="liveHostPhone">Phone number</label>
+          <input id="liveHostPhone" type="tel" inputmode="tel" autocomplete="tel" dir="ltr" placeholder="+972…">
+          <button type="submit" id="liveHostContinue">Continue</button>
+          <p id="liveHostError" hidden></p>
+        </form>
+        <div id="liveHostTools" class="live-view-actions">
+          <p id="liveViewStatus" role="status" aria-live="polite">Waiting</p>
+          <button type="button" id="liveViewPresent">Present</button>
+        </div>
+      </div>
+      <button type="button" id="liveHostOpen" class="live-host-open" hidden>Host</button>
       <section class="page active" id="page-day">
         <div class="desktop-day desktop-only">
           <div class="date-strip" id="dateStrip" aria-label="Delegation dates"></div>
@@ -399,7 +413,9 @@
   </script>
   <script src="./line-info.js?v=3"></script>
   <script src="./station-info.js?v=2"></script>
-  <script src="./app.js?v=167"></script>
-  <script type="module" src="./city-viewer.js?v=10"></script>
+  <script src="../live-hosts.js?v=1"></script>
+  <script src="./app.js?v=169"></script>
+  <script src="./live-view.js?v=3"></script>
+  <script type="module" src="./city-viewer.js?v=11"></script>
 </body>
 </html>
