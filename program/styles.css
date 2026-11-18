@@ -2168,6 +2168,28 @@ html.is-embedded .line-tags {
   line-height: 1.4;
 }
 
+.guide-card a {
+  color: #0b6f93;
+  font-weight: 450;
+  text-decoration: underline;
+  text-underline-offset: 0.14em;
+  word-break: break-all;
+}
+
+.guide-card .guide-figure {
+  list-style: none;
+  margin: 14px 0 0;
+  padding: 0;
+}
+
+.guide-card .guide-figure img {
+  display: block;
+  width: min(168px, 100%);
+  height: auto;
+  border-radius: 14px;
+  background: #fff;
+}
+
 .guide-card .guide-subhead {
   list-style: none;
   margin: 14px 0 6px;
