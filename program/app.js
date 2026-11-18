@@ -1156,6 +1156,28 @@ function notifyParentLanguage() {
   } catch (e) {}
 }
 
+function dayViewScroll() {
+  const desktop = getDesktopScroller();
+  const mobile = document.querySelector(".m-content");
+  return {
+    desktop: desktop ? desktop.scrollTop : 0,
+    windowTop: window.scrollY || 0,
+    mobile: mobile ? mobile.scrollTop : 0,
+  };
+}
+
+function restoreDayViewScroll(place) {
+  if (!place) return;
+  const desktop = getDesktopScroller();
+  if (desktop) desktop.scrollTop = place.desktop;
+  window.scrollTo(0, place.windowTop);
+  const mobile = document.querySelector(".m-content");
+  if (mobile) {
+    mobile.scrollTop = place.mobile;
+    mobileDatesLastTop = mobile.scrollTop;
+  }
+}
+
 function setProgramLang(lang) {
   let next = lang === "he" ? "he" : "en";
   if (next === programLang) {
@@ -1164,12 +1186,11 @@ function setProgramLang(lang) {
     return;
   }
   programLang = next;
-  currentDayIndex = 0;
+  const place = dayViewScroll();
   applyChromeLanguage();
   render({ resetNav: false });
-  if (document.getElementById("page-day")?.classList.contains("active")) {
-    scrollDayViewToTop();
-  }
+  restoreDayViewScroll(place);
+  requestAnimationFrame(() => restoreDayViewScroll(place));
   notifyParentLanguage();
   if (lastLineAnchor) {
     requestAnimationFrame(function () {
