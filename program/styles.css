@@ -2169,11 +2169,13 @@ html.is-embedded .line-tags {
 }
 
 .guide-card a {
+  display: block;
+  margin-top: 4px;
   color: #0b6f93;
   font-weight: 450;
   text-decoration: underline;
   text-underline-offset: 0.14em;
-  word-break: break-all;
+  overflow-wrap: anywhere;
 }
 
 .guide-card .guide-figure {
@@ -2242,7 +2244,6 @@ html.is-embedded .line-tags {
 
 .guide-hebrew .guide-card a {
   color: var(--navy);
-  word-break: break-all;
 }
 
 .avoid-page .guide-card {
