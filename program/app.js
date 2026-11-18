@@ -1838,7 +1838,7 @@ function stationDetailHtml(station) {
   const rows = station.rows
     .map(([operator, route, count]) => {
       const [company, line] = stationLineCells(operator, route);
-      return `<tr><td>${company}</td><td>${line}</td><td>${escapeModelText(count)}</td></tr>`;
+      return `<tr><td data-label="${escapeModelText(columns[0])}">${company}</td><td data-label="${escapeModelText(columns[1])}">${line}</td><td data-label="${escapeModelText(columns[2])}">${escapeModelText(count)}</td></tr>`;
     })
     .join("");
   return `<article class="station-detail">
