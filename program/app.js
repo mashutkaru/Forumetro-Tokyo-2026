@@ -109,7 +109,7 @@ const days = [
       ["ARRIVAL", "Narita Airport, 11:40", ICONS.plane],
       ["CHECK-IN", "Hotel, 15:30", ICONS.suitcase],
       ["RECEPTION", "LUMIVEIL TOKYO, 17:00–20:00", ICONS.dinner],
-      ["WALK", "Shiodome, 20:00–21:00", ICONS.stroll],
+      ["WALK (optional)", "Shiodome, 20:00–21:00", ICONS.stroll],
     ],
     program: [
       ["11:40", "Arrival at Narita International Airport", "Immigration, baggage collection and meeting the local coordination team"],
@@ -523,7 +523,7 @@ const daysJa = [
       ["到着", "成田空港、11:40"],
       ["チェックイン", "ホテル、15:30"],
       ["レセプション", "ルミヴェール東京、17:00–20:00"],
-      ["徒歩視察", "汐留、20:00–21:00"],
+      ["徒歩視察（任意）", "汐留、20:00–21:00"],
     ],
     program: [
       ["11:40", "成田国際空港に到着", "入国審査、手荷物受取、現地運営チームとの合流"],
@@ -813,7 +813,7 @@ const daysHe = [
       ["הגעה", "נמל התעופה נריטה, 11:40"],
       ["צ'ק-אין", "מלון, 15:30"],
       ["קבלת פנים", "LUMIVEIL TOKYO, 17:00–20:00"],
-      ["סיור אוריינטציה", "שיודומה, 20:00–21:00"],
+      ["סיור אוריינטציה (לבחירה)", "שיודומה, 20:00–21:00"],
     ],
     program: [
       ["11:40", "הגעה לנמל התעופה הבין-לאומי נריטה", "ביקורת גבולות, איסוף כבודה ומפגש עם צוות התיאום המקומי"],
