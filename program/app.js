@@ -2417,15 +2417,7 @@ function setLineSelection(lineId, toggle) {
   const buttons = document.querySelectorAll("#lineTags .line-tag");
   if (!panel || !buttons.length) return;
   const active = document.querySelector("#lineTags .line-tag.is-active");
-  if (toggle && active && active.dataset.line === lineId) {
-    buttons.forEach((btn) => {
-      btn.classList.remove("is-active");
-      btn.setAttribute("aria-expanded", "false");
-    });
-    panel.hidden = true;
-    panel.innerHTML = "";
-    return;
-  }
+  if (toggle && active && active.dataset.line === lineId) return;
   const line = profiles.find((item) => item.id === lineId) || profiles.find((item) => item.id === "ginza");
   if (!line) return;
   buttons.forEach((btn) => {
