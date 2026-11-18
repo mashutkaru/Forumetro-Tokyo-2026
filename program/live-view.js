@@ -127,6 +127,12 @@ function paintLiveBanner() {
   }
   document.documentElement.classList.toggle("is-live-open", showBanner);
   document.documentElement.classList.toggle("is-live-gate", showBanner && !host);
+  const badge = document.getElementById("liveBadge");
+  if (badge) {
+    const showBadge = liveRole === "viewer" && liveStatus === "live" && !host && !hostGateOpen;
+    badge.hidden = !showBadge;
+    badge.textContent = liveLabel("live");
+  }
 }
 
 function postLive(data) {
