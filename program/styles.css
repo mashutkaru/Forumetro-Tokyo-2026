@@ -1757,9 +1757,14 @@ html.is-embedded .line-tags {
   margin: 0 34px 12px;
 }
 
+.station-stage {
+  padding: 0 34px;
+}
+
 @media (max-width: 900px) {
   .station-signs,
-  .station-panel {
+  .station-panel,
+  .station-stage {
     padding: 0;
     margin-left: 0;
     margin-right: 0;
@@ -1813,8 +1818,8 @@ html.is-embedded .line-tags {
   line-height: 1.55;
 }
 
-.station-total {
-  margin: 0 0 8px;
+.station-detail .station-total {
+  margin: 0 0 22px;
   font-size: 22px;
   font-weight: 800;
 }
@@ -1836,15 +1841,26 @@ html.is-embedded .line-tags {
 
 .station-lines th {
   padding-top: 0;
-  color: var(--navy);
-  font-size: 12px;
+  padding-bottom: 8px;
+  border-bottom: 1.5px solid rgba(23, 48, 68, 0.35);
+  color: var(--muted);
+  font-size: 11px;
   font-weight: 750;
-  letter-spacing: 0.03em;
+  letter-spacing: 0.06em;
   text-transform: uppercase;
 }
 
 .station-lines td {
   border-top: 1px solid rgba(23, 48, 68, 0.1);
+}
+
+.station-lines tbody tr:first-child td {
+  border-top: 0;
+}
+
+.station-lines th:first-child,
+.station-lines td:first-child {
+  padding-right: 44px;
 }
 
 .station-lines th:nth-child(2),
