@@ -1628,11 +1628,11 @@ const LINE_NAME_COLORS = [
   ["JR East Shinkansen", "#3CB44A"],
   ["Shōnan–Shinjuku", "#E4682C"],
   ["Keihin-Tōhoku", "#00B0E0"],
+  ["Den-en-toshi Line", "#00A070"],
   ["Den-en-toshi", "#00A070"],
   ["Chūō–Sōbu", "#E0B400"],
   ["Chūō Rapid", "#FC8000"],
   ["Yurikamome Line", "#00A0E9"],
-  ["Yurikamome", "#00A0E9"],
   ["Inokashira Line", "#3858B8"],
   ["Inokashira", "#3858B8"],
   ["Marunouchi Line", "#E40010"],
@@ -1652,6 +1652,7 @@ const LINE_NAME_COLORS = [
   ["Saikyō", "#008C60"],
   ["Asakusa Line", "#E85298"],
   ["Asakusa", "#E85298"],
+  ["Hibiya Lines", "#7A7A72"],
   ["Hibiya Line", "#7A7A72"],
   ["Hibiya", "#7A7A72"],
   ["Keiyō", "#A01820"],
@@ -1661,8 +1662,17 @@ const LINE_NAME_COLORS = [
   ["Ōedo", "#B40078"],
 ].sort((a, b) => b[0].length - a[0].length);
 
+const LINE_NAME_KEEP = ["Higashi-Ginza", "at Ginza"];
+
 function colorLineNames(route) {
   let text = String(route || "");
+  const kept = [];
+  LINE_NAME_KEEP.forEach((phrase, index) => {
+    if (!text.includes(phrase)) return;
+    const token = `\u0001${index}\u0001`;
+    text = text.split(phrase).join(token);
+    kept.push([token, phrase]);
+  });
   const marks = [];
   LINE_NAME_COLORS.forEach(([phrase, color], index) => {
     if (!text.includes(phrase)) return;
@@ -1674,13 +1684,16 @@ function colorLineNames(route) {
   marks.forEach(([token, phrase, color]) => {
     html = html.split(token).join(`<span class="station-line-name" style="color:${color}">${escapeModelText(phrase)}</span>`);
   });
+  kept.forEach(([token, phrase]) => {
+    html = html.split(token).join(escapeModelText(phrase));
+  });
   return html;
 }
 
 function stationDetailHtml(station) {
   const heading = programLang === "ja" ? "1日あたりの乗降人員" : programLang === "he" ? "תנועת נוסעים ביום" : "Daily passenger movements";
   const rows = station.rows
-    .map(([operator, route, count]) => `<li><span><strong>${escapeModelText(operator)}</strong> ${colorLineNames(route)}</span><b>${escapeModelText(count)}</b></li>`)
+    .map(([operator, route, count]) => `<li><span><strong>${colorLineNames(operator)}</strong> ${colorLineNames(route)}</span><b>${escapeModelText(count)}</b></li>`)
     .join("");
   return `<article class="station-detail">
       <h4>${stationName(station)}</h4>
