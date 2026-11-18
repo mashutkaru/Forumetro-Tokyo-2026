@@ -1290,65 +1290,64 @@ function scrollDesktopScroller(top, behavior) {
   window.scrollTo({ top: top, behavior: behavior || "auto" });
 }
 
-let keepMobileDatesOpen = false;
-let keepMobileDatesTimer = 0;
-let mobileTouchY = null;
+let mobileDatesLastTop = 0;
+let mobileDatesIdleTimer = 0;
+let mobileDatesTouching = false;
 
 function showMobileDates() {
   const days = document.querySelector(".m-days");
   if (days) days.classList.remove("is-hidden");
-  keepMobileDatesOpen = true;
-  clearTimeout(keepMobileDatesTimer);
-  keepMobileDatesTimer = setTimeout(() => {
-    keepMobileDatesOpen = false;
-  }, 500);
-  const scroller = document.querySelector(".m-content");
-  requestAnimationFrame(() => {
-    if (!scroller || scroller.scrollTop <= 4) keepMobileDatesOpen = false;
-  });
 }
 
 function hideMobileDates() {
-  if (keepMobileDatesOpen) return;
   const days = document.querySelector(".m-days");
   if (!days || days.classList.contains("is-hidden")) return;
   days.classList.add("is-hidden");
+}
+
+function queueHideMobileDates() {
+  clearTimeout(mobileDatesIdleTimer);
+  mobileDatesIdleTimer = setTimeout(() => {
+    if (mobileDatesTouching) return;
+    hideMobileDates();
+  }, 480);
 }
 
 function bindMobileDateStrip() {
   const scroller = document.querySelector(".m-content");
   if (!scroller || scroller.dataset.datesBound === "1") return;
   scroller.dataset.datesBound = "1";
+  mobileDatesLastTop = scroller.scrollTop;
 
-  const onMoveDown = () => {
-    if (scroller.scrollTop > 8) hideMobileDates();
-  };
-  scroller.addEventListener("scroll", onMoveDown, { passive: true });
-  document.addEventListener("scroll", onMoveDown, { passive: true, capture: true });
+  scroller.addEventListener("scroll", () => {
+    if (!document.getElementById("page-day")?.classList.contains("active")) return;
+    const top = scroller.scrollTop;
+    const delta = top - mobileDatesLastTop;
+    mobileDatesLastTop = top;
+    if (Math.abs(delta) < 4) return;
+    if (delta > 0) hideMobileDates();
+    else showMobileDates();
+    queueHideMobileDates();
+  }, { passive: true });
 
   document.addEventListener("touchstart", (event) => {
-    mobileTouchY = event.touches[0] ? event.touches[0].clientY : null;
+    if (event.target.closest(".m-days")) {
+      mobileDatesTouching = true;
+      clearTimeout(mobileDatesIdleTimer);
+    }
   }, { passive: true });
-  document.addEventListener("touchmove", (event) => {
-    if (!document.getElementById("page-day")?.classList.contains("active")) return;
-    const y = event.touches[0] ? event.touches[0].clientY : null;
-    if (mobileTouchY != null && y != null && mobileTouchY - y > 8) hideMobileDates();
-    mobileTouchY = y;
+  document.addEventListener("touchend", () => {
+    if (!mobileDatesTouching) return;
+    mobileDatesTouching = false;
+    queueHideMobileDates();
   }, { passive: true });
-
-  const sentinel = document.createElement("div");
-  sentinel.setAttribute("aria-hidden", "true");
-  sentinel.style.cssText = "height:1px;margin:0;pointer-events:none;";
-  scroller.prepend(sentinel);
-  if ("IntersectionObserver" in window) {
-    const observer = new IntersectionObserver((entries) => {
-      if (scroller.scrollTop > 8 && !entries[0].isIntersecting) hideMobileDates();
-    }, { root: scroller, threshold: 1 });
-    observer.observe(sentinel);
-  }
+  document.addEventListener("touchcancel", () => {
+    mobileDatesTouching = false;
+  }, { passive: true });
 }
 
 function scrollDayViewToTop() {
+  holdSectionSpy("overview");
   showMobileDates();
   scrollDesktopScroller(0, "smooth");
 
@@ -1935,6 +1934,73 @@ function renderGuideCard([title, items]) {
   `;
 }
 
+let sectionSpyHold = "";
+let sectionSpyHoldTimer = 0;
+
+function holdSectionSpy(section) {
+  sectionSpyHold = section || "";
+  clearTimeout(sectionSpyHoldTimer);
+  sectionSpyHoldTimer = setTimeout(() => {
+    sectionSpyHold = "";
+    syncSectionFromScroll();
+  }, 1400);
+}
+
+function syncSectionFromScroll() {
+  if (!document.getElementById("page-day")?.classList.contains("active")) return;
+
+  const mobile = usesMobileProgram();
+  const scroller = mobile ? document.querySelector(".m-content") : getDesktopScroller();
+  if (!scroller) return;
+
+  const names = ["overview", "schedule", "location", "model"];
+  const box = scroller.getBoundingClientRect();
+  const dateStrip = mobile ? null : document.querySelector(".date-strip");
+  const viewTop = (dateStrip ? dateStrip.getBoundingClientRect().bottom : box.top) + 8;
+  const viewBottom = box.bottom;
+
+  let current = "overview";
+  let best = -1;
+  names.forEach((name) => {
+    const el = document.getElementById(mobile ? `m-section-${name}` : `section-${name}`);
+    if (!el || el.hidden || el.getClientRects().length === 0) return;
+    const rect = el.getBoundingClientRect();
+    const visible = Math.min(rect.bottom, viewBottom) - Math.max(rect.top, viewTop);
+    if (visible >= best) {
+      best = visible;
+      current = name;
+    }
+  });
+
+  if (sectionSpyHold && current !== sectionSpyHold) return;
+  sectionSpyHold = "";
+  clearTimeout(sectionSpyHoldTimer);
+
+  const active = document.querySelector(".nav-program [data-section].active")?.dataset.section;
+  if (active === current) return;
+  setProgramNavActive(current);
+  notifyParentSection(current);
+}
+
+function bindSectionSpy() {
+  if (document.documentElement.dataset.sectionSpy === "1") return;
+  document.documentElement.dataset.sectionSpy = "1";
+  let frame = 0;
+  const onScroll = () => {
+    if (frame) return;
+    frame = requestAnimationFrame(() => {
+      frame = 0;
+      syncSectionFromScroll();
+    });
+  };
+  const desktop = getDesktopScroller();
+  const mobile = document.querySelector(".m-content");
+  if (desktop) desktop.addEventListener("scroll", onScroll, { passive: true });
+  if (mobile && mobile !== desktop) mobile.addEventListener("scroll", onScroll, { passive: true });
+  window.addEventListener("scroll", onScroll, { passive: true });
+  requestAnimationFrame(syncSectionFromScroll);
+}
+
 function setProgramNavActive(section) {
   document.querySelectorAll(".nav-program [data-section]").forEach((btn) => {
     btn.classList.toggle("active", btn.dataset.section === section);
@@ -1942,13 +2008,14 @@ function setProgramNavActive(section) {
 }
 
 function goToDaySection(section) {
+  const name = section === "day" ? "overview" : section === "lines" ? "tips" : section;
+  holdSectionSpy(name);
   if (section === "tips" || section === "lines") {
     openLinePage();
     return;
   }
   const onLines = document.getElementById("page-lines")?.classList.contains("active");
   if (onLines) showPage("day", { scroll: false });
-  const name = section === "day" ? "overview" : section;
   setProgramNavActive(name);
   if (name === "overview") showMobileDates();
   if (window.matchMedia("(max-width: 900px)").matches || document.documentElement.classList.contains("is-mobile-embed")) {
@@ -2655,6 +2722,7 @@ function initEvents() {
   });
 
   bindMobileDateStrip();
+  bindSectionSpy();
 }
 
 renderLinePage();
