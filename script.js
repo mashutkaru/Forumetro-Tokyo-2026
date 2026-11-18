@@ -1344,7 +1344,10 @@
           '<div class="participants-header-inner">' +
             '<div class="participants-header-copy"><h1>Participants</h1></div>' +
             '<div class="search-row" dir="ltr">' +
-              '<input type="text" id="search-input" dir="ltr" autocomplete="off" placeholder="Search by name, org, role" />' +
+              '<div class="search-field">' +
+                '<input type="text" id="search-input" dir="ltr" autocomplete="off" placeholder="Search by name, org, role" />' +
+                '<button type="button" class="search-clear" id="search-clear" aria-label="Clear search" hidden>&times;</button>' +
+              '</div>' +
             '</div>' +
             '<div class="stats-bar-wrap" id="stats-bar">'+statsHtml+'</div>' +
           '</div>' +
@@ -1446,18 +1449,30 @@
 
   function bindSearchInput(container, search, setSearch) {
     var input = container.querySelector('#search-input');
+    var clearBtn = container.querySelector('#search-clear');
     if (!input) return;
     if (document.activeElement !== input && input.value !== search) input.value = search;
+    if (clearBtn) clearBtn.hidden = !input.value;
     input.disabled = false;
     input.readOnly = false;
     if (input.getAttribute('data-bound') === '1') return;
     input.setAttribute('data-bound', '1');
     function syncFromInput() {
+      if (clearBtn) clearBtn.hidden = !input.value;
       setSearch(input.value);
     }
     input.addEventListener('input', syncFromInput);
     input.addEventListener('keyup', syncFromInput);
     input.addEventListener('change', syncFromInput);
+    if (clearBtn) {
+      clearBtn.addEventListener('click', function (event) {
+        event.preventDefault();
+        input.value = '';
+        clearBtn.hidden = true;
+        setSearch('');
+        input.focus();
+      });
+    }
   }
 
   function scrollToParticipantCard(card) {
