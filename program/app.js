@@ -1585,12 +1585,42 @@ function mobileScheduleHasDetails(entry) {
   return rows.length > 0 || embeds.length > 0;
 }
 
+function escapeScheduleText(value) {
+  return String(value || "")
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;");
+}
+
+function splitScheduleLabel(label) {
+  const text = String(label || "").replace(/\s+/g, " ").trim();
+  if (!text) return { lead: "", body: "" };
+  const jaEnd = text.search(/[。！？]/);
+  const enEnd = text.search(/[.!?]\s/);
+  let end = -1;
+  if (jaEnd >= 0) end = jaEnd;
+  if (enEnd >= 0 && (end < 0 || enEnd < end)) end = enEnd;
+  if (end < 0) return { lead: "", body: text };
+  const lead = text.slice(0, end + 1).trim();
+  const body = text.slice(end + 1).trim();
+  if (!body) return { lead: "", body: text };
+  return { lead, body };
+}
+
+function scheduleLabelHtml(label) {
+  const { lead, body } = splitScheduleLabel(label);
+  if (!body && !lead) return "";
+  const leadHtml = lead ? `<p class="m-schedule-item__lead">${escapeScheduleText(lead)}</p>` : "";
+  const bodyHtml = body ? `<p class="m-schedule-item__label">${escapeScheduleText(body)}</p>` : "";
+  return `${leadHtml}${bodyHtml}`;
+}
+
 function renderMobileScheduleEntry(entry) {
   const [time, title, label, plan, link] = entry;
   const hasDetails = mobileScheduleHasDetails(entry);
   const planHtml = hasDetails ? renderSchedulePlanBlock(plan, { mobile: true }) : "";
   const badgeHtml = renderScheduleBadge(link);
-  const labelHtml = label && String(label).trim() ? `<p class="m-schedule-item__label">${label}</p>` : "";
+  const labelHtml = scheduleLabelHtml(label);
 
   const headContent = `
     <span class="m-schedule-item__head">

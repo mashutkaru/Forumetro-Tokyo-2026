@@ -2701,11 +2701,23 @@ html.is-embedded.is-mobile-embed .mobile-app .m-head {
   border-top: 1px solid rgba(33, 79, 99, 0.08);
 }
 
+.m-schedule-item__lead {
+  margin: 12px 0 0;
+  color: var(--navy);
+  font-size: 14px;
+  font-weight: 750;
+  line-height: 1.4;
+}
+
 .m-schedule-item__label {
   margin: 12px 0 0;
   color: #243d4d;
   font-size: 14px;
   line-height: 1.45;
+}
+
+.m-schedule-item__lead + .m-schedule-item__label {
+  margin-top: 8px;
 }
 
 .m-schedule-item__details .timeline-plan {
