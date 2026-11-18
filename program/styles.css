@@ -2251,7 +2251,7 @@ html.is-embedded .line-tags {
 }
 
 .avoid-page .guide-card li::marker {
-  color: var(--danger);
+  color: #111;
 }
 
 .travelog-empty {
