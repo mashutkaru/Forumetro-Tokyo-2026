@@ -1893,6 +1893,38 @@
       grid-column: auto;
       margin: 0;
     }
+    .title-tools { display: contents; }
+    .page-refresh,
+    .page-refresh-line,
+    .page-refresh-balance { display: none; }
+    .page-refresh {
+      align-items: center;
+      justify-content: center;
+      inline-size: 44px;
+      block-size: 44px;
+      min-inline-size: 44px;
+      min-block-size: 44px;
+      margin: 0;
+      padding: 0;
+      border: none;
+      border-radius: 999px;
+      background: var(--teal-pale);
+      color: var(--navy);
+      box-shadow: 0 4px 18px rgba(0, 0, 0, 0.2);
+      cursor: pointer;
+      flex: 0 0 auto;
+    }
+    .page-refresh-icon {
+      display: block;
+      inline-size: 22px;
+      block-size: 22px;
+    }
+    .page-refresh:hover { background: #ffffff; }
+    .page-refresh:focus-visible {
+      outline: 2px solid var(--navy);
+      outline-offset: 2px;
+    }
+    .page-refresh:disabled { cursor: default; opacity: 0.55; }
     @media (min-width: 901px) {
       body.about-page .participants-header-inner {
         grid-template-columns: auto minmax(0, 1fr) auto;
@@ -3203,6 +3235,66 @@
       #steering-section-main .steering-carousel-track {
         justify-content: start;
       }
+      html.is-home-app .page-refresh {
+        display: inline-flex;
+        position: static;
+      }
+      html.is-home-app .page-refresh-line {
+        display: flex;
+        justify-content: flex-start;
+        inline-size: 100%;
+        box-sizing: border-box;
+        padding-block: 8px 0;
+        padding-inline: max(12px, env(safe-area-inset-left)) max(12px, env(safe-area-inset-right));
+      }
+      html.is-home-app .page-refresh-balance {
+        display: block;
+        inline-size: 44px;
+        block-size: 44px;
+      }
+      html.is-home-app .participants-header-wrap {
+        padding-left: max(12px, env(safe-area-inset-left)) !important;
+        padding-right: max(12px, env(safe-area-inset-right)) !important;
+      }
+      html.is-home-app .title-tools {
+        display: grid;
+        grid-template-columns: 44px minmax(0, 1fr) auto;
+        align-items: center;
+        column-gap: 8px;
+        inline-size: 100%;
+        min-inline-size: 0;
+      }
+      html.is-home-app body.program-page .title-tools,
+      html.is-home-app body.useful-page .title-tools,
+      html.is-home-app body.about-page .title-tools,
+      html.is-home-app body.metro-page .title-tools {
+        grid-area: title;
+      }
+      html.is-home-app .title-tools .participants-header-copy,
+      html.is-home-app .title-tools .about-lang-btn,
+      html.is-home-app .title-tools .program-lang-group,
+      html.is-home-app .title-tools .page-refresh,
+      html.is-home-app .title-tools .page-refresh-balance {
+        grid-area: auto;
+      }
+      html.is-home-app .title-tools .page-refresh { grid-column: 1; justify-self: start; }
+      html.is-home-app .title-tools .participants-header-copy { grid-column: 2; min-inline-size: 0; }
+      html.is-home-app .title-tools .about-lang-btn,
+      html.is-home-app .title-tools .program-lang-group,
+      html.is-home-app .title-tools .page-refresh-balance {
+        grid-column: 3;
+        justify-self: end;
+        align-self: center;
+        margin: 0 !important;
+      }
+      html.is-home-app .title-tools h1 {
+        max-inline-size: 100%;
+        overflow-wrap: break-word;
+      }
+      html.is-home-app body.program-lang-he #program-page .title-tools,
+      html.is-home-app body.useful-lang-he #useful-page .title-tools {
+        direction: rtl;
+      }
     }
 
     @media (min-width: 901px) {
@@ -3393,7 +3485,17 @@
     <div id="program-page">
       <div class="participants-header-wrap program-embed-title">
         <div class="participants-header-inner">
-          <div class="participants-header-copy"><h1 id="programPageTitle" data-en="Program" data-ja="プログラム" data-he="תוכנית">Program</h1></div>
+          <div class="title-tools">
+            <button type="button" class="page-refresh" aria-label="Refresh page">
+              <svg class="page-refresh-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M20.5 12a8.5 8.5 0 1 1-2.4-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M20.5 4.5V9H16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
+            <div class="participants-header-copy"><h1 id="programPageTitle" data-en="Program" data-ja="プログラム" data-he="תוכנית">Program</h1></div>
+            <div class="program-lang-group">
+              <button type="button" class="about-section-flip-hint about-lang-btn" id="program-lang-he-btn" data-lang="he" aria-pressed="false" aria-label="Show Hebrew">
+                <span class="about-lang-btn-label">עברית</span>
+              </button>
+            </div>
+          </div>
           <div class="stats-bar-wrap program-section-bar" aria-label="Day sections">
             <button type="button" class="sector-btn active" data-section="overview" style="--station:#009BBF">
               <span class="nav-mark" aria-hidden="true"><span class="nav-mark-line">T</span><span class="nav-mark-id">04</span></span>
@@ -3416,11 +3518,6 @@
               <span class="nav-caption" data-en="Line info" data-ja="路線情報" data-he="מידע על הקווים">Line info</span>
             </button>
           </div>
-          <div class="program-lang-group">
-            <button type="button" class="about-section-flip-hint about-lang-btn" id="program-lang-he-btn" data-lang="he" aria-pressed="false" aria-label="Show Hebrew">
-              <span class="about-lang-btn-label">עברית</span>
-            </button>
-          </div>
         </div>
       </div>
       <iframe
@@ -3434,7 +3531,17 @@
     <div id="useful-page">
       <div class="participants-header-wrap program-embed-title">
         <div class="participants-header-inner">
-          <div class="participants-header-copy"><h1 id="usefulPageTitle" data-en="Useful Information" data-he="מידע שימושי">Useful Information</h1></div>
+          <div class="title-tools">
+            <button type="button" class="page-refresh" aria-label="Refresh page">
+              <svg class="page-refresh-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M20.5 12a8.5 8.5 0 1 1-2.4-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M20.5 4.5V9H16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
+            <div class="participants-header-copy"><h1 id="usefulPageTitle" data-en="Useful Information" data-he="מידע שימושי">Useful Information</h1></div>
+            <div class="program-lang-group">
+              <button type="button" class="about-section-flip-hint about-lang-btn" id="useful-lang-he-btn" data-lang="he" aria-pressed="false" aria-label="Show Hebrew">
+                <span class="about-lang-btn-label">עברית</span>
+              </button>
+            </div>
+          </div>
           <div class="stats-bar-wrap useful-section-bar" aria-label="Useful stations">
             <button type="button" class="sector-btn active" data-page="prep" style="--station:#8F76D6">
               <span class="nav-mark" aria-hidden="true"><span class="nav-mark-line">Z</span><span class="nav-mark-id">05</span></span>
@@ -3453,11 +3560,6 @@
               <span class="nav-caption" data-en="Travelog" data-he="יומן מסע">Travelog</span>
             </button>
           </div>
-          <div class="program-lang-group">
-            <button type="button" class="about-section-flip-hint about-lang-btn" id="useful-lang-he-btn" data-lang="he" aria-pressed="false" aria-label="Show Hebrew">
-              <span class="about-lang-btn-label">עברית</span>
-            </button>
-          </div>
         </div>
       </div>
       <iframe
@@ -3470,6 +3572,6 @@
     </div>
   </main>
 
-  <script src="script.js?v=289"></script>
+  <script src="script.js?v=290"></script>
 </body>
 </html>

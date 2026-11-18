@@ -556,6 +556,7 @@
       langBtn.classList.toggle('is-flipped', flipped);
       langBtn.setAttribute('aria-pressed', flipped ? 'true' : 'false');
       langBtn.setAttribute('aria-label', flipped ? 'Show English' : 'Show Japanese');
+      syncRefreshLabels();
     }
 
     if (langBtn && langBtn.getAttribute('data-bound') !== '1') {
@@ -578,9 +579,20 @@
     });
   }
 
+  function pageRefreshButtonHtml() {
+    return '<button type="button" class="page-refresh" aria-label="Refresh page">' +
+      '<svg class="page-refresh-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M20.5 12a8.5 8.5 0 1 1-2.4-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M20.5 4.5V9H16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>' +
+    '</button>';
+  }
+
+  function pageRefreshBalanceHtml() {
+    return '<span class="page-refresh-balance" aria-hidden="true"></span>';
+  }
+
   function renderHomePage(container, setPage) {
     container.innerHTML =
       '<div class="home-wrap">' +
+        '<div class="page-refresh-line">' + pageRefreshButtonHtml() + '</div>' +
         '<div class="home-copy">' +
           '<p class="home-kicker">People. Cities. Connections.</p>' +
           '<h1 class="home-title"><span class="home-title-line">FORUMETRO</span><span class="home-title-line">TOKYO <span class="home-title-year">2026</span></span></h1>' +
@@ -757,11 +769,14 @@
     container.innerHTML = '<div class="about-page-shell">' +
       '<div class="participants-header-wrap">' +
         '<div class="participants-header-inner">' +
-          '<div class="participants-header-copy"><h1>About</h1></div>' +
+          '<div class="title-tools">' +
+            pageRefreshButtonHtml() +
+            '<div class="participants-header-copy"><h1>About</h1></div>' +
+            '<button type="button" class="about-section-flip-hint about-lang-btn" id="about-lang-btn" aria-pressed="false" aria-label="Show Japanese">' +
+              '<span class="about-lang-btn-label">日本語</span>' +
+            '</button>' +
+          '</div>' +
           '<div class="stats-bar-wrap" id="about-stops-bar">'+aboutStopsHtml+'</div>' +
-          '<button type="button" class="about-section-flip-hint about-lang-btn" id="about-lang-btn" aria-pressed="false" aria-label="Show Japanese">' +
-            '<span class="about-lang-btn-label">日本語</span>' +
-          '</button>' +
         '</div>' +
       '</div>' +
       '<div class="participants-content about-page-content">' +
@@ -998,7 +1013,11 @@
     container.innerHTML = '<div class="about-page-shell">' +
       '<div class="participants-header-wrap">' +
         '<div class="participants-header-inner">' +
-          '<div class="participants-header-copy"><h1>About</h1></div>' +
+          '<div class="title-tools">' +
+            pageRefreshButtonHtml() +
+            '<div class="participants-header-copy"><h1>About</h1></div>' +
+            pageRefreshBalanceHtml() +
+          '</div>' +
           '<div class="stats-bar-wrap" id="about-stops-bar">'+buildAboutStopsHtml('metro-project')+'</div>' +
         '</div>' +
       '</div>' +
@@ -1041,6 +1060,7 @@
     var organizer2BioFlipHtml = buildTeamBioFlipHtml('organizer-2-bio-flip', '[プレースホルダー] 主催者 2', organizer2Ja, organizer2En);
     var teamBoxStyle = 'box-shadow:0 4px 24px rgba(0,0,0,0.15);margin-bottom:24px';
     container.innerHTML = '<div style="min-height:100vh;background:'+P.pale+'">' +
+      '<div class="page-refresh-line">' + pageRefreshButtonHtml() + '</div>' +
       '<div class="about-banner team-banner" style="background:'+P.hero+';width:100%;overflow:hidden">' +
         '<div style="padding:48px 24px;text-align:center"><div class="team-banner-row"><span class="partner-logo partner-placeholder">[PLACEHOLDER]</span><h1 style="margin:0;color:white;font-size:32px;font-weight:800;letter-spacing:0.02em">Meet the Team</h1><span class="partner-logo partner-placeholder">[PLACEHOLDER]</span></div></div>' +
       '</div>' +
@@ -1342,7 +1362,11 @@
       container.innerHTML = '<div style="min-height:100vh;background:'+P.pale+'">' +
         '<div class="participants-header-wrap">' +
           '<div class="participants-header-inner">' +
-            '<div class="participants-header-copy"><h1>Participants</h1></div>' +
+            '<div class="title-tools">' +
+              pageRefreshButtonHtml() +
+              '<div class="participants-header-copy"><h1>Participants</h1></div>' +
+              pageRefreshBalanceHtml() +
+            '</div>' +
             '<div class="search-row" dir="ltr">' +
               '<div class="search-field">' +
                 '<input type="text" id="search-input" dir="ltr" autocomplete="off" placeholder="Search by name, org, role" />' +
@@ -1863,6 +1887,7 @@
       requestAnimationFrame(scrollToTop);
     }
     if (!options.skipUrl) syncPageUrl(page, !!options.replaceUrl);
+    syncRefreshLabels();
   }
 
   function setActiveSector(s) {
@@ -1914,12 +1939,15 @@
     document.body.classList.toggle('program-lang-he', state.programLang === 'he');
     paintPageLang(document.getElementById('program-page'), state.programLang);
     paintLangButton(document.getElementById('program-lang-he-btn'), state.programLang, 'he');
+    syncRefreshLabels();
   }
 
   function applyUsefulLangChrome(lang) {
     state.usefulLang = lang === 'he' ? 'he' : 'en';
+    document.body.classList.toggle('useful-lang-he', state.usefulLang === 'he');
     paintPageLang(document.getElementById('useful-page'), state.usefulLang);
     paintLangButton(document.getElementById('useful-lang-he-btn'), state.usefulLang, 'he');
+    syncRefreshLabels();
   }
 
   document.querySelector('#program-page').addEventListener('click', function (event) {
@@ -2040,4 +2068,88 @@
     var page = (history.state && history.state.page) || new URLSearchParams(window.location.search).get('page') || 'home';
     setPage(page, { skipUrl: true });
   });
+
+  function isStandaloneApp() {
+    var isAppMode =
+      window.matchMedia('(display-mode: standalone)').matches ||
+      window.navigator.standalone === true;
+    return isAppMode;
+  }
+
+  function syncHomeAppMode() {
+    document.documentElement.classList.toggle('is-home-app', isStandaloneApp());
+  }
+
+  function refreshLanguage() {
+    if (state.page === 'metro') return 'ja';
+    if (state.page === 'about') {
+      var aboutBtn = document.getElementById('about-lang-btn');
+      if (aboutBtn && aboutBtn.classList.contains('is-flipped')) return 'ja';
+    }
+    if (state.page === 'program' && state.programLang === 'he') return 'he';
+    if (state.page === 'useful' && state.usefulLang === 'he') return 'he';
+    return 'en';
+  }
+
+  function syncRefreshLabels() {
+    var lang = refreshLanguage();
+    var label = lang === 'he' ? 'רענון הדף' : lang === 'ja' ? 'ページを更新' : 'Refresh page';
+    document.querySelectorAll('.page-refresh').forEach(function (btn) {
+      btn.setAttribute('aria-label', label);
+    });
+  }
+
+  function controlIsDirty(el) {
+    if (!el || el.disabled || el.closest('.search-field')) return false;
+    var type = (el.type || '').toLowerCase();
+    if (type === 'button' || type === 'submit' || type === 'reset' || type === 'hidden' || type === 'file') return false;
+    if (type === 'checkbox' || type === 'radio') return el.checked !== el.defaultChecked;
+    return el.value !== el.defaultValue;
+  }
+
+  function rootHasUnsavedChanges(root) {
+    if (!root || !root.querySelectorAll) return false;
+    var controls = root.querySelectorAll('input, textarea, select');
+    for (var i = 0; i < controls.length; i++) {
+      if (controlIsDirty(controls[i])) return true;
+    }
+    return false;
+  }
+
+  function pageHasUnsavedChanges() {
+    if (rootHasUnsavedChanges(document)) return true;
+    var frames = document.querySelectorAll('iframe');
+    for (var i = 0; i < frames.length; i++) {
+      try {
+        if (frames[i].contentDocument && rootHasUnsavedChanges(frames[i].contentDocument)) return true;
+      } catch (err) {}
+    }
+    return false;
+  }
+
+  function refreshConfirmText() {
+    var lang = refreshLanguage();
+    if (lang === 'he') return 'לרענן את הדף? שינויים שלא נשמרו יאבדו.';
+    if (lang === 'ja') return 'ページを再読み込みしますか？保存していない変更は失われます。';
+    return 'Reload this page? Changes you have not saved will be lost.';
+  }
+
+  var refreshLocked = false;
+  document.addEventListener('click', function (event) {
+    var btn = event.target.closest('.page-refresh');
+    if (!btn || refreshLocked || btn.disabled) return;
+    if (pageHasUnsavedChanges() && !window.confirm(refreshConfirmText())) return;
+    refreshLocked = true;
+    document.querySelectorAll('.page-refresh').forEach(function (item) { item.disabled = true; });
+    window.location.reload();
+  });
+
+  var standaloneMedia = window.matchMedia('(display-mode: standalone)');
+  var mobileMedia = window.matchMedia('(max-width: 900px)');
+  if (standaloneMedia.addEventListener) standaloneMedia.addEventListener('change', syncHomeAppMode);
+  else if (standaloneMedia.addListener) standaloneMedia.addListener(syncHomeAppMode);
+  if (mobileMedia.addEventListener) mobileMedia.addEventListener('change', syncHomeAppMode);
+  else if (mobileMedia.addListener) mobileMedia.addListener(syncHomeAppMode);
+  syncHomeAppMode();
+  syncRefreshLabels();
 })();
