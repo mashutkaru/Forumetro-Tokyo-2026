@@ -1753,9 +1753,20 @@ html.is-embedded .line-tags {
   padding: 0 34px;
 }
 
+.station-panel {
+  margin: 0 34px 12px;
+}
+
 @media (max-width: 900px) {
-  .station-signs {
+  .station-signs,
+  .station-panel {
     padding: 0;
+    margin-left: 0;
+    margin-right: 0;
+  }
+
+  .station-panel {
+    margin-bottom: 12px;
   }
 }
 

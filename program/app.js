@@ -1752,8 +1752,8 @@ function renderDayStations(containerId, day) {
       return `<button type="button" class="city-model-chip station-sign-btn${selected}" data-station="${station.sign}" dir="ltr" aria-label="${label}" aria-expanded="false">${label}</button>`;
     })
     .join("")}</div>
-    <div class="station-stage">${shown.map ? stationMapHtml(shown) : ""}</div>
-    <div class="station-panel" hidden></div>`;
+    <div class="station-panel" hidden></div>
+    <div class="station-stage">${shown.map ? stationMapHtml(shown) : ""}</div>`;
   bindLineMapZoom(container);
 }
 
