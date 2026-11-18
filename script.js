@@ -38,8 +38,8 @@
     { id:11, key:"boaz_gamliel", nameEn:"Boaz Gamliel", nameJa:"ガムリエル・ボアズ", nameHe:"", sector:"Local Government", org:"Ness Ziona", role:"City Engineer", photo:"Boaz Gamliel.jpg" },
     { id:12, key:"gil_mamon", nameEn:"Gil Mamon", nameJa:"マモン・ギル", nameHe:"", sector:"Local Government", org:"Ness Ziona", role:"City CEO", photo:"Gil Mamon.jpg" },
     { id:13, key:"lilach_shenkman", nameEn:"Lilach Shenkman", nameJa:"シェンクマン・リラハ", nameHe:"", sector:"Local Government", org:"Petah Tikva", role:"Director of Traffic Division", photo:"Lilach Shenkman.jpg" },
-    { id:14, key:"itzik_ozelbo", nameEn:"Itzik Ozelbo", nameJa:"オゼルボ・イツィク", nameHe:"", sector:"Local Government", org:"Petah Tikva", role:"City Engineer", photo:"Itzik Ozelbo.jpg" },
-    { id:15, key:"amit_capuza", nameEn:"Amit Capuza", nameJa:"カプーザ・アミット", nameHe:"", sector:"Local Government", org:"Kiryat Ono", role:"City Engineer", photo:"Amit Capuza.jpg" },
+    { id:14, key:"itzik_ozelbo", nameEn:"Itzhak Ozalvo", nameJa:"オザルボ・イツハク", nameHe:"", sector:"Local Government", org:"Petah Tikva", role:"City Engineer", photo:"Itzik Ozelbo.jpg" },
+    { id:15, key:"amit_capuza", nameEn:"Amit Kapuza", nameJa:"カプザ・アミット", nameHe:"", sector:"Local Government", org:"Kiryat Ono", role:"City Engineer", photo:"Amit Capuza.jpg" },
     { id:16, key:"evyatar_biton_tzur", nameEn:"Evyatar Biton Tzur", nameJa:"ビトン・ツール・エヴィヤタル", nameHe:"", sector:"Local Government", org:"Rishon LeZion", role:"Deputy City Engineer; Director of Infrastructure and Public Construction Division", photo:"Evyatar Biton Tzur.jpg" },
     { id:17, key:"lital_zohar_zilcha", nameEn:"Lital Zohar Zilcha", nameJa:"ゾハル・ジルハ・リタル", nameHe:"", sector:"Local Government", org:"Rishon LeZion", role:"Director of Urban Transport Infrastructure Division", photo:"Lital Zohar Zilcha.jpg" },
     { id:18, key:"dalit_harel", nameEn:"Dalit Harel", nameJa:"ハレル・ダリット", nameHe:"", sector:"Local Government", org:"Rehovot", role:"City Engineer", photo:"Dalit Harel.jpg" },
@@ -58,11 +58,11 @@
     { id:32, key:"natalie_katz", nameEn:"Natalie Katz", nameJa:"カッツ・ナタリー", nameHe:"", sector:"Government-Owned Company", org:"NTA Metropolitan Mass Transit System Ltd.", role:"Vice President, Metro Project; M1 Line Manager", photo:"Natalie Katz.jpg" },
     { id:33, key:"tadasa_baruch", nameEn:"Tadasa Baruch", nameJa:"バルフ・タダサ", nameHe:"", sector:"Government-Owned Company", org:"NTA Metropolitan Mass Transit System Ltd.", role:"Director of Traffic Management and Control Division", photo:"Tadasa Baruch.jpg" },
     { id:34, key:"guy_segal", nameEn:"Guy Segal", nameJa:"セガル・ガイ", nameHe:"", sector:"Government-Owned Company", org:"NTA Metropolitan Mass Transit System Ltd.", role:"Deputy Director, M3 Line; Line Manager", photo:"Guy Segal.jpg" },
-    { id:35, key:"dudu_kovsenyano", nameEn:"Dudu Kovsenyano", nameJa:"コブセニアノ・ドゥドゥ", nameHe:"", sector:"Central Government", org:"Metro Authority", role:"Legal Counsel", photo:"Dudu Kovsenyano.jpg" },
+    { id:35, key:"dudu_kovsenyano", nameEn:"David Covasneanu", nameJa:"コヴァスネアヌ・ダビド", nameHe:"", sector:"Central Government", org:"Metro Authority", role:"Legal Counsel", photo:"Dudu Kovsenyano.jpg" },
     { id:36, key:"haim_cohen", nameEn:"Haim Cohen", nameJa:"コーエン・ハイム", nameHe:"", sector:"Central Government", org:"Ministry of Transport and Road Safety", role:"Director, Licensing and Public Transport Operations Division, Central and Gush Dan District", photo:"Haim Cohen.jpg" },
     { id:37, key:"lior_rosen", nameEn:"Lior Rosen", nameJa:"ローゼン・リオール", nameHe:"", sector:"Central Government", org:"Ministry of Transport and Road Safety", role:"Senior Director, Land Transport Planning", photo:"Lior Rosen.jpg" },
     { id:38, key:"chen_winik", nameEn:"Chen Winik", nameJa:"ヴィニク・ヘン", nameHe:"", sector:"Local Government", org:"Ministry of Transport and Road Safety", role:"Traffic Engineer, Tel Aviv and Central Districts; Acting District Engineer", photo:"Chen Winik.jpg" },
-    { id:39, key:"talila_harel", nameEn:"Talila Harel", nameJa:"ハレル・タリラ", nameHe:"", sector:"Central Government", org:"Planning Administration", role:"Central District Planner", photo:"Talila Harel.jpg" },
+    { id:39, key:"talila_harel", nameEn:"Tlila Harel", nameJa:"ハレル・トリラ", nameHe:"", sector:"Central Government", org:"Planning Administration", role:"Central District Planner", photo:"Talila Harel.jpg" },
     { id:40, key:"sharon_barkat", nameEn:"Sharon Barkat", nameJa:"バルカット・シャロン", nameHe:"", sector:"Local Government", org:"Planning Administration", role:"Deputy Tel Aviv District Planner", photo:"Sharon Barkat.jpg" },
     { id:41, key:"michal_lilienthal", nameEn:"Michal Lilienthal", nameJa:"リリエンタル・ミハル", nameHe:"", sector:"Central Government", org:"Planning Administration", role:"Director of Detailed Planning and Licensing Division", photo:"Michal Lilienthal.jpg" }
   ];
@@ -72,7 +72,8 @@
     { id:"sc2", key:"hila_waxberg", nameEn:"Hila Wechsberg", nameJa:"ウェクスバーグ・ヒラ", nameHe:"", org:"NTA Metropolitan Mass Transit System Ltd.", orgJa:"NTA（テルアビブ都市圏交通公社）／地方自治体部門長", role:"Head of Local Authorities Division", roleJa:"", photo:"Hila Waxberg.png" },
     { id:"sc3", key:"tal_granit", nameEn:"Tal Granit", nameJa:"グラニット・タル", nameHe:"", org:"Ministry of Transport and Road Safety", orgJa:"イスラエル運輸・道路安全省／国家メトロ庁", role:"Head of Budget Department", roleJa:"予算部長", photo:"Tal Granit.jpg", photoVer:3 },
     { id:"sc4", key:"itamar_ben_meir", nameEn:"Itamar Ben Meir", nameJa:"ベン・メイル・イタマル", nameHe:"", org:"NTA Metropolitan Mass Transit System Ltd.", orgJa:"NTA（テルアビブ都市圏交通公社）／最高経営責任者（CEO）", role:"CEO", roleJa:"", photo:"Itamar Ben Meir.jpeg", photoVer:3 },
-    { id:"sc6", key:"yodfat_afek_arazi", nameEn:"Yodfat Afek Arazi", nameJa:"アフェク・アラジ・ヨドファト", nameHe:"", org:"NTA Metropolitan Mass Transit System Ltd.", orgJa:"NTA（テルアビブ都市圏交通公社）／取締役会会長", role:"Chair of the Board", roleJa:"", photo:"Yodfat Afek Arazi.jpg" }
+    { id:"sc6", key:"yodfat_afek_arazi", nameEn:"Yodfat Afek Arazi", nameJa:"アフェク・アラジ・ヨドファト", nameHe:"", org:"NTA Metropolitan Mass Transit System Ltd.", orgJa:"NTA（テルアビブ都市圏交通公社）／取締役会会長", role:"Chair of the Board", roleJa:"", photo:"Yodfat Afek Arazi.jpg" },
+    { id:"sc7", key:"sigal_gabai", nameEn:"Sigal Gabai", nameJa:"ガバイ・シガル", nameHe:"", org:"Israel", orgJa:"イスラエル", role:"Chair of the Metro Regulatory Committee", roleJa:"メトロ規制委員会委員長", photo:"Sigal Gabai.jpg" }
   ];
 
   var PROGRAM_TEAM_BADGE = "Program Team";
@@ -84,7 +85,7 @@
     { id:"pt3", key:"masha_robeen", nameEn:"Masha Robeen", nameJa:"マーシャ・ルビーン", nameHe:"", org:"Japan-Israel AgeTech", orgJa:"Japan–Israel AgeTech 創設者・プロダクトマネージャー", role:"Delegation Coordinator", roleJa:"", photo:"Masha_Robeen.png", backOrg:"Founder & Product Manager, Japan–Israel AgeTech" },
     { id:"pt4", key:"dror_manuel_tzipori", nameEn:"Dror Manuel Zipori", nameJa:"ツィポリ・ドロール・マヌエル", nameHe:"", org:"JDC-ELKA", orgJa:"JDC-ELKA／プログラム・ディレクター", role:"Program Director", roleJa:"", photo:"Dror Manuel Tzipori.jpg" },
     { id:"pt5", key:"aluma_margalit_aviaz", nameEn:"Aluma Margalit Aviaz", nameJa:"マルガリット・アルマ・アヴィアズ", nameHe:"", org:"JDC-ELKA", orgJa:"JDC-ELKA／プログラム・コーディネーター", role:"Program Coordinator", roleJa:"", photo:"Aluma  Margalit Aviaz.png" },
-    { id:"pt6", key:"chen_rosenak", nameEn:"Chen Rosenak", nameJa:"ローゼナク・ヘン", nameHe:"", org:"Publica / JDC-ELKA", orgJa:"パブリカ／JDC-ELKA／プログラム・ディレクター", role:"Program Director", roleJa:"", photo:"Chen Rosenak.jpg" }
+    { id:"pt6", key:"chen_rosenak", nameEn:"Hen Roznek", nameJa:"ロズネク・ヘン", nameHe:"", org:"Publica / JDC-ELKA", orgJa:"パブリカ／JDC-ELKA／プログラム・ディレクター", role:"Program Director", roleJa:"", photo:"Chen Rosenak.jpg" }
   ];
   var PROGRAM_TEAM_ORDER = ["pt4", "pt6", "pt5", "pt1", "pt2", "pt3"];
 
@@ -105,15 +106,15 @@
       ]
     },
     chen_rosenak: {
-      jaTitle: 'チェン・ローゼンク',
+      jaTitle: 'ヘン・ロズネク',
       bioEn: [
-        'Chen is an urban planner and strategic consultant specializing in complex, multidisciplinary processes at the intersection of urban planning, public policy, and government.',
+        'Hen is an urban planner and strategic consultant specializing in complex, multidisciplinary processes at the intersection of urban planning, public policy, and government.',
         'As a consultant at Fabrica, she works with local authorities, government ministries, philanthropic foundations, and other organizations to develop and implement strategic initiatives in metropolitan transportation, public space, regional development, health, and community resilience. Her work includes facilitating senior leadership teams, building partnerships, and leading long-term change processes.',
-        'Previously, Chen served as Deputy CEO and Project Director at Forum 15, Israel\u2019s association of fiscally independent cities, and as a board member of the Urban Sustainability Lab of the Tel Aviv\u2013Jaffa Municipality.',
+        'Previously, Hen served as Deputy CEO and Project Director at Forum 15, Israel\u2019s association of fiscally independent cities, and as a board member of the Urban Sustainability Lab of the Tel Aviv\u2013Jaffa Municipality.',
         'She also teaches in the Urban Planning master\u2019s program at the Hebrew University of Jerusalem, is a graduate of the Urban Space Lab, and has a professional background in editing for major media organizations.'
       ],
       bioJa: [
-        'チェンは都市計画家および戦略コンサルタントであり、都市計画、公共政策、行政が交わる領域における複雑かつ分野横断的なプロセスを専門としています。',
+        'ヘンは都市計画家および戦略コンサルタントであり、都市計画、公共政策、行政が交わる領域における複雑かつ分野横断的なプロセスを専門としています。',
         'Fabricaのコンサルタントとして、地方自治体、政府省庁、慈善財団などの組織と連携し、都市圏交通、公共空間、地域開発、保健、コミュニティ・レジリエンスなどの分野における戦略的施策の策定・実施に携わっています。経営層チームのファシリテーション、パートナーシップの構築、長期的な変革プロセスの推進なども担当しています。',
         '以前は、イスラエルの財政的に自立した主要都市で構成されるForum 15で副CEO兼プロジェクト・ディレクターを務めたほか、テルアビブ・ヤッフォ市のUrban Sustainability Labの理事も務めました。',
         'また、ヘブライ大学の都市計画修士課程で講師を務めています。Urban Space Labの修了者でもあり、主要メディアで編集業務に携わった経験もあります。'
@@ -250,6 +251,15 @@
         '公共部門のマネジメント、インフラ整備、戦略計画、コーポレート・ガバナンスにおいて、豊富な経営リーダーシップの経験を有しています。',
         '2025年にNTAへ就任する以前は、バット・ヤム市の事務総長（2019～2024年）およびイスラエル政府企業庁の上級次長（2014～2019年）を務め、イスラエル鉄道やイスラエル電力公社をはじめとする主要な国有インフラ・公益企業を監督しました。',
         'バル＝イラン大学で法学修士号、ヘブライ大学で経済学・政治学の学士号を取得しています。また、ハーバード・ビジネス・スクールでの幹部教育を含む、マオズ上級公共リーダーシップ・プログラムの修了者です。'
+      ]
+    },
+    sigal_gabai: {
+      jaTitle: 'ガバイ・シガル',
+      bioEn: [
+        'Sigal Gabai chairs Israel\u2019s Metro Regulatory Committee, overseeing regulatory coordination in support of the development and implementation of the metro network. Her role involves facilitating cooperation among government agencies, infrastructure companies and relevant authorities, addressing regulatory barriers and advancing coordinated decision-making for this major national infrastructure project.'
+      ],
+      bioJa: [
+        'シガル・ガバイは、イスラエルのメトロ規制委員会の委員長を務めています。メトロ網の整備と実施を支えるため、規制面の調整を統括しています。政府機関、インフラ企業、関係当局の協力を促し、規制上の障壁に対応するとともに、この国家的な大規模インフラ事業に向けた連携した意思決定を進めています。'
       ]
     }
   };

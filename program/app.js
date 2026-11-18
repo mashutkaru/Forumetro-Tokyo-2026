@@ -1712,10 +1712,33 @@ function colorLineNames(route) {
   return html;
 }
 
+function stationLineCells(operator, route) {
+  const opHtml = colorLineNames(operator);
+  const routeHtml = colorLineNames(route);
+  if (!opHtml.includes("station-line-name")) {
+    return [`<strong>${opHtml}</strong>`, routeHtml];
+  }
+  const holder = document.createElement("div");
+  holder.innerHTML = opHtml;
+  const lineNames = [...holder.querySelectorAll(".station-line-name")].map((el) => el.outerHTML);
+  holder.querySelectorAll(".station-line-name").forEach((el) => el.remove());
+  const company = holder.textContent.replace(/\s+/g, " ").trim();
+  const line = [lineNames.join(", "), routeHtml].filter(Boolean).join(", ");
+  return [`<strong>${escapeModelText(company)}</strong>`, line];
+}
+
 function stationDetailHtml(station) {
   const heading = programLang === "ja" ? "1日あたりの乗降人員" : programLang === "he" ? "תנועת נוסעים ביום" : "Daily passenger movements";
+  const columns = programLang === "ja"
+    ? ["事業者", "路線", "乗降人員"]
+    : programLang === "he"
+      ? ["מפעיל", "קו", "מספר נוסעים"]
+      : ["Operator", "Line", "Number of passengers"];
   const rows = station.rows
-    .map(([operator, route, count]) => `<li><span><strong>${colorLineNames(operator)}</strong> ${colorLineNames(route)}</span><b>${escapeModelText(count)}</b></li>`)
+    .map(([operator, route, count]) => {
+      const [company, line] = stationLineCells(operator, route);
+      return `<tr><td>${company}</td><td>${line}</td><td>${escapeModelText(count)}</td></tr>`;
+    })
     .join("");
   return `<article class="station-detail">
       <h4>${stationName(station)}</h4>
@@ -1723,7 +1746,10 @@ function stationDetailHtml(station) {
       <p dir="ltr">${station.body}</p>
       <h5>${heading}</h5>
       <p class="station-total" dir="ltr">${station.total}</p>
-      <ul class="station-lines" dir="ltr">${rows}</ul>
+      <table class="station-lines" dir="ltr">
+        <thead><tr>${columns.map((label) => `<th>${label}</th>`).join("")}</tr></thead>
+        <tbody>${rows}</tbody>
+      </table>
       ${station.note ? `<p class="station-note" dir="ltr">${station.note}</p>` : ""}
     </article>`;
 }
