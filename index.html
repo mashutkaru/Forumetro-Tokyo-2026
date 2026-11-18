@@ -1164,7 +1164,6 @@
     .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; align-items: start; }
     .about-section-flip {
       perspective: 900px;
-      cursor: pointer;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -1928,6 +1927,13 @@
     @media (min-width: 901px) {
       body.about-page .participants-header-inner {
         grid-template-columns: auto minmax(0, 1fr) auto;
+        align-items: center;
+        gap: 0 24px;
+      }
+      body.about-page .participants-header-copy,
+      body.about-page #about-lang-btn,
+      body.about-page #about-stops-bar {
+        grid-row: 1;
       }
       body.participants-page .participants-header-inner {
         grid-template-columns: auto auto minmax(0, 1fr);
@@ -3572,6 +3578,6 @@
     </div>
   </main>
 
-  <script src="script.js?v=290"></script>
+  <script src="script.js?v=291"></script>
 </body>
 </html>

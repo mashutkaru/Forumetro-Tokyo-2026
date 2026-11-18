@@ -570,10 +570,6 @@
     flips.forEach(function (flipEl) {
       if (flipEl.getAttribute('data-bound') === '1') return;
       flipEl.setAttribute('data-bound', '1');
-      flipEl.addEventListener('click', function (e) {
-        if (e.target.closest('.cta-metro, a, .about-overview-carousel')) return;
-        setFlipped(!flipEl.classList.contains('is-flipped'));
-      });
       requestAnimationFrame(function () { syncFlipHeight(flipEl); });
       window.addEventListener('resize', function () { syncFlipHeight(flipEl); });
     });
