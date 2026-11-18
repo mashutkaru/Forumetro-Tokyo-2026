@@ -119,7 +119,7 @@ const days = [
       ["16:30", "Arrival at LUMIVEIL TOKYO", ""],
       ["17:00–18:00", "Opening presentations", "Forumetro delegation and local organizing team"],
       ["18:00–20:00", "Banquet", "LUMIVEIL TOKYO"],
-      ["20:00–21:00", "Expert-led walking tour", "Shiodome"],
+      ["20:00–21:00", "Expert-led walking tour (Optional)", "Shiodome"],
     ],
     lines: ["oedo", "asakusa", "ginza"],
     stations: ["shimbashi"],
@@ -148,6 +148,8 @@ const days = [
       ["TOKYO METRO", "Inside a station, 14:00–16:00", ICONS.hub],
     ],
     program: [
+      ["06:30", "Breakfast", "Hotel"],
+      ["08:45–09:00", "Morning briefing", "Hotel"],
       [
         "09:00–10:00",
         "How Tokyo's Rail Network Shaped the City",
@@ -212,6 +214,8 @@ const days = [
       ["COMMUTE", "Tatsuya Edakubo, 16:30–18:00", ICONS.train],
     ],
     program: [
+      ["06:30", "Breakfast", "Hotel"],
+      ["09:45–10:00", "Morning briefing", "Hotel"],
       [
         "10:00–12:00",
         "Participatory Planning Around Shibuya Station",
@@ -270,6 +274,8 @@ const days = [
       ["SHINJUKU", "South Exit and Busta, 13:30–15:00", ICONS.train],
     ],
     program: [
+      ["06:30", "Breakfast", "Hotel"],
+      ["09:45–10:00", "Morning briefing", "Hotel"],
       [
         "10:00–11:00",
         "Running Tokyo's Public Subway and Bus Services",
@@ -293,7 +299,7 @@ const days = [
       [
         "13:30–15:00",
         "Shinjuku Station's South Exit and Busta Bus Terminal",
-        "Station walk. The walk traces how former railway land around Shinjuku's South Exit was redeveloped after the privatization of Japanese National Railways. At Busta Shinjuku, participants will follow a passenger's route from the railway station to the highway bus terminal.",
+        "Station walk · OC Global. The walk traces how former railway land around Shinjuku's South Exit was redeveloped after the privatization of Japanese National Railways. At Busta Shinjuku, participants will follow a passenger's route from the railway station to the highway bus terminal.",
         [
           ["", "Redevelopment of former railway land", ""],
           ["", "Wayfinding between rail platforms and the highway bus terminal", ""],
@@ -327,6 +333,8 @@ const days = [
       ["KITAMI", "Park above the depot, 14:00–15:00", ICONS.park],
     ],
     program: [
+      ["06:30", "Breakfast", "Hotel"],
+      ["09:15–09:30", "Morning briefing", "Hotel"],
       [
         "09:30–12:00",
         "Community Planning Along Setagaya's Railway Corridor",
@@ -373,7 +381,7 @@ const days = [
     city: "Tokyo — independent exploration",
     theme:
       "Today offers time to explore Tokyo independently and experience its historic neighborhoods, landscapes and everyday urban life. Optional visits show how traditional places, commerce and the contemporary city sit side by side.",
-    tip: "The day is free after breakfast. A group activity is planned for 18:00.",
+    tip: "Breakfast is from 06:30, with a short briefing at 08:45. The day is then free until a group activity at 18:00.",
     notesExtra: "Independent visits are optional. The group activity and its meeting point are still to be confirmed.",
     items: [
       ["GARDENS", "Hamarikyu Gardens", ICONS.park],
@@ -382,7 +390,8 @@ const days = [
       ["EVENING", "Group activity, 18:00", ICONS.event],
     ],
     program: [
-      ["08:00–09:00", "Breakfast", "Hotel"],
+      ["06:30", "Breakfast", "Hotel"],
+      ["08:45–09:00", "Morning briefing", "Hotel"],
       [
         "09:00",
         "Optional city exploration",
@@ -424,18 +433,19 @@ const days = [
     title: "Tokyo's Future: Takanawa Gateway and Closing Reflections",
     city: "Takanawa Gateway City",
     theme:
-      "The morning is a site visit to Takanawa Gateway City with JR East, looking at a new model of railway-led urban development. A closing lunch turns to lessons for planning and building the Tel Aviv Metropolitan Metro. The afternoon is free.",
-    tip: "The group program ends after lunch. From 14:00 the time is free for shopping and independent plans.",
+      "The morning is a site visit to Takanawa Gateway City with JR East, looking at a new model of railway-led urban development. A closing lunch turns to lessons for planning and building the Tel Aviv Metropolitan Metro. A group activity follows from 14:00 to 16:00.",
+    tip: "Breakfast is from 06:30, with a short briefing at 08:45. A group activity runs from 14:00 to 16:00.",
     notesExtra:
-      "Breakfast is at the hotel; the time is still to be confirmed. The JR East visit details and the closing lunch venue are still to be confirmed.",
+      "Breakfast is at the hotel from 06:30. The JR East visit details and the closing lunch venue are still to be confirmed.",
     items: [
       ["TRANSFER", "Takanawa Gateway Station, 09:00–09:30", ICONS.transfer],
       ["TAKANAWA", "JR East site visit, 09:30–11:30", ICONS.innovation],
       ["DISCUSSION", "Closing lunch, 12:00–14:00", ICONS.panel],
-      ["FREE TIME", "From 14:00", ICONS.leisure],
+      ["ACTIVITY", "Group activity, 14:00–16:00", ICONS.event],
     ],
     program: [
-      ["08:30–08:45", "Morning briefing", "Hotel"],
+      ["06:30", "Breakfast", "Hotel"],
+      ["08:45–09:00", "Morning briefing", "Hotel"],
       ["09:00–09:30", "Transfer to Takanawa Gateway Station", ""],
       [
         "09:30–11:30",
@@ -448,7 +458,7 @@ const days = [
         "Closing lunch and discussion",
         "From Tokyo to Tel Aviv: Lessons for Building a Metropolitan Metro",
       ],
-      ["14:00", "Free time", "Shopping and independent activities"],
+      ["14:00–16:00", "Group activity", ""],
     ],
     lines: ["yamanote", "asakusa"],
     models: [
@@ -474,6 +484,8 @@ const days = [
       ["NIHONBASHI", "Chūō City walk, 09:00–12:00", ICONS.stroll],
     ],
     program: [
+      ["06:30", "Breakfast", "Hotel"],
+      ["08:45–09:00", "Morning briefing", "Hotel"],
       [
         "09:00–12:00",
         "Planning Around Nihonbashi Station in a Historic Commercial District",
@@ -521,7 +533,7 @@ const daysJa = [
       ["16:30", "ルミヴェール東京に到着", ""],
       ["17:00–18:00", "開会発表", "FORUMETRO視察団と現地運営チーム"],
       ["18:00–20:00", "懇親会", "ルミヴェール東京"],
-      ["20:00–21:00", "専門家による徒歩視察", "汐留"],
+      ["20:00–21:00", "専門家による徒歩視察（任意）", "汐留"],
     ],
   },
   {
@@ -538,6 +550,8 @@ const daysJa = [
       ["東京メトロ", "駅の内側、14:00–16:00"],
     ],
     program: [
+      ["06:30", "朝食", "ホテル"],
+      ["08:45–09:00", "朝の事前説明", "ホテル"],
       [
         "09:00–10:00",
         "東京の鉄道網は都市をどうかたちづくったか",
@@ -584,6 +598,8 @@ const daysJa = [
       ["通勤", "枝久保達也、16:30–18:00"],
     ],
     program: [
+      ["06:30", "朝食", "ホテル"],
+      ["09:45–10:00", "朝の事前説明", "ホテル"],
       [
         "10:00–12:00",
         "渋谷駅周辺の参加型まちづくり",
@@ -622,14 +638,16 @@ const daysJa = [
     city: "都営交通、東京都、新宿駅",
     theme:
       "午前は都営交通と東京都から、公営の地下鉄・バスと、交通の事業が政策から地区の計画になる過程を聞きます。午後は新宿駅の南口とバスタ新宿を歩きます。",
-    tip: "新宿の徒歩視察の案内者は未定です。",
-    notesExtra: "新宿駅の徒歩視察の案内者は未定です。",
+    tip: "新宿の徒歩視察はOC Globalが案内します。",
+    notesExtra: "",
     items: [
       ["都営", "地下鉄とバス、10:00–11:00"],
       ["東京都", "行政の各層にまたがる計画、11:00–12:00"],
       ["新宿", "南口とバスタ、13:30–15:00"],
     ],
     program: [
+      ["06:30", "朝食", "ホテル"],
+      ["09:45–10:00", "朝の事前説明", "ホテル"],
       [
         "10:00–11:00",
         "東京の公営地下鉄とバスを運営する",
@@ -653,7 +671,7 @@ const daysJa = [
       [
         "13:30–15:00",
         "新宿駅南口とバスタ新宿",
-        "駅の徒歩視察 · 案内者は未定。日本国有鉄道の民営化のあと、新宿駅南口周辺の旧鉄道用地がどう再開発されたかをたどります。バスタ新宿では、鉄道駅から高速バス乗り場までの乗客の経路を歩きます。",
+        "駅の徒歩視察 · OC Global。日本国有鉄道の民営化のあと、新宿駅南口周辺の旧鉄道用地がどう再開発されたかをたどります。バスタ新宿では、鉄道駅から高速バス乗り場までの乗客の経路を歩きます。",
         [
           ["", "旧鉄道用地の再開発", ""],
           ["", "鉄道のホームから高速バス乗り場までの案内", ""],
@@ -675,6 +693,8 @@ const daysJa = [
       ["喜多見", "車両基地の上の公園、14:00–15:00"],
     ],
     program: [
+      ["06:30", "朝食", "ホテル"],
+      ["09:15–09:30", "朝の事前説明", "ホテル"],
       [
         "09:30–12:00",
         "世田谷の鉄道沿線における地域のまちづくり",
@@ -703,7 +723,7 @@ const daysJa = [
     city: "東京 — 各自での見学",
     theme:
       "この日は東京を各自で歩き、歴史のあるまち、風景、日常の都市生活に触れます。任意の見学では、伝統的な場所、商業、現代の都市が隣り合う様子が見られます。",
-    tip: "朝食のあとは自由時間です。18:00にグループ活動を予定しています。",
+    tip: "朝食は6:30から、08:45に短い事前説明があります。そのあとは自由時間で、18:00にグループ活動を予定しています。",
     notesExtra: "各自の見学は任意です。グループ活動の内容と集合場所は未定です。",
     items: [
       ["庭園", "浜離宮恩賜庭園"],
@@ -712,7 +732,8 @@ const daysJa = [
       ["夕方", "グループ活動、18:00"],
     ],
     program: [
-      ["08:00–09:00", "朝食", "ホテル"],
+      ["06:30", "朝食", "ホテル"],
+      ["08:45–09:00", "朝の事前説明", "ホテル"],
       [
         "09:00",
         "任意の市内見学",
@@ -731,22 +752,23 @@ const daysJa = [
     title: "東京の未来：高輪ゲートウェイと研修の総括",
     city: "高輪ゲートウェイシティ",
     theme:
-      "午前はJR東日本とともに高輪ゲートウェイシティを訪れ、鉄道を軸とした新しい都市開発を見ます。閉会昼食では、テルアビブ都市圏メトロの計画と整備への示唆を話し合います。午後は自由時間です。",
-    tip: "グループのプログラムは昼食のあとで終わります。14:00以降は買い物や各自の予定に使えます。",
-    notesExtra: "朝食はホテルでとります。時刻は未定です。JR東日本の視察内容と閉会昼食の会場は未定です。",
+      "午前はJR東日本とともに高輪ゲートウェイシティを訪れ、鉄道を軸とした新しい都市開発を見ます。閉会昼食では、テルアビブ都市圏メトロの計画と整備への示唆を話し合います。14:00から16:00まではグループ活動です。",
+    tip: "朝食は6:30から、08:45に短い事前説明があります。14:00から16:00まではグループ活動です。",
+    notesExtra: "朝食はホテルで6:30からです。JR東日本の視察内容と閉会昼食の会場は未定です。",
     items: [
       ["移動", "高輪ゲートウェイ駅、09:00–09:30"],
       ["高輪", "JR東日本の現地視察、09:30–11:30"],
       ["意見交換", "閉会昼食、12:00–14:00"],
-      ["自由時間", "14:00以降"],
+      ["活動", "グループ活動、14:00–16:00"],
     ],
     program: [
-      ["08:30–08:45", "朝の事前説明", "ホテル"],
+      ["06:30", "朝食", "ホテル"],
+      ["08:45–09:00", "朝の事前説明", "ホテル"],
       ["09:00–09:30", "高輪ゲートウェイ駅へ移動", ""],
       ["09:30–11:30", "現地視察", "JR東日本 — 高輪ゲートウェイシティ：建築、駅とまちの一体整備、歩行者ネットワーク、イノベーション。詳細は未定。"],
       ["11:30–12:00", "昼食会場へ移動", "会場は未定"],
       ["12:00–14:00", "閉会昼食と意見交換", "東京からテルアビブへ：都市圏メトロ整備への示唆"],
-      ["14:00", "自由時間", "買い物と各自の活動"],
+      ["14:00–16:00", "グループ活動", ""],
     ],
   },
   {
@@ -761,6 +783,8 @@ const daysJa = [
       ["日本橋", "中央区による徒歩視察、09:00–12:00"],
     ],
     program: [
+      ["06:30", "朝食", "ホテル"],
+      ["08:45–09:00", "朝の事前説明", "ホテル"],
       [
         "09:00–12:00",
         "歴史のある商業地区における日本橋駅周辺の計画",
@@ -799,7 +823,7 @@ const daysHe = [
       ["16:30", "הגעה ל-LUMIVEIL TOKYO", ""],
       ["17:00–18:00", "מצגות פתיחה", "משלחת פורומטרו והצוות המארגן המקומי"],
       ["18:00–20:00", "ארוחת ערב חגיגית", "LUMIVEIL TOKYO"],
-      ["20:00–21:00", "סיור אוריינטציה רגלי בהדרכת מומחה", "תחנת שיודומה/שינבשי"],
+      ["20:00–21:00", "סיור אוריינטציה רגלי בהדרכת מומחה (לבחירה)", "תחנת שיודומה/שינבשי"],
     ],
   },
   {
@@ -816,6 +840,8 @@ const daysHe = [
       ["טוקיו מטרו", "בתוך תחנה, 14:00–16:00"],
     ],
     program: [
+      ["06:30", "ארוחת בוקר", "מלון"],
+      ["08:45–09:00", "תדרוך בוקר", "מלון"],
       [
         "09:00–10:00",
         "כיצד עיצבה רשת הרכבות של טוקיו את העיר",
@@ -862,6 +888,8 @@ const daysHe = [
       ["נסיעה יומית", "טטסויה אדקובו, 16:30–18:00"],
     ],
     program: [
+      ["06:30", "ארוחת בוקר", "מלון"],
+      ["09:45–10:00", "תדרוך בוקר", "מלון"],
       [
         "10:00–12:00",
         "תכנון בשיתוף הציבור סביב תחנת שיבויה",
@@ -908,6 +936,8 @@ const daysHe = [
       ["שינג׳וקו", "היציאה הדרומית ובוסטה, 13:30–15:00"],
     ],
     program: [
+      ["06:30", "ארוחת בוקר", "מלון"],
+      ["09:45–10:00", "תדרוך בוקר", "מלון"],
       [
         "10:00–11:00",
         "הפעלת שירותי המטרו והאוטובוסים הציבוריים בטוקיו",
@@ -931,7 +961,7 @@ const daysHe = [
       [
         "13:30–15:00",
         "תחנת שינג׳וקו – היציאה הדרומית ומסוף האוטובוסים בוסטה",
-        "סיור בתחנה. הסיור יבחן כיצד פותחו מחדש שטחי הרכבת סביב היציאה הדרומית של תחנת שינג׳וקו בעקבות הפרטת חברת הרכבות הלאומית של יפן. בבוסטה שינג׳וקו יעברו המשתתפים במסלול הנוסע מתחנת הרכבת אל מסוף האוטובוסים הבין־עירוניים.",
+        "סיור בתחנה · OC Global. הסיור יבחן כיצד פותחו מחדש שטחי הרכבת סביב היציאה הדרומית של תחנת שינג׳וקו בעקבות הפרטת חברת הרכבות הלאומית של יפן. בבוסטה שינג׳וקו יעברו המשתתפים במסלול הנוסע מתחנת הרכבת אל מסוף האוטובוסים הבין־עירוניים.",
         [
           ["", "פיתוח מחדש של שטחים ששימשו בעבר את הרכבת", ""],
           ["", "התמצאות בדרך מרציפי הרכבת למסוף האוטובוסים הבין־עירוניים", ""],
@@ -953,6 +983,8 @@ const daysHe = [
       ["קיטאמי", "פארק מעל מתחם הרכבות, 14:00–15:00"],
     ],
     program: [
+      ["06:30", "ארוחת בוקר", "מלון"],
+      ["09:15–09:30", "תדרוך בוקר", "מלון"],
       [
         "09:30–12:00",
         "תכנון קהילתי לאורך תוואי הרכבת בסטגאיה",
@@ -981,7 +1013,7 @@ const daysHe = [
     city: "טוקיו — סיור עצמאי",
     theme:
       "היום פנוי לסיור עצמאי בטוקיו ולמפגש עם שכונות היסטוריות, נוף וחיי היומיום בעיר. ביקורים לבחירה מראים איך מקומות מסורתיים, מסחר והעיר בת-זמננו יושבים זה לצד זה.",
-    tip: "אחרי ארוחת הבוקר היום פנוי. פעילות קבוצתית מתוכננת ל-18:00.",
+    tip: "ארוחת הבוקר מ-06:30, ותדרוך קצר ב-08:45. אחר כך היום פנוי עד לפעילות קבוצתית ב-18:00.",
     notesExtra: "הביקורים העצמאיים הם לבחירה. הפעילות הקבוצתית ומקום המפגש טרם נקבעו.",
     items: [
       ["גנים", "גני המאריקיו"],
@@ -990,7 +1022,8 @@ const daysHe = [
       ["ערב", "פעילות קבוצתית, 18:00"],
     ],
     program: [
-      ["08:00–09:00", "ארוחת בוקר", "מלון"],
+      ["06:30", "ארוחת בוקר", "מלון"],
+      ["08:45–09:00", "תדרוך בוקר", "מלון"],
       [
         "09:00",
         "סיור עירוני לבחירה",
@@ -1009,23 +1042,24 @@ const daysHe = [
     title: "העתיד של טוקיו: טקאנאווה גייטוויי וסיכום",
     city: "Takanawa Gateway City",
     theme:
-      "הבוקר מוקדש לביקור ב-Takanawa Gateway City עם JR East, ומציג דגם חדש של פיתוח עירוני בהובלת הרכבת. ארוחת צהריים מסכמת עוברת ללקחים לתכנון ולבניית המטרו המטרופוליני של תל אביב. אחר הצהריים פנוי.",
-    tip: "התוכנית הקבוצתית מסתיימת אחרי ארוחת הצהריים. מ-14:00 הזמן פנוי לקניות ולתוכניות אישיות.",
+      "הבוקר מוקדש לביקור ב-Takanawa Gateway City עם JR East, ומציג דגם חדש של פיתוח עירוני בהובלת הרכבת. ארוחת צהריים מסכמת עוברת ללקחים לתכנון ולבניית המטרו המטרופוליני של תל אביב. מ-14:00 עד 16:00 מתקיימת פעילות קבוצתית.",
+    tip: "ארוחת הבוקר מ-06:30, ותדרוך קצר ב-08:45. פעילות קבוצתית מתקיימת מ-14:00 עד 16:00.",
     notesExtra:
-      "ארוחת הבוקר במלון; השעה טרם נקבעה. פרטי הביקור של JR East ומקום ארוחת הצהריים המסכמת טרם נקבעו.",
+      "ארוחת הבוקר במלון מ-06:30. פרטי הביקור של JR East ומקום ארוחת הצהריים המסכמת טרם נקבעו.",
     items: [
       ["מעבר", "תחנת טקאנאווה גייטוויי, 09:00–09:30"],
       ["טקאנאווה", "ביקור באתר של JR East, 09:30–11:30"],
       ["דיון", "ארוחת צהריים מסכמת, 12:00–14:00"],
-      ["זמן פנוי", "מ-14:00"],
+      ["פעילות", "פעילות קבוצתית, 14:00–16:00"],
     ],
     program: [
-      ["08:30–08:45", "תדרוך בוקר", "מלון"],
+      ["06:30", "ארוחת בוקר", "מלון"],
+      ["08:45–09:00", "תדרוך בוקר", "מלון"],
       ["09:00–09:30", "מעבר לתחנת טקאנאווה גייטוויי", ""],
       ["09:30–11:30", "ביקור באתר", "JR East — TAKANAWA GATEWAY CITY: אדריכלות, חיבור בין תחנה לעיר, רשתות להולכי רגל וחדשנות. הפרטים טרם נקבעו."],
       ["11:30–12:00", "מעבר למקום ארוחת הצהריים", "המקום טרם נקבע"],
       ["12:00–14:00", "ארוחת צהריים מסכמת ודיון", "מטוקיו לתל אביב: לקחים לבניית מטרו מטרופוליני"],
-      ["14:00", "זמן פנוי", "קניות ופעילויות עצמאיות"],
+      ["14:00–16:00", "פעילות קבוצתית", ""],
     ],
   },
   {
@@ -1040,6 +1074,8 @@ const daysHe = [
       ["ניהונבאשי", "סיור עם רובע צ׳ואו, 09:00–12:00"],
     ],
     program: [
+      ["06:30", "ארוחת בוקר", "מלון"],
+      ["08:45–09:00", "תדרוך בוקר", "מלון"],
       [
         "09:00–12:00",
         "תכנון סביב תחנת ניהונבאשי בלב רובע מסחרי היסטורי",
