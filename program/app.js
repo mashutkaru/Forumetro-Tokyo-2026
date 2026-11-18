@@ -109,7 +109,7 @@ const days = [
       ["ARRIVAL", "Narita Airport, 11:40", ICONS.plane],
       ["CHECK-IN", "Hotel, 15:30", ICONS.suitcase],
       ["RECEPTION", "LUMIVEIL TOKYO, 17:00–20:00", ICONS.dinner],
-      ["WALK (optional)", "Shiodome, 20:00–21:00", ICONS.stroll],
+      ["ORIENTATION WALK (optional)", "Shiodome, 20:00–21:00", ICONS.stroll],
     ],
     program: [
       ["11:40", "Arrival at Narita International Airport", "Immigration, baggage collection and meeting the local coordination team"],
@@ -119,7 +119,7 @@ const days = [
       ["16:30", "Arrival at LUMIVEIL TOKYO", ""],
       ["17:00–18:00", "Opening presentations", "Forumetro delegation and local organizing team"],
       ["18:00–20:00", "Banquet", "LUMIVEIL TOKYO"],
-      ["20:00–21:00", "Expert-led walking tour (Optional)", "Shiodome"],
+      ["20:00–21:00", "Orientation walk (optional)", "Shiodome"],
     ],
     lines: ["oedo", "asakusa", "ginza"],
     stations: ["shimbashi"],
@@ -523,7 +523,7 @@ const daysJa = [
       ["到着", "成田空港、11:40"],
       ["チェックイン", "ホテル、15:30"],
       ["レセプション", "ルミヴェール東京、17:00–20:00"],
-      ["徒歩視察（任意）", "汐留、20:00–21:00"],
+      ["オリエンテーションウォーク（任意）", "汐留、20:00–21:00"],
     ],
     program: [
       ["11:40", "成田国際空港に到着", "入国審査、手荷物受取、現地運営チームとの合流"],
@@ -533,7 +533,7 @@ const daysJa = [
       ["16:30", "ルミヴェール東京に到着", ""],
       ["17:00–18:00", "開会発表", "FORUMETRO視察団と現地運営チーム"],
       ["18:00–20:00", "懇親会", "ルミヴェール東京"],
-      ["20:00–21:00", "専門家による徒歩視察（任意）", "汐留"],
+      ["20:00–21:00", "オリエンテーションウォーク（任意）", "汐留"],
     ],
   },
   {
@@ -823,7 +823,7 @@ const daysHe = [
       ["16:30", "הגעה ל-LUMIVEIL TOKYO", ""],
       ["17:00–18:00", "מצגות פתיחה", "משלחת פורומטרו והצוות המארגן המקומי"],
       ["18:00–20:00", "ארוחת ערב חגיגית", "LUMIVEIL TOKYO"],
-      ["20:00–21:00", "סיור אוריינטציה רגלי בהדרכת מומחה (לבחירה)", "תחנת שיודומה/שינבשי"],
+      ["20:00–21:00", "סיור אוריינטציה (לבחירה)", "תחנת שיודומה/שינבשי"],
     ],
   },
   {
