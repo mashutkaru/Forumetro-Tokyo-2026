@@ -4,6 +4,7 @@
    400ms is about 150 messages a second once each viewer gets a copy.
    That is above the free Supabase cap (100/s) and inside the Pro cap (500/s). */
 const LIVE_CAMERA_MS = 400;
+const LIVE_POINTER_MS = 120;
 
 const LIVE_SECTIONS = ["overview", "schedule", "location", "model", "tips"];
 const LIVE_LINES = ["ginza", "hibiya", "yamanote", "oedo", "toyoko", "odakyu", "chiyoda", "asakusa"];
@@ -64,6 +65,10 @@ let liveSeq = 0;
 let lastSentPlace = "";
 let lastCameraSent = 0;
 let cameraTimer = 0;
+let pointerTimer = 0;
+let pointerPending = null;
+let pointerDown = false;
+let lastPointerSent = 0;
 
 function liveLang() {
   const lang = document.documentElement.lang;
@@ -206,9 +211,86 @@ function leaveLiveView() {
   liveRole = "off";
   liveStatus = "waiting";
   hostGateOpen = false;
+  pointerDown = false;
+  showFinger(null, null);
   if (window.ForumetroProgram) window.ForumetroProgram.setMode("off");
   paintLiveBanner();
   postLive({ type: "forumetro:live-leave" });
+}
+
+function fingerPoint(event) {
+  const width = window.innerWidth || 1;
+  const height = window.innerHeight || 1;
+  const x = Math.min(1, Math.max(0, event.clientX / width));
+  const y = Math.min(1, Math.max(0, event.clientY / height));
+  return {
+    x: Math.round(x * 1000) / 1000,
+    y: Math.round(y * 1000) / 1000,
+  };
+}
+
+function sendPointer(point) {
+  postLive({
+    type: "forumetro:live-pointer",
+    x: point ? point.x : null,
+    y: point ? point.y : null,
+  });
+}
+
+function queuePointer(point) {
+  const wait = LIVE_POINTER_MS - (Date.now() - lastPointerSent);
+  if (wait <= 0) {
+    lastPointerSent = Date.now();
+    pointerPending = null;
+    sendPointer(point);
+    return;
+  }
+  pointerPending = point;
+  if (pointerTimer) return;
+  pointerTimer = window.setTimeout(() => {
+    pointerTimer = 0;
+    lastPointerSent = Date.now();
+    const next = pointerPending;
+    pointerPending = null;
+    if (next) sendPointer(next);
+  }, wait);
+}
+
+function showFinger(x, y) {
+  const dot = document.getElementById("liveFinger");
+  if (!dot) return;
+  if (liveRole !== "viewer" || typeof x !== "number" || typeof y !== "number") {
+    dot.classList.remove("is-on");
+    return;
+  }
+  dot.style.left = (x * 100) + "%";
+  dot.style.top = (y * 100) + "%";
+  dot.classList.add("is-on");
+}
+
+function fingerBlocked(event) {
+  return Boolean(event.target.closest("#liveViewBanner, #liveHostOpen, #liveHostGate"));
+}
+
+function onFingerDown(event) {
+  if (liveRole !== "presenter" || !event.isPrimary || fingerBlocked(event)) return;
+  pointerDown = true;
+  queuePointer(fingerPoint(event));
+}
+
+function onFingerMove(event) {
+  if (!pointerDown || liveRole !== "presenter" || !event.isPrimary) return;
+  queuePointer(fingerPoint(event));
+}
+
+function onFingerUp(event) {
+  if (!pointerDown || (event && !event.isPrimary)) return;
+  pointerDown = false;
+  if (pointerTimer) window.clearTimeout(pointerTimer);
+  pointerTimer = 0;
+  pointerPending = null;
+  lastPointerSent = Date.now();
+  sendPointer(null);
 }
 
 function togglePresent() {
@@ -216,6 +298,8 @@ function togglePresent() {
   if (liveRole === "presenter") {
     liveRole = "viewer";
     liveStatus = "ended";
+    pointerDown = false;
+    showFinger(null, null);
     if (window.ForumetroProgram) window.ForumetroProgram.setMode("follow");
     paintLiveBanner();
     postLive({ type: "forumetro:live-stop" });
@@ -260,10 +344,22 @@ function submitHostPhone(event) {
 }
 
 function applyLiveMessage(data) {
+  if (data.type === "forumetro:live-pointer") {
+    if (liveRole !== "viewer") return;
+    if (data.x === null && data.y === null) {
+      showFinger(null, null);
+      return;
+    }
+    if (typeof data.x !== "number" || typeof data.y !== "number") return;
+    if (data.x < 0 || data.x > 1 || data.y < 0 || data.y > 1) return;
+    showFinger(data.x, data.y);
+    return;
+  }
   if (data.type === "forumetro:live-role") {
     if (data.role === "presenter") {
       liveRole = "presenter";
       liveStatus = "live";
+      showFinger(null, null);
       window.ForumetroProgram.setMode("present");
     } else if (data.role === "viewer" && liveRole === "viewer") {
       window.ForumetroProgram.setMode("follow");
@@ -291,7 +387,11 @@ function applyLiveMessage(data) {
   liveSeq = data.seq;
   if (data.status !== "ended") liveStatus = "live";
   window.ForumetroProgram.applyPlace(clean, { immediate: first });
-  if (data.status === "ended") liveStatus = "ended";
+  if (data.status === "ended") {
+    liveStatus = "ended";
+    showFinger(null, null);
+  }
+  if (first) showFinger(null, null);
   paintLiveBanner();
 }
 
@@ -307,6 +407,10 @@ function bindLiveView() {
   const banner = liveBanner();
   if (!banner || !window.ForumetroProgram) return;
   document.getElementById("liveViewPresent").addEventListener("click", togglePresent);
+  document.addEventListener("pointerdown", onFingerDown);
+  document.addEventListener("pointermove", onFingerMove);
+  document.addEventListener("pointerup", onFingerUp);
+  document.addEventListener("pointercancel", onFingerUp);
   document.getElementById("liveHostOpen").addEventListener("click", openHostGate);
   document.getElementById("liveHostGate").addEventListener("submit", submitHostPhone);
   window.ForumetroProgram.onPlace(() => sendPlace(window.ForumetroProgram.readPlace(), true));

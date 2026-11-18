@@ -3247,6 +3247,29 @@ html.lang-he .live-host-open {
   display: none !important;
 }
 
+.live-finger {
+  position: fixed;
+  z-index: 80;
+  width: 28px;
+  height: 28px;
+  margin-left: -14px;
+  margin-top: -14px;
+  border-radius: 50%;
+  pointer-events: none;
+  background: rgba(255, 255, 255, 0.96);
+  box-shadow:
+    0 0 0 14px rgba(59, 111, 224, 0.32),
+    0 8px 20px rgba(33, 79, 99, 0.22);
+  opacity: 0;
+  transform: scale(0.7);
+  transition: opacity 0.18s ease, transform 0.18s ease, left 0.08s linear, top 0.08s linear;
+}
+
+.live-finger.is-on {
+  opacity: 1;
+  transform: scale(1);
+}
+
 .live-host-gate {
   display: flex;
   flex-wrap: wrap;

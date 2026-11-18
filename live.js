@@ -17,7 +17,8 @@
     "forumetro:live-present": 1,
     "forumetro:live-stop": 1,
     "forumetro:live-state": 1,
-    "forumetro:live-resume": 1
+    "forumetro:live-resume": 1,
+    "forumetro:live-pointer": 1
   };
 
   var channel = null;
@@ -26,6 +27,7 @@
   var generation = 0;
   var seq = 0;
   var latest = null;
+  var latestPresenter = "";
   var lastHeard = 0;
   var frameReady = false;
   var heartbeat = 0;
@@ -129,9 +131,19 @@
     });
   }
 
+  function pointValue(x, y) {
+    if (x === null && y === null) return true;
+    return typeof x === "number" && typeof y === "number"
+      && isFinite(x) && isFinite(y)
+      && x >= 0 && x <= 1 && y >= 0 && y <= 1;
+  }
+
   function broadcast(msg) {
     openChannel();
     if (!joined) {
+      if (msg.kind === "pointer") {
+        pending = pending.filter(function (item) { return item.kind !== "pointer"; });
+      }
       pending.push(msg);
       return;
     }
@@ -201,12 +213,24 @@
   function stopPresenter(tellOthers) {
     stopHeartbeat();
     if (tellOthers && latest && latest.snapshot) publish("ended", latest.snapshot, true);
+    if (tellOthers) {
+      broadcast({ kind: "pointer", presenterId: TAB, generation: generation, x: null, y: null });
+    }
     role = following ? "viewer" : "idle";
   }
 
   function onAir(event) {
     var msg = event.data;
-    if (!msg || (msg.kind !== "hello" && msg.kind !== "heartbeat" && msg.kind !== "state")) return;
+    if (!msg || (msg.kind !== "hello" && msg.kind !== "heartbeat" && msg.kind !== "state" && msg.kind !== "pointer")) return;
+    if (msg.kind === "pointer") {
+      if (!following || role === "presenter") return;
+      if (typeof msg.presenterId !== "string" || typeof msg.generation !== "number") return;
+      if (msg.presenterId === TAB || msg.presenterId !== latestPresenter) return;
+      if (!latest || msg.generation !== latest.generation) return;
+      if (!pointValue(msg.x, msg.y)) return;
+      send({ type: "forumetro:live-pointer", x: msg.x, y: msg.y });
+      return;
+    }
     if (typeof msg.presenterId !== "string" || typeof msg.generation !== "number" || typeof msg.seq !== "number") return;
     if (msg.kind === "hello") {
       if (role === "presenter" && latest && latest.snapshot) publish("live", latest.snapshot, true);
@@ -220,6 +244,7 @@
     if (latest && msg.generation < latest.generation) return;
     if (latest && msg.generation === latest.generation && msg.kind === "state" && msg.seq < latest.seq) return;
     lastHeard = Date.now();
+    latestPresenter = msg.presenterId;
     if (msg.kind === "heartbeat") {
       if (following && role === "viewer") send({ type: "forumetro:live-status", status: "live" });
       return;
@@ -263,6 +288,18 @@
       else sendApply();
       return;
     }
+    if (data.type === "forumetro:live-pointer") {
+      if (role !== "presenter") return;
+      if (!onlyKeys(data, { type: 1, x: 1, y: 1 }) || !pointValue(data.x, data.y)) return;
+      broadcast({
+        kind: "pointer",
+        presenterId: TAB,
+        generation: generation,
+        x: data.x,
+        y: data.y
+      });
+      return;
+    }
     if (data.type === "forumetro:live-present") {
       if (!validSnapshot(data.snapshot)) return;
       if (!window.ForumetroLiveHosts || !window.ForumetroLiveHosts.allows(data.phone)) return;
@@ -271,6 +308,7 @@
       generation = Date.now();
       seq = 0;
       latest = null;
+      latestPresenter = TAB;
       openChannel();
       publish("live", data.snapshot, true);
       send({ type: "forumetro:live-role", role: "presenter" });
