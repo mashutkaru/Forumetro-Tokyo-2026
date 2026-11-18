@@ -107,6 +107,7 @@ window.LINE_PROFILES = [
     id: "toyoko",
     code: "TY",
     color: "#E60012",
+    map: "line-maps/toyoko.jpg",
     label: "TŌYOKO LINE | 東横線 (TY)",
     intro: "The Tōkyū Tōyoko Line links Shibuya and Yokohama. It was built in stages from 1926, and the Shibuya–Yokohama route was finished in 1932. In 2013 Shibuya became an underground through-station. From Shibuya, trains continue onto the Fukutoshin Line and onward toward Tōbu and Seibu. From Yokohama they continue onto the Minatomirai Line.",
     rows: [
