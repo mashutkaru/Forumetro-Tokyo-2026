@@ -1623,10 +1623,64 @@ function stationButtonLabel(station) {
   return station.name;
 }
 
+const LINE_NAME_COLORS = [
+  ["Tōkaidō Shinkansen", "#1B4F9C"],
+  ["JR East Shinkansen", "#3CB44A"],
+  ["Shōnan–Shinjuku", "#E4682C"],
+  ["Keihin-Tōhoku", "#00B0E0"],
+  ["Den-en-toshi", "#00A070"],
+  ["Chūō–Sōbu", "#E0B400"],
+  ["Chūō Rapid", "#FC8000"],
+  ["Yurikamome Line", "#00A0E9"],
+  ["Yurikamome", "#00A0E9"],
+  ["Inokashira Line", "#3858B8"],
+  ["Inokashira", "#3858B8"],
+  ["Marunouchi Line", "#E40010"],
+  ["Marunouchi", "#E40010"],
+  ["Ueno–Tokyo", "#F08818"],
+  ["Fukutoshin", "#985820"],
+  ["Sōbu Rapid", "#E0B400"],
+  ["Hanzōmon", "#9060B8"],
+  ["Shinjuku Line", "#70BC38"],
+  ["Odawara Line", "#2C68B8"],
+  ["Odawara", "#2C68B8"],
+  ["Yokosuka", "#0078C0"],
+  ["Yamanote", "#80C040"],
+  ["Tōkaidō", "#F08818"],
+  ["Tōyoko Line", "#D01830"],
+  ["Tōyoko", "#D01830"],
+  ["Saikyō", "#008C60"],
+  ["Asakusa Line", "#E85298"],
+  ["Asakusa", "#E85298"],
+  ["Hibiya Line", "#7A7A72"],
+  ["Hibiya", "#7A7A72"],
+  ["Keiyō", "#A01820"],
+  ["Ginza Line", "#FF9500"],
+  ["Ginza", "#FF9500"],
+  ["Ōedo Line", "#B40078"],
+  ["Ōedo", "#B40078"],
+].sort((a, b) => b[0].length - a[0].length);
+
+function colorLineNames(route) {
+  let text = String(route || "");
+  const marks = [];
+  LINE_NAME_COLORS.forEach(([phrase, color], index) => {
+    if (!text.includes(phrase)) return;
+    const token = `\u0000${index}\u0000`;
+    text = text.split(phrase).join(token);
+    marks.push([token, phrase, color]);
+  });
+  let html = escapeModelText(text);
+  marks.forEach(([token, phrase, color]) => {
+    html = html.split(token).join(`<span class="station-line-name" style="color:${color}">${escapeModelText(phrase)}</span>`);
+  });
+  return html;
+}
+
 function stationDetailHtml(station) {
   const heading = programLang === "ja" ? "1日あたりの乗降人員" : programLang === "he" ? "תנועת נוסעים ביום" : "Daily passenger movements";
   const rows = station.rows
-    .map(([operator, route, count]) => `<li><span><strong>${operator}</strong> ${route}</span><b>${count}</b></li>`)
+    .map(([operator, route, count]) => `<li><span><strong>${escapeModelText(operator)}</strong> ${colorLineNames(route)}</span><b>${escapeModelText(count)}</b></li>`)
     .join("");
   return `<article class="station-detail">
       <h4>${stationName(station)}</h4>

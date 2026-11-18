@@ -1827,6 +1827,10 @@ html.is-embedded .line-tags {
   font-variant-numeric: tabular-nums;
 }
 
+.station-line-name {
+  font-weight: 700;
+}
+
 .station-note {
   color: var(--muted);
   font-size: 13px;
