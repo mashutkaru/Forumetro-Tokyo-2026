@@ -109,7 +109,7 @@ const days = [
       ["ARRIVAL", "Narita Airport, 11:40", ICONS.plane],
       ["CHECK-IN", "Hotel, 15:30", ICONS.suitcase],
       ["RECEPTION", "LUMIVEIL TOKYO, 17:00–20:00", ICONS.dinner],
-      ["ORIENTATION WALK (optional)", "Shiodome, 20:00–21:00", ICONS.stroll],
+      ["ORIENTATION WALK (Optional)", "Shiodome, 20:00–21:00", ICONS.stroll],
     ],
     program: [
       ["11:40", "Arrival at Narita International Airport", "Immigration, baggage collection and meeting the local coordination team"],
@@ -119,7 +119,7 @@ const days = [
       ["16:30", "Arrival at LUMIVEIL TOKYO", ""],
       ["17:00–18:00", "Opening presentations", "Forumetro delegation and local organizing team"],
       ["18:00–20:00", "Banquet", "LUMIVEIL TOKYO"],
-      ["20:00–21:00", "Orientation walk (optional)", "Shiodome"],
+      ["20:00–21:00", "Orientation Walk (Optional)", "Shiodome"],
     ],
     lines: ["oedo", "asakusa", "ginza"],
     stations: ["shimbashi"],
