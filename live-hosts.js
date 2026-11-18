@@ -3,7 +3,8 @@
    Numbers can be written as +972504412944 or 0504412944. */
 (function () {
   var HOSTS = [
-    "+972504412944"
+    "+972504412944",
+    "+972546668902"
   ];
 
   function digits(value) {

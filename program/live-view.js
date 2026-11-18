@@ -57,6 +57,7 @@ const LIVE_TEXT = {
 };
 
 let hostGateOpen = false;
+let hostDenyTimer = 0;
 
 let liveRole = "off";
 let liveStatus = "waiting";
@@ -321,12 +322,27 @@ function togglePresent() {
 }
 
 function openHostGate() {
+  if (hostDenyTimer) window.clearTimeout(hostDenyTimer);
+  hostDenyTimer = 0;
   hostGateOpen = true;
   const error = document.getElementById("liveHostError");
   if (error) error.hidden = true;
   paintLiveBanner();
   const input = document.getElementById("liveHostPhone");
   if (input) input.focus();
+}
+
+function returnToViewerLive() {
+  hostGateOpen = false;
+  const error = document.getElementById("liveHostError");
+  const input = document.getElementById("liveHostPhone");
+  if (error) error.hidden = true;
+  if (input) input.value = "";
+  if (liveRole !== "presenter" && liveRole !== "off") {
+    liveRole = "viewer";
+    if (window.ForumetroProgram) window.ForumetroProgram.setMode("follow");
+  }
+  paintLiveBanner();
 }
 
 function submitHostPhone(event) {
@@ -339,8 +355,15 @@ function submitHostPhone(event) {
       error.hidden = false;
       error.textContent = liveLabel("denied");
     }
+    if (hostDenyTimer) window.clearTimeout(hostDenyTimer);
+    hostDenyTimer = window.setTimeout(() => {
+      hostDenyTimer = 0;
+      if (!knownHost()) returnToViewerLive();
+    }, 3000);
     return;
   }
+  if (hostDenyTimer) window.clearTimeout(hostDenyTimer);
+  hostDenyTimer = 0;
   try {
     localStorage.setItem("forumetro-live-host", phone.trim());
   } catch (e) {}
