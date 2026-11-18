@@ -262,8 +262,8 @@ const days = [
     city: "Toei, the Tokyo Metropolitan Government and Shinjuku Station",
     theme:
       "The morning is with Toei and the Tokyo Metropolitan Government, on public subway and bus services and how a transport project moves from policy to a local plan. The afternoon walks Shinjuku Station's south exit and the Busta bus terminal.",
-    tip: "The guide for the Shinjuku walk is still to be confirmed.",
-    notesExtra: "The guide for the Shinjuku station walk is still to be confirmed.",
+    tip: "",
+    notesExtra: "",
     items: [
       ["TOEI", "Subway and buses, 10:00–11:00", ICONS.presentation],
       ["TMG", "Planning across government, 11:00–12:00", ICONS.building],
@@ -293,7 +293,7 @@ const days = [
       [
         "13:30–15:00",
         "Shinjuku Station's South Exit and Busta Bus Terminal",
-        "Station walk · Guide to be confirmed. The walk traces how former railway land around Shinjuku's South Exit was redeveloped after the privatization of Japanese National Railways. At Busta Shinjuku, participants will follow a passenger's route from the railway station to the highway bus terminal.",
+        "Station walk. The walk traces how former railway land around Shinjuku's South Exit was redeveloped after the privatization of Japanese National Railways. At Busta Shinjuku, participants will follow a passenger's route from the railway station to the highway bus terminal.",
         [
           ["", "Redevelopment of former railway land", ""],
           ["", "Wayfinding between rail platforms and the highway bus terminal", ""],
@@ -900,8 +900,8 @@ const daysHe = [
     city: "טואי, ממשלת המטרופולין של טוקיו ותחנת שינג׳וקו",
     theme:
       "הבוקר עם טואי ועם ממשלת המטרופולין של טוקיו: שירותי המטרו והאוטובוסים הציבוריים, והדרך שבה מיזם תחבורה עובר ממדיניות לתוכנית מקומית. אחר הצהריים סיור ביציאה הדרומית של תחנת שינג׳וקו ובמסוף בוסטה.",
-    tip: "זהות המדריך לסיור בשינג׳וקו טרם נקבעה.",
-    notesExtra: "זהות המדריך לסיור בתחנת שינג׳וקו טרם נקבעה.",
+    tip: "",
+    notesExtra: "",
     items: [
       ["טואי", "מטרו ואוטובוסים, 10:00–11:00"],
       ["הממשל המטרופוליני", "תכנון בין דרגי השלטון, 11:00–12:00"],
@@ -931,7 +931,7 @@ const daysHe = [
       [
         "13:30–15:00",
         "תחנת שינג׳וקו – היציאה הדרומית ומסוף האוטובוסים בוסטה",
-        "סיור בתחנה · זהות המדריך טרם נקבעה. הסיור יבחן כיצד פותחו מחדש שטחי הרכבת סביב היציאה הדרומית של תחנת שינג׳וקו בעקבות הפרטת חברת הרכבות הלאומית של יפן. בבוסטה שינג׳וקו יעברו המשתתפים במסלול הנוסע מתחנת הרכבת אל מסוף האוטובוסים הבין־עירוניים.",
+        "סיור בתחנה. הסיור יבחן כיצד פותחו מחדש שטחי הרכבת סביב היציאה הדרומית של תחנת שינג׳וקו בעקבות הפרטת חברת הרכבות הלאומית של יפן. בבוסטה שינג׳וקו יעברו המשתתפים במסלול הנוסע מתחנת הרכבת אל מסוף האוטובוסים הבין־עירוניים.",
         [
           ["", "פיתוח מחדש של שטחים ששימשו בעבר את הרכבת", ""],
           ["", "התמצאות בדרך מרציפי הרכבת למסוף האוטובוסים הבין־עירוניים", ""],
