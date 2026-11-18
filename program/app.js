@@ -1662,6 +1662,23 @@ const LINE_NAME_COLORS = [
   ["Ōedo", "#B40078"],
 ].sort((a, b) => b[0].length - a[0].length);
 
+const LINE_NAME_PAGES = {
+  "Ginza Line": "ginza",
+  Ginza: "ginza",
+  "Hibiya Lines": "hibiya",
+  "Hibiya Line": "hibiya",
+  Hibiya: "hibiya",
+  Yamanote: "yamanote",
+  "Ōedo Line": "oedo",
+  Ōedo: "oedo",
+  "Tōyoko Line": "toyoko",
+  Tōyoko: "toyoko",
+  "Odawara Line": "odakyu",
+  Odawara: "odakyu",
+  "Asakusa Line": "asakusa",
+  Asakusa: "asakusa",
+};
+
 const LINE_NAME_KEEP = ["Higashi-Ginza", "at Ginza"];
 
 function colorLineNames(route) {
@@ -1682,7 +1699,12 @@ function colorLineNames(route) {
   });
   let html = escapeModelText(text);
   marks.forEach(([token, phrase, color]) => {
-    html = html.split(token).join(`<span class="station-line-name" style="color:${color}">${escapeModelText(phrase)}</span>`);
+    const page = LINE_NAME_PAGES[phrase];
+    const label = escapeModelText(phrase);
+    const colored = page
+      ? `<button type="button" class="station-line-name" data-station-line="${page}" style="color:${color}">${label}</button>`
+      : `<span class="station-line-name" style="color:${color}">${label}</span>`;
+    html = html.split(token).join(colored);
   });
   kept.forEach(([token, phrase]) => {
     html = html.split(token).join(escapeModelText(phrase));
@@ -2201,12 +2223,21 @@ function setLineSelection(lineId, toggle) {
   requestAnimationFrame(() => revealLinePanel(panel));
 }
 
+function notifyParentSection(section) {
+  try {
+    if (window.parent && window.parent !== window) {
+      window.parent.postMessage({ type: "forumetro:section", section }, "*");
+    }
+  } catch (e) {}
+}
+
 function openLinePage(lineId) {
   const arriving = !document.getElementById("page-lines")?.classList.contains("active");
   showPage("lines");
   setProgramNavActive("tips");
   const current = document.querySelector("#lineTags .line-tag.is-active")?.dataset.line;
   setLineSelection(lineId || (arriving ? "ginza" : current || "ginza"), false);
+  notifyParentSection("tips");
 }
 
 function resetPanelNav() {
@@ -2520,6 +2551,13 @@ function initEvents() {
     if (homeButton) {
       event.preventDefault();
       goBackToDelegationAbout();
+      return;
+    }
+
+    const stationLine = event.target.closest("[data-station-line]");
+    if (stationLine?.dataset.stationLine) {
+      event.preventDefault();
+      openLinePage(stationLine.dataset.stationLine);
       return;
     }
 

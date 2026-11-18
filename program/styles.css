@@ -1831,6 +1831,18 @@ html.is-embedded .line-tags {
   font-weight: 700;
 }
 
+button.station-line-name {
+  display: inline;
+  padding: 0;
+  border: 0;
+  background: none;
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+  text-decoration: underline;
+  text-underline-offset: 0.12em;
+}
+
 .station-note {
   color: var(--muted);
   font-size: 13px;

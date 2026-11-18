@@ -1968,6 +1968,12 @@
       else applyProgramLangChrome(event.data.lang);
       return;
     }
+    if (event.data.type === 'forumetro:section') {
+      document.querySelectorAll('.program-section-bar [data-section]').forEach(function (item) {
+        item.classList.toggle('active', item.getAttribute('data-section') === event.data.section);
+      });
+      return;
+    }
     if (event.data.type === 'forumetro:keep-top') {
       window.scrollTo(0, 0);
       return;
