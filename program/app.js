@@ -1119,7 +1119,10 @@ function viewDay(day) {
 
 function textForLang(el) {
   if (programLang === "ja") return el.getAttribute("data-ja") || el.getAttribute("data-en");
-  if (programLang === "he") return el.getAttribute("data-he") || el.getAttribute("data-en");
+  if (programLang === "he") {
+    if (el.classList.contains("nav-label") && el.closest(".topbar")) return el.getAttribute("data-en");
+    return el.getAttribute("data-he") || el.getAttribute("data-en");
+  }
   return el.getAttribute("data-en");
 }
 

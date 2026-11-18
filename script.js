@@ -1915,7 +1915,12 @@
 
   function textForPageLang(el, lang) {
     if (lang === 'ja') return el.getAttribute('data-ja') || el.getAttribute('data-en');
-    if (lang === 'he') return el.getAttribute('data-he') || el.getAttribute('data-en');
+    if (lang === 'he') {
+      if (el.classList.contains('nav-caption') && el.closest('.program-section-bar, .useful-section-bar')) {
+        return el.getAttribute('data-en');
+      }
+      return el.getAttribute('data-he') || el.getAttribute('data-en');
+    }
     return el.getAttribute('data-en');
   }
 
