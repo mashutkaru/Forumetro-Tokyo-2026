@@ -648,22 +648,6 @@ html.lang-he.is-embedded:not(.is-mobile-embed) .topbar-end {
   transform: translateY(-50%);
 }
 
-html.lang-he.is-embedded:not(.is-mobile-embed) .nav.nav-program {
-  direction: rtl;
-}
-
-html.lang-he.is-embedded:not(.is-mobile-embed) .nav.nav-program.line-anchored::before {
-  background: linear-gradient(90deg, #3B6FE0, #C9A227, #FF9500, #F62E36, #00BB85, #009BBF);
-}
-
-html.lang-he.is-embedded:not(.is-mobile-embed) .nav.nav-useful {
-  direction: rtl;
-}
-
-html.lang-he.is-embedded:not(.is-mobile-embed) .nav.nav-useful.line-anchored::before {
-  background: linear-gradient(90deg, #009BBF, #F62E36, #00BB85, #8F76D6);
-}
-
 html.lang-he .date-strip,
 html.lang-he .m-days,
 html.lang-he .m-days-row {
