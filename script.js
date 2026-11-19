@@ -25,7 +25,7 @@
   }
 
   const PARTICIPANTS = [
-    { id:1, key:"roy_groves", nameEn:"Roy Groves", nameJa:"グローブス・ロイ", nameHe:"", sector:"Local Government", org:"Or Yehuda", role:"Acting CEO, Or Yehuda Development Company", photo:"Roy Groves.jpg" },
+    { id:1, key:"roy_groves", nameEn:"Roy Grovas", nameJa:"グロヴァス・ロイ", nameHe:"", sector:"Local Government", org:"Or Yehuda", role:"Acting CEO, Or Yehuda Development Company", photo:"Roy Groves.jpg" },
     { id:2, key:"kfir_fabrik", nameEn:"Kfir Fabrik", nameJa:"ファブリク・クフィル", nameHe:"", sector:"Local Government", org:"Be'er Ya'akov", role:"City Architect and Director of Planning Department", photo:"Kfir Fabrik.jpg" },
     { id:3, key:"nitzan_barchan", nameEn:"Nitzan Barchan", nameJa:"バルハン・ニツァン", nameHe:"", sector:"Local Government", org:"Bnei Brak", role:"City Engineer", photo:"Nitzan Barchan.jpg" },
     { id:4, key:"yishai_valency", nameEn:"Yishai Valency", nameJa:"ヴァレンシー・イシャイ", nameHe:"", sector:"Local Government", org:"Bat Yam", role:"City Engineer", photo:"Yishai Valency.jpg" },
@@ -54,7 +54,7 @@
     { id:28, key:"kobi_ben_atar", nameEn:"Kobi Ben Atar", nameJa:"ベン・アタール・コビ", nameHe:"", sector:"Government-Owned Company", org:"NTA Metropolitan Mass Transit System Ltd.", role:"Vice President and Director, M1 Metro Directorate", photo:"Kobi Ben Atar.jpg" },
     { id:29, key:"rakefet_tibi", nameEn:"Rakefet Tibi", nameJa:"ティビ・ラケフェット", nameHe:"", sector:"Government-Owned Company", org:"NTA Metropolitan Mass Transit System Ltd.", role:"Senior Director, Integrated and Strategic Planning", photo:"Rakefet Tibi.jpg" },
     { id:30, key:"shani_kedar", nameEn:"Shani Kedar", nameJa:"ケダル・シャニ", nameHe:"", sector:"Government-Owned Company", org:"NTA Metropolitan Mass Transit System Ltd.", role:"Director, M3 Construction Division", photo:"Shani Kedar.jpg" },
-    { id:31, key:"danny_segal", nameEn:"Danny Segal", nameJa:"セガル・ダニー", nameHe:"", sector:"Government-Owned Company", org:"NTA Metropolitan Mass Transit System Ltd.", role:"M2 Planning Director", photo:"Danny Segal.jpg" },
+    { id:31, key:"danny_segal", nameEn:"Dany Sigal", nameJa:"シガル・ダニー", nameHe:"", sector:"Government-Owned Company", org:"NTA Metropolitan Mass Transit System Ltd.", role:"M2 Planning Director", photo:"Danny Segal.jpg" },
     { id:32, key:"natalie_katz", nameEn:"Natalie Katz", nameJa:"カッツ・ナタリー", nameHe:"", sector:"Government-Owned Company", org:"NTA Metropolitan Mass Transit System Ltd.", role:"Vice President, Metro Project; M1 Line Manager", photo:"Natalie Katz.jpg" },
     { id:33, key:"tadasa_baruch", nameEn:"Tadasa Baruch", nameJa:"バルフ・タダサ", nameHe:"", sector:"Government-Owned Company", org:"NTA Metropolitan Mass Transit System Ltd.", role:"Director of Traffic Management and Control Division", photo:"Tadasa Baruch.jpg" },
     { id:34, key:"guy_segal", nameEn:"Guy Segal", nameJa:"セガル・ガイ", nameHe:"", sector:"Government-Owned Company", org:"NTA Metropolitan Mass Transit System Ltd.", role:"Deputy Director, M3 Line; Line Manager", photo:"Guy Segal.jpg" },
@@ -69,11 +69,11 @@
 
   const STEERING_COMMITTEE = [
     { id:"sc1", key:"avi_haliva", nameEn:"Avi Haliva", nameJa:"ハリヴァ・アヴィ", nameHe:"", org:"Metro Authority", orgJa:"メトロ庁／長官", role:"Chair", roleJa:"", photo:"Avi Haliva.jpeg" },
-    { id:"sc2", key:"hila_waxberg", nameEn:"Hila Wechsberg", nameJa:"ウェクスバーグ・ヒラ", nameHe:"", org:"NTA Metropolitan Mass Transit System Ltd.", orgJa:"NTA（テルアビブ都市圏交通公社）／地方自治体部門長", role:"Head of Local Authorities Division", roleJa:"", photo:"Hila Waxberg.png" },
-    { id:"sc3", key:"tal_granit", nameEn:"Tal Granit", nameJa:"グラニット・タル", nameHe:"", org:"Ministry of Transport and Road Safety", orgJa:"イスラエル運輸・道路安全省／国家メトロ庁", role:"Head of Budget Department", roleJa:"予算部長", photo:"Tal Granit.jpg", photoVer:3 },
-    { id:"sc4", key:"itamar_ben_meir", nameEn:"Itamar Ben Meir", nameJa:"ベン・メイル・イタマル", nameHe:"", org:"NTA Metropolitan Mass Transit System Ltd.", orgJa:"NTA（テルアビブ都市圏交通公社）／最高経営責任者（CEO）", role:"CEO", roleJa:"", photo:"Itamar Ben Meir.jpeg", photoVer:3 },
     { id:"sc6", key:"yodfat_afek_arazi", nameEn:"Yodfat Afek Arazi", nameJa:"アフェク・アラジ・ヨドファト", nameHe:"", org:"NTA Metropolitan Mass Transit System Ltd.", orgJa:"NTA（テルアビブ都市圏交通公社）／取締役会会長", role:"Chair of the Board", roleJa:"", photo:"Yodfat Afek Arazi.jpg" },
-    { id:"sc7", key:"sigal_gabai", nameEn:"Sigal Gabai", nameJa:"ガバイ・シガル", nameHe:"", org:"Israel", orgJa:"イスラエル", role:"Chair of the Metro Regulatory Committee", roleJa:"メトロ規制委員会委員長", photo:"Sigal Gabai.jpg" }
+    { id:"sc7", key:"sigal_gabai", nameEn:"Sigal Gabai", nameJa:"ガバイ・シガル", nameHe:"", org:"Israel", orgJa:"イスラエル", role:"Chair of the Metro Regulatory Committee", roleJa:"メトロ規制委員会委員長", photo:"Sigal Gabai.jpg" },
+    { id:"sc4", key:"itamar_ben_meir", nameEn:"Itamar Ben Meir", nameJa:"ベン・メイル・イタマル", nameHe:"", org:"NTA Metropolitan Mass Transit System Ltd.", orgJa:"NTA（テルアビブ都市圏交通公社）／最高経営責任者（CEO）", role:"CEO", roleJa:"", photo:"Itamar Ben Meir.jpeg", photoVer:3 },
+    { id:"sc2", key:"hila_waxberg", nameEn:"Hila Wechsberg", nameJa:"ウェクスバーグ・ヒラ", nameHe:"", org:"NTA Metropolitan Mass Transit System Ltd.", orgJa:"NTA（テルアビブ都市圏交通公社）／地方自治体部門長", role:"Head of Local Authorities Division", roleJa:"", photo:"Hila Waxberg.png" },
+    { id:"sc3", key:"tal_granit", nameEn:"Tal Granit", nameJa:"グラニット・タル", nameHe:"", org:"Ministry of Transport and Road Safety", orgJa:"イスラエル運輸・道路安全省／国家メトロ庁", role:"Head of Budget Department", roleJa:"予算部長", photo:"Tal Granit.jpg", photoVer:3 }
   ];
 
   var PROGRAM_TEAM_BADGE = "Program Team";
