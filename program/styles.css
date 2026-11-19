@@ -1316,7 +1316,11 @@ main {
 html.lang-he .day-lines,
 html.lang-he .day-line-panel {
   direction: ltr;
-  justify-content: flex-start;
+}
+
+html.lang-he .day-lines-row,
+html.lang-he .line-page .line-tags {
+  justify-content: flex-end;
 }
 
 .day-line-panel {
