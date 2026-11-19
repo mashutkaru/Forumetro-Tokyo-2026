@@ -433,15 +433,16 @@ const days = [
     title: "Tokyo's Future: Takanawa Gateway and Closing Reflections",
     city: "Takanawa Gateway City",
     theme:
-      "The morning is a site visit to Takanawa Gateway City with JR East, looking at a new model of railway-led urban development. A closing lunch turns to lessons for planning and building the Tel Aviv Metropolitan Metro. A group activity follows from 14:00 to 16:00.",
-    tip: "Breakfast is from 06:30, with a short briefing at 08:45. A group activity runs from 14:00 to 16:00.",
+      "The morning is a site visit to Takanawa Gateway City with JR East, looking at a new model of railway-led urban development. Lunch is from 12:00 to 14:00, with a group activity from 12:00 to 15:45. From 16:00 to 17:30 the delegation holds a group reflection and summary.",
+    tip: "Breakfast is from 06:30, with a short briefing at 08:45. A group activity runs from 12:00 to 15:45.",
     notesExtra:
-      "Breakfast is at the hotel from 06:30. The closing lunch venue is still to be confirmed.",
+      "Breakfast is at the hotel from 06:30. The lunch venue is still to be confirmed.",
     items: [
       ["TRANSFER", "Takanawa Gateway Station, 09:00–09:30", ICONS.transfer],
       ["TAKANAWA", "JR East site visit, 09:30–11:30", ICONS.innovation],
-      ["DISCUSSION", "Closing lunch, 12:00–14:00", ICONS.panel],
-      ["ACTIVITY", "Group activity, 14:00–16:00", ICONS.event],
+      ["LUNCH", "Lunch, 12:00–14:00", ICONS.dinner],
+      ["ACTIVITY", "Group activity, 12:00–15:45", ICONS.event],
+      ["SUMMARY", "Group reflection and summary, 16:00–17:30", ICONS.meeting],
     ],
     program: [
       ["06:30~", "Breakfast", "Hotel"],
@@ -453,12 +454,9 @@ const days = [
         "Site visit: JR East. Architecture, station-city integration, pedestrian networks and innovation.",
       ],
       ["11:30–12:00", "Transfer to the lunch venue", "Venue to be confirmed"],
-      [
-        "12:00–14:00",
-        "Closing lunch and discussion",
-        "From Tokyo to Tel Aviv: Lessons for Building a Metropolitan Metro",
-      ],
-      ["14:00–16:00", "Group activity", ""],
+      ["12:00–14:00", "Lunch", ""],
+      ["12:00–15:45", "Group activity", ""],
+      ["16:00–17:30", "Group reflection and summary of the delegation", ""],
     ],
     lines: ["yamanote", "asakusa"],
     models: [
@@ -752,14 +750,15 @@ const daysJa = [
     title: "東京の未来：高輪ゲートウェイと研修の総括",
     city: "高輪ゲートウェイシティ",
     theme:
-      "午前はJR東日本とともに高輪ゲートウェイシティを訪れ、鉄道を軸とした新しい都市開発を見ます。閉会昼食では、テルアビブ都市圏メトロの計画と整備への示唆を話し合います。14:00から16:00まではグループ活動です。",
-    tip: "朝食は6:30から、08:45に短い事前説明があります。14:00から16:00まではグループ活動です。",
-    notesExtra: "朝食はホテルで6:30からです。閉会昼食の会場は未定です。",
+      "午前はJR東日本とともに高輪ゲートウェイシティを訪れ、鉄道を軸とした新しい都市開発を見ます。昼食は12:00から14:00、グループ活動は12:00から15:45です。16:00から17:30は視察団のグループ振り返りとまとめです。",
+    tip: "朝食は6:30から、08:45に短い事前説明があります。グループ活動は12:00から15:45です。",
+    notesExtra: "朝食はホテルで6:30からです。昼食の会場は未定です。",
     items: [
       ["移動", "高輪ゲートウェイ駅、09:00–09:30"],
       ["高輪", "JR東日本の現地視察、09:30–11:30"],
-      ["意見交換", "閉会昼食、12:00–14:00"],
-      ["活動", "グループ活動、14:00–16:00"],
+      ["昼食", "昼食、12:00–14:00"],
+      ["活動", "グループ活動、12:00–15:45"],
+      ["まとめ", "グループ振り返りとまとめ、16:00–17:30"],
     ],
     program: [
       ["06:30~", "朝食", "ホテル"],
@@ -767,8 +766,9 @@ const daysJa = [
       ["09:00–09:30", "高輪ゲートウェイ駅へ移動", ""],
       ["09:30–11:30", "高輪ゲートウェイシティ", "現地視察：JR東日本。建築、駅とまちの一体整備、歩行者ネットワーク、イノベーション。"],
       ["11:30–12:00", "昼食会場へ移動", "会場は未定"],
-      ["12:00–14:00", "閉会昼食と意見交換", "東京からテルアビブへ：都市圏メトロ整備への示唆"],
-      ["14:00–16:00", "グループ活動", ""],
+      ["12:00–14:00", "昼食", ""],
+      ["12:00–15:45", "グループ活動", ""],
+      ["16:00–17:30", "視察団のグループ振り返りとまとめ", ""],
     ],
   },
   {
@@ -1042,15 +1042,16 @@ const daysHe = [
     title: "העתיד של טוקיו: טקאנאווה גייטוויי וסיכום",
     city: "Takanawa Gateway City",
     theme:
-      "הבוקר מוקדש לביקור ב-Takanawa Gateway City עם JR East, ומציג דגם חדש של פיתוח עירוני בהובלת הרכבת. ארוחת צהריים מסכמת עוברת ללקחים לתכנון ולבניית המטרו המטרופוליני של תל אביב. מ-14:00 עד 16:00 מתקיימת פעילות קבוצתית.",
-    tip: "ארוחת הבוקר מ-06:30, ותדרוך קצר ב-08:45. פעילות קבוצתית מתקיימת מ-14:00 עד 16:00.",
+      "הבוקר מוקדש לביקור ב-Takanawa Gateway City עם JR East, ומציג דגם חדש של פיתוח עירוני בהובלת הרכבת. ארוחת צהריים מ-12:00 עד 14:00, ופעילות קבוצתית מ-12:00 עד 15:45. מ-16:00 עד 17:30 מתקיים זמן עיבוד וסיכום קבוצתי של המשלחת.",
+    tip: "ארוחת הבוקר מ-06:30, ותדרוך קצר ב-08:45. פעילות קבוצתית מתקיימת מ-12:00 עד 15:45.",
     notesExtra:
-      "ארוחת הבוקר במלון מ-06:30. מקום ארוחת הצהריים המסכמת טרם נקבע.",
+      "ארוחת הבוקר במלון מ-06:30. מקום ארוחת הצהריים טרם נקבע.",
     items: [
       ["מעבר", "תחנת טקאנאווה גייטוויי, 09:00–09:30"],
       ["טקאנאווה", "ביקור באתר של JR East, 09:30–11:30"],
-      ["דיון", "ארוחת צהריים מסכמת, 12:00–14:00"],
-      ["פעילות", "פעילות קבוצתית, 14:00–16:00"],
+      ["צהריים", "ארוחת צהריים, 12:00–14:00"],
+      ["פעילות", "פעילות קבוצתית, 12:00–15:45"],
+      ["סיכום", "זמן עיבוד וסיכום קבוצתי, 16:00–17:30"],
     ],
     program: [
       ["06:30~", "ארוחת בוקר", "מלון"],
@@ -1058,8 +1059,9 @@ const daysHe = [
       ["09:00–09:30", "מעבר לתחנת טקאנאווה גייטוויי", ""],
       ["09:30–11:30", "TAKANAWA GATEWAY CITY", "ביקור באתר: JR East. אדריכלות, חיבור בין תחנה לעיר, רשתות להולכי רגל וחדשנות."],
       ["11:30–12:00", "מעבר למקום ארוחת הצהריים", "המקום טרם נקבע"],
-      ["12:00–14:00", "ארוחת צהריים מסכמת ודיון", "מטוקיו לתל אביב: לקחים לבניית מטרו מטרופוליני"],
-      ["14:00–16:00", "פעילות קבוצתית", ""],
+      ["12:00–14:00", "ארוחת צהריים", ""],
+      ["12:00–15:45", "פעילות קבוצתית", ""],
+      ["16:00–17:30", "זמן עיבוד וסיכום קבוצתי של המשלחת", ""],
     ],
   },
   {
