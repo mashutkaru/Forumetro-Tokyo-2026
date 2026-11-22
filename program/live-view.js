@@ -8,7 +8,7 @@ const LIVE_POINTER_MS = 120;
 
 const LIVE_SECTIONS = ["overview", "schedule", "location", "model", "tips"];
 const LIVE_LINES = ["ginza", "hibiya", "yamanote", "oedo", "toyoko", "odakyu", "chiyoda", "asakusa"];
-const LIVE_SNAP_KEYS = ["day", "section", "line", "model", "camera"];
+const LIVE_SNAP_KEYS = ["day", "section", "line", "model", "camera", "open"];
 const LIVE_CAMERA_KEYS = ["position", "target", "fov"];
 
 const LIVE_TEXT = {
@@ -19,6 +19,7 @@ const LIVE_TEXT = {
     disconnected: "Presenter disconnected",
     ended: "Ended",
     presenting: "You are presenting",
+    onair: "Host is presenting",
     present: "Present",
     stop: "Stop live",
     host: "Host",
@@ -33,6 +34,7 @@ const LIVE_TEXT = {
     disconnected: "המציג התנתק",
     ended: "הסתיים",
     presenting: "אתם מציגים",
+    onair: "המארח מציג",
     present: "הצגה",
     stop: "סיום השידור",
     host: "מארח",
@@ -47,6 +49,7 @@ const LIVE_TEXT = {
     disconnected: "発表者が切断されました",
     ended: "終了",
     presenting: "この画面が発表中です",
+    onair: "ホストが発表中",
     present: "発表する",
     stop: "ライブを終了",
     host: "ホスト",
@@ -69,6 +72,7 @@ let cameraTimer = 0;
 let pointerTimer = 0;
 let pointerPending = null;
 let pointerDown = false;
+let fingerVisible = false;
 let lastPointerSent = 0;
 
 function liveLang() {
@@ -128,12 +132,26 @@ function paintLiveBanner() {
   }
   document.documentElement.classList.toggle("is-live-open", showBanner);
   document.documentElement.classList.toggle("is-live-gate", showBanner && !host);
-  const badge = document.getElementById("liveBadge");
-  if (badge) {
-    const showBadge = liveRole === "viewer" && liveStatus === "live" && !host && !hostGateOpen;
-    badge.hidden = !showBadge;
-    badge.textContent = liveLabel("live");
+  const onAir = document.getElementById("liveOnAir");
+  const showOnAir = liveRole === "viewer" && liveStatus === "live" && !host && !hostGateOpen;
+  if (onAir) {
+    onAir.hidden = !showOnAir;
+    if (showOnAir) onAir.textContent = liveLabel("onair");
   }
+  document.documentElement.classList.toggle("is-live-viewer", showOnAir);
+  paintLiveBadge();
+}
+
+function paintLiveBadge() {
+  const badge = document.getElementById("liveBadge");
+  if (!badge) return;
+  const show = fingerVisible
+    && liveRole === "viewer"
+    && liveStatus === "live"
+    && !knownHost()
+    && !hostGateOpen;
+  badge.hidden = !show;
+  if (show) badge.textContent = liveLabel("live");
 }
 
 function postLive(data) {
@@ -153,6 +171,21 @@ function onlyKeys(obj, allowed) {
   return keys.length <= allowed.length && keys.every((key) => allowed.indexOf(key) !== -1);
 }
 
+function cleanOpen(value) {
+  if (value == null) return [];
+  if (!Array.isArray(value) || value.length > 40) return null;
+  const seen = {};
+  const open = [];
+  for (let i = 0; i < value.length; i += 1) {
+    const n = value[i];
+    if (typeof n !== "number" || !Number.isInteger(n) || n < 0 || n > 60 || seen[n]) return null;
+    seen[n] = true;
+    open.push(n);
+  }
+  open.sort((a, b) => a - b);
+  return open;
+}
+
 function cleanSnapshot(snapshot) {
   if (!onlyKeys(snapshot, LIVE_SNAP_KEYS)) return null;
   if (typeof snapshot.day !== "string" || !/^\d{2}\.\d{2}$/.test(snapshot.day)) return null;
@@ -164,12 +197,15 @@ function cleanSnapshot(snapshot) {
     if (!finiteTriple(snapshot.camera.position) || !finiteTriple(snapshot.camera.target)) return null;
     if (typeof snapshot.camera.fov !== "number" || snapshot.camera.fov < 10 || snapshot.camera.fov > 120) return null;
   }
+  const open = cleanOpen(snapshot.open);
+  if (snapshot.open != null && open === null) return null;
   return {
     day: snapshot.day,
     section: snapshot.section,
     line: snapshot.line,
     model: snapshot.model,
     camera: snapshot.camera,
+    open: open || null,
   };
 }
 
@@ -265,14 +301,18 @@ function queuePointer(point) {
 
 function showFinger(x, y) {
   const dot = document.getElementById("liveFinger");
-  if (!dot) return;
-  if (liveRole !== "viewer" || typeof x !== "number" || typeof y !== "number") {
-    dot.classList.remove("is-on");
-    return;
+  const touching = liveRole === "viewer" && typeof x === "number" && typeof y === "number";
+  fingerVisible = touching;
+  if (dot) {
+    if (!touching) {
+      dot.classList.remove("is-on");
+    } else {
+      dot.style.left = (x * 100) + "%";
+      dot.style.top = (y * 100) + "%";
+      dot.classList.add("is-on");
+    }
   }
-  dot.style.left = (x * 100) + "%";
-  dot.style.top = (y * 100) + "%";
-  dot.classList.add("is-on");
+  paintLiveBadge();
 }
 
 function fingerBlocked(event) {

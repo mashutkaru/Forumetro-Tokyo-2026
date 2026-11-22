@@ -8,7 +8,7 @@
   var TAB = Math.random().toString(36).slice(2, 10);
   var SECTIONS = { overview: 1, schedule: 1, location: 1, model: 1, tips: 1 };
   var LINES = { ginza: 1, hibiya: 1, yamanote: 1, oedo: 1, toyoko: 1, odakyu: 1, chiyoda: 1, asakusa: 1 };
-  var SNAP_KEYS = { day: 1, section: 1, line: 1, model: 1, camera: 1 };
+  var SNAP_KEYS = { day: 1, section: 1, line: 1, model: 1, camera: 1, open: 1 };
   var CAMERA_KEYS = { position: 1, target: 1, fov: 1 };
   var FRAME_TYPES = {
     "forumetro:live-ready": 1,
@@ -60,6 +60,21 @@
     });
   }
 
+  function validOpen(value) {
+    var seen;
+    var i;
+    var n;
+    if (value == null) return true;
+    if (!Array.isArray(value) || value.length > 40) return false;
+    seen = {};
+    for (i = 0; i < value.length; i++) {
+      n = value[i];
+      if (typeof n !== "number" || n !== Math.floor(n) || n < 0 || n > 60 || seen[n]) return false;
+      seen[n] = 1;
+    }
+    return true;
+  }
+
   function validSnapshot(snapshot) {
     if (!onlyKeys(snapshot, SNAP_KEYS)) return false;
     if (typeof snapshot.day !== "string" || !/^\d{2}\.\d{2}$/.test(snapshot.day)) return false;
@@ -71,6 +86,7 @@
       if (!finiteTriple(snapshot.camera.position) || !finiteTriple(snapshot.camera.target)) return false;
       if (typeof snapshot.camera.fov !== "number" || snapshot.camera.fov < 10 || snapshot.camera.fov > 120) return false;
     }
+    if (!validOpen(snapshot.open)) return false;
     return true;
   }
 

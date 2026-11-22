@@ -1091,6 +1091,21 @@ main {
   color: #fff;
 }
 
+html.is-mobile-embed .city-model-picker,
+html.is-mobile-embed .city-model-chip,
+html.is-mobile-embed .city-model-caption,
+html.is-mobile-embed .city-viewer,
+html.is-mobile-embed .city-viewer-stage,
+html.is-mobile-embed .city-viewer-stage canvas {
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-touch-callout: none;
+}
+
+html.is-mobile-embed .city-model-chip {
+  touch-action: manipulation;
+}
+
 .city-model-caption {
   margin: 8px 34px 0;
   color: var(--muted);
@@ -1167,6 +1182,10 @@ main {
   }
 }
 
+.city-viewer-toolbar [data-action="locate"] {
+  grid-column: 1 / -1;
+}
+
 .city-viewer-toolbar button,
 .city-viewer-retry {
   min-height: 44px;
@@ -1179,6 +1198,199 @@ main {
   font-weight: 700;
   padding: 8px 12px;
   cursor: pointer;
+}
+
+.city-viewer-toolbar button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.city-viewer-geo {
+  position: absolute;
+  z-index: 4;
+  left: 12px;
+  right: 12px;
+  bottom: 12px;
+  margin: 0;
+  padding: 8px 14px;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.94);
+  box-shadow: 0 6px 16px rgba(33, 79, 99, 0.12);
+  color: var(--ink);
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 1.35;
+  text-align: center;
+  pointer-events: none;
+}
+
+.city-viewer-geo[hidden] {
+  display: none;
+}
+
+.city-viewer-distance {
+  position: absolute;
+  z-index: 4;
+  top: 12px;
+  left: 12px;
+  max-width: min(280px, calc(100% - 120px));
+  margin: 0;
+  padding: 8px 12px;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.94);
+  box-shadow: 0 6px 16px rgba(33, 79, 99, 0.12);
+  color: var(--ink);
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 1.35;
+  text-align: left;
+  pointer-events: none;
+}
+
+html.lang-he .city-viewer-distance {
+  direction: rtl;
+  text-align: right;
+}
+
+.city-viewer-distance[hidden] {
+  display: none;
+}
+
+.cal-panel {
+  max-height: 46vh;
+  overflow: auto;
+  margin: 0;
+  padding: 12px;
+  border-top: 1px solid rgba(33, 79, 99, 0.12);
+  background: #fff;
+  color: var(--ink);
+  font-size: 13px;
+  line-height: 1.4;
+}
+
+.cal-panel h2,
+.cal-panel p {
+  margin: 0 0 8px;
+}
+
+.cal-panel h2 {
+  font-size: 15px;
+}
+
+.cal-key {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 12px;
+  word-break: break-all;
+}
+
+.cal-modes,
+.cal-actions,
+.cal-row-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 8px;
+}
+
+.cal-panel button {
+  min-height: 36px;
+  border: 1px solid var(--navy);
+  border-radius: 999px;
+  background: #fff;
+  color: var(--navy);
+  font: inherit;
+  font-size: 13px;
+  font-weight: 700;
+  padding: 6px 12px;
+  cursor: pointer;
+}
+
+.cal-panel button[aria-pressed="true"] {
+  background: var(--navy);
+  color: #fff;
+}
+
+.cal-panel button:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.cal-form {
+  display: grid;
+  gap: 6px;
+  margin-bottom: 8px;
+  padding: 8px;
+  border-radius: 12px;
+  background: var(--soft);
+}
+
+.cal-form label {
+  display: grid;
+  gap: 2px;
+  font-weight: 700;
+}
+
+.cal-form input[type="text"],
+.cal-form input[type="number"] {
+  min-height: 36px;
+  border: 1px solid rgba(33, 79, 99, 0.25);
+  border-radius: 8px;
+  padding: 6px 8px;
+  font: inherit;
+}
+
+.cal-table-wrap {
+  overflow-x: auto;
+  margin-bottom: 8px;
+}
+
+.cal-panel table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 12px;
+}
+
+.cal-panel th,
+.cal-panel td {
+  padding: 4px 6px;
+  border-bottom: 1px solid rgba(33, 79, 99, 0.12);
+  text-align: start;
+  white-space: nowrap;
+  vertical-align: top;
+}
+
+.cal-panel tr.is-selected td {
+  background: #fff4d6;
+}
+
+.cal-check {
+  display: flex;
+  gap: 8px;
+  align-items: flex-start;
+  margin: 8px 0;
+  font-weight: 700;
+}
+
+.cal-good { color: #0d7a32; }
+.cal-warn { color: #8a5a00; }
+.cal-bad { color: #a31621; }
+
+.cal-export {
+  width: 100%;
+  min-height: 88px;
+  margin-top: 8px;
+  border-radius: 8px;
+  border: 1px solid rgba(33, 79, 99, 0.25);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 11px;
+}
+
+html.lang-he .cal-panel {
+  direction: rtl;
+}
+
+.cal-panel [hidden] {
+  display: none;
 }
 
 .city-viewer-status,
@@ -3205,6 +3417,59 @@ html.is-mobile-embed.is-live-open .page.active {
 
 html.is-mobile-embed.is-live-open.is-live-gate .page.active {
   padding-top: 132px;
+}
+
+.live-on-air {
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0 0 8px;
+  padding: 12px 16px;
+  background: #3B6FE0;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 800;
+  line-height: 1.2;
+  pointer-events: none;
+}
+
+.live-on-air::before {
+  content: "";
+  width: 8px;
+  height: 8px;
+  flex: 0 0 auto;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.45);
+  animation: live-badge-pulse 1.8s ease-out infinite;
+}
+
+html.lang-he .live-on-air {
+  direction: rtl;
+}
+
+.live-on-air[hidden] {
+  display: none !important;
+}
+
+html.is-mobile-embed.is-live-viewer .app {
+  position: relative;
+}
+
+html.is-mobile-embed.is-live-viewer .live-on-air {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  margin: 0;
+  z-index: 60;
+}
+
+html.is-mobile-embed.is-live-viewer .page.active {
+  padding-top: 48px;
 }
 
 .live-host-open {

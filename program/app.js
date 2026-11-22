@@ -440,9 +440,9 @@ const days = [
     items: [
       ["TRANSFER", "Takanawa Gateway Station, 09:00–09:30", ICONS.transfer],
       ["TAKANAWA", "JR East site visit, 09:30–11:30", ICONS.innovation],
-      ["LUNCH", "Lunch, 12:00–14:00", ICONS.dinner],
+      ["LUNCH", "Lunch, 12:00–14:00", ICONS.panel],
       ["ACTIVITY", "Group activity, 14:00–15:45", ICONS.event],
-      ["SUMMARY", "Group processing and summary, 16:00–17:30", ICONS.meeting],
+      ["SUMMARY", "Group summary, 16:00–17:30", ICONS.panel],
     ],
     program: [
       ["06:30~", "Breakfast", "Hotel"],
@@ -750,15 +750,15 @@ const daysJa = [
     title: "東京の未来：高輪ゲートウェイと研修の総括",
     city: "高輪ゲートウェイシティ",
     theme:
-      "午前はJR東日本とともに高輪ゲートウェイシティを訪れ、鉄道を軸とした新しい都市開発を見ます。昼食は12:00から14:00です。14:00から15:45まではグループ活動、16:00から17:30までは視察団のグループでの振り返りと総括です。",
-    tip: "朝食は6:30から、08:45に短い事前説明があります。グループ活動は14:00から15:45です。",
+      "午前はJR東日本とともに高輪ゲートウェイシティを訪れ、鉄道を軸とした新しい都市開発を見ます。昼食は12:00から14:00です。14:00から15:45まではグループ活動、16:00から17:30までは代表団のグループでの振り返りと総括です。",
+    tip: "朝食は6:30から、08:45に短い事前説明があります。14:00から15:45まではグループ活動、16:00から総括です。",
     notesExtra: "朝食はホテルで6:30からです。昼食の会場は未定です。",
     items: [
       ["移動", "高輪ゲートウェイ駅、09:00–09:30"],
       ["高輪", "JR東日本の現地視察、09:30–11:30"],
       ["昼食", "昼食、12:00–14:00"],
       ["活動", "グループ活動、14:00–15:45"],
-      ["まとめ", "グループ振り返りとまとめ、16:00–17:30"],
+      ["総括", "グループ総括、16:00–17:30"],
     ],
     program: [
       ["06:30~", "朝食", "ホテル"],
@@ -768,7 +768,7 @@ const daysJa = [
       ["11:30–12:00", "昼食会場へ移動", "会場は未定"],
       ["12:00–14:00", "昼食", ""],
       ["14:00–15:45", "グループ活動", ""],
-      ["16:00–17:30", "視察団のグループ振り返りとまとめ", ""],
+      ["16:00–17:30", "代表団のグループでの振り返りと総括", ""],
     ],
   },
   {
@@ -1051,7 +1051,7 @@ const daysHe = [
       ["טקאנאווה", "ביקור באתר של JR East, 09:30–11:30"],
       ["צהריים", "ארוחת צהריים, 12:00–14:00"],
       ["פעילות", "פעילות קבוצתית, 14:00–15:45"],
-      ["סיכום", "זמן עיבוד וסיכום קבוצתי, 16:00–17:30"],
+      ["סיכום", "סיכום קבוצתי, 16:00–17:30"],
     ],
     program: [
       ["06:30~", "ארוחת בוקר", "מלון"],
@@ -1728,6 +1728,7 @@ function toggleMobileScheduleItem(button) {
     bindScheduleEmbedResize();
     scheduleEmbedResize();
   }
+  notePlace();
 }
 
 function renderScheduleEntry(entry) {
@@ -2477,6 +2478,7 @@ let applyingPlace = false;
 let applyToken = 0;
 let pendingLiveCamera = null;
 let lastAppliedKey = "";
+let lastAppliedOpen = null;
 const placeListeners = [];
 const cameraListeners = [];
 
@@ -2514,7 +2516,71 @@ function readPlace() {
       };
     }
   }
-  return { day: day.d, section, line, model, camera };
+  const open = section === "schedule" ? scheduleOpenIndexes() : null;
+  return { day: day.d, section, line, model, camera, open };
+}
+
+function scheduleLists() {
+  return ["scheduleList", "mSchedule"].map((id) => document.getElementById(id)).filter(Boolean);
+}
+
+function activeScheduleList() {
+  if (usesMobileProgram()) return document.getElementById("mSchedule") || document.getElementById("scheduleList");
+  return document.getElementById("scheduleList") || document.getElementById("mSchedule");
+}
+
+function scheduleOpenIndexes() {
+  const list = activeScheduleList();
+  if (!list) return [];
+  const open = [];
+  list.querySelectorAll(".m-schedule-item").forEach((item, index) => {
+    if (item.classList.contains("is-open")) open.push(index);
+  });
+  return open;
+}
+
+function revealScheduleItem(item) {
+  if (!item) return;
+  if (usesMobileProgram()) {
+    const scroller = document.querySelector(".m-content");
+    if (!scroller) return;
+    const top = scroller.scrollTop + item.getBoundingClientRect().top - scroller.getBoundingClientRect().top - 12;
+    scroller.scrollTo({ top: Math.max(0, top), behavior: "smooth" });
+    return;
+  }
+  scrollIframeTo(item, 12);
+}
+
+function applyScheduleOpen(indexes) {
+  const wanted = Array.isArray(indexes) ? indexes.slice().sort((a, b) => a - b) : [];
+  const key = wanted.join(",");
+  const prev = lastAppliedOpen == null ? [] : lastAppliedOpen.split(",").filter(Boolean).map(Number);
+  const changed = lastAppliedOpen !== key;
+  lastAppliedOpen = key;
+  scheduleLists().forEach((list) => {
+    list.querySelectorAll(".m-schedule-item").forEach((item, index) => {
+      const details = item.querySelector(".m-schedule-item__details");
+      const button = item.querySelector(".m-schedule-item__toggle");
+      if (!details || !button || button.classList.contains("m-schedule-item__toggle--static")) return;
+      const open = wanted.indexOf(index) !== -1;
+      item.classList.toggle("is-open", open);
+      button.setAttribute("aria-expanded", open ? "true" : "false");
+      details.hidden = !open;
+    });
+  });
+  if (wanted.length) {
+    bindScheduleEmbedResize();
+    scheduleEmbedResize();
+  }
+  if (!changed) return;
+  const added = wanted.filter((index) => prev.indexOf(index) === -1);
+  const focus = added.length ? added[added.length - 1] : -1;
+  if (focus < 0) return;
+  const list = activeScheduleList();
+  const item = list && list.querySelectorAll(".m-schedule-item")[focus];
+  requestAnimationFrame(() => {
+    requestAnimationFrame(() => revealScheduleItem(item));
+  });
 }
 
 function notePlace() {
@@ -2573,6 +2639,7 @@ function applyPlace(snapshot, options) {
     ? { model: snapshot.model, camera: snapshot.camera, immediate: !(options && options.immediate === false) }
     : null;
   tryApplyLiveCamera();
+  applyScheduleOpen(snapshot.section === "schedule" ? snapshot.open : null);
   if (liveMode === "follow") setProgramNavActive("live");
   window.setTimeout(() => {
     if (token === applyToken) applyingPlace = false;
@@ -2581,7 +2648,10 @@ function applyPlace(snapshot, options) {
 
 function setLiveMode(mode) {
   liveMode = mode === "present" || mode === "follow" ? mode : "off";
-  if (liveMode === "off") lastAppliedKey = "";
+  if (liveMode === "off") {
+    lastAppliedKey = "";
+    lastAppliedOpen = null;
+  }
   if (cityViewer && typeof cityViewer.setControlsEnabled === "function") {
     cityViewer.setControlsEnabled(liveMode !== "follow");
   }
@@ -2668,6 +2738,28 @@ function paintModelChoices(models) {
   });
 }
 
+function attachCalibration(viewer) {
+  if (!viewer) return;
+  let calibrate = false;
+  try {
+    calibrate = new URLSearchParams(window.location.search).get("calibrate") === "1";
+  } catch (e) {
+    calibrate = false;
+  }
+  if (!calibrate) return;
+  if (window.ForumetroCalibration) {
+    window.ForumetroCalibration.sync(viewer);
+    return;
+  }
+  if (attachCalibration.started) return;
+  attachCalibration.started = true;
+  import("./model-calibration.js?v=2").then((mod) => {
+    if (cityViewer) mod.startCalibration(cityViewer);
+  }).catch(() => {
+    attachCalibration.started = false;
+  });
+}
+
 function syncCityModel(day) {
   const models = dayModels(day);
   const show = models.length > 0;
@@ -2712,6 +2804,7 @@ function syncCityModel(day) {
   } else if (moved && cityViewer.refit) {
     cityViewer.refit();
   }
+  attachCalibration(cityViewer);
   window.requestAnimationFrame(() => {
     if (!cityViewer) return;
     cityViewer.resize();
@@ -2918,11 +3011,21 @@ function goBackToDelegationAbout() {
 }
 
 function initEvents() {
+  let lastPointerWasTouch = false;
+  let touchModelChip = null;
+  document.addEventListener("pointerdown", (event) => {
+    lastPointerWasTouch = event.pointerType === "touch";
+    touchModelChip = lastPointerWasTouch ? event.target.closest("[data-model-index]") : null;
+  }, true);
+  document.addEventListener("pointercancel", () => {
+    touchModelChip = null;
+  }, true);
+
   document.addEventListener("click", (event) => {
     if (liveMode === "follow") {
       if (leaveLiveFor(event) && window.ForumetroLive) {
         window.ForumetroLive.leave();
-      } else if (event.target.closest("[data-day], [data-model-index], [data-line], [data-day-line], [data-station]")) {
+      } else if (event.target.closest("[data-day], [data-model-index], [data-line], [data-day-line], [data-station], .m-schedule-item__toggle")) {
         event.preventDefault();
         return;
       }
@@ -2982,6 +3085,7 @@ function initEvents() {
 
     const modelChip = event.target.closest("[data-model-index]");
     if (modelChip) {
+      if (lastPointerWasTouch && touchModelChip !== modelChip) return;
       cityModelIndex = Number(modelChip.dataset.modelIndex);
       syncCityModel(viewDay(days[currentDayIndex]));
       goToDaySection("model");

@@ -3,11 +3,15 @@ import { OrbitControls } from "three/addons/controls/OrbitControls.js";
 import { RoomEnvironment } from "three/addons/environments/RoomEnvironment.js";
 import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
 import { createForumetroCompass } from "./forumetro-compass.js?v=1";
+import { createSelfLocation } from "./self-location.js?v=3";
 
 // Geographic north, clockwise from world -Z toward +X.
 // Keys are the model path without the ?v= suffix.
 // 0 means the urbanSCAN model is north-up: north is world -Z.
 // Shibuya’s north-up map matches that same ground axis.
+// model-geo.js uses these same keys. Once a model is calibrated, its
+// northDegrees must equal the number here. The location marker applies
+// that rotation once inside model-geo.js and must not be rotated again.
 const VERIFIED_NORTH = new Map([
   ["models/Asakusa-city-model.glb", 0],
   ["models/Kita-city-model.glb", 0],
@@ -29,6 +33,19 @@ function northForUrl(url) {
     if (path.endsWith("/" + key)) return value;
   }
   return null;
+}
+
+function modelKeyForUrl(url) {
+  if (!url) return null;
+  try {
+    const path = new URL(url, document.baseURI).pathname;
+    const mark = "/models/";
+    const at = path.lastIndexOf(mark);
+    if (at < 0) return null;
+    return path.slice(at + 1);
+  } catch (e) {
+    return null;
+  }
 }
 
 const loader = new GLTFLoader();
@@ -64,12 +81,15 @@ function create(mount) {
         <p data-en="The 3D model could not be loaded. Check your connection and try again." data-ja="3Dモデルを読み込めませんでした。通信状況を確認して、もう一度お試しください。" data-he="לא ניתן לטעון את המודל. בדקו את החיבור ונסו שוב.">The 3D model could not be loaded. Check your connection and try again.</p>
         <button type="button" class="city-viewer-retry"><span data-en="Try again" data-ja="もう一度" data-he="נסו שוב">Try again</span></button>
       </div>
+      <p class="city-viewer-distance" aria-live="polite" hidden></p>
+      <p class="city-viewer-geo" role="status" aria-live="polite" hidden></p>
     </div>
     <div class="city-viewer-toolbar">
       <button type="button" data-action="reset"><span data-en="Reset view" data-ja="表示を戻す" data-he="איפוס תצוגה">Reset view</span></button>
       <button type="button" data-action="in"><span data-en="Zoom in" data-ja="拡大" data-he="התקרבות">Zoom in</span></button>
       <button type="button" data-action="out"><span data-en="Zoom out" data-ja="縮小" data-he="התרחקות">Zoom out</span></button>
       <button type="button" data-action="full"><span data-en="Fullscreen" data-ja="全画面" data-he="מסך מלא">Fullscreen</span></button>
+      <button type="button" data-action="locate" disabled aria-disabled="true" aria-pressed="false"><span data-en="Show my location" data-ja="現在地を表示" data-he="הצג את המיקום שלי">Show my location</span></button>
     </div>
   `;
   mount.appendChild(root);
@@ -148,10 +168,24 @@ function create(mount) {
   let viewTween = null;
   const viewListeners = [];
   const readyListeners = [];
+  let selfLocation = null;
+  let calibrationOverlay = null;
 
   const compass = createForumetroCompass({
     THREE, stage, camera, controls, requestRender: kick,
     northDegrees: null
+  });
+
+  selfLocation = createSelfLocation({
+    THREE,
+    scene,
+    button: root.querySelector('[data-action="locate"]'),
+    label: root.querySelector('[data-action="locate"] span'),
+    statusEl: root.querySelector(".city-viewer-geo"),
+    distanceEl: root.querySelector(".city-viewer-distance"),
+    requestRender: kick,
+    getModelRoot: () => modelRoot,
+    boundsOf,
   });
 
   function clampPan() {
@@ -178,6 +212,7 @@ function create(mount) {
       else controls.update();
       clampPan();
       compass.update();
+      if (selfLocation) selfLocation.tick();
       renderer.render(scene, camera);
     };
     frame = window.requestAnimationFrame(loop);
@@ -290,6 +325,7 @@ function create(mount) {
   }
 
   function clearModel() {
+    if (selfLocation) selfLocation.dropMarker();
     if (!modelRoot) return;
     scene.remove(modelRoot);
     modelRoot.traverse((obj) => {
@@ -316,6 +352,8 @@ function create(mount) {
       notifyReady();
       return;
     }
+    // Drop any previous visitor marker before the mesh changes.
+    selfLocation.bindModel(modelKeyForUrl(url), northForUrl(url));
     modelReady = false;
     currentUrl = url;
     compass.setNorthDegrees(northForUrl(url));
@@ -331,6 +369,7 @@ function create(mount) {
         hideStatus();
         needsFit = true;
         resize();
+        selfLocation.reapply();
       },
       (event) => {
         if (token !== loadToken) return;
@@ -340,17 +379,29 @@ function create(mount) {
       () => {
         if (token !== loadToken) return;
         currentUrl = "";
+        selfLocation.noteFailed();
         showError();
       }
     );
   }
 
   function setActive(next) {
-    active = Boolean(next);
-    if (active) {
-      resize();
-      kick();
+    const on = Boolean(next);
+    if (active === on) {
+      if (on) {
+        resize();
+        kick();
+      }
+      return;
     }
+    active = on;
+    if (!active) {
+      selfLocation.deactivate();
+      return;
+    }
+    selfLocation.resumeIdle();
+    resize();
+    kick();
   }
 
   function setOnSelect(handler) {
@@ -433,9 +484,11 @@ function create(mount) {
   };
 
   stage.addEventListener("touchmove", (event) => event.preventDefault(), { passive: false });
+  stage.addEventListener("selectstart", (event) => event.preventDefault());
 
   canvas.addEventListener("pointerdown", (event) => {
     pointerDown = { x: event.clientX, y: event.clientY };
+    if (event.pointerType === "touch") event.preventDefault();
   });
   canvas.addEventListener("pointerup", (event) => {
     if (!pointerDown || !onSelect || !modelRoot) {
@@ -514,6 +567,29 @@ function create(mount) {
     onModelReady(handler) {
       if (typeof handler === "function") readyListeners.push(handler);
     },
+    getCalibrationContext() {
+      return {
+        key: modelKeyForUrl(currentUrl),
+        northDegrees: northForUrl(currentUrl),
+        ready: Boolean(modelReady && modelRoot),
+      };
+    },
+    getFootprint() {
+      if (!modelRoot) return null;
+      const box = boundsOf(modelRoot);
+      if (box.isEmpty()) return null;
+      return { minX: box.min.x, maxX: box.max.x, minZ: box.min.z, maxZ: box.max.z };
+    },
+    calibrationOverlay() {
+      if (!calibrationOverlay) {
+        calibrationOverlay = new THREE.Group();
+        calibrationOverlay.name = "calibration-overlay";
+        calibrationOverlay.raycast = function () {};
+        scene.add(calibrationOverlay);
+      }
+      return calibrationOverlay;
+    },
+    requestRender: kick,
   };
 }
 
