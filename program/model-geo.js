@@ -90,7 +90,142 @@ export const MODEL_GEO = {
   "models/Kita-city-model.glb": uncalibrated(), // TODO(calibrate)
   "models/Odaiba-satellite.glb": uncalibrated(), // TODO(calibrate)
   "models/Roppongi-city-model.glb": uncalibrated(), // TODO(calibrate)
-  "models/Shibuya-city-model-complete.glb": uncalibrated(), // TODO(calibrate)
+  "models/Shibuya-city-model-complete.glb": {
+    anchorWorld: { x: -163.0155487060547, z: -206.4427032470703 },
+    anchorGeo: { lat: 35.6597689712456, lon: 139.7003102731621 },
+    metersPerUnit: 1.0015683298649605,
+    northDegrees: 0,
+    coverage: [
+      { lat: 35.65336811509908, lon: 139.70211543752598 },
+      { lat: 35.65337357202827, lon: 139.70184376033035 },
+      { lat: 35.65338992981989, lon: 139.70157273759506 },
+      { lat: 35.65341714920947, lon: 139.70130302234415 },
+      { lat: 35.65345516438758, lon: 139.70103526422236 },
+      { lat: 35.65350388382934, lon: 139.70077010831218 },
+      { lat: 35.65356319029442, lon: 139.7005081934865 },
+      { lat: 35.65363294055051, lon: 139.70025015050774 },
+      { lat: 35.65371296703244, lon: 139.69999660126737 },
+      { lat: 35.65380307645954, lon: 139.69974815658938 },
+      { lat: 35.65390305232433, lon: 139.69950541479403 },
+      { lat: 35.65401265323338, lon: 139.69926896085306 },
+      { lat: 35.65413161567245, lon: 139.699039364024 },
+      { lat: 35.65425965262392, lon: 139.69881717818816 },
+      { lat: 35.65439645577892, lon: 139.69860293762653 },
+      { lat: 35.65454169553724, lon: 139.69839715938508 },
+      { lat: 35.65469502183696, lon: 139.69820033854387 },
+      { lat: 35.65485606581344, lon: 139.6980129499066 },
+      { lat: 35.65502443896982, lon: 139.69783544428338 },
+      { lat: 35.65519973621862, lon: 139.69766824950446 },
+      { lat: 35.65538153449922, lon: 139.69751176839262 },
+      { lat: 35.65556939664895, lon: 139.69736637774938 },
+      { lat: 35.65576286946755, lon: 139.697232428355 },
+      { lat: 35.65596148717357, lon: 139.69711024226498 },
+      { lat: 35.65616477112782, lon: 139.69700011449967 },
+      { lat: 35.65637223176894, lon: 139.696902309665 },
+      { lat: 35.65658336930472, lon: 139.6968170639801 },
+      { lat: 35.65679767488721, lon: 139.69674458223565 },
+      { lat: 35.65701463241011, lon: 139.69668503948392 },
+      { lat: 35.65723371913082, lon: 139.69663857901082 },
+      { lat: 35.65745440722592, lon: 139.69660531267408 },
+      { lat: 35.65767616513906, lon: 139.69658532090304 },
+      { lat: 35.6578984585488, lon: 139.69657865168497 },
+      { lat: 35.65812075195854, lon: 139.69658532090304 },
+      { lat: 35.65834250987168, lon: 139.69660531267408 },
+      { lat: 35.65856319796678, lon: 139.69663857901082 },
+      { lat: 35.6587822846875, lon: 139.69668503948392 },
+      { lat: 35.65899924221039, lon: 139.69674458223565 },
+      { lat: 35.65921354779289, lon: 139.6968170639801 },
+      { lat: 35.65942468532867, lon: 139.696902309665 },
+      { lat: 35.65963214596979, lon: 139.69700011449967 },
+      { lat: 35.65983542992403, lon: 139.69711024226498 },
+      { lat: 35.66003404763005, lon: 139.697232428355 },
+      { lat: 35.66022752044866, lon: 139.69736637774938 },
+      { lat: 35.66041538259839, lon: 139.69751176839262 },
+      { lat: 35.66059718087898, lon: 139.69766824950446 },
+      { lat: 35.66077247812778, lon: 139.69783544428338 },
+      { lat: 35.66094085128416, lon: 139.6980129499066 },
+      { lat: 35.66110189526065, lon: 139.69820033854387 },
+      { lat: 35.66125522156036, lon: 139.69839715938508 },
+      { lat: 35.66140046131869, lon: 139.69860293762653 },
+      { lat: 35.66153726447368, lon: 139.69881717818816 },
+      { lat: 35.66166530142516, lon: 139.699039364024 },
+      { lat: 35.66178426386422, lon: 139.69926896085306 },
+      { lat: 35.66189386477327, lon: 139.69950541479403 },
+      { lat: 35.66199384063806, lon: 139.69974815658938 },
+      { lat: 35.66208395006517, lon: 139.69999660126737 },
+      { lat: 35.66216397654709, lon: 139.70025015050774 },
+      { lat: 35.66223372680319, lon: 139.7005081934865 },
+      { lat: 35.66229303326827, lon: 139.70077010831218 },
+      { lat: 35.66234175271003, lon: 139.70103526422236 },
+      { lat: 35.66237976788814, lon: 139.70130302234415 },
+      { lat: 35.66240698727772, lon: 139.70157273759506 },
+      { lat: 35.66242334506933, lon: 139.70184376033035 },
+      { lat: 35.66242880199853, lon: 139.70211543752598 },
+      { lat: 35.66242334506933, lon: 139.7023871147216 },
+      { lat: 35.66240698727772, lon: 139.7026581374569 },
+      { lat: 35.66237976788814, lon: 139.7029278527078 },
+      { lat: 35.66234175271003, lon: 139.7031956108296 },
+      { lat: 35.66229303326827, lon: 139.7034607667398 },
+      { lat: 35.66223372680319, lon: 139.70372268156544 },
+      { lat: 35.66216397654709, lon: 139.7039807245442 },
+      { lat: 35.66208395006517, lon: 139.70423427378458 },
+      { lat: 35.66199384063806, lon: 139.70448271846257 },
+      { lat: 35.66189386477327, lon: 139.70472546025792 },
+      { lat: 35.66178426386422, lon: 139.7049619141989 },
+      { lat: 35.66166530142516, lon: 139.70519151102798 },
+      { lat: 35.66153726447368, lon: 139.7054136968638 },
+      { lat: 35.66140046131869, lon: 139.70562793742545 },
+      { lat: 35.66125522156036, lon: 139.7058337156669 },
+      { lat: 35.66110189526065, lon: 139.70603053650808 },
+      { lat: 35.66094085128416, lon: 139.70621792514535 },
+      { lat: 35.66077247812778, lon: 139.70639543076857 },
+      { lat: 35.66059718087898, lon: 139.7065626255475 },
+      { lat: 35.66041538259839, lon: 139.70671910665936 },
+      { lat: 35.66022752044866, lon: 139.70686449730258 },
+      { lat: 35.66003404763005, lon: 139.70699844669696 },
+      { lat: 35.65983542992403, lon: 139.707120632787 },
+      { lat: 35.65963214596979, lon: 139.70723076055228 },
+      { lat: 35.65942468532867, lon: 139.70732856538694 },
+      { lat: 35.65921354779289, lon: 139.70741381107186 },
+      { lat: 35.65899924221039, lon: 139.7074862928163 },
+      { lat: 35.6587822846875, lon: 139.70754583556806 },
+      { lat: 35.65856319796678, lon: 139.70759229604113 },
+      { lat: 35.65834250987168, lon: 139.70762556237787 },
+      { lat: 35.65812075195854, lon: 139.7076455541489 },
+      { lat: 35.6578984585488, lon: 139.70765222336698 },
+      { lat: 35.65767616513906, lon: 139.7076455541489 },
+      { lat: 35.65745440722592, lon: 139.70762556237787 },
+      { lat: 35.65723371913082, lon: 139.70759229604113 },
+      { lat: 35.65701463241011, lon: 139.70754583556806 },
+      { lat: 35.65679767488721, lon: 139.7074862928163 },
+      { lat: 35.65658336930472, lon: 139.70741381107186 },
+      { lat: 35.65637223176894, lon: 139.70732856538694 },
+      { lat: 35.65616477112782, lon: 139.70723076055228 },
+      { lat: 35.65596148717357, lon: 139.707120632787 },
+      { lat: 35.65576286946755, lon: 139.70699844669696 },
+      { lat: 35.65556939664895, lon: 139.70686449730258 },
+      { lat: 35.65538153449922, lon: 139.70671910665936 },
+      { lat: 35.65519973621862, lon: 139.7065626255475 },
+      { lat: 35.65502443896982, lon: 139.70639543076857 },
+      { lat: 35.65485606581344, lon: 139.70621792514535 },
+      { lat: 35.65469502183696, lon: 139.70603053650808 },
+      { lat: 35.65454169553724, lon: 139.7058337156669 },
+      { lat: 35.65439645577892, lon: 139.70562793742545 },
+      { lat: 35.65425965262392, lon: 139.7054136968638 },
+      { lat: 35.65413161567245, lon: 139.70519151102798 },
+      { lat: 35.65401265323338, lon: 139.7049619141989 },
+      { lat: 35.65390305232433, lon: 139.70472546025792 },
+      { lat: 35.65380307645954, lon: 139.70448271846257 },
+      { lat: 35.65371296703244, lon: 139.70423427378458 },
+      { lat: 35.65363294055051, lon: 139.7039807245442 },
+      { lat: 35.65356319029442, lon: 139.70372268156544 },
+      { lat: 35.65350388382934, lon: 139.7034607667398 },
+      { lat: 35.65345516438758, lon: 139.7031956108296 },
+      { lat: 35.65341714920947, lon: 139.7029278527078 },
+      { lat: 35.65338992981989, lon: 139.7026581374569 },
+      { lat: 35.65337357202827, lon: 139.7023871147216 },
+    ],
+  },
   "models/Shibuya-city-model.glb": uncalibrated(), // TODO(calibrate)
   "models/Shimokita-Senrogai-city-model.glb": uncalibrated(), // TODO(calibrate)
   "models/Shinbashi-Shiodome-city-model.glb": {
@@ -167,7 +302,270 @@ export const MODEL_GEO = {
   },
   "models/Shinjuku-city-model.glb": uncalibrated(), // TODO(calibrate)
   "models/Takanawa-Gateway-city-model.glb": uncalibrated(), // TODO(calibrate)
-  "models/Tokyo-Hibiya-Ginza.glb": uncalibrated(), // TODO(calibrate)
+  "models/Tokyo-Hibiya-Ginza.glb": {
+    anchorWorld: { x: -572.3793272414075, z: 490.10612471247345 },
+    anchorGeo: { lat: 35.67438504182432, lon: 139.76085554566245 },
+    metersPerUnit: 1.0072283081118987,
+    northDegrees: 0,
+    coverage: [
+      { lat: 35.67857357456989, lon: 139.7561516547572 },
+      { lat: 35.6783512097184, lon: 139.7561616664824 },
+      { lat: 35.67812911282482, lon: 139.75617834521304 },
+      { lat: 35.67790741767694, lon: 139.75620168211145 },
+      { lat: 35.67768625781922, lon: 139.75623166222158 },
+      { lat: 35.677465766448535, lon: 139.75626826786808 },
+      { lat: 35.67724607641418, lon: 139.75631147729663 },
+      { lat: 35.677027320148326, lon: 139.75636126399425 },
+      { lat: 35.67680962917941, lon: 139.7564175980488 },
+      { lat: 35.67659313489684, lon: 139.75648044546924 },
+      { lat: 35.67637796757773, lon: 139.75654976818555 },
+      { lat: 35.67616425666496, lon: 139.7566255254085 },
+      { lat: 35.6759521310453, lon: 139.75670767091023 },
+      { lat: 35.675741718632224, lon: 139.756796154384 },
+      { lat: 35.67553314622694, lon: 139.75689092416343 },
+      { lat: 35.675326538962224, lon: 139.75699192178385 },
+      { lat: 35.67512202169275, lon: 139.75709908674122 },
+      { lat: 35.67491971760479, lon: 139.75721235513234 },
+      { lat: 35.67471974849422, lon: 139.7573316582953 },
+      { lat: 35.674522234766584, lon: 139.75745692416902 },
+      { lat: 35.67432729543703, lon: 139.75758807729343 },
+      { lat: 35.67413504813037, lon: 139.75772503948903 },
+      { lat: 35.67394560824681, lon: 139.7578677271379 },
+      { lat: 35.673759090352355, lon: 139.7580160545825 },
+      { lat: 35.673575606232276, lon: 139.75816993276635 },
+      { lat: 35.673395266559545, lon: 139.7583292692337 },
+      { lat: 35.67321818033871, lon: 139.7584939667702 },
+      { lat: 35.67304445434973, lon: 139.7586639281614 },
+      { lat: 35.672874192591834, lon: 139.7588390493947 },
+      { lat: 35.67270749795196, lon: 139.7590192250978 },
+      { lat: 35.67254447109248, lon: 139.759204347859 },
+      { lat: 35.672385209895005, lon: 139.75939430550778 },
+      { lat: 35.672229810016596, lon: 139.7595889831544 },
+      { lat: 35.672078365445856, lon: 139.75978826386964 },
+      { lat: 35.67193096794681, lon: 139.75999202800497 },
+      { lat: 35.67178770539047, lon: 139.7602001525128 },
+      { lat: 35.67164866397942, lon: 139.76041251162616 },
+      { lat: 35.67151392880392, lon: 139.7606289782186 },
+      { lat: 35.6713835793928, lon: 139.7608494217644 },
+      { lat: 35.671257695274896, lon: 139.76107370901866 },
+      { lat: 35.671136352085995, lon: 139.76130170469696 },
+      { lat: 35.671019622681186, lon: 139.76153327215528 },
+      { lat: 35.67090757713481, lon: 139.76176827135046 },
+      { lat: 35.67080028385279, lon: 139.76200656121966 },
+      { lat: 35.670697806791864, lon: 139.76224799798067 },
+      { lat: 35.670600207684195, lon: 139.7624924361518 },
+      { lat: 35.67050754548122, lon: 139.76273972855176 },
+      { lat: 35.67041987635365, lon: 139.7629897262998 },
+      { lat: 35.670337252579166, lon: 139.76324227881548 },
+      { lat: 35.670259723654745, lon: 139.76349723347897 },
+      { lat: 35.67018733740889, lon: 139.76375443733056 },
+      { lat: 35.670120136108686, lon: 139.764013735371 },
+      { lat: 35.670058160908894, lon: 139.7642749712415 },
+      { lat: 35.67000144962743, lon: 139.76453798739345 },
+      { lat: 35.66995003563302, lon: 139.76480262559852 },
+      { lat: 35.66990395006982, lon: 139.76506872660863 },
+      { lat: 35.66986322074513, lon: 139.76533612981606 },
+      { lat: 35.669827872129325, lon: 139.7656046744431 },
+      { lat: 35.669797925912114, lon: 139.76587419860732 },
+      { lat: 35.66977339989014, lon: 139.76614453991652 },
+      { lat: 35.669754308523196, lon: 139.76641553555353 },
+      { lat: 35.66974066404648, lon: 139.76668702227627 },
+      { lat: 35.66973247368989, lon: 139.76695883654534 },
+      { lat: 35.66972974301488, lon: 139.76723081465127 },
+      { lat: 35.66973247368989, lon: 139.7675027927572 },
+      { lat: 35.66974066404648, lon: 139.76777460702627 },
+      { lat: 35.669754308523196, lon: 139.768046093749 },
+      { lat: 35.66977339989014, lon: 139.76831708938602 },
+      { lat: 35.669797925912114, lon: 139.76858743069522 },
+      { lat: 35.669827872129325, lon: 139.76885695485944 },
+      { lat: 35.66986322074513, lon: 139.76912549948648 },
+      { lat: 35.66990395006982, lon: 139.7693929026939 },
+      { lat: 35.66995003563302, lon: 139.76965900370402 },
+      { lat: 35.67000144962743, lon: 139.7699236419091 },
+      { lat: 35.670058160908894, lon: 139.77018665806105 },
+      { lat: 35.670120136108686, lon: 139.77044789393153 },
+      { lat: 35.67018733740889, lon: 139.77070719197198 },
+      { lat: 35.670259723654745, lon: 139.77096439582357 },
+      { lat: 35.670337252579166, lon: 139.77121935048706 },
+      { lat: 35.67041987635365, lon: 139.77147190300275 },
+      { lat: 35.67050754548122, lon: 139.77172190075078 },
+      { lat: 35.670600207684195, lon: 139.77196919315074 },
+      { lat: 35.670697806791864, lon: 139.77221363132188 },
+      { lat: 35.67080028385279, lon: 139.7724550680829 },
+      { lat: 35.67090757713481, lon: 139.77269335795208 },
+      { lat: 35.671019622681186, lon: 139.77292835714726 },
+      { lat: 35.671136352085995, lon: 139.77315992460558 },
+      { lat: 35.671257695274896, lon: 139.77338792028388 },
+      { lat: 35.6713835793928, lon: 139.77361220753815 },
+      { lat: 35.67151392880392, lon: 139.77383265108395 },
+      { lat: 35.67164866397942, lon: 139.77404911767638 },
+      { lat: 35.67178770539047, lon: 139.77426147678975 },
+      { lat: 35.67193096794681, lon: 139.77446960129757 },
+      { lat: 35.672078365445856, lon: 139.7746733654329 },
+      { lat: 35.672229810016596, lon: 139.77487264614814 },
+      { lat: 35.672385209895005, lon: 139.77506732379476 },
+      { lat: 35.67254447109248, lon: 139.77525728144354 },
+      { lat: 35.67270749795196, lon: 139.77544240420474 },
+      { lat: 35.672874192591834, lon: 139.77562257990783 },
+      { lat: 35.67304445434973, lon: 139.77579770114113 },
+      { lat: 35.67321818033871, lon: 139.77596766253234 },
+      { lat: 35.673395266559545, lon: 139.77613236006883 },
+      { lat: 35.673575606232276, lon: 139.7762916965362 },
+      { lat: 35.673759090352355, lon: 139.77644557472004 },
+      { lat: 35.67394560824681, lon: 139.77659390216465 },
+      { lat: 35.67413504813037, lon: 139.7767365898135 },
+      { lat: 35.67432729543703, lon: 139.7768735520091 },
+      { lat: 35.674522234766584, lon: 139.77700470513352 },
+      { lat: 35.67471974849422, lon: 139.77712997100724 },
+      { lat: 35.67491971760479, lon: 139.7772492741702 },
+      { lat: 35.67512202169275, lon: 139.77736254256132 },
+      { lat: 35.675326538962224, lon: 139.7774697075187 },
+      { lat: 35.67553314622694, lon: 139.7775707051391 },
+      { lat: 35.675741718632224, lon: 139.77766547491854 },
+      { lat: 35.6759521310453, lon: 139.7777539583923 },
+      { lat: 35.67616425666496, lon: 139.77783610389406 },
+      { lat: 35.67637796757773, lon: 139.777911861117 },
+      { lat: 35.67659313489684, lon: 139.7779811838333 },
+      { lat: 35.67680962917941, lon: 139.77804403125373 },
+      { lat: 35.677027320148326, lon: 139.7781003653083 },
+      { lat: 35.67724607641418, lon: 139.7781501520059 },
+      { lat: 35.677465766448535, lon: 139.77819336143446 },
+      { lat: 35.67768625781922, lon: 139.77822996708096 },
+      { lat: 35.67790741767694, lon: 139.7782599471911 },
+      { lat: 35.67812911282482, lon: 139.7782832840895 },
+      { lat: 35.6783512097184, lon: 139.77829996282014 },
+      { lat: 35.67857357456989, lon: 139.77830997454535 },
+      { lat: 35.678796073452475, lon: 139.7783133124669 },
+      { lat: 35.67901857233505, lon: 139.77830997454535 },
+      { lat: 35.67924093718654, lon: 139.77829996282014 },
+      { lat: 35.67946303408012, lon: 139.7782832840895 },
+      { lat: 35.679684729228, lon: 139.7782599471911 },
+      { lat: 35.679905889085724, lon: 139.77822996708096 },
+      { lat: 35.68012638045641, lon: 139.77819336143446 },
+      { lat: 35.680346070490764, lon: 139.7781501520059 },
+      { lat: 35.680564826756616, lon: 139.7781003653083 },
+      { lat: 35.68078251772553, lon: 139.77804403125373 },
+      { lat: 35.6809990120081, lon: 139.7779811838333 },
+      { lat: 35.68121417932721, lon: 139.777911861117 },
+      { lat: 35.68142789023998, lon: 139.77783610389406 },
+      { lat: 35.68164001585964, lon: 139.7777539583923 },
+      { lat: 35.68185042827272, lon: 139.77766547491854 },
+      { lat: 35.682059000678, lon: 139.7775707051391 },
+      { lat: 35.68226560794272, lon: 139.7774697075187 },
+      { lat: 35.68247012521219, lon: 139.77736254256132 },
+      { lat: 35.682672429300155, lon: 139.7772492741702 },
+      { lat: 35.68287239841072, lon: 139.77712997100724 },
+      { lat: 35.68306991213836, lon: 139.77700470513352 },
+      { lat: 35.68326485146791, lon: 139.7768735520091 },
+      { lat: 35.683457098774575, lon: 139.7767365898135 },
+      { lat: 35.68364653865813, lon: 139.77659390216465 },
+      { lat: 35.68383305655259, lon: 139.77644557472004 },
+      { lat: 35.68401654067267, lon: 139.7762916965362 },
+      { lat: 35.6841968803454, lon: 139.77613236006883 },
+      { lat: 35.684373966566234, lon: 139.77596766253234 },
+      { lat: 35.68454769255521, lon: 139.77579770114113 },
+      { lat: 35.68471795431311, lon: 139.77562257990783 },
+      { lat: 35.68488464895298, lon: 139.77544240420474 },
+      { lat: 35.68504767581246, lon: 139.77525728144354 },
+      { lat: 35.68520693700994, lon: 139.77506732379476 },
+      { lat: 35.685362336888346, lon: 139.77487264614814 },
+      { lat: 35.68551378145909, lon: 139.7746733654329 },
+      { lat: 35.685661178958135, lon: 139.77446960129757 },
+      { lat: 35.68580444151447, lon: 139.77426147678975 },
+      { lat: 35.68594348292552, lon: 139.77404911767638 },
+      { lat: 35.686078218101024, lon: 139.77383265108395 },
+      { lat: 35.68620856751214, lon: 139.77361220753815 },
+      { lat: 35.68633445163005, lon: 139.77338792028388 },
+      { lat: 35.68645579481895, lon: 139.77315992460558 },
+      { lat: 35.686572524223756, lon: 139.77292835714726 },
+      { lat: 35.68668456977013, lon: 139.77269335795208 },
+      { lat: 35.68679186305215, lon: 139.7724550680829 },
+      { lat: 35.68689434011308, lon: 139.77221363132188 },
+      { lat: 35.686991939220746, lon: 139.77196919315074 },
+      { lat: 35.68708460142372, lon: 139.77172190075078 },
+      { lat: 35.687172270551294, lon: 139.77147190300275 },
+      { lat: 35.687254894325775, lon: 139.77121935048706 },
+      { lat: 35.6873324232502, lon: 139.77096439582357 },
+      { lat: 35.68740480949605, lon: 139.77070719197198 },
+      { lat: 35.687472010796256, lon: 139.77044789393153 },
+      { lat: 35.68753398599605, lon: 139.77018665806105 },
+      { lat: 35.687590697277514, lon: 139.7699236419091 },
+      { lat: 35.68764211127192, lon: 139.76965900370402 },
+      { lat: 35.68768819683512, lon: 139.7693929026939 },
+      { lat: 35.68772892615982, lon: 139.76912549948648 },
+      { lat: 35.68776427477562, lon: 139.76885695485944 },
+      { lat: 35.68779422099283, lon: 139.76858743069522 },
+      { lat: 35.6878187470148, lon: 139.76831708938602 },
+      { lat: 35.687837838381746, lon: 139.768046093749 },
+      { lat: 35.68785148285846, lon: 139.76777460702627 },
+      { lat: 35.68785967321505, lon: 139.7675027927572 },
+      { lat: 35.687862403890065, lon: 139.76723081465127 },
+      { lat: 35.68785967321505, lon: 139.76695883654534 },
+      { lat: 35.68785148285846, lon: 139.76668702227627 },
+      { lat: 35.687837838381746, lon: 139.76641553555353 },
+      { lat: 35.6878187470148, lon: 139.76614453991652 },
+      { lat: 35.68779422099283, lon: 139.76587419860732 },
+      { lat: 35.68776427477562, lon: 139.7656046744431 },
+      { lat: 35.68772892615982, lon: 139.76533612981606 },
+      { lat: 35.68768819683512, lon: 139.76506872660863 },
+      { lat: 35.68764211127192, lon: 139.76480262559852 },
+      { lat: 35.687590697277514, lon: 139.76453798739345 },
+      { lat: 35.68753398599605, lon: 139.7642749712415 },
+      { lat: 35.687472010796256, lon: 139.764013735371 },
+      { lat: 35.68740480949605, lon: 139.76375443733056 },
+      { lat: 35.6873324232502, lon: 139.76349723347897 },
+      { lat: 35.687254894325775, lon: 139.76324227881548 },
+      { lat: 35.687172270551294, lon: 139.7629897262998 },
+      { lat: 35.68708460142372, lon: 139.76273972855176 },
+      { lat: 35.686991939220746, lon: 139.7624924361518 },
+      { lat: 35.68689434011308, lon: 139.76224799798067 },
+      { lat: 35.68679186305215, lon: 139.76200656121966 },
+      { lat: 35.68668456977013, lon: 139.76176827135046 },
+      { lat: 35.686572524223756, lon: 139.76153327215528 },
+      { lat: 35.68645579481895, lon: 139.76130170469696 },
+      { lat: 35.68633445163005, lon: 139.76107370901866 },
+      { lat: 35.68620856751214, lon: 139.7608494217644 },
+      { lat: 35.686078218101024, lon: 139.7606289782186 },
+      { lat: 35.68594348292552, lon: 139.76041251162616 },
+      { lat: 35.68580444151447, lon: 139.7602001525128 },
+      { lat: 35.685661178958135, lon: 139.75999202800497 },
+      { lat: 35.68551378145909, lon: 139.75978826386964 },
+      { lat: 35.685362336888346, lon: 139.7595889831544 },
+      { lat: 35.68520693700994, lon: 139.75939430550778 },
+      { lat: 35.68504767581246, lon: 139.759204347859 },
+      { lat: 35.68488464895298, lon: 139.7590192250978 },
+      { lat: 35.68471795431311, lon: 139.7588390493947 },
+      { lat: 35.68454769255521, lon: 139.7586639281614 },
+      { lat: 35.684373966566234, lon: 139.7584939667702 },
+      { lat: 35.6841968803454, lon: 139.7583292692337 },
+      { lat: 35.68401654067267, lon: 139.75816993276635 },
+      { lat: 35.68383305655259, lon: 139.7580160545825 },
+      { lat: 35.68364653865813, lon: 139.7578677271379 },
+      { lat: 35.683457098774575, lon: 139.75772503948903 },
+      { lat: 35.68326485146791, lon: 139.75758807729343 },
+      { lat: 35.68306991213836, lon: 139.75745692416902 },
+      { lat: 35.68287239841072, lon: 139.7573316582953 },
+      { lat: 35.682672429300155, lon: 139.75721235513234 },
+      { lat: 35.68247012521219, lon: 139.75709908674122 },
+      { lat: 35.68226560794272, lon: 139.75699192178385 },
+      { lat: 35.682059000678, lon: 139.75689092416343 },
+      { lat: 35.68185042827272, lon: 139.756796154384 },
+      { lat: 35.68164001585964, lon: 139.75670767091023 },
+      { lat: 35.68142789023998, lon: 139.7566255254085 },
+      { lat: 35.68121417932721, lon: 139.75654976818555 },
+      { lat: 35.6809990120081, lon: 139.75648044546924 },
+      { lat: 35.68078251772553, lon: 139.7564175980488 },
+      { lat: 35.680564826756616, lon: 139.75636126399425 },
+      { lat: 35.680346070490764, lon: 139.75631147729663 },
+      { lat: 35.68012638045641, lon: 139.75626826786808 },
+      { lat: 35.679905889085724, lon: 139.75623166222158 },
+      { lat: 35.679684729228, lon: 139.75620168211145 },
+      { lat: 35.67946303408012, lon: 139.75617834521304 },
+      { lat: 35.67924093718654, lon: 139.7561616664824 },
+      { lat: 35.67901857233505, lon: 139.7561516547572 },
+      { lat: 35.678796073452475, lon: 139.75614831683563 },
+    ],
+  },
   "models/Toranomon-city-model-complete.glb": {
     anchorWorld: { x: 329.03486571686847, z: 297.6612592554746 },
     anchorGeo: { lat: 35.665956391810354, lon: 139.74965341903732 },
@@ -387,39 +785,147 @@ export function wgs84ToWorld(entry, lat, lon) {
   return projectToWorld(entry, lat, lon);
 }
 
-function toEastNorth(entry, lat, lon) {
-  const lat0 = (entry.anchorGeo.lat * Math.PI) / 180;
-  return {
-    e: (lon - entry.anchorGeo.lon) * 111320 * Math.cos(lat0),
-    n: (lat - entry.anchorGeo.lat) * 110540,
-  };
+const EARTH_M = 6371000;
+
+function wrapDelta(degrees) {
+  let d = degrees;
+  while (d > 180) d -= 360;
+  while (d < -180) d += 360;
+  return d;
 }
 
-function closestOnSegment(point, a, b) {
-  const abe = b.e - a.e;
-  const abn = b.n - a.n;
-  const len2 = abe * abe + abn * abn;
-  let t = 0;
-  if (len2 > 0) {
-    t = ((point.e - a.e) * abe + (point.n - a.n) * abn) / len2;
-    if (t < 0) t = 0;
-    else if (t > 1) t = 1;
+function wrapLon(lon) {
+  let x = lon;
+  while (x > 180) x -= 360;
+  while (x < -180) x += 360;
+  return x;
+}
+
+function toRad(degrees) {
+  return (degrees * Math.PI) / 180;
+}
+
+function toDeg(radians) {
+  return (radians * 180) / Math.PI;
+}
+
+function sphereMeters(lat1, lon1, lat2, lon2) {
+  const p1 = toRad(lat1);
+  const p2 = toRad(lat2);
+  const dLat = toRad(lat2 - lat1);
+  const dLon = toRad(wrapDelta(lon2 - lon1));
+  const h = Math.sin(dLat / 2) ** 2
+    + Math.cos(p1) * Math.cos(p2) * Math.sin(dLon / 2) ** 2;
+  return 2 * EARTH_M * Math.asin(Math.min(1, Math.sqrt(h)));
+}
+
+// WGS84 inverse. Short coverage edges use the sphere; the reported
+// distance uses this ellipsoid length when it converges.
+function geodesicMeters(lat1, lon1, lat2, lon2) {
+  const a = 6378137;
+  const f = 1 / 298.257223563;
+  const b = (1 - f) * a;
+  const phi1 = toRad(lat1);
+  const phi2 = toRad(lat2);
+  const L = toRad(wrapDelta(lon2 - lon1));
+  const U1 = Math.atan((1 - f) * Math.tan(phi1));
+  const U2 = Math.atan((1 - f) * Math.tan(phi2));
+  const sinU1 = Math.sin(U1);
+  const cosU1 = Math.cos(U1);
+  const sinU2 = Math.sin(U2);
+  const cosU2 = Math.cos(U2);
+  let lambda = L;
+  let sinSigma = 0;
+  let cosSigma = 0;
+  let sigma = 0;
+  let sinAlpha = 0;
+  let cos2Alpha = 0;
+  let cos2SigmaM = 0;
+  let iter = 0;
+  for (; iter < 100; iter++) {
+    const sinLambda = Math.sin(lambda);
+    const cosLambda = Math.cos(lambda);
+    sinSigma = Math.sqrt(
+      (cosU2 * sinLambda) ** 2
+      + (cosU1 * sinU2 - sinU1 * cosU2 * cosLambda) ** 2
+    );
+    if (sinSigma === 0) return 0;
+    cosSigma = sinU1 * sinU2 + cosU1 * cosU2 * cosLambda;
+    sigma = Math.atan2(sinSigma, cosSigma);
+    sinAlpha = (cosU1 * cosU2 * sinLambda) / sinSigma;
+    cos2Alpha = 1 - sinAlpha ** 2;
+    cos2SigmaM = cos2Alpha === 0 ? 0 : cosSigma - (2 * sinU1 * sinU2) / cos2Alpha;
+    const C = (f / 16) * cos2Alpha * (2 + f * (4 - 3 * cos2Alpha));
+    const next = L + (1 - C) * f * sinAlpha * (
+      sigma + C * sinSigma * (cos2SigmaM + C * cosSigma * (-1 + 2 * cos2SigmaM ** 2))
+    );
+    if (Math.abs(next - lambda) < 1e-12) {
+      lambda = next;
+      break;
+    }
+    lambda = next;
   }
-  return { e: a.e + abe * t, n: a.n + abn * t };
+  if (iter >= 100) return sphereMeters(lat1, lon1, lat2, lon2);
+  const u2 = cos2Alpha * (a * a - b * b) / (b * b);
+  const A = 1 + (u2 / 16384) * (4096 + u2 * (-768 + u2 * (320 - 175 * u2)));
+  const B = (u2 / 1024) * (256 + u2 * (-128 + u2 * (74 - 47 * u2)));
+  const dSigma = B * sinSigma * (
+    cos2SigmaM + (B / 4) * (
+      cosSigma * (-1 + 2 * cos2SigmaM ** 2)
+      - (B / 6) * cos2SigmaM * (-3 + 4 * sinSigma ** 2) * (-3 + 4 * cos2SigmaM ** 2)
+    )
+  );
+  return b * A * (sigma - dSigma);
 }
 
-function segmentDistance(point, a, b) {
-  const hit = closestOnSegment(point, a, b);
-  return Math.hypot(point.e - hit.e, point.n - hit.n);
+function initialBearing(lat1, lon1, lat2, lon2) {
+  const p1 = toRad(lat1);
+  const p2 = toRad(lat2);
+  const dLon = toRad(wrapDelta(lon2 - lon1));
+  const y = Math.sin(dLon) * Math.cos(p2);
+  const x = Math.cos(p1) * Math.sin(p2) - Math.sin(p1) * Math.cos(p2) * Math.cos(dLon);
+  return Math.atan2(y, x);
 }
 
-function eastNorthToLatLon(entry, east, north) {
-  const lat0 = (entry.anchorGeo.lat * Math.PI) / 180;
-  const cos = Math.cos(lat0);
-  return {
-    lat: entry.anchorGeo.lat + north / 110540,
-    lon: entry.anchorGeo.lon + (cos === 0 ? 0 : east / (111320 * cos)),
-  };
+function destination(lat, lon, bearing, distanceM) {
+  const delta = distanceM / EARTH_M;
+  const theta = bearing;
+  const p1 = toRad(lat);
+  const l1 = toRad(lon);
+  const p2 = Math.asin(
+    Math.sin(p1) * Math.cos(delta) + Math.cos(p1) * Math.sin(delta) * Math.cos(theta)
+  );
+  const l2 = l1 + Math.atan2(
+    Math.sin(theta) * Math.sin(delta) * Math.cos(p1),
+    Math.cos(delta) - Math.sin(p1) * Math.sin(p2)
+  );
+  return { lat: toDeg(p2), lon: wrapLon(toDeg(l2)) };
+}
+
+// Closest point on one short great-circle segment. The query can be far
+// away. Only the returned point, which lies on the segment, is safe to
+// project with the local neighborhood conversion.
+function closestOnGeodesic(lat, lon, latA, lonA, latB, lonB) {
+  const span = sphereMeters(latA, lonA, latB, lonB);
+  const fromStart = sphereMeters(latA, lonA, lat, lon);
+  if (!(span > 0.05)) {
+    return { lat: latA, lon: lonA, distanceM: geodesicMeters(lat, lon, latA, lonA) };
+  }
+  const bearingPoint = initialBearing(latA, lonA, lat, lon);
+  const bearingSeg = initialBearing(latA, lonA, latB, lonB);
+  const delta13 = fromStart / EARTH_M;
+  const cross = Math.asin(Math.max(-1, Math.min(1, Math.sin(delta13) * Math.sin(bearingPoint - bearingSeg))));
+  const cosCross = Math.cos(cross);
+  let along = 0;
+  if (cosCross > 1e-12) {
+    const cosAlong = Math.max(-1, Math.min(1, Math.cos(delta13) / cosCross));
+    along = Math.acos(cosAlong) * EARTH_M;
+    if (Math.cos(bearingPoint - bearingSeg) < 0) along = -along;
+  }
+  if (along <= 0) return { lat: latA, lon: lonA, distanceM: geodesicMeters(lat, lon, latA, lonA) };
+  if (along >= span) return { lat: latB, lon: lonB, distanceM: geodesicMeters(lat, lon, latB, lonB) };
+  const hit = destination(latA, lonA, bearingSeg, along);
+  return { lat: hit.lat, lon: hit.lon, distanceM: geodesicMeters(lat, lon, hit.lat, hit.lon) };
 }
 
 function distanceToRing(entry, lat, lon, ring) {
@@ -427,23 +933,31 @@ function distanceToRing(entry, lat, lon, ring) {
   return nearest ? nearest.distanceM : Infinity;
 }
 
-// Closest point on the coverage ring itself (edges and vertices), measured
-// in local meters. This is the polygon perimeter, not a bounding box.
+// Closest point on the coverage ring, including the middle of an edge.
+// Distance is geodesic. This is not the model's bounding box.
 function nearestOnRing(entry, lat, lon, ring) {
-  const point = toEastNorth(entry, lat, lon);
   let best = null;
+  let second = null;
   for (let i = 0; i < ring.length; i++) {
-    const a = toEastNorth(entry, ring[i].lat, ring[i].lon);
-    const next = ring[(i + 1) % ring.length];
-    const b = toEastNorth(entry, next.lat, next.lon);
-    const hit = closestOnSegment(point, a, b);
-    const distanceM = Math.hypot(point.e - hit.e, point.n - hit.n);
-    if (!best || distanceM < best.distanceM) {
-      const geo = eastNorthToLatLon(entry, hit.e, hit.n);
-      best = { lat: geo.lat, lon: geo.lon, distanceM };
+    const a = ring[i];
+    const b = ring[(i + 1) % ring.length];
+    const hit = closestOnGeodesic(lat, lon, a.lat, a.lon, b.lat, b.lon);
+    if (!Number.isFinite(hit.distanceM)) continue;
+    if (!best || hit.distanceM < best.distanceM) {
+      second = best;
+      best = hit;
+    } else if (!second || hit.distanceM < second.distanceM) {
+      second = hit;
     }
   }
-  return best;
+  if (!best) return null;
+  let ambiguous = false;
+  if (second) {
+    const apart = sphereMeters(best.lat, best.lon, second.lat, second.lon);
+    const slack = Math.max(5, best.distanceM * 0.005);
+    ambiguous = apart > 20 && second.distanceM - best.distanceM <= slack;
+  }
+  return { lat: best.lat, lon: best.lon, distanceM: best.distanceM, ambiguous };
 }
 
 export function nearestPerimeter(entry, lat, lon) {
@@ -476,15 +990,15 @@ function pointInRing(lat, lon, ring) {
 
 // "inside": the whole accuracy circle is inside the polygon.
 // "outside": the whole circle is outside it.
-// "edge": the circle touches or crosses the boundary, or accuracy is
-// missing. A missing or overlapping circle is never called inside or outside.
+// "edge": the circle touches or crosses the boundary.
+// "unknown": accuracy is missing, so the point is not called inside or outside.
 export function classifyCoverage(entry, lat, lon, accuracyM) {
   const ring = entry && usableRing(entry.coverage);
   if (!ring || !entry.anchorGeo || !isLatLon(entry.anchorGeo) || !isNum(lat) || !isNum(lon)) return "outside";
+  const known = isNum(accuracyM) && accuracyM >= 0;
+  if (!known) return "unknown";
   const inside = pointInRing(lat, lon, ring);
   const distance = distanceToRing(entry, lat, lon, ring);
-  const known = isNum(accuracyM) && accuracyM >= 0;
-  if (!known) return "edge";
   if (distance > accuracyM) return inside ? "inside" : "outside";
   return "edge";
 }

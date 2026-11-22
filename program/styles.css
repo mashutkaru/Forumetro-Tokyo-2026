@@ -1252,6 +1252,28 @@ html.lang-he .city-viewer-distance {
   display: none;
 }
 
+.city-viewer-allow {
+  position: absolute;
+  z-index: 5;
+  left: 50%;
+  bottom: 56px;
+  transform: translateX(-50%);
+  min-height: 36px;
+  border: 0;
+  border-radius: 999px;
+  background: var(--navy);
+  color: #fff;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 700;
+  padding: 6px 14px;
+  cursor: pointer;
+}
+
+.city-viewer-allow[hidden] {
+  display: none;
+}
+
 .cal-panel {
   max-height: 46vh;
   overflow: auto;

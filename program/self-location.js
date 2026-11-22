@@ -4,7 +4,7 @@
 // The pulsing dot is updated from the viewer's existing render loop (tick).
 // This file does not start its own animation loop.
 
-import { MODEL_GEO, isCalibrated, markerReady, classifyCoverage, isInsideCoverage, nearestPerimeter, wgs84ToWorld } from "./model-geo.js?v=4";
+import { MODEL_GEO, isCalibrated, markerReady, classifyCoverage, isInsideCoverage, nearestPerimeter, wgs84ToWorld } from "./model-geo.js?v=7";
 
 const GEO_OPTIONS = Object.freeze({
   enableHighAccuracy: true,
@@ -12,7 +12,7 @@ const GEO_OPTIONS = Object.freeze({
   maximumAge: 5000,
 });
 
-const STALE_MS = 20000;
+const FRESH_MS = 60000;
 const DOT_PIXELS = 28;
 const MARKER_RED = "#d3122a";
 
@@ -28,44 +28,82 @@ const STATUS_COPY = {
     he: "המיקום שלך נמצא בתוך אזור המודל",
   },
   outside: {
-    en: "You are {d} from this model",
-    ja: "このモデルの範囲まで{d}",
-    he: "המרחק שלך מגבול המודל הוא {d}",
+    en: "Outside model · {d} to model edge",
+    ja: "モデルの外 · 端まで{d}",
+    he: "מחוץ למודל · {d} עד קצה המודל",
+  },
+  outsideAbout: {
+    en: "Outside model · about {d} to model edge",
+    ja: "モデルの外 · 端までおよそ{d}",
+    he: "מחוץ למודל · בערך {d} עד קצה המודל",
+  },
+  outsideUnknown: {
+    en: "Outside model · distance approximate",
+    ja: "モデルの外 · 距離は概算です",
+    he: "מחוץ למודל · המרחק משוער",
   },
   edge: {
-    en: "Near the model boundary — GPS accuracy is limited",
-    ja: "モデルの境界付近です — GPSの精度に制限があります",
-    he: "בקרבת גבול המודל — דיוק המיקום מוגבל",
+    en: "Near model edge · location approximate",
+    ja: "モデルの端の近く · 位置は概算です",
+    he: "ליד קצה המודל · המיקום משוער",
+  },
+  unknown: {
+    en: "Location approximate · accuracy unavailable",
+    ja: "位置は概算です · 精度がありません",
+    he: "המיקום משוער · דיוק לא זמין",
   },
   uncalibrated: {
-    en: "Location is not calibrated for this area yet.",
-    ja: "このエリアの現在地はまだ調整されていません。",
-    he: "המיקום עדיין לא מכויל לאזור הזה.",
+    en: "Location not calibrated for this model",
+    ja: "このモデルの現在地はまだ調整されていません",
+    he: "המיקום לא מכויל למודל הזה",
   },
   denied: {
-    en: "Location is blocked. Allow location for this site in your browser settings.",
-    ja: "位置情報が拒否されています。ブラウザの設定でこのサイトの位置情報を許可してください。",
-    he: "הגישה למיקום חסומה. אפשרו מיקום לאתר זה בהגדרות הדפדפן.",
+    en: "Location is blocked. Allow it for this site in your browser settings.",
+    ja: "位置情報が拒否されています。ブラウザの設定でこのサイトを許可してください。",
+    he: "הגישה למיקום חסומה. אפשרו אותה לאתר זה בהגדרות הדפדפן.",
   },
   unavailable: {
-    en: "Your position is unavailable or took too long. Try again outdoors.",
-    ja: "現在地を取得できないか、時間がかかりすぎました。屋外でもう一度お試しください。",
-    he: "המיקום לא זמין, או שהאיתור ארך יותר מדי. נסו שוב בחוץ.",
+    en: "Your position is unavailable.",
+    ja: "現在地を取得できません。",
+    he: "המיקום לא זמין.",
+  },
+  timeout: {
+    en: "Location took too long.",
+    ja: "現在地の取得に時間がかかりすぎました。",
+    he: "איתור המיקום ארך יותר מדי.",
+  },
+  insecure: {
+    en: "Location needs a secure page.",
+    ja: "現在地には保護されたページが必要です。",
+    he: "המיקום זמין רק בדף מאובטח.",
   },
   gesture: {
-    en: "Tap the model once to allow your location.",
-    ja: "モデルを一度タップすると、現在地を許可できます。",
-    he: "לחצו פעם אחת על המודל כדי לאפשר את המיקום.",
+    en: "Tap Allow location. The browser will then ask.",
+    ja: "「位置情報を許可」を押すと、ブラウザが確認します。",
+    he: "לחצו על אפשר מיקום. הדפדפן יבקש אישור.",
   },
   stale: {
-    en: "Last location update was {n} seconds ago.",
-    ja: "前回の現在地更新は{n}秒前です。",
-    he: "עדכון המיקום האחרון היה לפני {n} שניות.",
+    en: "Location out of date",
+    ja: "現在地の情報が古くなっています",
+    he: "המיקום אינו עדכני",
   },
   unsupported: {
     en: "This browser cannot share your location.",
     ja: "このブラウザでは現在地を使えません。",
     he: "הדפדפן הזה לא יכול לשתף את המיקום.",
+  },
+};
+
+const ACTION_COPY = {
+  allow: {
+    en: "Allow location",
+    ja: "位置情報を許可",
+    he: "אפשר מיקום",
+  },
+  retry: {
+    en: "Retry",
+    ja: "再試行",
+    he: "נסו שוב",
   },
 };
 
@@ -80,16 +118,23 @@ function fill(text, vars) {
   return text.replace(/\{(\w+)\}/g, (match, key) => (vars[key] == null ? match : String(vars[key])));
 }
 
-function formatDistance(meters, lang) {
+function formatDistance(meters, lang, precise) {
   const value = Math.max(0, meters);
-  if (value >= 1000) {
-    const km = (Math.round(value / 100) / 10).toFixed(1);
-    if (lang === "he") return km + " ק״מ";
-    return km + " km";
+  let text;
+  if (!precise) {
+    if (value >= 100000) text = String(Math.round(value / 1000));
+    else if (value >= 1000) text = (Math.round(value / 100) / 10).toFixed(1);
+    else text = String(Math.max(10, Math.round(value / 10) * 10));
+  } else if (value >= 100000) {
+    text = String(Math.round(value / 1000));
+  } else if (value >= 1000) {
+    text = (Math.round(value / 100) / 10).toFixed(1);
+  } else {
+    text = String(Math.round(value));
   }
-  const whole = String(Math.round(value));
-  if (lang === "he") return whole + " מ׳";
-  return whole + " m";
+  const km = value >= 1000;
+  if (km) return lang === "he" ? text + " ק״מ" : text + " km";
+  return lang === "he" ? text + " מ׳" : text + " m";
 }
 
 export function createSelfLocation({
@@ -99,6 +144,7 @@ export function createSelfLocation({
   stage,
   statusEl,
   distanceEl,
+  allowBtn,
   requestRender,
   getModelRoot,
   boundsOf,
@@ -114,15 +160,16 @@ export function createSelfLocation({
   let viewerActive = false;
   let meshReady = false;
   let tracking = false;
-  let waitingForGesture = false;
   let session = 0;
   let watchId = null;
   let lastFix = null;
-  let shownAge = -1;
+  let staleShown = false;
   let group = null;
   let dot = null;
   let ring = null;
-  let dimmed = false;
+  let hereMap = null;
+  let edgeMap = null;
+  let freshTimer = 0;
 
   function paint(el, pack, vars) {
     el.dataset.en = fill(pack.en, vars);
@@ -134,6 +181,8 @@ export function createSelfLocation({
   function setStatus(key, vars) {
     const pack = STATUS_COPY[key];
     if (!pack) return;
+    const next = fill(pack[pageLang()] || pack.en, vars);
+    if (!statusEl.hidden && statusEl.dataset.state === key && statusEl.textContent === next) return;
     statusEl.dataset.state = key;
     paint(statusEl, pack, vars);
     statusEl.hidden = false;
@@ -157,15 +206,40 @@ export function createSelfLocation({
     delete distanceEl.dataset.he;
   }
 
-  function setDistance(meters) {
+  function showAction(mode) {
+    if (!allowBtn) return;
+    const label = allowBtn.querySelector("span");
+    if (!mode) {
+      allowBtn.hidden = true;
+      delete allowBtn.dataset.mode;
+      return;
+    }
+    paint(label, ACTION_COPY[mode] || ACTION_COPY.allow);
+    allowBtn.dataset.mode = mode;
+    allowBtn.hidden = false;
+  }
+
+  function setDistance(meters, approximate) {
     if (!distanceEl) return;
-    paint(distanceEl, STATUS_COPY.outside, {
-      d: formatDistance(meters, "en"),
-    });
-    distanceEl.dataset.ja = fill(STATUS_COPY.outside.ja, { d: formatDistance(meters, "ja") });
-    distanceEl.dataset.he = fill(STATUS_COPY.outside.he, { d: formatDistance(meters, "he") });
-    distanceEl.dataset.en = fill(STATUS_COPY.outside.en, { d: formatDistance(meters, "en") });
+    const pack = approximate ? STATUS_COPY.outsideAbout : STATUS_COPY.outside;
+    const vars = {
+      d: formatDistance(meters, pageLang(), !approximate),
+    };
+    const next = fill(pack[pageLang()] || pack.en, vars);
+    if (!distanceEl.hidden && distanceEl.textContent === next) return;
+    distanceEl.dataset.en = fill(pack.en, { d: formatDistance(meters, "en", !approximate) });
+    distanceEl.dataset.ja = fill(pack.ja, { d: formatDistance(meters, "ja", !approximate) });
+    distanceEl.dataset.he = fill(pack.he, { d: formatDistance(meters, "he", !approximate) });
     distanceEl.textContent = distanceEl.dataset[pageLang()] || distanceEl.dataset.en;
+    distanceEl.hidden = false;
+  }
+
+  function setOutsideUnknown() {
+    if (!distanceEl) return;
+    const pack = STATUS_COPY.outsideUnknown;
+    const next = pack[pageLang()] || pack.en;
+    if (!distanceEl.hidden && distanceEl.textContent === next) return;
+    paint(distanceEl, pack);
     distanceEl.hidden = false;
   }
 
@@ -188,30 +262,56 @@ export function createSelfLocation({
     group = null;
     dot = null;
     ring = null;
-    dimmed = false;
+    hereMap = null;
+    edgeMap = null;
+  }
+
+  function makeMap(draw) {
+    const canvas = document.createElement("canvas");
+    canvas.width = 128;
+    canvas.height = 128;
+    draw(canvas.getContext("2d"));
+    const texture = new THREE.CanvasTexture(canvas);
+    if (THREE.SRGBColorSpace) texture.colorSpace = THREE.SRGBColorSpace;
+    texture.needsUpdate = true;
+    return texture;
   }
 
   function ensureMarker() {
     if (group) return;
-    const canvas = document.createElement("canvas");
-    canvas.width = 128;
-    canvas.height = 128;
-    const ctx = canvas.getContext("2d");
-    ctx.clearRect(0, 0, 128, 128);
-    ctx.beginPath();
-    ctx.arc(64, 64, 40, 0, Math.PI * 2);
-    ctx.fillStyle = "#ffffff";
-    ctx.fill();
-    ctx.beginPath();
-    ctx.arc(64, 64, 26, 0, Math.PI * 2);
-    ctx.fillStyle = MARKER_RED;
-    ctx.fill();
-    const texture = new THREE.CanvasTexture(canvas);
-    if (THREE.SRGBColorSpace) texture.colorSpace = THREE.SRGBColorSpace;
-    texture.needsUpdate = true;
+    hereMap = makeMap((ctx) => {
+      ctx.clearRect(0, 0, 128, 128);
+      ctx.beginPath();
+      ctx.arc(64, 64, 40, 0, Math.PI * 2);
+      ctx.fillStyle = "#ffffff";
+      ctx.fill();
+      ctx.beginPath();
+      ctx.arc(64, 64, 26, 0, Math.PI * 2);
+      ctx.fillStyle = MARKER_RED;
+      ctx.fill();
+    });
+    edgeMap = makeMap((ctx) => {
+      ctx.clearRect(0, 0, 128, 128);
+      ctx.beginPath();
+      ctx.moveTo(64, 12);
+      ctx.lineTo(116, 64);
+      ctx.lineTo(64, 116);
+      ctx.lineTo(12, 64);
+      ctx.closePath();
+      ctx.fillStyle = "#ffffff";
+      ctx.fill();
+      ctx.beginPath();
+      ctx.moveTo(64, 30);
+      ctx.lineTo(98, 64);
+      ctx.lineTo(64, 98);
+      ctx.lineTo(30, 64);
+      ctx.closePath();
+      ctx.fillStyle = MARKER_RED;
+      ctx.fill();
+    });
 
     dot = new THREE.Sprite(new THREE.SpriteMaterial({
-      map: texture,
+      map: hereMap,
       transparent: true,
       depthTest: false,
       depthWrite: false,
@@ -265,38 +365,27 @@ export function createSelfLocation({
     return y;
   }
 
-  function undim() {
-    dimmed = false;
-    if (!dot) return;
-    dot.material.opacity = 1;
-    ring.material.opacity = 0.4;
-  }
-
-  function dimMarker() {
-    if (!dot) return;
-    dimmed = true;
-    dot.material.opacity = 0.35;
-    ring.material.opacity = 0.15;
-  }
-
-  function place(world, accuracyM, metersPerUnit, dimmedMark) {
+  function place(world, accuracyM, metersPerUnit, kind) {
     const y = groundY(world.x, world.z);
     if (y == null) return false;
     ensureMarker();
     const lift = 0.4 / metersPerUnit;
     group.position.set(world.x, y + lift, world.z);
-    const radius = typeof accuracyM === "number" && Number.isFinite(accuracyM) && accuracyM > 0
+    const edge = kind === "edge";
+    dot.material.map = edge ? edgeMap : hereMap;
+    dot.material.opacity = 1;
+    dot.material.needsUpdate = true;
+    const radius = !edge && typeof accuracyM === "number" && Number.isFinite(accuracyM) && accuracyM > 0
       ? accuracyM / metersPerUnit
       : 0;
     ring.visible = radius > 0;
+    ring.material.opacity = 0.4;
     if (radius > 0) ring.scale.set(radius, radius, radius);
     dot.position.set(0, 0.8 / metersPerUnit, 0);
-    if (dimmedMark) dimMarker();
-    else undim();
     return true;
   }
 
-  function showModelState() {
+  function modelIsReady() {
     const ready = markerReady(currentEntry, currentNorth);
     if (currentKey && isCalibrated(currentEntry) && !ready && !warned.has(currentKey)) {
       warned.add(currentKey);
@@ -306,74 +395,112 @@ export function createSelfLocation({
         + "). That rotation is applied once, inside the coordinate conversion."
       );
     }
-    hideDistance();
-    if (ready) hideStatus();
-    else {
-      dropMarker();
-      setStatus("uncalibrated");
-    }
     return ready;
   }
 
-  function clearGestureWait() {
-    if (!waitingForGesture) return;
-    waitingForGesture = false;
-    stage.removeEventListener("pointerdown", onGesture, true);
+  function fixAge(fix) {
+    if (!fix || !Number.isFinite(fix.time)) return Infinity;
+    return Date.now() - fix.time;
   }
 
-  function waitForGesture() {
+  function knownAccuracy(value) {
+    return typeof value === "number" && Number.isFinite(value) && value >= 0;
+  }
+
+  function stopWatch() {
+    session += 1;
     tracking = false;
     if (watchId != null && navigator.geolocation && typeof navigator.geolocation.clearWatch === "function") {
       navigator.geolocation.clearWatch(watchId);
     }
     watchId = null;
-    document.removeEventListener("visibilitychange", onVisible);
-    session += 1;
-    if (waitingForGesture) return;
-    waitingForGesture = true;
-    setStatus("gesture");
-    stage.addEventListener("pointerdown", onGesture, true);
   }
 
-  function onGesture() {
-    clearGestureWait();
-    beginWatch(true);
-  }
-
-  function stopTracking() {
-    session += 1;
-    tracking = false;
+  function forgetFix() {
     lastFix = null;
-    shownAge = -1;
-    if (watchId != null && navigator.geolocation && typeof navigator.geolocation.clearWatch === "function") {
-      navigator.geolocation.clearWatch(watchId);
-    }
-    watchId = null;
-    clearGestureWait();
-    document.removeEventListener("visibilitychange", onVisible);
+    staleShown = false;
     dropMarker();
     hideDistance();
+    showAction(null);
     requestRender();
   }
 
+  function noteStale() {
+    if (staleShown) return;
+    staleShown = true;
+    dropMarker();
+    hideDistance();
+    setStatus("stale");
+    requestRender();
+  }
+
+  function ensureFreshTimer() {
+    if (freshTimer) return;
+    freshTimer = window.setInterval(() => {
+      if (!tracking || !lastFix || document.hidden) return;
+      if (fixAge(lastFix) < FRESH_MS) return;
+      noteStale();
+    }, 1000);
+  }
+
   function beginWatch(fromGesture) {
-    if (!viewerActive || !meshReady) return;
-    if (!showModelState()) return;
-    if (tracking) {
-      if (lastFix) applyFix();
+    if (!viewerActive || !meshReady || document.hidden) return;
+    if (!modelIsReady()) {
+      stopWatch();
+      dropMarker();
+      hideDistance();
+      setStatus("uncalibrated");
+      showAction(null);
+      return;
+    }
+    if (!window.isSecureContext) {
+      stopWatch();
+      forgetFix();
+      setStatus("insecure");
       return;
     }
     if (!navigator.geolocation || typeof navigator.geolocation.watchPosition !== "function") {
       setStatus("unsupported");
+      showAction(null);
       return;
     }
-    clearGestureWait();
+    if (fromGesture) {
+      startWatch(true);
+      return;
+    }
+    if (!navigator.permissions || typeof navigator.permissions.query !== "function") {
+      startWatch(false);
+      return;
+    }
+    navigator.permissions.query({ name: "geolocation" }).then((status) => {
+      if (!viewerActive || !meshReady || document.hidden) return;
+      if (status && status.state === "denied") {
+        stopWatch();
+        dropMarker();
+        hideDistance();
+        setStatus("denied");
+        showAction(null);
+        return;
+      }
+      startWatch(false);
+    }).catch(() => {
+      startWatch(false);
+    });
+  }
+
+  function startWatch(fromGesture) {
+    if (watchId != null) {
+      if (lastFix) applyFix();
+      return;
+    }
+    showAction(null);
     tracking = true;
+    ensureFreshTimer();
     session += 1;
     const token = session;
     const gestured = Boolean(fromGesture);
-    setStatus("locating");
-    document.addEventListener("visibilitychange", onVisible);
+    if (lastFix) applyFix();
+    else setStatus("locating");
     try {
       watchId = navigator.geolocation.watchPosition(
         (position) => {
@@ -389,54 +516,71 @@ export function createSelfLocation({
     }
   }
 
-  function onVisible() {
-    if (document.visibilityState !== "visible" || !tracking) return;
-    if (!navigator.geolocation || typeof navigator.geolocation.getCurrentPosition !== "function") return;
-    const token = session;
-    navigator.geolocation.getCurrentPosition(
-      (position) => {
-        if (token === session) onFix(position);
-      },
-      (error) => {
-        if (token === session) onError(error);
-      },
-      GEO_OPTIONS
-    );
+  function onVisibility() {
+    if (document.visibilityState === "hidden") {
+      stopWatch();
+      dropMarker();
+      hideDistance();
+      requestRender();
+      return;
+    }
+    if (!viewerActive || !meshReady) return;
+    if (lastFix && fixAge(lastFix) >= FRESH_MS) noteStale();
+    beginWatch(false);
+  }
+
+  function placePerimeter(nearest, metersPerUnit) {
+    const world = nearest && wgs84ToWorld(currentEntry, nearest.lat, nearest.lon);
+    if (!world || !place(world, 0, metersPerUnit, "edge")) {
+      dropMarker();
+      return false;
+    }
+    return true;
   }
 
   function applyFix() {
-    if (!tracking || !lastFix) return;
-    if (!markerReady(currentEntry, currentNorth)) {
+    if (!meshReady || !viewerActive || document.hidden || !lastFix) return;
+    if (!modelIsReady()) {
       dropMarker();
       hideDistance();
       setStatus("uncalibrated");
       requestRender();
       return;
     }
+    if (fixAge(lastFix) >= FRESH_MS) {
+      noteStale();
+      return;
+    }
+    staleShown = false;
     const kind = classifyCoverage(currentEntry, lastFix.lat, lastFix.lon, lastFix.accuracy);
     const nearest = nearestPerimeter(currentEntry, lastFix.lat, lastFix.lon);
     const metersPerUnit = currentEntry.metersPerUnit;
+    const rawInside = isInsideCoverage(currentEntry, lastFix.lat, lastFix.lon);
     hideDistance();
-    if (kind === "outside") {
-      const world = nearest && wgs84ToWorld(currentEntry, nearest.lat, nearest.lon);
-      if (!world || !place(world, 0, metersPerUnit, false)) {
-        dropMarker();
+    showAction(null);
+    if (kind === "outside" || (kind === "unknown" && !rawInside)) {
+      if (!placePerimeter(nearest, metersPerUnit)) {
         setStatus("locating");
         return;
       }
       hideStatus();
-      setDistance(nearest.distanceM);
+      if (kind === "unknown" || !nearest || !Number.isFinite(nearest.distanceM)) setOutsideUnknown();
+      else {
+        const uncertain = nearest.ambiguous
+          || (knownAccuracy(lastFix.accuracy) && lastFix.accuracy > Math.max(50, nearest.distanceM * 0.2));
+        setDistance(nearest.distanceM, uncertain);
+      }
       requestRender();
       return;
     }
     if (kind === "edge") {
-      const rawInside = isInsideCoverage(currentEntry, lastFix.lat, lastFix.lon);
       const target = rawInside || !nearest
         ? { lat: lastFix.lat, lon: lastFix.lon }
         : nearest;
       const world = wgs84ToWorld(currentEntry, target.lat, target.lon);
       const ringMeters = rawInside ? lastFix.accuracy : 0;
-      if (!world || !place(world, ringMeters, metersPerUnit, true)) {
+      const markerKind = rawInside ? "here" : "edge";
+      if (!world || !place(world, ringMeters, metersPerUnit, markerKind)) {
         dropMarker();
         setStatus("edge");
         requestRender();
@@ -446,8 +590,20 @@ export function createSelfLocation({
       requestRender();
       return;
     }
+    if (kind === "unknown") {
+      const world = wgs84ToWorld(currentEntry, lastFix.lat, lastFix.lon);
+      if (!world || !place(world, 0, metersPerUnit, "here")) {
+        dropMarker();
+        setStatus("unknown");
+        requestRender();
+        return;
+      }
+      setStatus("unknown");
+      requestRender();
+      return;
+    }
     const world = wgs84ToWorld(currentEntry, lastFix.lat, lastFix.lon);
-    if (!world || !place(world, lastFix.accuracy, metersPerUnit, false)) {
+    if (!world || !place(world, lastFix.accuracy, metersPerUnit, "here")) {
       dropMarker();
       setStatus("locating");
       return;
@@ -458,61 +614,94 @@ export function createSelfLocation({
 
   function onFix(position) {
     const coords = position && position.coords;
-    if (!coords || !Number.isFinite(coords.latitude) || !Number.isFinite(coords.longitude)) {
-      if (!lastFix) setStatus("unavailable");
+    const stamp = position && position.timestamp;
+    const latOk = coords && Number.isFinite(coords.latitude) && coords.latitude >= -90 && coords.latitude <= 90;
+    const lonOk = coords && Number.isFinite(coords.longitude) && coords.longitude >= -180 && coords.longitude <= 180;
+    if (!latOk || !lonOk || !Number.isFinite(stamp)) {
+      if (!lastFix) {
+        dropMarker();
+        setStatus("unavailable");
+        showAction("retry");
+      }
       return;
     }
+    if (lastFix && stamp < lastFix.time) return;
+    if (stamp > Date.now() + 60000) return;
     lastFix = {
       lat: coords.latitude,
       lon: coords.longitude,
-      accuracy: coords.accuracy,
-      time: Date.now(),
+      accuracy: knownAccuracy(coords.accuracy) ? coords.accuracy : null,
+      time: stamp,
     };
-    shownAge = -1;
+    staleShown = false;
     applyFix();
   }
 
   function onError(error, fromGesture) {
     const code = error && error.code;
+    const fresh = lastFix && fixAge(lastFix) < FRESH_MS;
     if (code === 1) {
+      stopWatch();
       if (!fromGesture) {
-        waitForGesture();
+        dropMarker();
+        hideDistance();
+        setStatus("gesture");
+        showAction("allow");
         return;
       }
-      stopTracking();
+      dropMarker();
+      hideDistance();
       setStatus("denied");
+      showAction(null);
       return;
     }
-    if (!lastFix) setStatus("unavailable");
+    if (fresh) return;
+    dropMarker();
+    hideDistance();
+    setStatus(code === 3 ? "timeout" : "unavailable");
+    showAction("retry");
   }
 
   function tick() {
-    if (dot && group && camera) {
-      const height = Math.max(stage.clientHeight || 1, 1);
-      const dist = Math.max(camera.position.distanceTo(group.position), 0.5);
-      const worldH = 2 * Math.tan((camera.fov * Math.PI) / 360) * dist;
-      const pulse = dimmed ? 1 : 1 + 0.12 * Math.sin(performance.now() * 0.005);
-      const size = worldH * (DOT_PIXELS / height) * pulse;
-      dot.scale.set(size, size, 1);
-    }
-    if (!tracking || !lastFix) return;
-    const ageMs = Date.now() - lastFix.time;
-    if (ageMs < STALE_MS) return;
-    if (dot) dimMarker();
-    const seconds = Math.floor(ageMs / 1000);
-    if (seconds === shownAge) return;
-    shownAge = seconds;
-    setStatus("stale", { n: String(seconds) });
+    if (!dot || !group || !camera) return;
+    const height = Math.max(stage.clientHeight || 1, 1);
+    const dist = Math.max(camera.position.distanceTo(group.position), 0.5);
+    const worldH = 2 * Math.tan((camera.fov * Math.PI) / 360) * dist;
+    const edge = dot.material.map === edgeMap;
+    const pulse = edge ? 1 : 1 + 0.12 * Math.sin(performance.now() * 0.005);
+    const size = worldH * (DOT_PIXELS / height) * pulse;
+    dot.scale.set(size, size, 1);
   }
+
+  if (allowBtn) {
+    allowBtn.addEventListener("click", () => {
+      showAction(null);
+      beginWatch(true);
+    });
+  }
+  document.addEventListener("visibilitychange", onVisibility);
+  window.addEventListener("pagehide", () => {
+    viewerActive = false;
+    stopWatch();
+    forgetFix();
+    hideStatus();
+  });
 
   return {
     bindModel(key, verifiedNorth) {
-      stopTracking();
+      dropMarker();
+      hideDistance();
+      showAction(null);
       meshReady = false;
       currentKey = key || null;
       currentEntry = key && Object.prototype.hasOwnProperty.call(MODEL_GEO, key) ? MODEL_GEO[key] : null;
       currentNorth = typeof verifiedNorth === "number" && Number.isFinite(verifiedNorth) ? verifiedNorth : null;
-      showModelState();
+      if (!modelIsReady()) {
+        stopWatch();
+        setStatus("uncalibrated");
+        return;
+      }
+      hideStatus();
     },
     dropMarker,
     reapply() {
@@ -521,12 +710,14 @@ export function createSelfLocation({
     },
     noteFailed() {
       meshReady = false;
-      stopTracking();
+      stopWatch();
+      forgetFix();
       hideStatus();
     },
     deactivate() {
       viewerActive = false;
-      stopTracking();
+      stopWatch();
+      forgetFix();
       hideStatus();
     },
     resumeIdle() {
@@ -534,6 +725,7 @@ export function createSelfLocation({
       if (!currentKey) {
         hideStatus();
         hideDistance();
+        showAction(null);
         return;
       }
       beginWatch(false);

@@ -3,7 +3,7 @@ import { OrbitControls } from "three/addons/controls/OrbitControls.js";
 import { RoomEnvironment } from "three/addons/environments/RoomEnvironment.js";
 import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
 import { createForumetroCompass } from "./forumetro-compass.js?v=1";
-import { createSelfLocation } from "./self-location.js?v=5";
+import { createSelfLocation } from "./self-location.js?v=8";
 
 // Geographic north, clockwise from world -Z toward +X.
 // Keys are the model path without the ?v= suffix.
@@ -83,6 +83,9 @@ function create(mount) {
       </div>
       <p class="city-viewer-distance" aria-live="polite" hidden></p>
       <p class="city-viewer-geo" role="status" aria-live="polite" hidden></p>
+      <button type="button" class="city-viewer-allow" hidden>
+        <span data-en="Allow location" data-ja="位置情報を許可" data-he="אפשר מיקום">Allow location</span>
+      </button>
     </div>
     <div class="city-viewer-toolbar">
       <button type="button" data-action="reset"><span data-en="Reset view" data-ja="表示を戻す" data-he="איפוס תצוגה">Reset view</span></button>
@@ -182,6 +185,7 @@ function create(mount) {
     stage,
     statusEl: root.querySelector(".city-viewer-geo"),
     distanceEl: root.querySelector(".city-viewer-distance"),
+    allowBtn: root.querySelector(".city-viewer-allow"),
     requestRender: kick,
     getModelRoot: () => modelRoot,
     boundsOf,
