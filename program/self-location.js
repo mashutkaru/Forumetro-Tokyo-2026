@@ -4,7 +4,7 @@
 // The pulsing dot is updated from the viewer's existing render loop (tick).
 // This file does not start its own animation loop.
 
-import { MODEL_GEO, isCalibrated, markerReady, classifyCoverage, isInsideCoverage, nearestPerimeter, wgs84ToWorld } from "./model-geo.js?v=7";
+import { MODEL_GEO, isCalibrated, markerReady, classifyCoverage, isInsideCoverage, nearestPerimeter, wgs84ToWorld } from "./model-geo.js?v=8";
 
 const GEO_OPTIONS = Object.freeze({
   enableHighAccuracy: true,
@@ -169,7 +169,9 @@ export function createSelfLocation({
   let ring = null;
   let hereMap = null;
   let edgeMap = null;
+  let edgeRim = null;
   let freshTimer = 0;
+  const ndc = new THREE.Vector3();
 
   function paint(el, pack, vars) {
     el.dataset.en = fill(pack.en, vars);
@@ -264,6 +266,7 @@ export function createSelfLocation({
     ring = null;
     hereMap = null;
     edgeMap = null;
+    edgeRim = null;
   }
 
   function makeMap(draw) {
@@ -370,8 +373,21 @@ export function createSelfLocation({
     if (y == null) return false;
     ensureMarker();
     const lift = 0.4 / metersPerUnit;
-    group.position.set(world.x, y + lift, world.z);
     const edge = kind === "edge";
+    edgeRim = null;
+    if (edge) {
+      const box = boundsOf(getModelRoot());
+      const yTop = y + lift;
+      edgeRim = {
+        x: world.x,
+        z: world.z,
+        yTop,
+        yBot: box && !box.isEmpty() ? box.min.y + lift : yTop,
+        cx: box && !box.isEmpty() ? (box.min.x + box.max.x) / 2 : world.x,
+        cz: box && !box.isEmpty() ? (box.min.z + box.max.z) / 2 : world.z,
+      };
+    }
+    group.position.set(world.x, edge ? edgeRim.yTop : y + lift, world.z);
     dot.material.map = edge ? edgeMap : hereMap;
     dot.material.opacity = 1;
     dot.material.needsUpdate = true;
@@ -662,14 +678,47 @@ export function createSelfLocation({
     showAction("retry");
   }
 
+  function projectNdc(x, y, z) {
+    ndc.set(x, y, z);
+    ndc.project(camera);
+    return { x: ndc.x, y: ndc.y };
+  }
+
+  // The gray base is a vertical wall at the same ground edge. On the near
+  // side its bottom is the outline you see; on the far side the top is.
+  function outerRimY() {
+    if (!edgeRim) return null;
+    const center = projectNdc(edgeRim.cx, edgeRim.yTop, edgeRim.cz);
+    const top = projectNdc(edgeRim.x, edgeRim.yTop, edgeRim.z);
+    const bottom = projectNdc(edgeRim.x, edgeRim.yBot, edgeRim.z);
+    const points = [center, top, bottom];
+    if (points.some((point) => !Number.isFinite(point.x) || !Number.isFinite(point.y))) return edgeRim.yTop;
+    const fromCenter = (point) => (point.x - center.x) ** 2 + (point.y - center.y) ** 2;
+    return fromCenter(bottom) > fromCenter(top) ? edgeRim.yBot : edgeRim.yTop;
+  }
+
   function tick() {
     if (!dot || !group || !camera) return;
+    if (edgeRim) {
+      const y = outerRimY();
+      if (y != null) group.position.y = y;
+    }
     const height = Math.max(stage.clientHeight || 1, 1);
     const dist = Math.max(camera.position.distanceTo(group.position), 0.5);
     const worldH = 2 * Math.tan((camera.fov * Math.PI) / 360) * dist;
     const edge = dot.material.map === edgeMap;
     const pulse = edge ? 1 : 1 + 0.12 * Math.sin(performance.now() * 0.005);
     const size = worldH * (DOT_PIXELS / height) * pulse;
+    const lift = currentEntry && currentEntry.metersPerUnit > 0 ? 0.8 / currentEntry.metersPerUnit : 0.8;
+    if (edge && edgeRim) {
+      const ox = edgeRim.x - edgeRim.cx;
+      const oz = edgeRim.z - edgeRim.cz;
+      const len = Math.hypot(ox, oz) || 1;
+      const out = size * 0.5;
+      dot.position.set((ox / len) * out, lift, (oz / len) * out);
+    } else {
+      dot.position.set(0, lift, 0);
+    }
     dot.scale.set(size, size, 1);
   }
 

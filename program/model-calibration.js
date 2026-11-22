@@ -1,4 +1,4 @@
-import { projectToWorld } from "./model-geo.js?v=7";
+import { projectToWorld } from "./model-geo.js?v=8";
 import {
   solvePair,
   smallestAngleDelta,
