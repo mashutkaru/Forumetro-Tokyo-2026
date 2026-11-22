@@ -3,7 +3,7 @@ import { OrbitControls } from "three/addons/controls/OrbitControls.js";
 import { RoomEnvironment } from "three/addons/environments/RoomEnvironment.js";
 import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
 import { createForumetroCompass } from "./forumetro-compass.js?v=1";
-import { createSelfLocation } from "./self-location.js?v=3";
+import { createSelfLocation } from "./self-location.js?v=5";
 
 // Geographic north, clockwise from world -Z toward +X.
 // Keys are the model path without the ?v= suffix.
@@ -89,7 +89,6 @@ function create(mount) {
       <button type="button" data-action="in"><span data-en="Zoom in" data-ja="拡大" data-he="התקרבות">Zoom in</span></button>
       <button type="button" data-action="out"><span data-en="Zoom out" data-ja="縮小" data-he="התרחקות">Zoom out</span></button>
       <button type="button" data-action="full"><span data-en="Fullscreen" data-ja="全画面" data-he="מסך מלא">Fullscreen</span></button>
-      <button type="button" data-action="locate" disabled aria-disabled="true" aria-pressed="false"><span data-en="Show my location" data-ja="現在地を表示" data-he="הצג את המיקום שלי">Show my location</span></button>
     </div>
   `;
   mount.appendChild(root);
@@ -179,8 +178,8 @@ function create(mount) {
   selfLocation = createSelfLocation({
     THREE,
     scene,
-    button: root.querySelector('[data-action="locate"]'),
-    label: root.querySelector('[data-action="locate"] span'),
+    camera,
+    stage,
     statusEl: root.querySelector(".city-viewer-geo"),
     distanceEl: root.querySelector(".city-viewer-distance"),
     requestRender: kick,

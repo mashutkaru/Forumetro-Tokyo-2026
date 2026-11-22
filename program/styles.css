@@ -1182,10 +1182,6 @@ html.is-mobile-embed .city-model-chip {
   }
 }
 
-.city-viewer-toolbar [data-action="locate"] {
-  grid-column: 1 / -1;
-}
-
 .city-viewer-toolbar button,
 .city-viewer-retry {
   min-height: 44px;

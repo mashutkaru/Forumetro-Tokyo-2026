@@ -4,7 +4,7 @@
 // The pulsing dot is updated from the viewer's existing render loop (tick).
 // This file does not start its own animation loop.
 
-import { MODEL_GEO, isCalibrated, markerReady, classifyCoverage, isInsideCoverage, nearestPerimeter, wgs84ToWorld } from "./model-geo.js?v=3";
+import { MODEL_GEO, isCalibrated, markerReady, classifyCoverage, isInsideCoverage, nearestPerimeter, wgs84ToWorld } from "./model-geo.js?v=4";
 
 const GEO_OPTIONS = Object.freeze({
   enableHighAccuracy: true,
@@ -13,21 +13,8 @@ const GEO_OPTIONS = Object.freeze({
 });
 
 const STALE_MS = 20000;
-const DOT_METERS = 12;
+const DOT_PIXELS = 28;
 const MARKER_RED = "#d3122a";
-
-const BUTTON_COPY = {
-  show: {
-    en: "Show my location",
-    ja: "現在地を表示",
-    he: "הצג את המיקום שלי",
-  },
-  hide: {
-    en: "Hide my location",
-    ja: "現在地を隠す",
-    he: "הסתר את המיקום שלי",
-  },
-};
 
 const STATUS_COPY = {
   locating: {
@@ -56,14 +43,19 @@ const STATUS_COPY = {
     he: "המיקום עדיין לא מכויל לאזור הזה.",
   },
   denied: {
-    en: "Location is blocked. Allow location access for this site in your browser settings, then tap Show my location again.",
-    ja: "位置情報が拒否されています。ブラウザの設定でこのサイトの位置情報を許可してから、「現在地を表示」をもう一度押してください。",
-    he: "הגישה למיקום חסומה. אפשרו מיקום לאתר זה בהגדרות הדפדפן, ואז לחצו שוב על הצג את המיקום שלי.",
+    en: "Location is blocked. Allow location for this site in your browser settings.",
+    ja: "位置情報が拒否されています。ブラウザの設定でこのサイトの位置情報を許可してください。",
+    he: "הגישה למיקום חסומה. אפשרו מיקום לאתר זה בהגדרות הדפדפן.",
   },
   unavailable: {
-    en: "Your position is unavailable or took too long. Try again outdoors, or tap Show my location.",
-    ja: "現在地を取得できないか、時間がかかりすぎました。屋外で試すか、「現在地を表示」をもう一度押してください。",
-    he: "המיקום לא זמין, או שהאיתור ארך יותר מדי. נסו בחוץ, או לחצו שוב על הצג את המיקום שלי.",
+    en: "Your position is unavailable or took too long. Try again outdoors.",
+    ja: "現在地を取得できないか、時間がかかりすぎました。屋外でもう一度お試しください。",
+    he: "המיקום לא זמין, או שהאיתור ארך יותר מדי. נסו שוב בחוץ.",
+  },
+  gesture: {
+    en: "Tap the model once to allow your location.",
+    ja: "モデルを一度タップすると、現在地を許可できます。",
+    he: "לחצו פעם אחת על המודל כדי לאפשר את המיקום.",
   },
   stale: {
     en: "Last location update was {n} seconds ago.",
@@ -103,8 +95,8 @@ function formatDistance(meters, lang) {
 export function createSelfLocation({
   THREE,
   scene,
-  button,
-  label,
+  camera,
+  stage,
   statusEl,
   distanceEl,
   requestRender,
@@ -119,7 +111,10 @@ export function createSelfLocation({
   let currentKey = null;
   let currentEntry = null;
   let currentNorth = null;
+  let viewerActive = false;
+  let meshReady = false;
   let tracking = false;
+  let waitingForGesture = false;
   let session = 0;
   let watchId = null;
   let lastFix = null;
@@ -127,7 +122,6 @@ export function createSelfLocation({
   let group = null;
   let dot = null;
   let ring = null;
-  let dotBase = 1;
   let dimmed = false;
 
   function paint(el, pack, vars) {
@@ -135,11 +129,6 @@ export function createSelfLocation({
     el.dataset.ja = fill(pack.ja, vars);
     el.dataset.he = fill(pack.he, vars);
     el.textContent = el.dataset[pageLang()] || el.dataset.en;
-  }
-
-  function setButtonMode(mode) {
-    paint(label, BUTTON_COPY[mode]);
-    button.setAttribute("aria-pressed", mode === "hide" ? "true" : "false");
   }
 
   function setStatus(key, vars) {
@@ -301,8 +290,7 @@ export function createSelfLocation({
       : 0;
     ring.visible = radius > 0;
     if (radius > 0) ring.scale.set(radius, radius, radius);
-    dotBase = DOT_METERS / metersPerUnit;
-    dot.position.set(0, DOT_METERS * 0.5 / metersPerUnit, 0);
+    dot.position.set(0, 0.8 / metersPerUnit, 0);
     if (dimmedMark) dimMarker();
     else undim();
     return true;
@@ -318,12 +306,38 @@ export function createSelfLocation({
         + "). That rotation is applied once, inside the coordinate conversion."
       );
     }
-    button.disabled = !ready;
-    button.setAttribute("aria-disabled", ready ? "false" : "true");
-    setButtonMode("show");
     hideDistance();
     if (ready) hideStatus();
-    else setStatus("uncalibrated");
+    else {
+      dropMarker();
+      setStatus("uncalibrated");
+    }
+    return ready;
+  }
+
+  function clearGestureWait() {
+    if (!waitingForGesture) return;
+    waitingForGesture = false;
+    stage.removeEventListener("pointerdown", onGesture, true);
+  }
+
+  function waitForGesture() {
+    tracking = false;
+    if (watchId != null && navigator.geolocation && typeof navigator.geolocation.clearWatch === "function") {
+      navigator.geolocation.clearWatch(watchId);
+    }
+    watchId = null;
+    document.removeEventListener("visibilitychange", onVisible);
+    session += 1;
+    if (waitingForGesture) return;
+    waitingForGesture = true;
+    setStatus("gesture");
+    stage.addEventListener("pointerdown", onGesture, true);
+  }
+
+  function onGesture() {
+    clearGestureWait();
+    beginWatch(true);
   }
 
   function stopTracking() {
@@ -335,11 +349,44 @@ export function createSelfLocation({
       navigator.geolocation.clearWatch(watchId);
     }
     watchId = null;
+    clearGestureWait();
     document.removeEventListener("visibilitychange", onVisible);
     dropMarker();
     hideDistance();
-    setButtonMode("show");
     requestRender();
+  }
+
+  function beginWatch(fromGesture) {
+    if (!viewerActive || !meshReady) return;
+    if (!showModelState()) return;
+    if (tracking) {
+      if (lastFix) applyFix();
+      return;
+    }
+    if (!navigator.geolocation || typeof navigator.geolocation.watchPosition !== "function") {
+      setStatus("unsupported");
+      return;
+    }
+    clearGestureWait();
+    tracking = true;
+    session += 1;
+    const token = session;
+    const gestured = Boolean(fromGesture);
+    setStatus("locating");
+    document.addEventListener("visibilitychange", onVisible);
+    try {
+      watchId = navigator.geolocation.watchPosition(
+        (position) => {
+          if (token === session) onFix(position);
+        },
+        (error) => {
+          if (token === session) onError(error, gestured);
+        },
+        GEO_OPTIONS
+      );
+    } catch (e) {
+      if (token === session) onError({ code: 2 }, gestured);
+    }
   }
 
   function onVisible() {
@@ -425,9 +472,13 @@ export function createSelfLocation({
     applyFix();
   }
 
-  function onError(error) {
+  function onError(error, fromGesture) {
     const code = error && error.code;
     if (code === 1) {
+      if (!fromGesture) {
+        waitForGesture();
+        return;
+      }
       stopTracking();
       setStatus("denied");
       return;
@@ -435,46 +486,13 @@ export function createSelfLocation({
     if (!lastFix) setStatus("unavailable");
   }
 
-  function onClick() {
-    if (button.disabled) return;
-    if (tracking) {
-      stopTracking();
-      showModelState();
-      return;
-    }
-    if (!navigator.geolocation || typeof navigator.geolocation.watchPosition !== "function") {
-      setStatus("unsupported");
-      return;
-    }
-    // Called directly from the tap. iOS Safari only allows geolocation
-    // from a user gesture, so this must not wait on a timer or a promise.
-    tracking = true;
-    session += 1;
-    const token = session;
-    setButtonMode("hide");
-    setStatus("locating");
-    document.addEventListener("visibilitychange", onVisible);
-    try {
-      watchId = navigator.geolocation.watchPosition(
-        (position) => {
-          if (token === session) onFix(position);
-        },
-        (error) => {
-          if (token === session) onError(error);
-        },
-        GEO_OPTIONS
-      );
-    } catch (e) {
-      if (token === session) onError({ code: 2 });
-    }
-  }
-
-  button.addEventListener("click", onClick);
-
   function tick() {
-    if (dot && dotBase > 0) {
-      const pulse = 1 + 0.16 * Math.sin(performance.now() * 0.005);
-      const size = dotBase * pulse;
+    if (dot && group && camera) {
+      const height = Math.max(stage.clientHeight || 1, 1);
+      const dist = Math.max(camera.position.distanceTo(group.position), 0.5);
+      const worldH = 2 * Math.tan((camera.fov * Math.PI) / 360) * dist;
+      const pulse = dimmed ? 1 : 1 + 0.12 * Math.sin(performance.now() * 0.005);
+      const size = worldH * (DOT_PIXELS / height) * pulse;
       dot.scale.set(size, size, 1);
     }
     if (!tracking || !lastFix) return;
@@ -490,6 +508,7 @@ export function createSelfLocation({
   return {
     bindModel(key, verifiedNorth) {
       stopTracking();
+      meshReady = false;
       currentKey = key || null;
       currentEntry = key && Object.prototype.hasOwnProperty.call(MODEL_GEO, key) ? MODEL_GEO[key] : null;
       currentNorth = typeof verifiedNorth === "number" && Number.isFinite(verifiedNorth) ? verifiedNorth : null;
@@ -497,28 +516,27 @@ export function createSelfLocation({
     },
     dropMarker,
     reapply() {
-      if (tracking && lastFix) applyFix();
+      meshReady = true;
+      beginWatch(false);
     },
     noteFailed() {
+      meshReady = false;
       stopTracking();
       hideStatus();
-      button.disabled = true;
-      button.setAttribute("aria-disabled", "true");
     },
     deactivate() {
+      viewerActive = false;
       stopTracking();
       hideStatus();
     },
     resumeIdle() {
-      if (tracking) return;
+      viewerActive = true;
       if (!currentKey) {
-        button.disabled = true;
-        button.setAttribute("aria-disabled", "true");
         hideStatus();
         hideDistance();
         return;
       }
-      showModelState();
+      beginWatch(false);
     },
     tick,
   };

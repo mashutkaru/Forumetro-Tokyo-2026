@@ -2753,7 +2753,7 @@ function attachCalibration(viewer) {
   }
   if (attachCalibration.started) return;
   attachCalibration.started = true;
-  import("./model-calibration.js?v=2").then((mod) => {
+  import("./model-calibration.js?v=3").then((mod) => {
     if (cityViewer) mod.startCalibration(cityViewer);
   }).catch(() => {
     attachCalibration.started = false;
