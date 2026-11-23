@@ -13,11 +13,9 @@ const GEO_OPTIONS = Object.freeze({
 });
 
 const FRESH_MS = 60000;
-const DOT_PIXELS = 28;
 const PIN_PIXELS = 46;
 // Sprite center is measured from the bottom. This keeps the pin tip on the point.
 const PIN_ANCHOR_Y = 10 / 128;
-const MARKER_RED = "#d3122a";
 const PIN_RED = "#e84838";
 
 const STATUS_COPY = {
@@ -172,7 +170,6 @@ export function createSelfLocation({
   let dot = null;
   let ring = null;
   let hereMap = null;
-  let edgeMap = null;
   let edgeRim = null;
   let freshTimer = 0;
   const ndc = new THREE.Vector3();
@@ -269,7 +266,6 @@ export function createSelfLocation({
     dot = null;
     ring = null;
     hereMap = null;
-    edgeMap = null;
     edgeRim = null;
   }
 
@@ -311,25 +307,6 @@ export function createSelfLocation({
   function ensureMarker() {
     if (group) return;
     hereMap = makeMap(drawLocationPin);
-    edgeMap = makeMap((ctx) => {
-      ctx.clearRect(0, 0, 128, 128);
-      ctx.beginPath();
-      ctx.moveTo(64, 12);
-      ctx.lineTo(116, 64);
-      ctx.lineTo(64, 116);
-      ctx.lineTo(12, 64);
-      ctx.closePath();
-      ctx.fillStyle = "#ffffff";
-      ctx.fill();
-      ctx.beginPath();
-      ctx.moveTo(64, 30);
-      ctx.lineTo(98, 64);
-      ctx.lineTo(64, 98);
-      ctx.lineTo(30, 64);
-      ctx.closePath();
-      ctx.fillStyle = MARKER_RED;
-      ctx.fill();
-    });
 
     dot = new THREE.Sprite(new THREE.SpriteMaterial({
       map: hereMap,
@@ -406,7 +383,8 @@ export function createSelfLocation({
       };
     }
     group.position.set(world.x, edge ? edgeRim.yTop : y + lift, world.z);
-    dot.material.map = edge ? edgeMap : hereMap;
+    dot.material.map = hereMap;
+    dot.center.set(0.5, PIN_ANCHOR_Y);
     dot.material.opacity = 1;
     dot.material.needsUpdate = true;
     const radius = !edge && typeof accuracyM === "number" && Number.isFinite(accuracyM) && accuracyM > 0
@@ -724,21 +702,11 @@ export function createSelfLocation({
     const height = Math.max(stage.clientHeight || 1, 1);
     const dist = Math.max(camera.position.distanceTo(group.position), 0.5);
     const worldH = 2 * Math.tan((camera.fov * Math.PI) / 360) * dist;
-    const edge = dot.material.map === edgeMap;
-    dot.center.set(0.5, edge ? 0.5 : PIN_ANCHOR_Y);
-    const pulse = edge ? 1 : 1 + 0.12 * Math.sin(performance.now() * 0.005);
-    const px = edge ? DOT_PIXELS : PIN_PIXELS;
-    const size = worldH * (px / height) * pulse;
+    dot.center.set(0.5, PIN_ANCHOR_Y);
+    const pulse = edgeRim ? 1 : 1 + 0.12 * Math.sin(performance.now() * 0.005);
+    const size = worldH * (PIN_PIXELS / height) * pulse;
     const lift = currentEntry && currentEntry.metersPerUnit > 0 ? 0.8 / currentEntry.metersPerUnit : 0.8;
-    if (edge && edgeRim) {
-      const ox = edgeRim.x - edgeRim.cx;
-      const oz = edgeRim.z - edgeRim.cz;
-      const len = Math.hypot(ox, oz) || 1;
-      const out = size * 0.5;
-      dot.position.set((ox / len) * out, lift, (oz / len) * out);
-    } else {
-      dot.position.set(0, lift, 0);
-    }
+    dot.position.set(0, lift, 0);
     dot.scale.set(size, size, 1);
   }
 
