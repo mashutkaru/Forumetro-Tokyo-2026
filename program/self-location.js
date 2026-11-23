@@ -14,7 +14,11 @@ const GEO_OPTIONS = Object.freeze({
 
 const FRESH_MS = 60000;
 const DOT_PIXELS = 28;
+const PIN_PIXELS = 46;
+// Sprite center is measured from the bottom. This keeps the pin tip on the point.
+const PIN_ANCHOR_Y = 10 / 128;
 const MARKER_RED = "#d3122a";
+const PIN_RED = "#e84838";
 
 const STATUS_COPY = {
   locating: {
@@ -280,19 +284,33 @@ export function createSelfLocation({
     return texture;
   }
 
+  function drawLocationPin(ctx) {
+    ctx.clearRect(0, 0, 128, 128);
+    const cx = 64;
+    const cy = 44;
+    ctx.fillStyle = "rgba(20, 16, 16, 0.2)";
+    ctx.beginPath();
+    ctx.ellipse(cx, 120, 12, 4, 0, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.fillStyle = PIN_RED;
+    ctx.beginPath();
+    ctx.arc(cx, cy, 32, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.beginPath();
+    ctx.moveTo(cx - 16, cy + 22);
+    ctx.lineTo(cx, 118);
+    ctx.lineTo(cx + 16, cy + 22);
+    ctx.closePath();
+    ctx.fill();
+    ctx.fillStyle = "#ffffff";
+    ctx.beginPath();
+    ctx.arc(cx, cy, 12, 0, Math.PI * 2);
+    ctx.fill();
+  }
+
   function ensureMarker() {
     if (group) return;
-    hereMap = makeMap((ctx) => {
-      ctx.clearRect(0, 0, 128, 128);
-      ctx.beginPath();
-      ctx.arc(64, 64, 40, 0, Math.PI * 2);
-      ctx.fillStyle = "#ffffff";
-      ctx.fill();
-      ctx.beginPath();
-      ctx.arc(64, 64, 26, 0, Math.PI * 2);
-      ctx.fillStyle = MARKER_RED;
-      ctx.fill();
-    });
+    hereMap = makeMap(drawLocationPin);
     edgeMap = makeMap((ctx) => {
       ctx.clearRect(0, 0, 128, 128);
       ctx.beginPath();
@@ -707,8 +725,10 @@ export function createSelfLocation({
     const dist = Math.max(camera.position.distanceTo(group.position), 0.5);
     const worldH = 2 * Math.tan((camera.fov * Math.PI) / 360) * dist;
     const edge = dot.material.map === edgeMap;
+    dot.center.set(0.5, edge ? 0.5 : PIN_ANCHOR_Y);
     const pulse = edge ? 1 : 1 + 0.12 * Math.sin(performance.now() * 0.005);
-    const size = worldH * (DOT_PIXELS / height) * pulse;
+    const px = edge ? DOT_PIXELS : PIN_PIXELS;
+    const size = worldH * (px / height) * pulse;
     const lift = currentEntry && currentEntry.metersPerUnit > 0 ? 0.8 / currentEntry.metersPerUnit : 0.8;
     if (edge && edgeRim) {
       const ox = edgeRim.x - edgeRim.cx;

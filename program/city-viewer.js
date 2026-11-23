@@ -3,7 +3,7 @@ import { OrbitControls } from "three/addons/controls/OrbitControls.js";
 import { RoomEnvironment } from "three/addons/environments/RoomEnvironment.js";
 import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
 import { createForumetroCompass } from "./forumetro-compass.js?v=1";
-import { createSelfLocation } from "./self-location.js?v=11";
+import { createSelfLocation } from "./self-location.js?v=13";
 
 // Geographic north, clockwise from world -Z toward +X.
 // Keys are the model path without the ?v= suffix.
