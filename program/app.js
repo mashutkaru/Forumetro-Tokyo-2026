@@ -101,7 +101,7 @@ const days = [
     title: "Welcome to Tokyo",
     city: "Narita Airport → Hotel / LUMIVEIL TOKYO",
     theme:
-      "After arrival and hotel check-in, the opening presentation and a Tokyo introduction take place at LUMIVEIL TOKYO, followed by dinner. At 20:00 there is an optional orientation walk at Shimbashi and Shiodome station. Anyone who stays behind has a free evening.",
+      "After arrival and hotel check-in, the opening presentation and a Tokyo introduction take place at LUMIVEIL TOKYO, followed by dinner. The evening is free, with an optional orientation walk at Shinbashi/Shiodome station.",
     tip: "Keep your passport easy to reach at Narita. The group leaves the hotel lobby at 16:00.",
     notesExtra:
       "Airport arrival and traffic may shift the coach transfer and hotel check-in. The opening and dinner are at LUMIVEIL TOKYO.",
@@ -110,7 +110,7 @@ const days = [
       ["CHECK-IN", "Hotel, 15:00", ICONS.suitcase],
       ["OPENING", "LUMIVEIL TOKYO, 16:30–18:00", ICONS.presentation],
       ["DINNER", "Buffet, 18:00–20:00", ICONS.dinner],
-      ["WALK", "Shimbashi and Shiodome, 20:00", ICONS.stroll],
+      ["EVENING", "Optional walk, Shinbashi/Shiodome, 20:00", ICONS.stroll],
     ],
     program: [
       ["11:40", "Arrival at Narita International Airport", "Immigration, baggage collection and meeting the local coordination team"],
@@ -120,7 +120,7 @@ const days = [
       ["16:30–17:10", "Opening activity and presentation", "Delegation team. Venue: LUMIVEIL TOKYO"],
       ["17:10–18:00", "Tokyo introduction", "Ofer Bilik. Venue: LUMIVEIL TOKYO"],
       ["18:00–20:00", "Buffet dinner", "LUMIVEIL TOKYO"],
-      ["20:00", "Optional orientation walk", "Shimbashi and Shiodome station. The evening stays free for anyone who does not join."],
+      ["20:00", "Free evening (optional orientation walk at the Shinbashi/Shiodome station)", ""],
     ],
     lines: ["oedo", "asakusa", "ginza"],
     stations: ["shimbashi"],
@@ -585,7 +585,7 @@ const daysJa = [
     title: "東京へようこそ",
     city: "成田空港 → ホテル／ルミヴェール東京",
     theme:
-      "到着とホテルのチェックインのあと、ルミヴェール東京で開会の発表と東京の紹介を行い、夕食をとります。20:00には新橋・汐留駅で任意のオリエンテーション散策があります。参加しない場合、夜は自由時間です。",
+      "到着とホテルのチェックインのあと、ルミヴェール東京で開会の発表と東京の紹介を行い、夕食をとります。夜は自由時間で、希望者は新橋・汐留駅のオリエンテーションウォークに参加できます。",
     tip: "成田空港ではパスポートを取り出しやすくしておいてください。16:00にホテルのロビーを出発します。",
     notesExtra:
       "空港到着や道路状況により、貸切バスの移動とホテルのチェックイン時刻が変わることがあります。開会と夕食はルミヴェール東京です。",
@@ -594,7 +594,7 @@ const daysJa = [
       ["チェックイン", "ホテル、15:00"],
       ["開会", "ルミヴェール東京、16:30–18:00"],
       ["夕食", "ビュッフェ、18:00–20:00"],
-      ["散策", "新橋・汐留、20:00"],
+      ["夜", "任意の徒歩、新橋・汐留、20:00"],
     ],
     program: [
       ["11:40", "成田国際空港に到着", "入国審査、手荷物受取、現地運営チームとの合流"],
@@ -604,7 +604,7 @@ const daysJa = [
       ["16:30–17:10", "開会の活動と発表", "視察団。会場：ルミヴェール東京"],
       ["17:10–18:00", "東京の紹介", "オフェル・ビリック。会場：ルミヴェール東京"],
       ["18:00–20:00", "ビュッフェ夕食", "ルミヴェール東京"],
-      ["20:00", "任意のオリエンテーション散策", "新橋・汐留駅。参加しない場合、夜は自由時間です。"],
+      ["20:00", "自由時間（任意：新橋・汐留駅のオリエンテーションウォーク）", ""],
     ],
   },
   {
@@ -946,7 +946,7 @@ const daysHe = [
     title: "ברוכים הבאים לטוקיו",
     city: "נמל התעופה נריטה · המלון · LUMIVEIL TOKYO",
     theme:
-      "אחרי ההגעה והצ'ק-אין במלון מתקיימים ב-LUMIVEIL TOKYO מפגש פתיחה והיכרות עם טוקיו, ואחריהם ארוחת ערב. בשעה 20:00 יש סיור התמצאות רשות בתחנת שינבאשי ושיודומה. מי שלא מצטרף, הערב נשאר פנוי.",
+      "אחרי ההגעה והצ'ק-אין במלון מתקיימים ב-LUMIVEIL TOKYO מפגש פתיחה והיכרות עם טוקיו, ואחריהם ארוחת ערב. הערב פנוי, עם סיור אוריינטציה לבחירה בתחנת שינבאשי/שיודומה.",
     tip: "החזיקו את הדרכון בהישג יד בנריטה. הקבוצה יוצאת מלובי המלון בשעה 16:00.",
     notesExtra:
       "שעת הנחיתה והעומס בדרכים עשויים להזיז את ההסעה ואת הצ'ק-אין במלון. הפתיחה וארוחת הערב מתקיימות ב-LUMIVEIL TOKYO.",
@@ -955,7 +955,7 @@ const daysHe = [
       ["צ'ק-אין", "מלון, 15:00"],
       ["פתיחה", "LUMIVEIL TOKYO, 16:30–18:00"],
       ["ארוחת ערב", "בופה, 18:00–20:00"],
-      ["סיור", "שינבאשי ושיודומה, 20:00"],
+      ["ערב", "סיור לבחירה, שינבאשי/שיודומה, 20:00"],
     ],
     program: [
       ["11:40", "הגעה לנמל התעופה הבין-לאומי נריטה", "ביקורת גבולות, איסוף כבודה ומפגש עם צוות התיאום המקומי"],
@@ -965,7 +965,7 @@ const daysHe = [
       ["16:30–17:10", "פעילות פתיחה ומצגת", "צוות המשלחת. מקום: LUMIVEIL TOKYO"],
       ["17:10–18:00", "היכרות עם טוקיו", "עופר ביליק. מקום: LUMIVEIL TOKYO"],
       ["18:00–20:00", "ארוחת ערב בבופה", "LUMIVEIL TOKYO"],
-      ["20:00", "סיור התמצאות רשות", "תחנת שינבאשי ושיודומה. מי שלא מצטרף, הערב נשאר פנוי."],
+      ["20:00", "ערב חופשי (סיור אוריינטציה לבחירה בתחנת שינבאשי/שיודומה)", ""],
     ],
   },
   {
